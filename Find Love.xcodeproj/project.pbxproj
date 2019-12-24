@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,8 @@
 		AD8895E223B21F5300347A6A /* SingInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895E023B21F5300347A6A /* SingInVC.swift */; };
 		AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8895E123B21F5300347A6A /* SingInVC.xib */; };
 		AD8895E523B28AFB00347A6A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD8895E423B28AFB00347A6A /* GoogleService-Info.plist */; };
+		AD8895E923B293BE00347A6A /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895E723B293BE00347A6A /* MenuVC.swift */; };
+		AD8895EA23B293BE00347A6A /* MenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8895E823B293BE00347A6A /* MenuVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		AD8895E023B21F5300347A6A /* SingInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInVC.swift; sourceTree = "<group>"; };
 		AD8895E123B21F5300347A6A /* SingInVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingInVC.xib; sourceTree = "<group>"; };
 		AD8895E423B28AFB00347A6A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AD8895E723B293BE00347A6A /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
+		AD8895E823B293BE00347A6A /* MenuVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuVC.xib; sourceTree = "<group>"; };
 		BD710EB921D70B94626E4CDB /* Pods_Find_Love.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find_Love.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D462102E429A663397EBDFE0 /* Pods-Find Love.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Love.release.xcconfig"; path = "Target Support Files/Pods-Find Love/Pods-Find Love.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,7 +60,6 @@
 				09A7F9FC8CF0F1991ED38035 /* Pods-Find Love.debug.xcconfig */,
 				D462102E429A663397EBDFE0 /* Pods-Find Love.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -82,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				AD8895E423B28AFB00347A6A /* GoogleService-Info.plist */,
+				AD8895E623B293A400347A6A /* MenuVC */,
 				AD8895C223B2122D00347A6A /* AppDelegate.swift */,
 				AD8895D823B2159F00347A6A /* Controllers */,
 				AD8895C923B2122F00347A6A /* Assets.xcassets */,
@@ -126,6 +130,15 @@
 				AD8895E123B21F5300347A6A /* SingInVC.xib */,
 			);
 			path = SingInVC;
+			sourceTree = "<group>";
+		};
+		AD8895E623B293A400347A6A /* MenuVC */ = {
+			isa = PBXGroup;
+			children = (
+				AD8895E723B293BE00347A6A /* MenuVC.swift */,
+				AD8895E823B293BE00347A6A /* MenuVC.xib */,
+			);
+			path = MenuVC;
 			sourceTree = "<group>";
 		};
 		D6BAB27F39BA229C9E09A2CF /* Frameworks */ = {
@@ -198,6 +211,7 @@
 			files = (
 				AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */,
 				AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */,
+				AD8895EA23B293BE00347A6A /* MenuVC.xib in Resources */,
 				AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */,
 				AD8895CA23B2122F00347A6A /* Assets.xcassets in Resources */,
 				AD8895DE23B2162C00347A6A /* RegistrationVC.xib in Resources */,
@@ -258,6 +272,7 @@
 				AD8895DD23B2162C00347A6A /* RegistrationVC.swift in Sources */,
 				AD8895E223B21F5300347A6A /* SingInVC.swift in Sources */,
 				AD8895D623B2128C00347A6A /* HelloVC.swift in Sources */,
+				AD8895E923B293BE00347A6A /* MenuVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
