@@ -1,0 +1,456 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10922157054E58D2595F4C55 /* Pods_Find_Love.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD710EB921D70B94626E4CDB /* Pods_Find_Love.framework */; };
+		AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895C223B2122D00347A6A /* AppDelegate.swift */; };
+		AD8895CA23B2122F00347A6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD8895C923B2122F00347A6A /* Assets.xcassets */; };
+		AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD8895CB23B2122F00347A6A /* LaunchScreen.storyboard */; };
+		AD8895D623B2128C00347A6A /* HelloVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895D423B2128C00347A6A /* HelloVC.swift */; };
+		AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8895D523B2128C00347A6A /* HelloVC.xib */; };
+		AD8895DD23B2162C00347A6A /* RegistrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895DB23B2162C00347A6A /* RegistrationVC.swift */; };
+		AD8895DE23B2162C00347A6A /* RegistrationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8895DC23B2162C00347A6A /* RegistrationVC.xib */; };
+		AD8895E223B21F5300347A6A /* SingInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895E023B21F5300347A6A /* SingInVC.swift */; };
+		AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8895E123B21F5300347A6A /* SingInVC.xib */; };
+		AD8895E523B28AFB00347A6A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD8895E423B28AFB00347A6A /* GoogleService-Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		09A7F9FC8CF0F1991ED38035 /* Pods-Find Love.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Love.debug.xcconfig"; path = "Target Support Files/Pods-Find Love/Pods-Find Love.debug.xcconfig"; sourceTree = "<group>"; };
+		AD8895BF23B2122D00347A6A /* Find Love.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find Love.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD8895C223B2122D00347A6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AD8895C923B2122F00347A6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AD8895CC23B2122F00347A6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AD8895CE23B2122F00347A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD8895D423B2128C00347A6A /* HelloVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloVC.swift; sourceTree = "<group>"; };
+		AD8895D523B2128C00347A6A /* HelloVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelloVC.xib; sourceTree = "<group>"; };
+		AD8895DB23B2162C00347A6A /* RegistrationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVC.swift; sourceTree = "<group>"; };
+		AD8895DC23B2162C00347A6A /* RegistrationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationVC.xib; sourceTree = "<group>"; };
+		AD8895E023B21F5300347A6A /* SingInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInVC.swift; sourceTree = "<group>"; };
+		AD8895E123B21F5300347A6A /* SingInVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingInVC.xib; sourceTree = "<group>"; };
+		AD8895E423B28AFB00347A6A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BD710EB921D70B94626E4CDB /* Pods_Find_Love.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find_Love.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D462102E429A663397EBDFE0 /* Pods-Find Love.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Love.release.xcconfig"; path = "Target Support Files/Pods-Find Love/Pods-Find Love.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AD8895BC23B2122D00347A6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10922157054E58D2595F4C55 /* Pods_Find_Love.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A902548BB5C59C07BDD3DE6E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				09A7F9FC8CF0F1991ED38035 /* Pods-Find Love.debug.xcconfig */,
+				D462102E429A663397EBDFE0 /* Pods-Find Love.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		AD8895B623B2122D00347A6A = {
+			isa = PBXGroup;
+			children = (
+				AD8895C123B2122D00347A6A /* Find Love */,
+				AD8895C023B2122D00347A6A /* Products */,
+				A902548BB5C59C07BDD3DE6E /* Pods */,
+				D6BAB27F39BA229C9E09A2CF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		AD8895C023B2122D00347A6A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD8895BF23B2122D00347A6A /* Find Love.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AD8895C123B2122D00347A6A /* Find Love */ = {
+			isa = PBXGroup;
+			children = (
+				AD8895E423B28AFB00347A6A /* GoogleService-Info.plist */,
+				AD8895C223B2122D00347A6A /* AppDelegate.swift */,
+				AD8895D823B2159F00347A6A /* Controllers */,
+				AD8895C923B2122F00347A6A /* Assets.xcassets */,
+				AD8895CB23B2122F00347A6A /* LaunchScreen.storyboard */,
+				AD8895CE23B2122F00347A6A /* Info.plist */,
+			);
+			path = "Find Love";
+			sourceTree = "<group>";
+		};
+		AD8895D823B2159F00347A6A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AD8895D923B215BD00347A6A /* HelloVC */,
+				AD8895DF23B21F1B00347A6A /* SingInVC */,
+				AD8895DA23B215E800347A6A /* RegistrationVC */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		AD8895D923B215BD00347A6A /* HelloVC */ = {
+			isa = PBXGroup;
+			children = (
+				AD8895D423B2128C00347A6A /* HelloVC.swift */,
+				AD8895D523B2128C00347A6A /* HelloVC.xib */,
+			);
+			path = HelloVC;
+			sourceTree = "<group>";
+		};
+		AD8895DA23B215E800347A6A /* RegistrationVC */ = {
+			isa = PBXGroup;
+			children = (
+				AD8895DB23B2162C00347A6A /* RegistrationVC.swift */,
+				AD8895DC23B2162C00347A6A /* RegistrationVC.xib */,
+			);
+			path = RegistrationVC;
+			sourceTree = "<group>";
+		};
+		AD8895DF23B21F1B00347A6A /* SingInVC */ = {
+			isa = PBXGroup;
+			children = (
+				AD8895E023B21F5300347A6A /* SingInVC.swift */,
+				AD8895E123B21F5300347A6A /* SingInVC.xib */,
+			);
+			path = SingInVC;
+			sourceTree = "<group>";
+		};
+		D6BAB27F39BA229C9E09A2CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD710EB921D70B94626E4CDB /* Pods_Find_Love.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AD8895BE23B2122D00347A6A /* Find Love */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD8895D123B2122F00347A6A /* Build configuration list for PBXNativeTarget "Find Love" */;
+			buildPhases = (
+				2480F6DBD9740EC769B09B13 /* [CP] Check Pods Manifest.lock */,
+				AD8895BB23B2122D00347A6A /* Sources */,
+				AD8895BC23B2122D00347A6A /* Frameworks */,
+				AD8895BD23B2122D00347A6A /* Resources */,
+				C7E09B6B8B20ABCB56BBF623 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Find Love";
+			productName = "Find Love";
+			productReference = AD8895BF23B2122D00347A6A /* Find Love.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AD8895B723B2122D00347A6A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = Kaiserdem;
+				TargetAttributes = {
+					AD8895BE23B2122D00347A6A = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = AD8895BA23B2122D00347A6A /* Build configuration list for PBXProject "Find Love" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AD8895B623B2122D00347A6A;
+			productRefGroup = AD8895C023B2122D00347A6A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AD8895BE23B2122D00347A6A /* Find Love */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AD8895BD23B2122D00347A6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */,
+				AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */,
+				AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */,
+				AD8895CA23B2122F00347A6A /* Assets.xcassets in Resources */,
+				AD8895DE23B2162C00347A6A /* RegistrationVC.xib in Resources */,
+				AD8895E523B28AFB00347A6A /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2480F6DBD9740EC769B09B13 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Find Love-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C7E09B6B8B20ABCB56BBF623 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Find Love/Pods-Find Love-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Find Love/Pods-Find Love-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Find Love/Pods-Find Love-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AD8895BB23B2122D00347A6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */,
+				AD8895DD23B2162C00347A6A /* RegistrationVC.swift in Sources */,
+				AD8895E223B21F5300347A6A /* SingInVC.swift in Sources */,
+				AD8895D623B2128C00347A6A /* HelloVC.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AD8895CB23B2122F00347A6A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD8895CC23B2122F00347A6A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AD8895CF23B2122F00347A6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AD8895D023B2122F00347A6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AD8895D223B2122F00347A6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09A7F9FC8CF0F1991ED38035 /* Pods-Find Love.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7729HYB5LH;
+				INFOPLIST_FILE = "Find Love/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "kaiserdem.Find-Love";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AD8895D323B2122F00347A6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D462102E429A663397EBDFE0 /* Pods-Find Love.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7729HYB5LH;
+				INFOPLIST_FILE = "Find Love/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "kaiserdem.Find-Love";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AD8895BA23B2122D00347A6A /* Build configuration list for PBXProject "Find Love" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD8895CF23B2122F00347A6A /* Debug */,
+				AD8895D023B2122F00347A6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD8895D123B2122F00347A6A /* Build configuration list for PBXNativeTarget "Find Love" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD8895D223B2122F00347A6A /* Debug */,
+				AD8895D323B2122F00347A6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AD8895B723B2122D00347A6A /* Project object */;
+}
