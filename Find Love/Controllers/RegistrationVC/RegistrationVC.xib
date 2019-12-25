@@ -12,8 +12,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegistrationVC" customModule="Find_Love" customModuleProvider="target">
             <connections>
+                <outlet property="ageTF" destination="do6-AZ-fIg" id="8cT-Qi-Iy0"/>
                 <outlet property="closeBtn" destination="2Qf-Oe-H0L" id="aFx-fS-eZ8"/>
+                <outlet property="emailTF" destination="exz-Xg-p9J" id="HLg-eh-acv"/>
+                <outlet property="findGenderSegCont" destination="c0V-bp-zXW" id="uyE-AM-qAm"/>
+                <outlet property="findeAgeFromTF" destination="SwO-8P-f3L" id="MuY-ip-oco"/>
+                <outlet property="findeAgeToTF" destination="fQn-5w-Y90" id="iGL-ge-I8e"/>
+                <outlet property="genderSegCont" destination="Iqn-XO-9fx" id="XbC-p6-jiX"/>
                 <outlet property="nameTextField" destination="K3v-R0-9UR" id="36H-BD-Zj3"/>
+                <outlet property="passwordTF" destination="8gv-Wk-r3V" id="uT1-t7-qpQ"/>
+                <outlet property="registrationBtn" destination="eCp-fV-4Zk" id="AIG-Zy-fQy"/>
+                <outlet property="setPhotoBtn" destination="951-ML-6ht" id="ah1-Gz-cmS"/>
+                <outlet property="userImageView" destination="qZD-7C-Rir" id="4NS-ue-p0T"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -50,6 +60,9 @@
                             <integer key="value" value="6"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="registrationBtnAction:" destination="-1" eventType="touchUpInside" id="Xvq-es-9Co"/>
+                    </connections>
                 </button>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Имя" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K3v-R0-9UR">
                     <rect key="frame" x="30" y="225" width="315" height="30"/>

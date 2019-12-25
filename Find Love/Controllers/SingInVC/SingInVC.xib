@@ -12,6 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SingInVC" customModule="Find_Love" customModuleProvider="target">
             <connections>
+                <outlet property="emailTF" destination="B2i-Nn-a4f" id="fTF-x4-hqC"/>
+                <outlet property="enterBtn" destination="AgK-fD-zzw" id="dAb-3r-YME"/>
+                <outlet property="forgotPasswordBtn" destination="J5R-3l-3QY" id="s9x-d0-OZY"/>
+                <outlet property="passwordTF" destination="6IH-P1-f5n" id="txz-6U-0Qp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -56,6 +60,9 @@
                     <state key="normal" title="Забыл пароль">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <connections>
+                        <action selector="forgotPasswordBtnAction:" destination="-1" eventType="touchUpInside" id="K1J-BZ-JHm"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AgK-fD-zzw">
                     <rect key="frame" x="30" y="448" width="315" height="36"/>
@@ -69,6 +76,9 @@
                             <integer key="value" value="6"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="enterBtnAction:" destination="-1" eventType="touchUpInside" id="SQy-WZ-9o0"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDl-z1-bPe">
                     <rect key="frame" x="305" y="50" width="40" height="40"/>

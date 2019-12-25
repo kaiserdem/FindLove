@@ -85,7 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				AD8895E423B28AFB00347A6A /* GoogleService-Info.plist */,
-				AD8895E623B293A400347A6A /* MenuVC */,
 				AD8895C223B2122D00347A6A /* AppDelegate.swift */,
 				AD8895D823B2159F00347A6A /* Controllers */,
 				AD8895C923B2122F00347A6A /* Assets.xcassets */,
@@ -101,6 +100,7 @@
 				AD8895D923B215BD00347A6A /* HelloVC */,
 				AD8895DF23B21F1B00347A6A /* SingInVC */,
 				AD8895DA23B215E800347A6A /* RegistrationVC */,
+				AD8895E623B293A400347A6A /* MenuVC */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

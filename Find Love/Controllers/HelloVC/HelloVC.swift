@@ -12,13 +12,30 @@ import Firebase
 class HelloVC: UIViewController {
 
   @IBOutlet weak var singInBtn: UIButton!
-  
   @IBOutlet weak var registrationBtn: UIButton!
   
   override func viewDidLoad() {
         super.viewDidLoad()
 
       navigationController?.navigationBar.isHidden = true
+    
+    checkAuth()
+  }
+  
+  private func checkAuth() {
+    if Auth.auth().currentUser == nil {
+      perform(#selector(handleLogin), with: nil, afterDelay: 0)
+    }
+//    let controll = MenuVC.init(nibName: "MenuVC", bundle: nil)
+//    navigationController?.pushViewController(controll, animated: true)
+  }
+  
+  @objc func handleLogin() {
+    do {
+      try Auth.auth().signOut()
+    } catch let logoutError {
+      print(logoutError)
+    }
   }
 
   @IBAction func singInBtnAction(_ sender: Any) {
