@@ -73,9 +73,18 @@ class MessagesTableVC: UITableViewController {
     
     let user = users[indexPath.row]
     cell.userImageView.image = UIImage(named: "user")
+    cell.userImageView.contentMode = .scaleAspectFit
     cell.userNameLabel.text = user.name
     cell.lastMessagesLabel.text = user.email
+    
+    if let profileImageView = user.profileImageUrl {
+      cell.userImageView.loadImageUsingCachWithUrlString(profileImageView)
+    }
     return cell
+  }
+  
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 65
   }
   
 }

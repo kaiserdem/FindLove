@@ -97,7 +97,8 @@ class RegistrationVC: UIViewController {
   
   fileprivate func registeUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
     // ссылка на базу данных
-    let ref = Database.database().reference()
+    let ref = Database.database().reference(fromURL: "https://findlove-f6445.firebaseio.com/")
+    //let ref = Database.database().reference()
     let userReference = ref.child("users").child(uid) // создали папку пользователя
     userReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
       if error != nil {

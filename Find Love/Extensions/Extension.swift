@@ -12,7 +12,7 @@ import UIKit
 let imageCach = NSCache<AnyObject, AnyObject>()
 
 extension UIImageView {
-  // загрузка картинки с кеша
+  // загрузка картинки с кеша 
   func loadImageUsingCachWithUrlString(_ urlString: String) {
     self.image = nil // по дефолту
     // если есть такая картинка тогда загружаем из кеша
