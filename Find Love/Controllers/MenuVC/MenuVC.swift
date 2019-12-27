@@ -11,6 +11,7 @@ import Firebase
 
 class MenuVC: UIViewController {
 
+  @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var titleNameLable: UILabel!
   @IBOutlet weak var messagesBtn: UIButton!
   @IBOutlet weak var logoutBtn: UIButton!
@@ -18,12 +19,19 @@ class MenuVC: UIViewController {
   override func viewDidLoad() {
         super.viewDidLoad()
 
-
+    checkIfUserIsLogedIn()
   }
 
-
+  func checkIfUserIsLogedIn() { // проверка если пользователь вошел в систему
+    
+    if Auth.auth().currentUser?.uid == nil { // если мы не вошли
+      handleLogout()
+    } else {
+      fetchUserAndSetupNavBarTitle()
+    }
+  }
   
-  @IBAction func logoutBtnAction(_ sender: Any) {
+  func handleLogout() { // выйти
     do {
       try Auth.auth().signOut()
     } catch let logoutError {
@@ -31,6 +39,34 @@ class MenuVC: UIViewController {
     }
     let controll = HelloVC.init(nibName: "HelloVC", bundle: nil)
     self.navigationController?.pushViewController(controll, animated: true)
+  }
+  
+  
+  func fetchUserAndSetupNavBarTitle() { // загружаем пользователя и сохраняем титул
+    guard let uid = Auth.auth().currentUser?.uid else { // если currentUser 0 тогда выходим
+      return
+    }
+    // получаем uid по из базы данных, берем значение
+    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+      
+      if let dictionary = snapshot.value as? [String: AnyObject] {
+        
+        let user = User(dictionary: dictionary)
+        self.setupNavBarWithUser(user)
+      }
+    }, withCancel: nil)
+  }
+  
+  func setupNavBarWithUser(_ user: User) { //загрузить данные
+    titleNameLable.text = user.name
+    if let profileImageUrl = user.profileImageUrl {
+      profileImageView.loadImageUsingCachWithUrlString(profileImageUrl)
+    }
+    
+  }
+  
+  @IBAction func logoutBtnAction(_ sender: Any) {
+    handleLogout()
   }
   
   @IBAction func messagesBtnAction(_ sender: Any) {

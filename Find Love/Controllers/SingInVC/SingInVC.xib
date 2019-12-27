@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SingInVC" customModule="Find_Love" customModuleProvider="target">
             <connections>
+                <outlet property="closeBtn" destination="rDl-z1-bPe" id="ao6-ns-Z5c"/>
+                <outlet property="closeBtnTopConstraints" destination="vkp-CT-mNE" id="O6o-zk-8Ac"/>
                 <outlet property="emailTF" destination="B2i-Nn-a4f" id="fTF-x4-hqC"/>
                 <outlet property="enterBtn" destination="AgK-fD-zzw" id="dAb-3r-YME"/>
                 <outlet property="forgotPasswordBtn" destination="J5R-3l-3QY" id="s9x-d0-OZY"/>
@@ -31,7 +33,7 @@
                     </constraints>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите електронную почту" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arF-T2-IJf">
                     <rect key="frame" x="30" y="218" width="315" height="35"/>
@@ -98,7 +100,7 @@
                     </constraints>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -107,11 +109,11 @@
                 <constraint firstItem="B2i-Nn-a4f" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="4Ik-Ca-eRM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="J5R-3l-3QY" secondAttribute="bottom" constant="30" id="63d-AA-0Rw"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6IH-P1-f5n" secondAttribute="trailing" constant="30" id="8OX-Yp-xXw"/>
-                <constraint firstItem="arF-T2-IJf" firstAttribute="top" secondItem="rDl-z1-bPe" secondAttribute="bottom" constant="128" id="9No-R2-H1d"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="J5R-3l-3QY" secondAttribute="trailing" constant="30" id="C4O-yR-rWm"/>
                 <constraint firstItem="6IH-P1-f5n" firstAttribute="top" secondItem="TeU-vd-f0g" secondAttribute="bottom" id="DLM-4n-Ldh"/>
                 <constraint firstItem="arF-T2-IJf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="Iro-6y-cKu"/>
                 <constraint firstItem="B2i-Nn-a4f" firstAttribute="top" secondItem="arF-T2-IJf" secondAttribute="bottom" id="NFE-Rr-0LI"/>
+                <constraint firstItem="arF-T2-IJf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="198" id="YgR-Md-Ua6"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rDl-z1-bPe" secondAttribute="trailing" constant="30" id="bZb-WQ-WzQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="arF-T2-IJf" secondAttribute="trailing" constant="30" id="c8C-YA-0Md"/>
                 <constraint firstItem="J5R-3l-3QY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="dPK-Ss-atv"/>

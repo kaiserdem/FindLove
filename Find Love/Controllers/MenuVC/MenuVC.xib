@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="logoutBtn" destination="26Z-d0-blF" id="ucS-yR-zWA"/>
                 <outlet property="messagesBtn" destination="tpe-tj-r6p" id="lFF-Fe-gWe"/>
+                <outlet property="profileImageView" destination="2oA-0Y-AHh" id="coW-yZ-HO9"/>
                 <outlet property="titleNameLable" destination="Ryn-5L-XLz" id="ynq-fw-Nwq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26Z-d0-blF">
-                    <rect key="frame" x="285" y="110" width="60" height="34"/>
+                    <rect key="frame" x="285" y="603" width="60" height="34"/>
                     <color key="backgroundColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="T3F-e7-XlY"/>
@@ -42,7 +43,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpe-tj-r6p">
-                    <rect key="frame" x="30" y="110" width="99" height="34"/>
+                    <rect key="frame" x="30" y="603" width="99" height="34"/>
                     <color key="backgroundColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="Сообщения"/>
@@ -56,7 +57,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ryn-5L-XLz">
-                    <rect key="frame" x="30" y="50" width="315" height="30"/>
+                    <rect key="frame" x="30" y="254" width="315" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="dfi-0I-6yu"/>
                     </constraints>
@@ -64,16 +65,30 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2oA-0Y-AHh">
+                    <rect key="frame" x="123.5" y="46" width="128" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="128" id="VKA-e7-KFt"/>
+                        <constraint firstAttribute="height" constant="128" id="tbV-vj-rUC"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="64"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Ryn-5L-XLz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="1Fh-Li-a8N"/>
+                <constraint firstItem="Ryn-5L-XLz" firstAttribute="top" secondItem="2oA-0Y-AHh" secondAttribute="bottom" constant="80" id="DEf-0p-pMT"/>
+                <constraint firstItem="2oA-0Y-AHh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="EHh-b3-MOj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="26Z-d0-blF" secondAttribute="trailing" constant="30" id="IeJ-iX-B1c"/>
                 <constraint firstItem="Ryn-5L-XLz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="LPc-9g-5ob"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ryn-5L-XLz" secondAttribute="trailing" constant="30" id="MIq-zb-pnZ"/>
-                <constraint firstItem="26Z-d0-blF" firstAttribute="top" secondItem="Ryn-5L-XLz" secondAttribute="bottom" constant="30" id="gPS-qS-CK6"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="tpe-tj-r6p" secondAttribute="bottom" constant="30" id="gOu-Po-KxO"/>
                 <constraint firstItem="tpe-tj-r6p" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="hgb-Df-yrt"/>
-                <constraint firstItem="tpe-tj-r6p" firstAttribute="top" secondItem="Ryn-5L-XLz" secondAttribute="bottom" constant="30" id="sLm-wM-3H8"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="26Z-d0-blF" secondAttribute="bottom" constant="30" id="pKH-Bi-co7"/>
+                <constraint firstItem="2oA-0Y-AHh" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="26" id="uvb-i4-kVx"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>

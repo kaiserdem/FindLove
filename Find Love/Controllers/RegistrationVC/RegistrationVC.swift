@@ -26,6 +26,8 @@ class RegistrationVC: UIViewController {
   @IBOutlet weak var emailTF: UITextField!
   @IBOutlet weak var nameTextField: UITextField!
   
+  weak var menuVC: MenuVC?
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -72,8 +74,6 @@ class RegistrationVC: UIViewController {
               self.registeUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
             }
           })
-          let controll = MenuVC.init(nibName: "MenuVC", bundle: nil)
-          self.navigationController?.pushViewController(controll, animated: true)
         })
       }
       
@@ -104,7 +104,10 @@ class RegistrationVC: UIViewController {
       if error != nil {
         return
       }
+      self.menuVC?.fetchUserAndSetupNavBarTitle()
       
+      let controll = MenuVC.init(nibName: "MenuVC", bundle: nil)
+      self.navigationController?.pushViewController(controll, animated: true)
     })
   }
   

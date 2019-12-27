@@ -12,9 +12,12 @@ import Firebase
 class SingInVC: UIViewController {
 
   @IBOutlet weak var emailTF: UITextField!
-  
+  @IBOutlet weak var closeBtnTopConstraints: NSLayoutConstraint!
+  @IBOutlet weak var closeBtn: UIButton!
   @IBOutlet weak var forgotPasswordBtn: UIButton!
   @IBOutlet weak var passwordTF: UITextField!
+  
+  weak var menuVC: MenuVC?
   
   @IBOutlet weak var enterBtn: UIButton!
   override func viewDidLoad() {
@@ -22,6 +25,19 @@ class SingInVC: UIViewController {
       
       navigationController?.navigationBar.isHidden = true
 
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil);
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil);
+  }
+  
+  @objc func keyboardWillShow(sender: NSNotification) {
+    self.view.frame.origin.y = -100 // Move view 150 points upward
+    closeBtnTopConstraints.constant = 130
+  }
+  
+  @objc func keyboardWillHide(sender: NSNotification) {
+    self.view.frame.origin.y = 0 // Move view to original position
+    closeBtnTopConstraints.constant = 30
   }
   
     func handleLogin() {
@@ -35,9 +51,8 @@ class SingInVC: UIViewController {
           return
         }
         
-        // польучить пользователи и настройки  нав бара и тутула
-        //self.messagesController?.fetchUserAndSetupNavBarTitle()
         print("Success sing in")
+        self.menuVC?.fetchUserAndSetupNavBarTitle()
         let controll = MenuVC.init(nibName: "MenuVC", bundle: nil)
         self.navigationController?.pushViewController(controll, animated: true)
       }
