@@ -30,10 +30,10 @@
                         <constraint firstAttribute="height" constant="35" id="oWb-sF-Bfh"/>
                     </constraints>
                     <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arF-T2-IJf">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите електронную почту" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arF-T2-IJf">
                     <rect key="frame" x="30" y="218" width="315" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="tAL-ho-LaQ"/>
@@ -42,8 +42,8 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пароль" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TeU-vd-f0g">
-                    <rect key="frame" x="30" y="323" width="315" height="35"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите пароль" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TeU-vd-f0g">
+                    <rect key="frame" x="30" y="303" width="315" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="M7o-ih-JSy"/>
                     </constraints>
@@ -65,7 +65,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AgK-fD-zzw">
-                    <rect key="frame" x="30" y="448" width="315" height="36"/>
+                    <rect key="frame" x="30" y="428" width="315" height="36"/>
                     <color key="backgroundColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Войти">
@@ -92,7 +92,7 @@
                     </connections>
                 </button>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6IH-P1-f5n">
-                    <rect key="frame" x="30" y="358" width="315" height="35"/>
+                    <rect key="frame" x="30" y="338" width="315" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="Vu3-nz-efp"/>
                     </constraints>
@@ -122,7 +122,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="B2i-Nn-a4f" secondAttribute="trailing" constant="30" id="ttl-cF-ROs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TeU-vd-f0g" secondAttribute="trailing" constant="30" id="uoW-aA-b4z"/>
                 <constraint firstItem="rDl-z1-bPe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="vkp-CT-mNE"/>
-                <constraint firstItem="TeU-vd-f0g" firstAttribute="top" secondItem="B2i-Nn-a4f" secondAttribute="bottom" constant="35" id="zqM-by-VPH"/>
+                <constraint firstItem="TeU-vd-f0g" firstAttribute="top" secondItem="B2i-Nn-a4f" secondAttribute="bottom" constant="15" id="zqM-by-VPH"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="87.200000000000003" y="48.125937031484263"/>

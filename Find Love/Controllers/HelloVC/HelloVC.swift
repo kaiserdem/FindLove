@@ -23,11 +23,13 @@ class HelloVC: UIViewController {
   }
   
   private func checkAuth() {
+    
     if Auth.auth().currentUser == nil {
       perform(#selector(handleLogin), with: nil, afterDelay: 0)
+    } else {
+      let controll = MenuVC.init(nibName: "MenuVC", bundle: nil)
+      navigationController?.pushViewController(controll, animated: true)
     }
-//    let controll = MenuVC.init(nibName: "MenuVC", bundle: nil)
-//    navigationController?.pushViewController(controll, animated: true)
   }
   
   @objc func handleLogin() {

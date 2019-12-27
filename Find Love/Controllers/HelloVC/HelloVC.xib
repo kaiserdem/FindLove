@@ -35,7 +35,10 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="fID-ED-Kp1"/>
                     </constraints>
-                    <state key="normal" title="Регистрация"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="Регистрация">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="6"/>
@@ -51,7 +54,10 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="eAb-Sa-Jyo"/>
                     </constraints>
-                    <state key="normal" title="Войти"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="Войти">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="6"/>

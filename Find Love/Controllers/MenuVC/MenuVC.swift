@@ -11,6 +11,8 @@ import Firebase
 
 class MenuVC: UIViewController {
 
+  @IBOutlet weak var titleNameLable: UILabel!
+  @IBOutlet weak var messagesBtn: UIButton!
   @IBOutlet weak var logoutBtn: UIButton!
   
   override func viewDidLoad() {
@@ -31,4 +33,8 @@ class MenuVC: UIViewController {
     self.navigationController?.pushViewController(controll, animated: true)
   }
   
+  @IBAction func messagesBtnAction(_ sender: Any) {
+    let controll = MessagesTableVC()
+    self.navigationController?.pushViewController(controll, animated: true)
+  }
 }
