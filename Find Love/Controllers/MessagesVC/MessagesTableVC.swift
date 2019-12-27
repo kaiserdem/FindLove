@@ -19,9 +19,9 @@ class MessagesTableVC: UITableViewController {
     super.viewDidLoad()
     
     fetchUser()
-    navigationController?.navigationBar.isHidden = false
-    
-    navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel))
+//    navigationController?.navigationBar.isHidden = false
+//
+//    navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel))
     
     tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
   }

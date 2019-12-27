@@ -9,6 +9,7 @@
 // test1@gmail.com
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class RegistrationVC: UIViewController {
   
@@ -48,21 +49,66 @@ class RegistrationVC: UIViewController {
       guard let uid = user?.user.uid else { // создаем айди пользователя
         return
       }
+      let imageName = NSUUID().uuidString // генерирует случайный айди
+      // создали папку  для картинке в базе
+      let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
       
-      let ref = Database.database().reference(fromURL: "https://findlove-f6445.firebaseio.com/")
-      let userReference = ref.child("users").child(uid)
-      let values = ["name": name, "email": email]
-      userReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
-        if error != nil {
-          print(error)
-          return
-        }
-        print("Success register")
-        let controll = MenuVC.init(nibName: "MenuVC", bundle: nil)
-        self.navigationController?.pushViewController(controll, animated: true)
-      })
+      if let profileImage = self.userImageView.image, let  uploadData = profileImage.jpegData(compressionQuality: 0.1) {
+        storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+          
+          if error != nil {
+            print(error ?? "")
+            return
+          }
+          // могут быть ошибки
+          storageRef.downloadURL(completion: { (url, error) in
+            if error != nil {
+              print(error!.localizedDescription)
+              return
+            }
+            if let profileImageUrl = url?.absoluteString {
+              
+              let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl]
+              self.registeUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
+            }
+          })
+          let controll = MenuVC.init(nibName: "MenuVC", bundle: nil)
+          self.navigationController?.pushViewController(controll, animated: true)
+        })
+      }
+      
+      
+      
+      
+//      let ref = Database.database().reference(fromURL: "https://findlove-f6445.firebaseio.com/")
+//      let userReference = ref.child("users").child(uid)
+//      let values = ["name": name, "email": email]
+//      userReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
+//        if error != nil {
+//          print(error)
+//          return
+//        }
+//        print("Success register")
+//        let controll = MenuVC.init(nibName: "MenuVC", bundle: nil)
+//        self.navigationController?.pushViewController(controll, animated: true)
+//      })
     }
   }
+  
+  fileprivate func registeUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
+    // ссылка на базу данных
+    let ref = Database.database().reference()
+    let userReference = ref.child("users").child(uid) // создали папку пользователя
+    userReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
+      if error != nil {
+        return
+      }
+      
+    })
+  }
+  
+  
+  
   
 //  func handleRegister() { // выполнит регистрацию
 //    guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else { // если пустые, принт, выходим

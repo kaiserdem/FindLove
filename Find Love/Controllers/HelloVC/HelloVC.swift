@@ -14,6 +14,9 @@ class HelloVC: UIViewController {
   @IBOutlet weak var singInBtn: UIButton!
   @IBOutlet weak var registrationBtn: UIButton!
   
+  
+  weak var menuVC: MenuVC?
+  
   override func viewDidLoad() {
         super.viewDidLoad()
 
