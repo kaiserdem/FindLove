@@ -24,29 +24,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26Z-d0-blF">
-                    <rect key="frame" x="285" y="603" width="60" height="34"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpe-tj-r6p">
+                    <rect key="frame" x="30" y="602" width="35" height="35"/>
                     <color key="backgroundColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="34" id="T3F-e7-XlY"/>
-                        <constraint firstAttribute="width" constant="60" id="h5D-4B-LKk"/>
+                        <constraint firstAttribute="height" constant="35" id="PLR-eY-fSX"/>
+                        <constraint firstAttribute="width" constant="35" id="rjI-5G-FG9"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <state key="normal" title="Выйти"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="6"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="logoutBtnAction:" destination="-1" eventType="touchUpInside" id="FCL-hT-hal"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpe-tj-r6p">
-                    <rect key="frame" x="30" y="603" width="99" height="34"/>
-                    <color key="backgroundColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <state key="normal" title="Сообщения"/>
+                    <state key="normal" image="messages"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="6"/>
@@ -62,7 +47,6 @@
                         <constraint firstAttribute="height" constant="30" id="dfi-0I-6yu"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2oA-0Y-AHh">
@@ -77,20 +61,53 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eh3-sv-3wm">
+                    <rect key="frame" x="30" y="46" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="35" id="2p9-K6-7pY"/>
+                        <constraint firstAttribute="height" constant="35" id="RAJ-c8-Fad"/>
+                    </constraints>
+                    <state key="normal" image="setting"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26Z-d0-blF">
+                    <rect key="frame" x="310" y="46" width="35" height="35"/>
+                    <color key="backgroundColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="T3F-e7-XlY"/>
+                        <constraint firstAttribute="width" constant="35" id="h5D-4B-LKk"/>
+                    </constraints>
+                    <state key="normal" image="logout"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="6"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="logoutBtnAction:" destination="-1" eventType="touchUpInside" id="FCL-hT-hal"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="Eh3-sv-3wm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="26" id="0Um-lH-jln"/>
                 <constraint firstItem="Ryn-5L-XLz" firstAttribute="top" secondItem="2oA-0Y-AHh" secondAttribute="bottom" constant="80" id="DEf-0p-pMT"/>
                 <constraint firstItem="2oA-0Y-AHh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="EHh-b3-MOj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="26Z-d0-blF" secondAttribute="trailing" constant="30" id="IeJ-iX-B1c"/>
+                <constraint firstItem="Eh3-sv-3wm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="KNd-qV-txS"/>
                 <constraint firstItem="Ryn-5L-XLz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="LPc-9g-5ob"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ryn-5L-XLz" secondAttribute="trailing" constant="30" id="MIq-zb-pnZ"/>
+                <constraint firstItem="26Z-d0-blF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="26" id="XV7-TX-c3Z"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="tpe-tj-r6p" secondAttribute="bottom" constant="30" id="gOu-Po-KxO"/>
                 <constraint firstItem="tpe-tj-r6p" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="hgb-Df-yrt"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="26Z-d0-blF" secondAttribute="bottom" constant="30" id="pKH-Bi-co7"/>
                 <constraint firstItem="2oA-0Y-AHh" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="26" id="uvb-i4-kVx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="26Z-d0-blF" secondAttribute="trailing" constant="30" id="va7-Rl-V0z"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
     </objects>
+    <resources>
+        <image name="logout" width="64" height="64"/>
+        <image name="messages" width="64" height="64"/>
+        <image name="setting" width="64" height="64"/>
+    </resources>
 </document>

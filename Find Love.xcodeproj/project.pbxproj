@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		10922157054E58D2595F4C55 /* Pods_Find_Love.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD710EB921D70B94626E4CDB /* Pods_Find_Love.framework */; };
 		AD02EB2623B77F8900F472A5 /* MessagesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD02EB2523B77F8900F472A5 /* MessagesVC.xib */; };
+		AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */; };
 		AD26946323B4FD2C00D49887 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946223B4FD2C00D49887 /* MessagesVC.swift */; };
 		AD26946523B4FF8100D49887 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946423B4FF8100D49887 /* User.swift */; };
 		AD26946723B538A500D49887 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946623B538A500D49887 /* Message.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		09A7F9FC8CF0F1991ED38035 /* Pods-Find Love.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Love.debug.xcconfig"; path = "Target Support Files/Pods-Find Love/Pods-Find Love.debug.xcconfig"; sourceTree = "<group>"; };
 		AD02EB2523B77F8900F472A5 /* MessagesVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessagesVC.xib; sourceTree = "<group>"; };
+		AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		AD26946223B4FD2C00D49887 /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		AD26946423B4FF8100D49887 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AD26946623B538A500D49887 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -81,6 +83,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		AD02EB2923B793C200F472A5 /* ChatMessageCell */ = {
+			isa = PBXGroup;
+			children = (
+				AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */,
+			);
+			path = ChatMessageCell;
+			sourceTree = "<group>";
+		};
 		AD26946123B4FA3100D49887 /* MessagesVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				AD26946E23B6019C00D49887 /* UserCell */,
+				AD02EB2923B793C200F472A5 /* ChatMessageCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -174,8 +185,8 @@
 				AD8895DF23B21F1B00347A6A /* SingInVC */,
 				AD8895DA23B215E800347A6A /* RegistrationVC */,
 				AD8895E623B293A400347A6A /* MenuVC */,
-				AD26947A23B6856000D49887 /* ChatLogVC */,
 				AD26946123B4FA3100D49887 /* MessagesVC */,
+				AD26947A23B6856000D49887 /* ChatLogVC */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -355,6 +366,7 @@
 				AD8895D623B2128C00347A6A /* HelloVC.swift in Sources */,
 				AD26946723B538A500D49887 /* Message.swift in Sources */,
 				AD8895E923B293BE00347A6A /* MenuVC.swift in Sources */,
+				AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */,
 				AD26946C23B6019200D49887 /* UserCell.swift in Sources */,
 				AD26946523B4FF8100D49887 /* User.swift in Sources */,
 			);

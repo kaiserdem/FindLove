@@ -64,7 +64,8 @@ class MessagesVC: UIViewController {
     navigationController?.pushViewController(vc, animated: true)
   }
   @IBAction func newMessageBtnAction(_ sender: Any) {
-    let vc = ChatLogVC.init(nibName: "ChatLogVC", bundle: nil)
+    //let vc = ChatLogVC.init(nibName: "ChatLogVC", bundle: nil)
+    let vc = ChatLogVC(collectionViewLayout: UICollectionViewFlowLayout())
     navigationController?.pushViewController(vc, animated: true)
   }
   
