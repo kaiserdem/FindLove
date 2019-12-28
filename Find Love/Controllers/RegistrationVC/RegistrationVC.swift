@@ -89,8 +89,8 @@ class RegistrationVC: UIViewController {
 //          return
 //        }
 //        print("Success register")
-//        let controll = MenuVC.init(nibName: "MenuVC", bundle: nil)
-//        self.navigationController?.pushViewController(controll, animated: true)
+//        let vc = MenuVC.init(nibName: "MenuVC", bundle: nil)
+//        self.navigationController?.pushViewController(vc, animated: true)
 //      })
     }
   }
@@ -186,8 +186,8 @@ class RegistrationVC: UIViewController {
     handleRegister()
   }
   @IBAction func closeBtnAction(_ sender: Any) {
-    let controll = HelloVC.init(nibName: "HelloVC", bundle: nil)
-    navigationController?.pushViewController(controll, animated: true)
+    let vc = HelloVC.init(nibName: "HelloVC", bundle: nil)
+    navigationController?.pushViewController(vc, animated: true)
     
   }
   

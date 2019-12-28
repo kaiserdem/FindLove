@@ -19,6 +19,7 @@ class MenuVC: UIViewController {
   override func viewDidLoad() {
         super.viewDidLoad()
 
+    navigationController?.navigationBar.isHidden = true
     checkIfUserIsLogedIn()
   }
 
@@ -70,7 +71,7 @@ class MenuVC: UIViewController {
   }
   
   @IBAction func messagesBtnAction(_ sender: Any) {
-    let controll = MessagesTableVC()
-    self.navigationController?.pushViewController(controll, animated: true)
+    let vc = MessagesVC()
+    self.navigationController?.pushViewController(vc, animated: true)
   }
 }

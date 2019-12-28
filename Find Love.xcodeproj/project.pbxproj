@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		10922157054E58D2595F4C55 /* Pods_Find_Love.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD710EB921D70B94626E4CDB /* Pods_Find_Love.framework */; };
-		AD26946323B4FD2C00D49887 /* MessagesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946223B4FD2C00D49887 /* MessagesTableVC.swift */; };
+		AD02EB2623B77F8900F472A5 /* MessagesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD02EB2523B77F8900F472A5 /* MessagesVC.xib */; };
+		AD26946323B4FD2C00D49887 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946223B4FD2C00D49887 /* MessagesVC.swift */; };
 		AD26946523B4FF8100D49887 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946423B4FF8100D49887 /* User.swift */; };
 		AD26946723B538A500D49887 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946623B538A500D49887 /* Message.swift */; };
 		AD26946923B5393B00D49887 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946823B5393B00D49887 /* Extension.swift */; };
 		AD26946C23B6019200D49887 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946A23B6019200D49887 /* UserCell.swift */; };
 		AD26946D23B6019200D49887 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD26946B23B6019200D49887 /* UserCell.xib */; };
+		AD26947323B67B8A00D49887 /* ChatLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26947223B67B8A00D49887 /* ChatLogVC.swift */; };
+		AD26947923B6846C00D49887 /* ChatLogVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD26947823B6846C00D49887 /* ChatLogVC.xib */; };
 		AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895C223B2122D00347A6A /* AppDelegate.swift */; };
 		AD8895CA23B2122F00347A6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD8895C923B2122F00347A6A /* Assets.xcassets */; };
 		AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD8895CB23B2122F00347A6A /* LaunchScreen.storyboard */; };
@@ -30,12 +33,15 @@
 
 /* Begin PBXFileReference section */
 		09A7F9FC8CF0F1991ED38035 /* Pods-Find Love.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Love.debug.xcconfig"; path = "Target Support Files/Pods-Find Love/Pods-Find Love.debug.xcconfig"; sourceTree = "<group>"; };
-		AD26946223B4FD2C00D49887 /* MessagesTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableVC.swift; sourceTree = "<group>"; };
+		AD02EB2523B77F8900F472A5 /* MessagesVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessagesVC.xib; sourceTree = "<group>"; };
+		AD26946223B4FD2C00D49887 /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		AD26946423B4FF8100D49887 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AD26946623B538A500D49887 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		AD26946823B5393B00D49887 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		AD26946A23B6019200D49887 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		AD26946B23B6019200D49887 /* UserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
+		AD26947223B67B8A00D49887 /* ChatLogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogVC.swift; sourceTree = "<group>"; };
+		AD26947823B6846C00D49887 /* ChatLogVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatLogVC.xib; sourceTree = "<group>"; };
 		AD8895BF23B2122D00347A6A /* Find Love.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find Love.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD8895C223B2122D00347A6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD8895C923B2122F00347A6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,7 +84,8 @@
 		AD26946123B4FA3100D49887 /* MessagesVC */ = {
 			isa = PBXGroup;
 			children = (
-				AD26946223B4FD2C00D49887 /* MessagesTableVC.swift */,
+				AD26946223B4FD2C00D49887 /* MessagesVC.swift */,
+				AD02EB2523B77F8900F472A5 /* MessagesVC.xib */,
 			);
 			path = MessagesVC;
 			sourceTree = "<group>";
@@ -115,6 +122,15 @@
 				AD26946E23B6019C00D49887 /* UserCell */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		AD26947A23B6856000D49887 /* ChatLogVC */ = {
+			isa = PBXGroup;
+			children = (
+				AD26947223B67B8A00D49887 /* ChatLogVC.swift */,
+				AD26947823B6846C00D49887 /* ChatLogVC.xib */,
+			);
+			path = ChatLogVC;
 			sourceTree = "<group>";
 		};
 		AD8895B623B2122D00347A6A = {
@@ -158,6 +174,7 @@
 				AD8895DF23B21F1B00347A6A /* SingInVC */,
 				AD8895DA23B215E800347A6A /* RegistrationVC */,
 				AD8895E623B293A400347A6A /* MenuVC */,
+				AD26947A23B6856000D49887 /* ChatLogVC */,
 				AD26946123B4FA3100D49887 /* MessagesVC */,
 			);
 			path = Controllers;
@@ -270,7 +287,9 @@
 				AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */,
 				AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */,
 				AD8895EA23B293BE00347A6A /* MenuVC.xib in Resources */,
+				AD26947923B6846C00D49887 /* ChatLogVC.xib in Resources */,
 				AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */,
+				AD02EB2623B77F8900F472A5 /* MessagesVC.xib in Resources */,
 				AD26946D23B6019200D49887 /* UserCell.xib in Resources */,
 				AD8895CA23B2122F00347A6A /* Assets.xcassets in Resources */,
 				AD8895DE23B2162C00347A6A /* RegistrationVC.xib in Resources */,
@@ -331,7 +350,8 @@
 				AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */,
 				AD8895DD23B2162C00347A6A /* RegistrationVC.swift in Sources */,
 				AD8895E223B21F5300347A6A /* SingInVC.swift in Sources */,
-				AD26946323B4FD2C00D49887 /* MessagesTableVC.swift in Sources */,
+				AD26947323B67B8A00D49887 /* ChatLogVC.swift in Sources */,
+				AD26946323B4FD2C00D49887 /* MessagesVC.swift in Sources */,
 				AD8895D623B2128C00347A6A /* HelloVC.swift in Sources */,
 				AD26946723B538A500D49887 /* Message.swift in Sources */,
 				AD8895E923B293BE00347A6A /* MenuVC.swift in Sources */,

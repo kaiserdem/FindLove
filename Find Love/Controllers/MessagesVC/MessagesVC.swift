@@ -9,36 +9,40 @@
 import UIKit
 import Firebase
 
-class MessagesTableVC: UITableViewController {
+class MessagesVC: UIViewController {
   
+  @IBOutlet weak var menyBtn: UIButton!
+  @IBOutlet weak var newMessageBtn: UIButton!
+  @IBOutlet weak var backViewTable: UIView!
+  
+  
+  let tableView = UITableView()
   let cellId = "Cell"
-  
   var users = [User]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     fetchUser()
-//    navigationController?.navigationBar.isHidden = false
-//
-//    navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel))
+    uploadTableView()
+  }
+  
+  func uploadTableView() {
+    
+    tableView.delegate = self
+    tableView.dataSource = self
+    
+    backViewTable.addSubview(tableView)
+    tableView.translatesAutoresizingMaskIntoConstraints = false
+    tableView.topAnchor.constraint(equalTo: backViewTable.topAnchor).isActive = true
+    tableView.leftAnchor.constraint(equalTo: backViewTable.leftAnchor).isActive = true
+    tableView.bottomAnchor.constraint(equalTo: backViewTable.bottomAnchor).isActive = true
+    tableView.rightAnchor.constraint(equalTo: backViewTable.rightAnchor).isActive = true
     
     tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
   }
   
-//  func fetchUser() {
-//
-//    Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
-//      if let dictionary = snapshot.value as? [String: AnyObject] {
-//
-//        print(snapshot)
-//         let user = User(dictionary: dictionary)
-//        //self.users.append(user)
-//        //print(user.name as Any)
-//      }
-//    }, withCancel: nil)
-//  }
-  
+
   func fetchUser() { // выбрать пользователя
     Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
@@ -55,20 +59,25 @@ class MessagesTableVC: UITableViewController {
     }, withCancel: nil)
   }
   
-  @objc func cancel() {
-    let controll = MenuVC.init(nibName: "MenuVC", bundle: nil)
-    navigationController?.pushViewController(controll, animated: true)
+  @IBAction func menyBtnAction(_ sender: Any) {
+    let vc = MenuVC.init(nibName: "MenuVC", bundle: nil)
+    navigationController?.pushViewController(vc, animated: true)
+  }
+  @IBAction func newMessageBtnAction(_ sender: Any) {
+    let vc = ChatLogVC.init(nibName: "ChatLogVC", bundle: nil)
+    navigationController?.pushViewController(vc, animated: true)
   }
   
+}
+
+extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
   
-  
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
+   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return users.count
   }
   
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell
     
     let user = users[indexPath.row]
@@ -83,8 +92,7 @@ class MessagesTableVC: UITableViewController {
     return cell
   }
   
-  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 65
   }
-  
 }

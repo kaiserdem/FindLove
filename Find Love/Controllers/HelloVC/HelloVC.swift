@@ -30,8 +30,8 @@ class HelloVC: UIViewController {
     if Auth.auth().currentUser == nil {
       perform(#selector(handleLogin), with: nil, afterDelay: 0)
     } else {
-      let controll = MenuVC.init(nibName: "MenuVC", bundle: nil)
-      navigationController?.pushViewController(controll, animated: true)
+      let vc = MenuVC.init(nibName: "MenuVC", bundle: nil)
+      navigationController?.pushViewController(vc, animated: true)
     }
   }
   
@@ -44,12 +44,12 @@ class HelloVC: UIViewController {
   }
 
   @IBAction func singInBtnAction(_ sender: Any) {
-    let controll = SingInVC.init(nibName: "SingInVC", bundle: nil)
-    navigationController?.pushViewController(controll, animated: true)
+    let vc = SingInVC.init(nibName: "SingInVC", bundle: nil)
+    navigationController?.pushViewController(vc, animated: true)
   }
   
   @IBAction func registrationBtnAction(_ sender: Any) {
-    let controll = RegistrationVC.init(nibName: "RegistrationVC", bundle: nil)
-    navigationController?.pushViewController(controll, animated: true)
+    let vc = RegistrationVC.init(nibName: "RegistrationVC", bundle: nil)
+    navigationController?.pushViewController(vc, animated: true)
   }
 }
