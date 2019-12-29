@@ -11,6 +11,7 @@ import Firebase
 
 class MessagesVC: UIViewController {
   
+  @IBOutlet weak var topBarView: UIView!
   @IBOutlet weak var userNameLabel: UILabel!
   @IBOutlet weak var menyBtn: UIButton!
   @IBOutlet weak var newMessageBtn: UIButton!
@@ -24,12 +25,21 @@ class MessagesVC: UIViewController {
   var messagesDictionary = [String: Message]()
   var menuVC: MenuVC?
   
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     fetchUser()
     uploadTableView()
     observeMessages()
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    topBarView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 25.0)
   }
   
   func uploadTableView() {

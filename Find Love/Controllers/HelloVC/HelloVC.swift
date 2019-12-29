@@ -17,6 +17,10 @@ class HelloVC: UIViewController {
   
   weak var menuVC: MenuVC?
   
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
+  
   override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +28,7 @@ class HelloVC: UIViewController {
     
     checkAuth()
   }
+  
   
   private func checkAuth() {
     

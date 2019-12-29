@@ -69,6 +69,9 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   
   let cellId = "cellId"
   
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()

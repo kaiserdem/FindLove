@@ -18,6 +18,10 @@ class NewMessageVC: UIViewController {
   var messagesVC: MessagesVC?
   var users = [User]()
   
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
+  
   override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -45,11 +49,11 @@ class NewMessageVC: UIViewController {
     Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
         let user = User(dictionary: dictionary) // пользователь
-        self.users = [user]
+        user.id = snapshot.key
+        
+        self.users.append(user) // добавляем в масив
         
         print(self.users)
-        
-        
         DispatchQueue.main.async { // на главном потоке асинхронно
           self.tableView.reloadData()
         }
@@ -57,31 +61,41 @@ class NewMessageVC: UIViewController {
     }, withCancel: nil)
   }
   
-
   @IBAction func backBtnAction(_ sender: Any) {
+    let vc = MessagesVC.init(nibName: "MessagesVC", bundle: nil)
+    navigationController?.pushViewController(vc, animated: true)
   }
 }
 
 extension NewMessageVC: UITableViewDataSource, UITableViewDelegate {
   
-//  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    let user = self.users[indexPath.row]
-//    //showChatLogVCForUser(user)
-//  }
-  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return  5 //messages.count
+    return  users.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell
+    let user = users[indexPath.row]
+    cell.userNameLabel.text = user.name
+    cell.lastMessagesLabel.text = user.email
     
-    cell.userNameLabel.text = "1"
-    
+    if let profileImageView = user.profileImageUrl {
+      cell.userImageView.loadImageUsingCachWithUrlString(profileImageView)
+    }
     return cell
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 65
   }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    self.dismiss(animated: true) { // закрыть
+      let user = self.users[indexPath.row]
+      print(user)
+      self.messagesVC?.showChatLogVCForUser(user)
+    }
+  }
+  
 }

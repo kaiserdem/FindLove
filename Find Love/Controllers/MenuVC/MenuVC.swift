@@ -11,17 +11,22 @@ import Firebase
 
 class MenuVC: UIViewController {
 
+  @IBOutlet weak var button: UIButton!
   @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var titleNameLable: UILabel!
   @IBOutlet weak var messagesBtn: UIButton!
   @IBOutlet weak var logoutBtn: UIButton!
   
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
   
   override func viewDidLoad() {
         super.viewDidLoad()
 
     navigationController?.navigationBar.isHidden = true
     checkIfUserIsLogedIn()
+    
   }
 
   func checkIfUserIsLogedIn() { // проверка если пользователь вошел в систему

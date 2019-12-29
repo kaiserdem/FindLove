@@ -28,6 +28,10 @@ class RegistrationVC: UIViewController {
   
   weak var menuVC: MenuVC?
   
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 

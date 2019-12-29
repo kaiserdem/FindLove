@@ -20,6 +20,11 @@ class SingInVC: UIViewController {
   weak var menuVC: MenuVC?
   
   @IBOutlet weak var enterBtn: UIButton!
+  
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
+  
   override func viewDidLoad() {
         super.viewDidLoad()
       
