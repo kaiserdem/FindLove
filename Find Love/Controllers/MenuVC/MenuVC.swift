@@ -16,6 +16,7 @@ class MenuVC: UIViewController {
   @IBOutlet weak var messagesBtn: UIButton!
   @IBOutlet weak var logoutBtn: UIButton!
   
+  
   override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,7 +64,6 @@ class MenuVC: UIViewController {
     if let profileImageUrl = user.profileImageUrl {
       profileImageView.loadImageUsingCachWithUrlString(profileImageUrl)
     }
-    
   }
   
   @IBAction func logoutBtnAction(_ sender: Any) {

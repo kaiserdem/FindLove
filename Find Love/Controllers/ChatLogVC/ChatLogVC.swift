@@ -11,13 +11,14 @@ import Firebase
 
 class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
   
-//  var user: User? {
-//    didSet {
-//      navigationItem.title = user?.name
-//
-//      observeMessages() // наблюдать сообщения по Id
-//    }
-//  }
+  
+  var user: User? {
+    didSet {
+      self.nameLabel.text = user?.name
+
+      //observeMessages() // наблюдать сообщения по Id
+    }
+  }
   
   var messages = [Message]() // масив всех сообщений
   
@@ -57,6 +58,14 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     textField.delegate = self // подписали делегат
     return textField
   }()
+  
+  lazy var nameLabel: UILabel = {
+    let label = UILabel()
+    label.textAlignment = NSTextAlignment.center
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
   
   let cellId = "cellId"
   
@@ -107,6 +116,38 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   //  }
   
   func setupInputComponents() { // компоненты контроллера
+    
+    let topConteinerView = UIView()
+    topConteinerView.backgroundColor = .gray
+    topConteinerView.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(topConteinerView)
+    
+    topConteinerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    topConteinerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+    topConteinerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+    topConteinerView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+    
+    let backButton = UIButton(type: .system)
+    backButton.setTitle("Назад", for: .normal)
+    backButton.setTitleColor(.black, for: .normal)
+    backButton.translatesAutoresizingMaskIntoConstraints = false
+    backButton.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
+    topConteinerView.addSubview(backButton)
+    
+    backButton.leftAnchor.constraint(equalTo: topConteinerView.leftAnchor, constant: 10).isActive = true
+    backButton.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 20).isActive = true
+    backButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
+    backButton.heightAnchor.constraint(equalTo: topConteinerView.heightAnchor).isActive = true
+    
+//    let nameLabel = UILabel()
+//    nameLabel.textAlignment = NSTextAlignment.center
+//    nameLabel.translatesAutoresizingMaskIntoConstraints = false
+    topConteinerView.addSubview(nameLabel)
+    
+    nameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 20).isActive = true
+    nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
+    
     let conteinerView = UIView()
     conteinerView.backgroundColor = .gray
     conteinerView.translatesAutoresizingMaskIntoConstraints = false
@@ -149,18 +190,23 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
   }
   
+  @objc func handleBack() {
+    let controll = MessagesVC.init(nibName: "MessagesVC", bundle: nil)
+    self.navigationController?.pushViewController(controll, animated: true)
+  }
+  
   @objc func handleSend() { // отправляем сообщение
     
     let ref = Database.database().reference().child("messages") // новая ветка
     let childRef = ref.childByAutoId() // вернет всех детей
-    //let toId = user!.id! // айди получателя
-    //let fromId = Auth.auth().currentUser!.uid // айди отправителя
-    //let timestamp = Int(NSDate().timeIntervalSince1970) // время
+    let toId = user!.id! // айди получателя
+    let fromId = Auth.auth().currentUser!.uid // айди текущего пользователя, отправителя
+    let timestamp = Int(NSDate().timeIntervalSince1970) // время
+    
     // отправляем масив данных
-    let values = ["text": inputTextField.text!, "name": "user"] as [String : Any]
+    let values = ["text": inputTextField.text!, "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
     childRef.updateChildValues(values)
-    //let values = ["text": inputTextField.text!, "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
-//
+    
 //    childRef.updateChildValues(values) { (error, ref) in // загрузить значение веток
 //      if error != nil { // если есть ошибка
 //        print(error!) // выходим из функции

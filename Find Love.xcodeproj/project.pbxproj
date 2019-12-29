@@ -10,6 +10,8 @@
 		10922157054E58D2595F4C55 /* Pods_Find_Love.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD710EB921D70B94626E4CDB /* Pods_Find_Love.framework */; };
 		AD02EB2623B77F8900F472A5 /* MessagesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD02EB2523B77F8900F472A5 /* MessagesVC.xib */; };
 		AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */; };
+		AD02EB3123B7FDB500F472A5 /* NewMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */; };
+		AD02EB3223B7FDB500F472A5 /* NewMessageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD02EB3023B7FDB500F472A5 /* NewMessageVC.xib */; };
 		AD26946323B4FD2C00D49887 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946223B4FD2C00D49887 /* MessagesVC.swift */; };
 		AD26946523B4FF8100D49887 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946423B4FF8100D49887 /* User.swift */; };
 		AD26946723B538A500D49887 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946623B538A500D49887 /* Message.swift */; };
@@ -36,6 +38,8 @@
 		09A7F9FC8CF0F1991ED38035 /* Pods-Find Love.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Love.debug.xcconfig"; path = "Target Support Files/Pods-Find Love/Pods-Find Love.debug.xcconfig"; sourceTree = "<group>"; };
 		AD02EB2523B77F8900F472A5 /* MessagesVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessagesVC.xib; sourceTree = "<group>"; };
 		AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
+		AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageVC.swift; sourceTree = "<group>"; };
+		AD02EB3023B7FDB500F472A5 /* NewMessageVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMessageVC.xib; sourceTree = "<group>"; };
 		AD26946223B4FD2C00D49887 /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		AD26946423B4FF8100D49887 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AD26946623B538A500D49887 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -89,6 +93,15 @@
 				AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */,
 			);
 			path = ChatMessageCell;
+			sourceTree = "<group>";
+		};
+		AD02EB2E23B7FD6D00F472A5 /* NewMessageVC */ = {
+			isa = PBXGroup;
+			children = (
+				AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */,
+				AD02EB3023B7FDB500F472A5 /* NewMessageVC.xib */,
+			);
+			path = NewMessageVC;
 			sourceTree = "<group>";
 		};
 		AD26946123B4FA3100D49887 /* MessagesVC */ = {
@@ -186,6 +199,7 @@
 				AD8895DA23B215E800347A6A /* RegistrationVC */,
 				AD8895E623B293A400347A6A /* MenuVC */,
 				AD26946123B4FA3100D49887 /* MessagesVC */,
+				AD02EB2E23B7FD6D00F472A5 /* NewMessageVC */,
 				AD26947A23B6856000D49887 /* ChatLogVC */,
 			);
 			path = Controllers;
@@ -295,6 +309,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD02EB3223B7FDB500F472A5 /* NewMessageVC.xib in Resources */,
 				AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */,
 				AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */,
 				AD8895EA23B293BE00347A6A /* MenuVC.xib in Resources */,
@@ -368,6 +383,7 @@
 				AD8895E923B293BE00347A6A /* MenuVC.swift in Sources */,
 				AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */,
 				AD26946C23B6019200D49887 /* UserCell.swift in Sources */,
+				AD02EB3123B7FDB500F472A5 /* NewMessageVC.swift in Sources */,
 				AD26946523B4FF8100D49887 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

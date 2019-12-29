@@ -11,6 +11,7 @@ import Firebase
 
 class MessagesVC: UIViewController {
   
+  @IBOutlet weak var userNameLabel: UILabel!
   @IBOutlet weak var menyBtn: UIButton!
   @IBOutlet weak var newMessageBtn: UIButton!
   @IBOutlet weak var backViewTable: UIView!
@@ -19,12 +20,16 @@ class MessagesVC: UIViewController {
   let tableView = UITableView()
   let cellId = "Cell"
   var users = [User]()
+  var messages = [Message]()
+  var messagesDictionary = [String: Message]()
+  var menuVC: MenuVC?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     fetchUser()
     uploadTableView()
+    observeMessages()
   }
   
   func uploadTableView() {
@@ -51,7 +56,8 @@ class MessagesVC: UIViewController {
         
         self.users.append(user) // добавляем в масив
         
-        print(self.users)
+        self.setupNavBarWithUser(user)
+        
         DispatchQueue.main.async { // на главном потоке асинхронно
           self.tableView.reloadData()
         }
@@ -59,37 +65,98 @@ class MessagesVC: UIViewController {
     }, withCancel: nil)
   }
   
+  func setupNavBarWithUser(_ user: User) {
+    userNameLabel.text = user.name
+  }
+  
+  func showChatLogVCForUser(_ user: User?) {
+    let vc = ChatLogVC(collectionViewLayout: UICollectionViewFlowLayout())
+    vc.user = user
+    navigationController?.pushViewController(vc, animated: true)
+  }
+  
+    func observeMessages() {
+      
+      let ref = Database.database().reference().child("messages")
+      ref.observe(.childAdded, with: { (snapshot) in
+        
+        if let dictionary = snapshot.value as? [String: AnyObject] {
+          let message = Message(dictionary: dictionary)
+          
+          if let toId = message.toId { // по этому id отправлено это сообщение
+            self.messagesDictionary[toId] = message
+            
+            self.messages = Array(self.messagesDictionary.values)
+            self.messages.sort(by: { (message1, message2) -> Bool in
+              return (message1.timestamp?.intValue)! > (message2.timestamp?.intValue)!
+            })
+          }
+          DispatchQueue.main.async {
+            self.tableView.reloadData()
+          }
+        }
+
+      }, withCancel: nil)
+      
+  //    guard let uid = Auth.auth().currentUser?.uid else { return } // uid текущего юзера
+  //
+      // ветка нашего юзера, все сообщения
+  //    let userMessagesRef = Database.database().reference().child("user-messages").child(uid)
+  //
+  //    // проверяем новые ветки
+  //    userMessagesRef.observe(.childAdded, with: { (snapshot) in
+  //      print("1")
+  //      let messageId = snapshot.key // ключ из ветки юзера
+  //      // ссылка на это сообщение
+  //      let messageRef = Database.database().reference().child("messages").child(messageId)
+  //      // просматриваем значение сообщения
+  //      messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+  //        // значение кладем в масив
+  //        guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+  //
+  //        let message = Message(dictionary: dictionary) // сообщения в масиве
+  //
+  //        if message.chatPartnerId() == self.user?.id { // проверка
+  //          self.messages.append(message) // добавляем в новый масив
+  //          DispatchQueue.main.async {
+  //            self.collectionView?.reloadData()
+  //          }
+  //        }
+  //      }, withCancel: nil)
+  //    }, withCancel: nil)
+    }
+  
   @IBAction func menyBtnAction(_ sender: Any) {
     let vc = MenuVC.init(nibName: "MenuVC", bundle: nil)
     navigationController?.pushViewController(vc, animated: true)
   }
   @IBAction func newMessageBtnAction(_ sender: Any) {
-    //let vc = ChatLogVC.init(nibName: "ChatLogVC", bundle: nil)
-    let vc = ChatLogVC(collectionViewLayout: UICollectionViewFlowLayout())
-    navigationController?.pushViewController(vc, animated: true)
+    //showChatLogVCForUser(users)
+    let newMessageVC = NewMessageVC()
+    newMessageVC.messagesVC = self // какой именно контролллер
+    let navController = UINavigationController(rootViewController: newMessageVC)
+    present(navController, animated: true, completion: nil)
   }
   
 }
 
 extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
   
-   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return users.count
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let user = self.users[indexPath.row]
+    showChatLogVCForUser(user)
   }
   
+   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return  messages.count
+  }
   
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell
     
-    let user = users[indexPath.row]
-    cell.userImageView.image = UIImage(named: "user")
-    cell.userImageView.contentMode = .scaleAspectFit
-    cell.userNameLabel.text = user.name
-    cell.lastMessagesLabel.text = user.email
+    let message = messages[indexPath.row]
+    cell.message = message
     
-    if let profileImageView = user.profileImageUrl {
-      cell.userImageView.loadImageUsingCachWithUrlString(profileImageView)
-    }
     return cell
   }
   

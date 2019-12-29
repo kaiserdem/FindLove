@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewMessageVC" customModule="Find_Love" customModuleProvider="target">
+            <connections>
+                <outlet property="backBtn" destination="ib6-Fr-IfT" id="XuV-qK-YEd"/>
+                <outlet property="backViewTable" destination="XTv-eY-yBW" id="3MO-or-KbX"/>
+                <outlet property="view" destination="kn3-FV-DCz" id="PcG-Kd-TCY"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="kn3-FV-DCz">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTv-eY-yBW">
+                    <rect key="frame" x="0.0" y="70" width="375" height="547"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ib6-Fr-IfT">
+                    <rect key="frame" x="30" y="25" width="53" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="YAB-XV-bpK"/>
+                    </constraints>
+                    <state key="normal" title="Назад">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="backBtnAction:" destination="-1" eventType="touchUpInside" id="Sz0-tU-bUV"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="FKg-t1-3ak" firstAttribute="bottom" secondItem="XTv-eY-yBW" secondAttribute="bottom" constant="50" id="Kei-S5-WnE"/>
+                <constraint firstItem="XTv-eY-yBW" firstAttribute="leading" secondItem="FKg-t1-3ak" secondAttribute="leading" id="O4S-uZ-IGP"/>
+                <constraint firstItem="XTv-eY-yBW" firstAttribute="trailing" secondItem="FKg-t1-3ak" secondAttribute="trailing" id="OO0-gn-iBL"/>
+                <constraint firstItem="XTv-eY-yBW" firstAttribute="top" secondItem="FKg-t1-3ak" secondAttribute="top" constant="50" id="Qz9-cR-k5f"/>
+                <constraint firstItem="ib6-Fr-IfT" firstAttribute="leading" secondItem="FKg-t1-3ak" secondAttribute="leading" constant="30" id="cVb-Dy-9sS"/>
+                <constraint firstItem="XTv-eY-yBW" firstAttribute="top" secondItem="ib6-Fr-IfT" secondAttribute="bottom" constant="10" id="sfg-Lc-DuM"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="FKg-t1-3ak"/>
+            <point key="canvasLocation" x="138.40000000000001" y="149.77511244377811"/>
+        </view>
+    </objects>
+</document>

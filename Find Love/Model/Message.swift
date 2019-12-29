@@ -22,7 +22,7 @@ class Message: NSObject { // модель сообщений
     self.toId = dictionary["toId"] as? String
     self.timestamp = dictionary["timestamp"] as? NSNumber
   }
-  func chatPartnerId() -> String? { // если написали сооющение себе
+  func chatPartnerId() -> String? { // если написали сообщение себе
     // если отправитель это я, тогда возврат toId, в противном случае fromId
     return fromId == Auth.auth().currentUser?.uid ? toId : fromId
   }

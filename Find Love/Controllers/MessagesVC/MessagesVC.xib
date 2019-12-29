@@ -15,6 +15,7 @@
                 <outlet property="backViewTable" destination="xkA-m3-jHD" id="Imt-E5-Bh6"/>
                 <outlet property="menyBtn" destination="1Et-q8-JW5" id="dj4-qd-X9M"/>
                 <outlet property="newMessageBtn" destination="LZJ-zy-HQq" id="CG4-ba-d3I"/>
+                <outlet property="userNameLabel" destination="ctp-ff-TT1" id="8r6-63-JYP"/>
                 <outlet property="view" destination="V4b-rR-22Q" id="bYt-f7-aB5"/>
             </connections>
         </placeholder>
@@ -49,17 +50,26 @@
                         <action selector="newMessageBtnAction:" destination="-1" eventType="touchUpInside" id="R4c-Od-zLH"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctp-ff-TT1">
+                    <rect key="frame" x="75" y="42" width="225" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="xkA-m3-jHD" firstAttribute="trailing" secondItem="9JR-y6-gMW" secondAttribute="trailing" id="2Oe-1O-vNg"/>
                 <constraint firstItem="xkA-m3-jHD" firstAttribute="top" secondItem="9JR-y6-gMW" secondAttribute="top" constant="50" id="Dj1-9g-5mD"/>
+                <constraint firstItem="ctp-ff-TT1" firstAttribute="leading" secondItem="1Et-q8-JW5" secondAttribute="trailing" constant="10" id="ODF-UO-2tu"/>
                 <constraint firstItem="xkA-m3-jHD" firstAttribute="top" secondItem="1Et-q8-JW5" secondAttribute="bottom" id="Tmk-fO-O2L"/>
                 <constraint firstItem="1Et-q8-JW5" firstAttribute="leading" secondItem="9JR-y6-gMW" secondAttribute="leading" constant="30" id="V5i-BF-Oj1"/>
                 <constraint firstItem="9JR-y6-gMW" firstAttribute="trailing" secondItem="LZJ-zy-HQq" secondAttribute="trailing" constant="30" id="ZT9-Lz-nT2"/>
                 <constraint firstItem="xkA-m3-jHD" firstAttribute="leading" secondItem="9JR-y6-gMW" secondAttribute="leading" id="bOo-LU-Vpy"/>
+                <constraint firstItem="LZJ-zy-HQq" firstAttribute="leading" secondItem="ctp-ff-TT1" secondAttribute="trailing" constant="10" id="bnV-WA-c9o"/>
                 <constraint firstItem="9JR-y6-gMW" firstAttribute="bottom" secondItem="xkA-m3-jHD" secondAttribute="bottom" constant="50" id="gjB-7H-0Dy"/>
                 <constraint firstItem="xkA-m3-jHD" firstAttribute="top" secondItem="LZJ-zy-HQq" secondAttribute="bottom" id="obp-nu-oLx"/>
+                <constraint firstItem="ctp-ff-TT1" firstAttribute="centerY" secondItem="1Et-q8-JW5" secondAttribute="centerY" id="tRq-P2-77r"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="9JR-y6-gMW"/>
             <point key="canvasLocation" x="138.40000000000001" y="149.77511244377811"/>
