@@ -112,7 +112,7 @@ class MessagesVC: UIViewController {
           
           if let toId = message.toId { // если есть Id получателья
             self.messagesDictionary[toId] = message // по toId было отправлено это message сообщение
-            print(self.messagesDictionary)
+            //print(self.messagesDictionary)
             self.messages = Array(self.messagesDictionary.values)
             self.messages.sort(by: { (message1, message2) -> Bool in // сортировать
               // дата первого сообщения больше чем второго
@@ -147,8 +147,18 @@ class MessagesVC: UIViewController {
 extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let user = self.users[indexPath.row]
-    showChatLogVCForUser(user)
+    let message = self.messages[indexPath.row] //
+    guard let chatPartnerId = message.chatPartnerId() else { return }
+    
+    // берем
+    let ref = Database.database().reference().child("users").child(chatPartnerId)
+    ref.observe(.value, with: { (snapshot) in
+      guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+      
+      let user = User(dictionary: dictionary)
+      user.id = chatPartnerId
+      self.showChatLogVCForUser(user)
+    }, withCancel: nil)
   }
   
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

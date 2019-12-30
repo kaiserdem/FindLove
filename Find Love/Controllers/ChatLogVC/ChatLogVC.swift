@@ -16,10 +16,40 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     didSet {
       self.nameLabel.text = user?.name
 
+      observeMessages()
     }
   }
   
   var messages = [Message]() // масив всех сообщений
+  
+  func observeMessages() {
+    
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    let userMessagesRef = Database.database().reference().child("user-messages").child(uid)
+    userMessagesRef.observe(.childAdded, with: { (snapshot) in
+      
+      let messageId = snapshot.key
+      let messageRef = Database.database().reference().child("messages").child(messageId)
+      
+      messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+        
+        let message = Message(dictionary: dictionary)
+        
+        if message.chatPartnerId() == self.user?.id {
+          self.messages.append(message)
+          
+          DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+          }
+        }
+      }, withCancel: nil)
+    }, withCancel: nil)
+  }
+  
+  
 
   lazy var inputTextField: UITextField = {
     let textField = UITextField()
@@ -48,7 +78,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     collectionView?.alwaysBounceVertical = true
     collectionView?.backgroundColor = UIColor.white
     // регистрация ячейки
-    //collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
+    collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
     setupInputComponents()
   }
 
@@ -174,5 +204,19 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     handleSend()
     return true
+  }
+  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return messages.count
+  }
+  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessageCell
+    
+    let message = messages[indexPath.row]
+    cell.textView.text = message.text
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: view.frame.width, height: 80)
   }
 }
