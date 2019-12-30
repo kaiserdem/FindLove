@@ -11,7 +11,6 @@ import Firebase
 
 class MenuVC: UIViewController {
 
-  @IBOutlet weak var button: UIButton!
   @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var titleNameLable: UILabel!
   @IBOutlet weak var messagesBtn: UIButton!

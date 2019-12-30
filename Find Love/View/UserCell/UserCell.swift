@@ -19,30 +19,42 @@ class UserCell: UITableViewCell {
 
   var message: Message? {
     didSet {
-      if let toId = message!.toId { // если есть такой
-        let ref = Database.database().reference().child("users").child(toId) // айди всех
-        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+      setupNameAndProfileImage()
+    }
+  }
+  
+  private func setupNameAndProfileImage() {
+    
+    let chatPartnerId: String?
+    
+    if message?.fromId == Auth.auth().currentUser?.uid {
+      chatPartnerId = message?.toId
+    } else {
+      chatPartnerId = message?.fromId
+    }
+    if let id = chatPartnerId { // если есть такой
+      let ref = Database.database().reference().child("users").child(id) // айди всех
+      ref.observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        if let dictionary = snapshot.value as? [String: AnyObject] {
+          self.userImageView.image = UIImage(named: "user")
+          self.userImageView.contentMode = .scaleAspectFit
+          self.userNameLabel.text = dictionary["name"] as? String
+          self.lastMessagesLabel.text = self.message!.text
           
-          if let dictionary = snapshot.value as? [String: AnyObject] {
-            self.userImageView.image = UIImage(named: "user")
-            self.userImageView.contentMode = .scaleAspectFit
-            self.userNameLabel.text = dictionary["name"] as? String
-            self.lastMessagesLabel.text = self.message!.text
+          if let seconds = self.message?.timestamp?.doubleValue {
+            let timestampDate = Date(timeIntervalSince1970: seconds)
             
-            if let seconds = self.message?.timestamp?.doubleValue {
-              let timestampDate = Date(timeIntervalSince1970: seconds)
-              
-              let dateFormatter = DateFormatter()
-              dateFormatter.dateFormat = "hh:mm:ss a"
-              self.timeLabel.text = dateFormatter.string(from: timestampDate)
-            }
-            
-            if let profileImageView = dictionary["profileImageUrl"] as? String {
-              self.userImageView.loadImageUsingCachWithUrlString(profileImageView)
-            }
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "hh:mm:ss a"
+            self.timeLabel.text = dateFormatter.string(from: timestampDate)
           }
-        }, withCancel: nil)
-      }
+          
+          if let profileImageView = dictionary["profileImageUrl"] as? String {
+            self.userImageView.loadImageUsingCachWithUrlString(profileImageView)
+          }
+        }
+      }, withCancel: nil)
     }
   }
   

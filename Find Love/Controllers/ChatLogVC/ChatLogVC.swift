@@ -16,41 +16,11 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     didSet {
       self.nameLabel.text = user?.name
 
-      //observeMessages() // наблюдать сообщения по Id
     }
   }
   
   var messages = [Message]() // масив всех сообщений
-  
-//  func observeMessages() {
-//    guard let uid = Auth.auth().currentUser?.uid else { return } // uid текущего юзера
-//
-//    // ветка нашего юзера, все сообщения
-//    let userMessagesRef = Database.database().reference().child("user-messages").child(uid)
-//
-//    // проверяем новые ветки
-//    userMessagesRef.observe(.childAdded, with: { (snapshot) in
-//      print("1")
-//      let messageId = snapshot.key // ключ из ветки юзера
-//      // ссылка на это сообщение
-//      let messageRef = Database.database().reference().child("messages").child(messageId)
-//      // просматриваем значение сообщения
-//      messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
-//        // значение кладем в масив
-//        guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
-//
-//        let message = Message(dictionary: dictionary) // сообщения в масиве
-//
-//        if message.chatPartnerId() == self.user?.id { // проверка
-//          self.messages.append(message) // добавляем в новый масив
-//          DispatchQueue.main.async {
-//            self.collectionView?.reloadData()
-//          }
-//        }
-//      }, withCancel: nil)
-//    }, withCancel: nil)
-//  }
-  
+
   lazy var inputTextField: UITextField = {
     let textField = UITextField()
     textField.placeholder = "Ведите сообщение..."
@@ -81,42 +51,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     //collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
     setupInputComponents()
   }
-  
-  // кол елементов в секции
-//  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//    return messages.count //сколько сообщений в масиве
-//  }
-//  
-//  // возвращает ячейку по елементу
-//  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//    // переиспользовать ячейку
-//    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessageCell
-//    
-//    let message = messages[indexPath.item]  // масив всех сообщений
-//    cell.textView.text = message.text // в ячейкц текст из масива
-//    return cell
-//  }
-//  
-//  //размер каждой ячейки
-//  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//    return CGSize(width: view.frame.width, height: 80)
-//  }
-  
-  
-  
-  //  //размер каждой ячейки
-  //  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-  //    let height: CGFloat = 80
-  //
-  //    return CGSize(width: view.frame.width, height: 80)
-  //  }
-  //    // расчитать размер вю для написаното текста
-  //  private func estimateFrameForText(_ text: String) -> CGRect {
-  //    let size = CGSize(width: 200, height: 1000)
-  //    let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-  //
-  //    return NSString(string: text).boundingRect(with: size, options: options, attributes: [nsa : UIFont.systemFont(ofSize: 16)]?, context: <#T##NSStringDrawingContext?#>) //boundingRect возвращает размер из строки
-  //  }
+
   
   func setupInputComponents() { // компоненты контроллера
     
@@ -141,10 +76,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     backButton.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 20).isActive = true
     backButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
     backButton.heightAnchor.constraint(equalTo: topConteinerView.heightAnchor).isActive = true
-    
-//    let nameLabel = UILabel()
-//    nameLabel.textAlignment = NSTextAlignment.center
-//    nameLabel.translatesAutoresizingMaskIntoConstraints = false
+
     topConteinerView.addSubview(nameLabel)
     
     nameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -200,28 +132,43 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   
   @objc func handleSend() { // отправляем сообщение
     
-    let ref = Database.database().reference().child("messages") // новая ветка
-    let childRef = ref.childByAutoId() // вернет всех детей
+    let ref = Database.database().reference()//.child("messages") // новая ветка
+    
+    let refMessages = ref.child("messages")
+    let childRef = refMessages.childByAutoId() // айди всех пользователей
     let toId = user!.id! // айди получателя
     let fromId = Auth.auth().currentUser!.uid // айди текущего пользователя, отправителя
     let timestamp = Int(NSDate().timeIntervalSince1970) // время
     
     // отправляем масив данных
     let values = ["text": inputTextField.text!, "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
-    childRef.updateChildValues(values)
+    childRef.updateChildValues(values) { (error, ref) in
+      if error != nil {
+        print(error!)
+        return
+      }
+    }
+    // новая папка с айди отправителем и айди сообщения
+    let refUserFromId = ref.child("user-messages").child(fromId)
+    let messageId = childRef.key // айди нашего сообщения
+    let valuesUF = [messageId: 1]
     
-//    childRef.updateChildValues(values) { (error, ref) in // загрузить значение веток
-//      if error != nil { // если есть ошибка
-//        print(error!) // выходим из функции
-//        return
-//      }
-//      // новая ветка,сообщения по конкретном пользователю, кто отправил
-//      let userMessageRef = Database.database().reference().child("user-messages").child(fromId)
-//
-//      let messageId = childRef.key // ключ нашего сообшения
-//      userMessageRef.updateChildValues([messageId: 1])// в новую ветку кладем ключ
-//
-//    }
+    refUserFromId.updateChildValues(valuesUF) { (error, ref) in
+      if error != nil {
+        print(error!)
+        return
+      }
+    }
+    
+    // новая папка с айди получателем и айди сообщения
+    let refUserToId = ref.child("user-messages").child(toId)
+    refUserToId.updateChildValues(valuesUF) { (error, ref) in
+      if error != nil {
+        print(error!)
+        return
+      }
+    }
+
   }
    // текстовое поле возврвщвет
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {

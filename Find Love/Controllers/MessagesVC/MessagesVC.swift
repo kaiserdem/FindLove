@@ -34,7 +34,7 @@ class MessagesVC: UIViewController {
     
     fetchUser()
     uploadTableView()
-    observeMessages()
+    observeUserMessages()
   }
   
   override func viewWillLayoutSubviews() {
@@ -66,17 +66,21 @@ class MessagesVC: UIViewController {
         
         self.users.append(user) // добавляем в масив
         
-        self.setupNavBarWithUser(user)
-        
         DispatchQueue.main.async { // на главном потоке асинхронно
           self.tableView.reloadData()
+          self.setupNavBarWithUser(user)
         }
       }
     }, withCancel: nil)
   }
   
   func setupNavBarWithUser(_ user: User) {
+    messages.removeAll()
+    messagesDictionary.removeAll()
+    tableView.reloadData()
     userNameLabel.text = user.name
+    
+    observeUserMessages()
   }
   
   func showChatLogVCForUser(_ user: User?) {
@@ -85,56 +89,46 @@ class MessagesVC: UIViewController {
     navigationController?.pushViewController(vc, animated: true)
   }
   
-    func observeMessages() {
+  func observeUserMessages() {
+    // айди текущий пользователь
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    
+    // ссылка на все сообщения пользователя
+    let ref = Database.database().reference().child("user-messages").child(uid)
+    ref.observe(.childAdded, with: { (snapshot) in
       
-      let ref = Database.database().reference().child("messages")
-      ref.observe(.childAdded, with: { (snapshot) in
-        
-        if let dictionary = snapshot.value as? [String: AnyObject] {
-          let message = Message(dictionary: dictionary)
+      // ключ сообщения
+      let messageId = snapshot.key
+      
+      // сслка на сообщения по ключу 
+      let messageReference = Database.database().reference().child("messages").child(messageId)
+      
+      // проверяем папку messages на новые сообщения
+      messageReference.observeSingleEvent(of: .value, with: { (snapshot) in
+
+        if let dictionary = snapshot.value as? [String: AnyObject] { // словарь из всего
+          let message = Message(dictionary: dictionary) // помещаем в сообщение
           
-          if let toId = message.toId { // по этому id отправлено это сообщение
-            self.messagesDictionary[toId] = message
-            
+          if let toId = message.toId { // если есть Id получателья
+            self.messagesDictionary[toId] = message // по toId было отправлено это message сообщение
+            print(self.messagesDictionary)
             self.messages = Array(self.messagesDictionary.values)
-            self.messages.sort(by: { (message1, message2) -> Bool in
+            self.messages.sort(by: { (message1, message2) -> Bool in // сортировать
+              // дата первого сообщения больше чем второго
               return (message1.timestamp?.intValue)! > (message2.timestamp?.intValue)!
             })
           }
-          DispatchQueue.main.async {
+          DispatchQueue.main.async(execute: {
             self.tableView.reloadData()
-          }
+          })
         }
 
       }, withCancel: nil)
-      
-  //    guard let uid = Auth.auth().currentUser?.uid else { return } // uid текущего юзера
-  //
-      // ветка нашего юзера, все сообщения
-  //    let userMessagesRef = Database.database().reference().child("user-messages").child(uid)
-  //
-  //    // проверяем новые ветки
-  //    userMessagesRef.observe(.childAdded, with: { (snapshot) in
-  //      print("1")
-  //      let messageId = snapshot.key // ключ из ветки юзера
-  //      // ссылка на это сообщение
-  //      let messageRef = Database.database().reference().child("messages").child(messageId)
-  //      // просматриваем значение сообщения
-  //      messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
-  //        // значение кладем в масив
-  //        guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
-  //
-  //        let message = Message(dictionary: dictionary) // сообщения в масиве
-  //
-  //        if message.chatPartnerId() == self.user?.id { // проверка
-  //          self.messages.append(message) // добавляем в новый масив
-  //          DispatchQueue.main.async {
-  //            self.collectionView?.reloadData()
-  //          }
-  //        }
-  //      }, withCancel: nil)
-  //    }, withCancel: nil)
-    }
+
+    }, withCancel: nil)
+    
+  }
   
   @IBAction func menyBtnAction(_ sender: Any) {
     let vc = MenuVC.init(nibName: "MenuVC", bundle: nil)
