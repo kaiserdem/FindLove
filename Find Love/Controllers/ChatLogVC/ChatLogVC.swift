@@ -75,11 +75,17 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 58, right: 0)
     collectionView?.alwaysBounceVertical = true
     collectionView?.backgroundColor = UIColor.white
     // регистрация ячейки
     collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
     setupInputComponents()
+  }
+  
+  // поменять констрейнты при смене ориентации
+  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    collectionView?.collectionViewLayout.invalidateLayout()
   }
 
   
@@ -155,6 +161,17 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
   }
   
+  // принимает текст возвращает размер
+  private func estimateFrameForText(_ text: String) -> CGRect {
+    
+    let size = CGSize(width: 200, height: 1000)
+    
+    // текст прислоняеться к левому краю и использует пренос строки
+    let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+    
+    return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)], context: nil)
+  }
+  
   @objc func handleBack() {
     let controll = MessagesVC.init(nibName: "MessagesVC", bundle: nil)
     self.navigationController?.pushViewController(controll, animated: true)
@@ -190,6 +207,8 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
       }
     }
     
+    self.inputTextField.text = nil
+    
     // новая папка с айди получателем и айди сообщения
     let refUserToId = ref.child("user-messages").child(toId)
     refUserToId.updateChildValues(valuesUF) { (error, ref) in
@@ -213,10 +232,19 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     let message = messages[indexPath.row]
     cell.textView.text = message.text
+    
+    cell.bubbleWidthAnchor?.constant = estimateFrameForText(message.text!).width + 35
+    
     return cell
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: view.frame.width, height: 80)
+    var height: CGFloat = 80
+    
+    if let text = messages[indexPath.row].text {
+      height = estimateFrameForText(text).height + 20
+    }
+    
+    return CGSize(width: view.frame.width, height: height)
   }
 }

@@ -20,6 +20,8 @@
 		AD26946D23B6019200D49887 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD26946B23B6019200D49887 /* UserCell.xib */; };
 		AD26947323B67B8A00D49887 /* ChatLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26947223B67B8A00D49887 /* ChatLogVC.swift */; };
 		AD26947923B6846C00D49887 /* ChatLogVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD26947823B6846C00D49887 /* ChatLogVC.xib */; };
+		AD293CAA23BA65BB0091808F /* ChatMessagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD293CA823BA65BB0091808F /* ChatMessagesCell.swift */; };
+		AD293CAB23BA65BB0091808F /* ChatMessagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD293CA923BA65BB0091808F /* ChatMessagesCell.xib */; };
 		AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895C223B2122D00347A6A /* AppDelegate.swift */; };
 		AD8895CA23B2122F00347A6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD8895C923B2122F00347A6A /* Assets.xcassets */; };
 		AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD8895CB23B2122F00347A6A /* LaunchScreen.storyboard */; };
@@ -48,6 +50,8 @@
 		AD26946B23B6019200D49887 /* UserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		AD26947223B67B8A00D49887 /* ChatLogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogVC.swift; sourceTree = "<group>"; };
 		AD26947823B6846C00D49887 /* ChatLogVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatLogVC.xib; sourceTree = "<group>"; };
+		AD293CA823BA65BB0091808F /* ChatMessagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessagesCell.swift; sourceTree = "<group>"; };
+		AD293CA923BA65BB0091808F /* ChatMessagesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessagesCell.xib; sourceTree = "<group>"; };
 		AD8895BF23B2122D00347A6A /* Find Love.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find Love.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD8895C223B2122D00347A6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD8895C923B2122F00347A6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -91,6 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */,
+				AD293CA823BA65BB0091808F /* ChatMessagesCell.swift */,
+				AD293CA923BA65BB0091808F /* ChatMessagesCell.xib */,
 			);
 			path = ChatMessageCell;
 			sourceTree = "<group>";
@@ -310,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD02EB3223B7FDB500F472A5 /* NewMessageVC.xib in Resources */,
+				AD293CAB23BA65BB0091808F /* ChatMessagesCell.xib in Resources */,
 				AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */,
 				AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */,
 				AD8895EA23B293BE00347A6A /* MenuVC.xib in Resources */,
@@ -379,6 +386,7 @@
 				AD26947323B67B8A00D49887 /* ChatLogVC.swift in Sources */,
 				AD26946323B4FD2C00D49887 /* MessagesVC.swift in Sources */,
 				AD8895D623B2128C00347A6A /* HelloVC.swift in Sources */,
+				AD293CAA23BA65BB0091808F /* ChatMessagesCell.swift in Sources */,
 				AD26946723B538A500D49887 /* Message.swift in Sources */,
 				AD8895E923B293BE00347A6A /* MenuVC.swift in Sources */,
 				AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */,

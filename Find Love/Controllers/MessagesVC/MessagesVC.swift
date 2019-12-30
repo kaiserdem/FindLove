@@ -110,9 +110,9 @@ class MessagesVC: UIViewController {
         if let dictionary = snapshot.value as? [String: AnyObject] { // словарь из всего
           let message = Message(dictionary: dictionary) // помещаем в сообщение
           
-          if let toId = message.toId { // если есть Id получателья
-            self.messagesDictionary[toId] = message // по toId было отправлено это message сообщение
-            //print(self.messagesDictionary)
+          if let chatPartnerId = message.chatPartnerId() { // если есть Id получателья
+            self.messagesDictionary[chatPartnerId] = message // по toId было отправлено это message сообщение
+            
             self.messages = Array(self.messagesDictionary.values)
             self.messages.sort(by: { (message1, message2) -> Bool in // сортировать
               // дата первого сообщения больше чем второго
