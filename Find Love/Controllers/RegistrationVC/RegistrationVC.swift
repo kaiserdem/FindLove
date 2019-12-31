@@ -37,7 +37,13 @@ class RegistrationVC: UIViewController {
 
       
         navigationController?.navigationBar.isHidden = true
+      
+      self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(sender:))))
     }
+  
+  @objc func keyboardWillHide(sender: NSNotification) {
+    view.endEditing(true)
+  }
 
 
   func handleRegister() {

@@ -200,8 +200,8 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
           
           DispatchQueue.main.async {
             self.collectionView?.reloadData()
-            self.collectionView.scrollsToTop = false
-          
+            let indexPath = IndexPath(item: self.messages.count-1, section: 0)
+            self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
           }
         }
       }, withCancel: nil)

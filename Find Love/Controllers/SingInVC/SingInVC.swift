@@ -33,16 +33,19 @@ class SingInVC: UIViewController {
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    
+    self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(sender:))))
   }
   
   @objc func keyboardWillShow(sender: NSNotification) {
-    self.view.frame.origin.y = -100 // Move view 150 points upward
+    self.view.frame.origin.y = -100 //
     closeBtnTopConstraints.constant = 130
   }
   
   @objc func keyboardWillHide(sender: NSNotification) {
-    self.view.frame.origin.y = 0 // Move view to original position
+    self.view.frame.origin.y = 0 // 
     closeBtnTopConstraints.constant = 30
+    view.endEditing(true)
   }
   
     func handleLogin() {
