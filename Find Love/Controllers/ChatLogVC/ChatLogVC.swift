@@ -21,35 +21,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   }
   
   var messages = [Message]() // масив всех сообщений
-  
-  func observeMessages() {
-    
-    guard let uid = Auth.auth().currentUser?.uid else { return }
-    
-    let userMessagesRef = Database.database().reference().child("user-messages").child(uid)
-    userMessagesRef.observe(.childAdded, with: { (snapshot) in
-      
-      let messageId = snapshot.key
-      let messageRef = Database.database().reference().child("messages").child(messageId)
-      
-      messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
-        
-        guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
-        
-        let message = Message(dictionary: dictionary)
-        
-        if message.chatPartnerId() == self.user?.id {
-          self.messages.append(message)
-          
-          DispatchQueue.main.async {
-            self.collectionView?.reloadData()
-          }
-        }
-      }, withCancel: nil)
-    }, withCancel: nil)
-  }
-  
-  
+  var conteinerViewBottonAnchor: NSLayoutConstraint?
 
   lazy var inputTextField: UITextField = {
     let textField = UITextField()
@@ -73,6 +45,43 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     return view
   }()
   
+  lazy var inputConteinerView: UIView = {
+    let conteinerView = UIView()
+    conteinerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
+    conteinerView.backgroundColor = .white
+    
+    let sendButton = UIButton(type: .system)
+    sendButton.setTitle("Отправить", for: .normal)
+    sendButton.setTitleColor(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), for: .normal)
+    sendButton.translatesAutoresizingMaskIntoConstraints = false
+    sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+    conteinerView.addSubview(sendButton)
+    
+    sendButton.rightAnchor.constraint(equalTo: conteinerView.rightAnchor, constant: -10).isActive = true
+    sendButton.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
+    sendButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+    sendButton.heightAnchor.constraint(equalTo: conteinerView.heightAnchor).isActive = true
+    
+    conteinerView.addSubview(inputTextField)
+    
+    inputTextField.leftAnchor.constraint(equalTo: conteinerView.leftAnchor, constant: 8).isActive = true
+    inputTextField.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
+    inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor).isActive = true
+    inputTextField.heightAnchor.constraint(equalTo: conteinerView.heightAnchor).isActive = true
+    
+    let separatorLineView = UIView()
+    separatorLineView.backgroundColor = UIColor.black
+    separatorLineView.translatesAutoresizingMaskIntoConstraints = false
+    conteinerView.addSubview(separatorLineView)
+    
+    separatorLineView.leftAnchor.constraint(equalTo: conteinerView.leftAnchor).isActive = true
+    separatorLineView.topAnchor.constraint(equalTo: conteinerView.topAnchor).isActive = true
+    separatorLineView.widthAnchor.constraint(equalTo: conteinerView.widthAnchor).isActive = true
+    separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+
+    return conteinerView
+  }()
+  
   let cellId = "cellId"
   
   override var prefersStatusBarHidden: Bool {
@@ -81,17 +90,20 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 58, right: 0)
+    collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 5, right: 0)
     collectionView?.alwaysBounceVertical = true
     collectionView?.backgroundColor = UIColor.white
+    
+    collectionView?.keyboardDismissMode = .interactive
 
     collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    
+
     setupInputComponents()
+    //setupKeyboardObservise()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    NotificationCenter.default.removeObserver(self) // убрать обсервер
   }
   
   // поменять констрейнты при смене ориентации
@@ -99,6 +111,42 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     collectionView?.collectionViewLayout.invalidateLayout()
   }
 
+  override var inputAccessoryView: UIView? { // вю короторе отвечает за клавиатуру
+    get {
+      return inputConteinerView
+    }
+  }
+  
+  override var canBecomeFirstResponder: Bool {
+    return true
+  }
+  
+//  func setupKeyboardObservise() {
+//    NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+//
+//    NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//  }
+//
+//
+//  @objc func handleKeyboardWillShow(notification: NSNotification) {
+//    let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect // высота клавиатуры
+//    let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+//
+//    conteinerViewBottonAnchor?.constant = -keyboardFrame.height
+//    UIView.animate(withDuration: keyboardDuration) {
+//      self.view.layoutIfNeeded()
+//    }
+//  }
+//
+//  @objc func handleKeyboardWillHide(notification: NSNotification) {
+//    conteinerViewBottonAnchor?.constant = 0
+//
+//    let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+//
+//    UIView.animate(withDuration: keyboardDuration) {
+//      self.view.layoutIfNeeded()
+//    }
+//  }
   
   func setupInputComponents() { // компоненты контроллера
     
@@ -129,54 +177,35 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     nameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
     nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 20).isActive = true
     nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
-    
-    view.addSubview(conteinerView)
-    
-    conteinerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    conteinerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    conteinerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    conteinerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    
-    let sendButton = UIButton(type: .system)
-    sendButton.setTitle("Отправить", for: .normal)
-    sendButton.setTitleColor(.black, for: .normal)
-    sendButton.translatesAutoresizingMaskIntoConstraints = false
-    sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
-    conteinerView.addSubview(sendButton)
-    
-    sendButton.rightAnchor.constraint(equalTo: conteinerView.rightAnchor, constant: -10).isActive = true
-    sendButton.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
-    sendButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
-    sendButton.heightAnchor.constraint(equalTo: conteinerView.heightAnchor).isActive = true
-    
-    conteinerView.addSubview(inputTextField)
-    
-    inputTextField.leftAnchor.constraint(equalTo: conteinerView.leftAnchor, constant: 8).isActive = true
-    inputTextField.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
-    inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor).isActive = true
-    inputTextField.heightAnchor.constraint(equalTo: conteinerView.heightAnchor).isActive = true
-    
-    let separatorLineView = UIView()
-    separatorLineView.backgroundColor = UIColor.black
-    separatorLineView.translatesAutoresizingMaskIntoConstraints = false
-    conteinerView.addSubview(separatorLineView)
-    
-    separatorLineView.leftAnchor.constraint(equalTo: conteinerView.leftAnchor).isActive = true
-    separatorLineView.topAnchor.constraint(equalTo: conteinerView.topAnchor).isActive = true
-    separatorLineView.widthAnchor.constraint(equalTo: conteinerView.widthAnchor).isActive = true
-    separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-    
   }
   
-  @objc func keyboardWillShow(sender: NSNotification) {
-    conteinerView.frame.origin.y = self.view.center.y + 23
-    //self.view.frame.origin.y = -100 // Move view 150 points upward
-    //collectionView.constant = 130
-  }
-  
-  @objc func keyboardWillHide(sender: NSNotification) {
-    //self.view.frame.origin.y = 0 // Move view to original position
-    //closeBtnTopConstraints.constant = 30
+  func observeMessages() {
+    
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    let userMessagesRef = Database.database().reference().child("user-messages").child(uid)
+    userMessagesRef.observe(.childAdded, with: { (snapshot) in
+      
+      let messageId = snapshot.key
+      let messageRef = Database.database().reference().child("messages").child(messageId)
+      
+      messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+        
+        let message = Message(dictionary: dictionary)
+        
+        if message.chatPartnerId() == self.user?.id {
+          self.messages.append(message)
+          
+          DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+            self.collectionView.scrollsToTop = false
+          
+          }
+        }
+      }, withCancel: nil)
+    }, withCancel: nil)
   }
   
   // принимает текст возвращает размер
