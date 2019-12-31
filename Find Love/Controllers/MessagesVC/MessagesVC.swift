@@ -94,39 +94,41 @@ class MessagesVC: UIViewController {
     // айди текущий пользователь
     guard let uid = Auth.auth().currentUser?.uid else { return }
     
-    
     // ссылка на все сообщения пользователя
     let ref = Database.database().reference().child("user-messages").child(uid)
     ref.observe(.childAdded, with: { (snapshot) in
       
       // ключ сообщения
-      let messageId = snapshot.key
-      
-      // сслка на сообщения по ключу 
-      let messageReference = Database.database().reference().child("messages").child(messageId)
-      
-      // проверяем папку messages на новые сообщения
-      messageReference.observeSingleEvent(of: .value, with: { (snapshot) in
-
-        if let dictionary = snapshot.value as? [String: AnyObject] { // словарь из всего
-          let message = Message(dictionary: dictionary) // помещаем в сообщение
+      let userId = snapshot.key
+      Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
+        
+        let messageId = snapshot.key
+        
+        // сслка на сообщения по ключу
+        let messageReference = Database.database().reference().child("messages").child(messageId)
+        
+        // проверяем папку messages на новые сообщения
+        messageReference.observeSingleEvent(of: .value, with: { (snapshot) in
           
-          if let chatPartnerId = message.chatPartnerId() { // если есть Id получателья
-            self.messagesDictionary[chatPartnerId] = message // по toId было отправлено это message сообщение
+          if let dictionary = snapshot.value as? [String: AnyObject] { // словарь из всего
+            let message = Message(dictionary: dictionary) // помещаем в сообщение
             
-            self.messages = Array(self.messagesDictionary.values)
-            self.messages.sort(by: { (message1, message2) -> Bool in // сортировать
-              // дата первого сообщения больше чем второго
-              return (message1.timestamp?.intValue)! > (message2.timestamp?.intValue)!
-            })
+            if let chatPartnerId = message.chatPartnerId() { // если есть Id получателья
+              self.messagesDictionary[chatPartnerId] = message // по toId было отправлено это message сообщение
+              
+              self.messages = Array(self.messagesDictionary.values)
+              self.messages.sort(by: { (message1, message2) -> Bool in // сортировать
+                // дата первого сообщения больше чем второго
+                return (message1.timestamp?.intValue)! > (message2.timestamp?.intValue)!
+              })
+            }
+            self.timer?.invalidate()
+            self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.tableReloadTable), userInfo: nil, repeats: true)
+            
           }
-          self.timer?.invalidate()
-          self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.tableReloadTable), userInfo: nil, repeats: true)
-          
-        }
-
+  
+        }, withCancel: nil)
       }, withCancel: nil)
-
     }, withCancel: nil)
     
   }

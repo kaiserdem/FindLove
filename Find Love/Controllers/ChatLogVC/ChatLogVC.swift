@@ -181,9 +181,9 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   
   func observeMessages() {
     
-    guard let uid = Auth.auth().currentUser?.uid else { return }
+    guard let uid = Auth.auth().currentUser?.uid, let toId = user?.id else { return }
     
-    let userMessagesRef = Database.database().reference().child("user-messages").child(uid)
+    let userMessagesRef = Database.database().reference().child("user-messages").child(uid).child(toId)
     userMessagesRef.observe(.childAdded, with: { (snapshot) in
       
       let messageId = snapshot.key
@@ -265,7 +265,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
       }
     }
     // новая папка с айди отправителем и айди сообщения
-    let refUserFromId = ref.child("user-messages").child(fromId)
+    let refUserFromId = ref.child("user-messages").child(fromId).child(toId)
     let messageId = childRef.key // айди нашего сообщения
     let valuesUF = [messageId: 1]
     
@@ -279,7 +279,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     self.inputTextField.text = nil
     
     // новая папка с айди получателем и айди сообщения
-    let refUserToId = ref.child("user-messages").child(toId)
+    let refUserToId = ref.child("user-messages").child(toId).child(fromId)
     refUserToId.updateChildValues(valuesUF) { (error, ref) in
       if error != nil {
         print(error!)
