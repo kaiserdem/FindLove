@@ -66,6 +66,12 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     return label
   }()
   
+  lazy var conteinerView: UIView = {
+    let view = UIView()
+    view.backgroundColor = .gray
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
   
   let cellId = "cellId"
   
@@ -78,8 +84,13 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 58, right: 0)
     collectionView?.alwaysBounceVertical = true
     collectionView?.backgroundColor = UIColor.white
-    // регистрация ячейки
+
     collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    
     setupInputComponents()
   }
   
@@ -119,10 +130,6 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 20).isActive = true
     nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
     
-    let conteinerView = UIView()
-    conteinerView.backgroundColor = .gray
-    conteinerView.translatesAutoresizingMaskIntoConstraints = false
-    
     view.addSubview(conteinerView)
     
     conteinerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -161,6 +168,17 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
   }
   
+  @objc func keyboardWillShow(sender: NSNotification) {
+    conteinerView.frame.origin.y = self.view.center.y + 23
+    //self.view.frame.origin.y = -100 // Move view 150 points upward
+    //collectionView.constant = 130
+  }
+  
+  @objc func keyboardWillHide(sender: NSNotification) {
+    //self.view.frame.origin.y = 0 // Move view to original position
+    //closeBtnTopConstraints.constant = 30
+  }
+  
   // принимает текст возвращает размер
   private func estimateFrameForText(_ text: String) -> CGRect {
     
@@ -170,6 +188,28 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
     
     return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)], context: nil)
+  }
+  
+  private func setupCell(_ cell: ChatMessageCell, message: Message) {
+    
+    if let profileImageUrl = self.user?.profileImageUrl {
+      cell.profileImageView.loadImageUsingCachWithUrlString(profileImageUrl)
+    }
+    
+    if message.fromId == Auth.auth().currentUser?.uid { // свои сообщения
+      cell.bubbleView.backgroundColor = ChatMessageCell.blueColor 
+      cell.textView.textColor = .white
+      cell.profileImageView.isHidden = true
+      cell.buubleViewRightAnchor?.isActive = true
+      cell.buubleViewLeftAnchor?.isActive = false
+    } else {
+      cell.bubbleView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1) // не свои серый
+      cell.textView.textColor = .black
+      cell.profileImageView.isHidden = false
+      
+      cell.buubleViewRightAnchor?.isActive = false
+      cell.buubleViewLeftAnchor?.isActive = true
+    }
   }
   
   @objc func handleBack() {
@@ -224,14 +264,18 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     handleSend()
     return true
   }
+  
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return messages.count
   }
+  
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessageCell
     
     let message = messages[indexPath.row]
     cell.textView.text = message.text
+    
+    setupCell(cell, message: message)
     
     cell.bubbleWidthAnchor?.constant = estimateFrameForText(message.text!).width + 35
     

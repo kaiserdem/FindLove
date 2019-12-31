@@ -24,6 +24,7 @@ class MessagesVC: UIViewController {
   var messages = [Message]()
   var messagesDictionary = [String: Message]()
   var menuVC: MenuVC?
+  var timer: Timer?
   
   override var prefersStatusBarHidden: Bool {
     return true
@@ -119,15 +120,21 @@ class MessagesVC: UIViewController {
               return (message1.timestamp?.intValue)! > (message2.timestamp?.intValue)!
             })
           }
-          DispatchQueue.main.async(execute: {
-            self.tableView.reloadData()
-          })
+          self.timer?.invalidate()
+          self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.tableReloadTable), userInfo: nil, repeats: true)
+          
         }
 
       }, withCancel: nil)
 
     }, withCancel: nil)
     
+  }
+  
+  @objc func tableReloadTable() {
+    DispatchQueue.main.async(execute: {
+      self.tableView.reloadData()
+    })
   }
   
   @IBAction func menyBtnAction(_ sender: Any) {
