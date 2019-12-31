@@ -68,7 +68,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   
   lazy var conteinerView: UIView = {
     let view = UIView()
-    view.backgroundColor = .gray
+    view.backgroundColor = #colorLiteral(red: 0.9030912519, green: 0.9030912519, blue: 0.9030912519, alpha: 1)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
@@ -103,7 +103,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   func setupInputComponents() { // компоненты контроллера
     
     let topConteinerView = UIView()
-    topConteinerView.backgroundColor = .gray
+    topConteinerView.backgroundColor = #colorLiteral(red: 0.9030912519, green: 0.9030912519, blue: 0.9030912519, alpha: 1)
     topConteinerView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(topConteinerView)
     
