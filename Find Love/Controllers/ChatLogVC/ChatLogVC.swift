@@ -52,6 +52,8 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     let sendButton = UIButton(type: .system)
     sendButton.setTitle("Отправить", for: .normal)
+    //sendButton.setImage(UIImage(named: "back"), for: .normal)
+    sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
     sendButton.setTitleColor(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), for: .normal)
     sendButton.translatesAutoresizingMaskIntoConstraints = false
     sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
@@ -59,7 +61,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     sendButton.rightAnchor.constraint(equalTo: conteinerView.rightAnchor, constant: -10).isActive = true
     sendButton.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
-    sendButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+    sendButton.widthAnchor.constraint(equalToConstant: 90).isActive = true
     sendButton.heightAnchor.constraint(equalTo: conteinerView.heightAnchor).isActive = true
     
     conteinerView.addSubview(inputTextField)
@@ -84,18 +86,16 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   
   let cellId = "cellId"
   
-  override var prefersStatusBarHidden: Bool {
-    return true
-  }
+//  override var prefersStatusBarHidden: Bool {
+//    return true
+//  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 5, right: 0)
     collectionView?.alwaysBounceVertical = true
     collectionView?.backgroundColor = UIColor.white
-    
     collectionView?.keyboardDismissMode = .interactive
-
     collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
 
     setupInputComponents()
@@ -152,6 +152,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     let topConteinerView = UIView()
     topConteinerView.backgroundColor = #colorLiteral(red: 0.9030912519, green: 0.9030912519, blue: 0.9030912519, alpha: 1)
+    topConteinerView.clipsToBounds = true
     topConteinerView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(topConteinerView)
     
@@ -163,19 +164,20 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     let backButton = UIButton(type: .system)
     backButton.setTitle("Назад", for: .normal)
     backButton.setTitleColor(.black, for: .normal)
+    backButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
     backButton.translatesAutoresizingMaskIntoConstraints = false
     backButton.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
     topConteinerView.addSubview(backButton)
     
     backButton.leftAnchor.constraint(equalTo: topConteinerView.leftAnchor, constant: 10).isActive = true
-    backButton.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 20).isActive = true
+    backButton.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 15).isActive = true
     backButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
     backButton.heightAnchor.constraint(equalTo: topConteinerView.heightAnchor).isActive = true
 
     topConteinerView.addSubview(nameLabel)
     
     nameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 20).isActive = true
+    nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 15).isActive = true
     nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
   }
   
@@ -194,8 +196,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
         guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
         
         let message = Message(dictionary: dictionary)
-        
-        if message.chatPartnerId() == self.user?.id {
+              
           self.messages.append(message)
           
           DispatchQueue.main.async {
@@ -203,7 +204,6 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
             let indexPath = IndexPath(item: self.messages.count-1, section: 0)
             self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
           }
-        }
       }, withCancel: nil)
     }, withCancel: nil)
   }

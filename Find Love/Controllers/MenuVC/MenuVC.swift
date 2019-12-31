@@ -16,9 +16,9 @@ class MenuVC: UIViewController {
   @IBOutlet weak var messagesBtn: UIButton!
   @IBOutlet weak var logoutBtn: UIButton!
   
-  override var prefersStatusBarHidden: Bool {
-    return true
-  }
+//  override var prefersStatusBarHidden: Bool {
+//    return true
+//  }
   
   override func viewDidLoad() {
         super.viewDidLoad()

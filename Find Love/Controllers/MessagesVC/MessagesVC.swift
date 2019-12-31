@@ -26,9 +26,9 @@ class MessagesVC: UIViewController {
   var menuVC: MenuVC?
   var timer: Timer?
   
-  override var prefersStatusBarHidden: Bool {
-    return true
-  }
+//  override var prefersStatusBarHidden: Bool {
+//    return true
+//  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -60,17 +60,15 @@ class MessagesVC: UIViewController {
   
 
   func fetchUser() { // выбрать пользователя
-    Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
+
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+      
       if let dictionary = snapshot.value as? [String: AnyObject] {
-        let user = User(dictionary: dictionary) // пользователь
-        user.id = snapshot.key
         
-        self.users.append(user) // добавляем в масив
-        
-        DispatchQueue.main.async { // на главном потоке асинхронно
-          self.tableView.reloadData()
-          self.setupNavBarWithUser(user)
-        }
+        let user = User(dictionary: dictionary)
+        self.setupNavBarWithUser(user)
       }
     }, withCancel: nil)
   }
@@ -103,37 +101,41 @@ class MessagesVC: UIViewController {
       Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
         
         let messageId = snapshot.key
+        self.fetchMessageWithaMessageId(messageId)
         
-        // сслка на сообщения по ключу
-        let messageReference = Database.database().reference().child("messages").child(messageId)
-        
-        // проверяем папку messages на новые сообщения
-        messageReference.observeSingleEvent(of: .value, with: { (snapshot) in
-          
-          if let dictionary = snapshot.value as? [String: AnyObject] { // словарь из всего
-            let message = Message(dictionary: dictionary) // помещаем в сообщение
-            
-            if let chatPartnerId = message.chatPartnerId() { // если есть Id получателья
-              self.messagesDictionary[chatPartnerId] = message // по toId было отправлено это message сообщение
-              
-              self.messages = Array(self.messagesDictionary.values)
-              self.messages.sort(by: { (message1, message2) -> Bool in // сортировать
-                // дата первого сообщения больше чем второго
-                return (message1.timestamp?.intValue)! > (message2.timestamp?.intValue)!
-              })
-            }
-            self.timer?.invalidate()
-            self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.tableReloadTable), userInfo: nil, repeats: true)
-            
-          }
-  
-        }, withCancel: nil)
       }, withCancel: nil)
     }, withCancel: nil)
+  }
+  
+  private func fetchMessageWithaMessageId(_ messageId: String) {
+    // сслка на сообщения по ключу
+    let messageReference = Database.database().reference().child("messages").child(messageId)
     
+    // проверяем папку messages на новые сообщения
+    messageReference.observeSingleEvent(of: .value, with: { (snapshot) in
+      
+      if let dictionary = snapshot.value as? [String: AnyObject] { // словарь из всего
+        let message = Message(dictionary: dictionary) // помещаем в сообщение
+        
+        if let chatPartnerId = message.chatPartnerId() { // если есть Id получателья
+          self.messagesDictionary[chatPartnerId] = message // по toId было отправлено это message сообщение
+        }
+        self.attempReloadOfTable()
+      }
+    }, withCancel: nil)
+  }
+  
+  private func attempReloadOfTable() {
+    timer?.invalidate()
+    timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.tableReloadTable), userInfo: nil, repeats: true)
   }
   
   @objc func tableReloadTable() {
+    self.messages = Array(self.messagesDictionary.values)
+    self.messages.sort(by: { (message1, message2) -> Bool in //сортировать по времени
+      // дата первого сообщения больше чем второго
+      return (message1.timestamp?.intValue)! > (message2.timestamp?.intValue)!
+    })
     DispatchQueue.main.async(execute: {
       self.tableView.reloadData()
     })
