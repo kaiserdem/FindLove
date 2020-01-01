@@ -15,12 +15,14 @@ class Message: NSObject { // модель сообщений
   var text: String?
   var timestamp: NSNumber?
   var toId: String?
+  var imageUrl: String?
   
   init(dictionary: [String: Any]) {
     self.fromId = dictionary["fromId"] as? String
     self.text = dictionary["text"] as? String
     self.toId = dictionary["toId"] as? String
     self.timestamp = dictionary["timestamp"] as? NSNumber
+    self.imageUrl = dictionary["imageUrl"] as? String
   }
   func chatPartnerId() -> String? { // если написали сообщение себе
     // если отправитель это я, тогда возврат toId, в противном случае fromId

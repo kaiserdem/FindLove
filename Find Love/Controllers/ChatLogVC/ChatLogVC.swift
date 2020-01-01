@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
+class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   
   var user: User? {
@@ -50,6 +50,17 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     conteinerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
     conteinerView.backgroundColor = .white
     
+    let uploadImageView = UIImageView(image: #imageLiteral(resourceName: "picture.png"))
+    uploadImageView.isUserInteractionEnabled = true
+    uploadImageView.translatesAutoresizingMaskIntoConstraints = false
+    uploadImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleUploadTap)))
+    conteinerView.addSubview(uploadImageView)
+    
+    uploadImageView.leadingAnchor.constraint(equalTo: conteinerView.leadingAnchor, constant: 8).isActive = true
+    uploadImageView.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
+    uploadImageView.widthAnchor.constraint(equalToConstant: 35).isActive = true
+    uploadImageView.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    
     let sendButton = UIButton(type: .system)
     sendButton.setTitle("Отправить", for: .normal)
     //sendButton.setImage(UIImage(named: "back"), for: .normal)
@@ -66,7 +77,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     conteinerView.addSubview(inputTextField)
     
-    inputTextField.leftAnchor.constraint(equalTo: conteinerView.leftAnchor, constant: 8).isActive = true
+    inputTextField.leadingAnchor.constraint(equalTo: uploadImageView.trailingAnchor, constant: 8).isActive = true
     inputTextField.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
     inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor).isActive = true
     inputTextField.heightAnchor.constraint(equalTo: conteinerView.heightAnchor).isActive = true
@@ -225,6 +236,14 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
       cell.profileImageView.loadImageUsingCachWithUrlString(profileImageUrl)
     }
     
+    if let messageImageUrl = message.imageUrl {
+      cell.messageImageView.loadImageUsingCachWithUrlString(messageImageUrl)
+      cell.messageImageView.isHidden = false
+      cell.bubbleView.backgroundColor = .clear
+    } else {
+      cell.messageImageView.isHidden = true
+    }
+    
     if message.fromId == Auth.auth().currentUser?.uid { // свои сообщения
       cell.bubbleView.backgroundColor = ChatMessageCell.blueColor 
       cell.textView.textColor = .white
@@ -241,35 +260,62 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     }
   }
   
-  @objc func handleBack() {
-    let controll = MessagesVC.init(nibName: "MessagesVC", bundle: nil)
-    self.navigationController?.pushViewController(controll, animated: true)
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    dismiss(animated: true, completion: nil)
   }
   
-  @objc func handleSend() { // отправляем сообщение
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     
-    let ref = Database.database().reference()//.child("messages") // новая ветка
+    var selectedImageFromPicker: UIImage?
+    if let editingImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+      selectedImageFromPicker = editingImage
+    } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+      selectedImageFromPicker = originalImage
+    }
+    if let selectedImage = selectedImageFromPicker {
+      uploadToFirebaseStorageUsingImage(selectedImage)
+    }
     
-    let refMessages = ref.child("messages")
-    let childRef = refMessages.childByAutoId() // айди всех пользователей
-    let toId = user!.id! // айди получателя
-    let fromId = Auth.auth().currentUser!.uid // айди текущего пользователя, отправителя
-    let timestamp = Int(NSDate().timeIntervalSince1970) // время
+    dismiss(animated: true, completion: nil) // выйти с контроллера
+  }
+  
+  private func uploadToFirebaseStorageUsingImage(_ image: UIImage) {
+
+    let imageName = UUID().uuidString
     
-    // отправляем масив данных
-    let values = ["text": inputTextField.text!, "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
-    childRef.updateChildValues(values) { (error, ref) in
-      if error != nil {
-        print(error!)
-        return
+    // создали папку в базе
+    let ref = Storage.storage().reference().child("message_images").child(imageName)
+    if let uploadData = image.jpegData(compressionQuality: 0.75) {
+      ref.putData(uploadData, metadata: nil) { (metadata, error) in
+        if error != nil {
+          print(error?.localizedDescription as Any)
+          return
+        }
+        // сохранили картинку
+        ref.downloadURL(completion: { (url, error) in
+          if error != nil {
+            print(error?.localizedDescription as Any)
+            return
+          }
+          if let imageUrl = url {
+            self.sendMessageWithImageUrl(imageUrl.absoluteString)
+          }
+        })
       }
     }
-    // новая папка с айди отправителем и айди сообщения
-    let refUserFromId = ref.child("user-messages").child(fromId).child(toId)
-    let messageId = childRef.key // айди нашего сообщения
-    let valuesUF = [messageId: 1]
+  }
+  
+  func sendMessageWithImageUrl(_ imageUrl: String) {
     
-    refUserFromId.updateChildValues(valuesUF) { (error, ref) in
+    let ref = Database.database().reference().child("messages")
+    let childRef = ref.childByAutoId()
+    let toId = user!.id!
+    let fromId = Auth.auth().currentUser?.uid
+    let timestamp = Int(Date().timeIntervalSince1970)
+    
+    let values = ["imageUrl": imageUrl, "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
+    
+    childRef.updateChildValues(values) { (error, ref) in
       if error != nil {
         print(error!)
         return
@@ -278,16 +324,96 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     self.inputTextField.text = nil
     
-    // новая папка с айди получателем и айди сообщения
-    let refUserToId = ref.child("user-messages").child(toId).child(fromId)
-    refUserToId.updateChildValues(valuesUF) { (error, ref) in
+    let refFromTo = Database.database().reference().child("user-messages").child(fromId!).child(toId)
+    
+    let messageId = childRef.key
+    let values2 = [messageId: 1] as! [String : Any]
+    
+    refFromTo.updateChildValues(values2) { (error, ref) in
       if error != nil {
         print(error!)
         return
       }
     }
+    
+    let refToFrom = Database.database().reference().child("user-messages").child(toId).child(fromId!)
+    
+    let messageId3 = childRef.key
+    let values3 = [messageId3: 1] as! [String : Any]
+    
+    refToFrom.updateChildValues(values3) { (error, ref) in
+      if error != nil {
+        print(error!)
+        return
+      }
+      
+    }
 
   }
+  
+  @objc func handleUploadTap() {
+    
+    print("handleUploadTap")
+
+    let imagePickerController = UIImagePickerController()
+  
+    imagePickerController.delegate = self
+    imagePickerController.allowsEditing = true
+    
+    present(imagePickerController, animated: true, completion: nil)
+  }
+  
+  @objc func handleBack() {
+    let controll = MessagesVC.init(nibName: "MessagesVC", bundle: nil)
+    self.navigationController?.pushViewController(controll, animated: true)
+  }
+  
+  @objc func handleSend() { // отправляем сообщение
+    
+    let ref = Database.database().reference().child("messages")
+    let childRef = ref.childByAutoId()
+    let toId = user!.id! // айди получателя
+    let fromId = Auth.auth().currentUser!.uid // айди текущего пользователя, отправителя
+    let timestamp = Int(NSDate().timeIntervalSince1970) // время
+    
+    let values = ["text": inputTextField.text!, "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
+    
+    childRef.updateChildValues(values) { (error, ref) in
+      if error != nil {
+        print(error!)
+        return
+      }
+    }
+    
+    self.inputTextField.text = nil
+    
+    let refFromTo = Database.database().reference().child("user-messages").child(fromId).child(toId)
+    
+    let messageId = childRef.key
+    let values2 = [messageId: 1] as! [String : Any]
+    
+    refFromTo.updateChildValues(values2) { (error, ref) in
+      if error != nil {
+        print(error!)
+        return
+      }
+    }
+    
+    let refToFrom = Database.database().reference().child("user-messages").child(toId).child(fromId)
+    
+    let messageId3 = childRef.key
+    let values3 = [messageId3: 1] as! [String : Any]
+    
+    refToFrom.updateChildValues(values3) { (error, ref) in
+      if error != nil {
+        print(error!)
+        return
+      }
+      
+    }
+  
+  }
+  
    // текстовое поле возврвщвет
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     handleSend()
@@ -306,8 +432,9 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     setupCell(cell, message: message)
     
-    cell.bubbleWidthAnchor?.constant = estimateFrameForText(message.text!).width + 35
-    
+    if let text = message.text {
+     cell.bubbleWidthAnchor?.constant = estimateFrameForText(text).width + 35
+    }
     return cell
   }
   

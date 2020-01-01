@@ -22,8 +22,8 @@
 		AD26947923B6846C00D49887 /* ChatLogVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD26947823B6846C00D49887 /* ChatLogVC.xib */; };
 		AD293CAA23BA65BB0091808F /* ChatMessagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD293CA823BA65BB0091808F /* ChatMessagesCell.swift */; };
 		AD293CAB23BA65BB0091808F /* ChatMessagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD293CA923BA65BB0091808F /* ChatMessagesCell.xib */; };
+		AD293CAD23BC1D530091808F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD293CAC23BC1D530091808F /* Assets.xcassets */; };
 		AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895C223B2122D00347A6A /* AppDelegate.swift */; };
-		AD8895CA23B2122F00347A6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD8895C923B2122F00347A6A /* Assets.xcassets */; };
 		AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD8895CB23B2122F00347A6A /* LaunchScreen.storyboard */; };
 		AD8895D623B2128C00347A6A /* HelloVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895D423B2128C00347A6A /* HelloVC.swift */; };
 		AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8895D523B2128C00347A6A /* HelloVC.xib */; };
@@ -52,9 +52,9 @@
 		AD26947823B6846C00D49887 /* ChatLogVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatLogVC.xib; sourceTree = "<group>"; };
 		AD293CA823BA65BB0091808F /* ChatMessagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessagesCell.swift; sourceTree = "<group>"; };
 		AD293CA923BA65BB0091808F /* ChatMessagesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessagesCell.xib; sourceTree = "<group>"; };
+		AD293CAC23BC1D530091808F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD8895BF23B2122D00347A6A /* Find Love.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find Love.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD8895C223B2122D00347A6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AD8895C923B2122F00347A6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD8895CC23B2122F00347A6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD8895CE23B2122F00347A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD8895D423B2128C00347A6A /* HelloVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloVC.swift; sourceTree = "<group>"; };
@@ -190,9 +190,9 @@
 				AD26946F23B6047B00D49887 /* Model */,
 				AD26947123B606BA00D49887 /* View */,
 				AD8895D823B2159F00347A6A /* Controllers */,
-				AD8895C923B2122F00347A6A /* Assets.xcassets */,
 				AD8895CB23B2122F00347A6A /* LaunchScreen.storyboard */,
 				AD8895CE23B2122F00347A6A /* Info.plist */,
+				AD293CAC23BC1D530091808F /* Assets.xcassets */,
 			);
 			path = "Find Love";
 			sourceTree = "<group>";
@@ -324,8 +324,8 @@
 				AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */,
 				AD02EB2623B77F8900F472A5 /* MessagesVC.xib in Resources */,
 				AD26946D23B6019200D49887 /* UserCell.xib in Resources */,
-				AD8895CA23B2122F00347A6A /* Assets.xcassets in Resources */,
 				AD8895DE23B2162C00347A6A /* RegistrationVC.xib in Resources */,
+				AD293CAD23BC1D530091808F /* Assets.xcassets in Resources */,
 				AD8895E523B28AFB00347A6A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
