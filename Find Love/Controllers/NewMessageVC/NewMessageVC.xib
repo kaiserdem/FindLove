@@ -26,27 +26,40 @@
                     <rect key="frame" x="0.0" y="70" width="375" height="547"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ib6-Fr-IfT">
-                    <rect key="frame" x="30" y="25" width="53" height="35"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ap-aL-cRj">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ib6-Fr-IfT">
+                            <rect key="frame" x="0.0" y="20" width="150" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="X4G-2u-a6c"/>
+                            </constraints>
+                            <state key="normal" title="Назад">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="backBtnAction:" destination="-1" eventType="touchUpInside" id="Sz0-tU-bUV"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.90309124230000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="35" id="YAB-XV-bpK"/>
+                        <constraint firstItem="ib6-Fr-IfT" firstAttribute="top" secondItem="4ap-aL-cRj" secondAttribute="top" constant="20" id="3pi-f5-Zic"/>
+                        <constraint firstAttribute="height" constant="70" id="E0p-3k-dzZ"/>
+                        <constraint firstAttribute="bottom" secondItem="ib6-Fr-IfT" secondAttribute="bottom" id="M7g-wQ-OOO"/>
+                        <constraint firstItem="ib6-Fr-IfT" firstAttribute="leading" secondItem="4ap-aL-cRj" secondAttribute="leading" id="V7a-zl-Mhh"/>
                     </constraints>
-                    <state key="normal" title="Назад">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <connections>
-                        <action selector="backBtnAction:" destination="-1" eventType="touchUpInside" id="Sz0-tU-bUV"/>
-                    </connections>
-                </button>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="4ap-aL-cRj" firstAttribute="leading" secondItem="FKg-t1-3ak" secondAttribute="leading" id="0pw-Qq-2q3"/>
+                <constraint firstItem="4ap-aL-cRj" firstAttribute="trailing" secondItem="FKg-t1-3ak" secondAttribute="trailing" id="IS7-if-gFO"/>
                 <constraint firstItem="FKg-t1-3ak" firstAttribute="bottom" secondItem="XTv-eY-yBW" secondAttribute="bottom" constant="50" id="Kei-S5-WnE"/>
                 <constraint firstItem="XTv-eY-yBW" firstAttribute="leading" secondItem="FKg-t1-3ak" secondAttribute="leading" id="O4S-uZ-IGP"/>
                 <constraint firstItem="XTv-eY-yBW" firstAttribute="trailing" secondItem="FKg-t1-3ak" secondAttribute="trailing" id="OO0-gn-iBL"/>
-                <constraint firstItem="XTv-eY-yBW" firstAttribute="top" secondItem="FKg-t1-3ak" secondAttribute="top" constant="50" id="Qz9-cR-k5f"/>
-                <constraint firstItem="ib6-Fr-IfT" firstAttribute="leading" secondItem="FKg-t1-3ak" secondAttribute="leading" constant="30" id="cVb-Dy-9sS"/>
-                <constraint firstItem="XTv-eY-yBW" firstAttribute="top" secondItem="ib6-Fr-IfT" secondAttribute="bottom" constant="10" id="sfg-Lc-DuM"/>
+                <constraint firstItem="XTv-eY-yBW" firstAttribute="top" secondItem="4ap-aL-cRj" secondAttribute="bottom" id="nOS-Vx-MgG"/>
+                <constraint firstItem="4ap-aL-cRj" firstAttribute="top" secondItem="kn3-FV-DCz" secondAttribute="top" id="uaR-2b-Vvz"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="FKg-t1-3ak"/>
             <point key="canvasLocation" x="138.40000000000001" y="149.77511244377811"/>

@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Find Love/Controllers/ChatLogVC/ChatLogVC.swift"
-            timestampString = "599606872.7839"
+            timestampString = "599670999.482689"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
-            landmarkName = "sendMessageWithImageUrl(_:)"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
+            landmarkName = "sendMessageWithImageUrl(_:image:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

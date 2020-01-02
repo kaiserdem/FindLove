@@ -110,7 +110,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
 
     setupInputComponents()
-    //setupKeyboardObservise()
+    setupKeyboardObservise()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -132,22 +132,21 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     return true
   }
   
-//  func setupKeyboardObservise() {
-//    NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//
+  func setupKeyboardObservise() {
+    NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+
 //    NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-//  }
-//
-//
-//  @objc func handleKeyboardWillShow(notification: NSNotification) {
-//    let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect // высота клавиатуры
-//    let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
-//
-//    conteinerViewBottonAnchor?.constant = -keyboardFrame.height
-//    UIView.animate(withDuration: keyboardDuration) {
-//      self.view.layoutIfNeeded()
-//    }
-//  }
+  }
+
+
+  @objc func handleKeyboardDidShow() {
+    
+    if messages.count > 0 {
+      let indexPath = IndexPath(item: self.messages.count-1, section: 0) // последнее
+      //проскролить
+      self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+    }
+  }
 //
 //  @objc func handleKeyboardWillHide(notification: NSNotification) {
 //    conteinerViewBottonAnchor?.constant = 0
@@ -162,7 +161,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   func setupInputComponents() { // компоненты контроллера
     
     let topConteinerView = UIView()
-    topConteinerView.backgroundColor = #colorLiteral(red: 0.9030912519, green: 0.9030912519, blue: 0.9030912519, alpha: 1)
+    topConteinerView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)// #colorLiteral(red: 0.9030912519, green: 0.9030912519, blue: 0.9030912519, alpha: 1)
     topConteinerView.clipsToBounds = true
     topConteinerView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(topConteinerView)
@@ -212,7 +211,8 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
           
           DispatchQueue.main.async {
             self.collectionView?.reloadData()
-            let indexPath = IndexPath(item: self.messages.count-1, section: 0)
+            let indexPath = IndexPath(item: self.messages.count-1, section: 0) // последнее
+            //проскролить
             self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
           }
       }, withCancel: nil)
@@ -298,22 +298,34 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
             return
           }
           if let imageUrl = url {
-            self.sendMessageWithImageUrl(imageUrl.absoluteString)
+            self.sendMessageWithImageUrl(imageUrl.absoluteString, image: image)
           }
         })
       }
     }
   }
   
-  func sendMessageWithImageUrl(_ imageUrl: String) {
+  private func sendMessageWithImageUrl(_ imageUrl: String, image: UIImage) {
+ 
+    let properties = ["imageUrl": imageUrl,"imageWidth": image.size.width, "imageHeight": image.size.height] as [String : Any]
+    print(properties)
+    sendMessagesWithProperties(properties)
+
+  }
+  
+  private func sendMessagesWithProperties(_ properties: [String: Any]) {
     
     let ref = Database.database().reference().child("messages")
     let childRef = ref.childByAutoId()
     let toId = user!.id!
-    let fromId = Auth.auth().currentUser?.uid
+    let fromId = Auth.auth().currentUser!.uid
     let timestamp = Int(Date().timeIntervalSince1970)
     
-    let values = ["imageUrl": imageUrl, "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
+    var values = [ "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
+    
+    properties.forEach { (key: String, value: Any) in // метод принимает данные
+      values[key] = value
+    }
     
     childRef.updateChildValues(values) { (error, ref) in
       if error != nil {
@@ -321,40 +333,36 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
         return
       }
     }
-    
+
     self.inputTextField.text = nil
-    
-    let refFromTo = Database.database().reference().child("user-messages").child(fromId!).child(toId)
-    
+
+    let refFromTo = Database.database().reference().child("user-messages").child(fromId).child(toId)
+
     let messageId = childRef.key
     let values2 = [messageId: 1] as! [String : Any]
-    
+
     refFromTo.updateChildValues(values2) { (error, ref) in
       if error != nil {
         print(error!)
         return
       }
     }
-    
-    let refToFrom = Database.database().reference().child("user-messages").child(toId).child(fromId!)
-    
+
+    let refToFrom = Database.database().reference().child("user-messages").child(toId).child(fromId)
+
     let messageId3 = childRef.key
     let values3 = [messageId3: 1] as! [String : Any]
-    
+
     refToFrom.updateChildValues(values3) { (error, ref) in
       if error != nil {
         print(error!)
         return
       }
-      
     }
-
   }
   
   @objc func handleUploadTap() {
     
-    print("handleUploadTap")
-
     let imagePickerController = UIImagePickerController()
   
     imagePickerController.delegate = self
@@ -368,50 +376,10 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     self.navigationController?.pushViewController(controll, animated: true)
   }
   
-  @objc func handleSend() { // отправляем сообщение
-    
-    let ref = Database.database().reference().child("messages")
-    let childRef = ref.childByAutoId()
-    let toId = user!.id! // айди получателя
-    let fromId = Auth.auth().currentUser!.uid // айди текущего пользователя, отправителя
-    let timestamp = Int(NSDate().timeIntervalSince1970) // время
-    
-    let values = ["text": inputTextField.text!, "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
-    
-    childRef.updateChildValues(values) { (error, ref) in
-      if error != nil {
-        print(error!)
-        return
-      }
-    }
-    
-    self.inputTextField.text = nil
-    
-    let refFromTo = Database.database().reference().child("user-messages").child(fromId).child(toId)
-    
-    let messageId = childRef.key
-    let values2 = [messageId: 1] as! [String : Any]
-    
-    refFromTo.updateChildValues(values2) { (error, ref) in
-      if error != nil {
-        print(error!)
-        return
-      }
-    }
-    
-    let refToFrom = Database.database().reference().child("user-messages").child(toId).child(fromId)
-    
-    let messageId3 = childRef.key
-    let values3 = [messageId3: 1] as! [String : Any]
-    
-    refToFrom.updateChildValues(values3) { (error, ref) in
-      if error != nil {
-        print(error!)
-        return
-      }
-      
-    }
   
+  @objc func handleSend() { // отправляем сообщение
+    let properties = ["text": inputTextField.text!] as [String : Any]
+    sendMessagesWithProperties(properties)
   }
   
    // текстовое поле возврвщвет
@@ -434,17 +402,24 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     if let text = message.text {
      cell.bubbleWidthAnchor?.constant = estimateFrameForText(text).width + 35
+    } else if message.imageUrl != nil {
+      cell.bubbleWidthAnchor?.constant = 200
     }
     return cell
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
     var height: CGFloat = 80
+    let message = messages[indexPath.row]
+    print(messages)
     
-    if let text = messages[indexPath.row].text {
+    if let text = message.text {
       height = estimateFrameForText(text).height + 20
+    } else if let imageWidht = message.imageWidth, let imageHight = message.imageHight {
+      // сделали размер пропорционально
+      height = CGFloat(imageHight / imageWidht * 200)
     }
-    
     return CGSize(width: view.frame.width, height: height)
   }
 }
