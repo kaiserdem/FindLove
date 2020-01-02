@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol ImageZomable {
+  func performZoomInForImageView(_ imageView: UIImageView)
+}
+
 class ChatMessageCell: UICollectionViewCell {
+  
+  var deledate: ImageZomable?
   
   static let blueColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
   static let grayColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -47,12 +53,14 @@ class ChatMessageCell: UICollectionViewCell {
     return imageView
   }()
   
-  var messageImageView: UIImageView = {
+  lazy var messageImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.layer.masksToBounds = true
     imageView.layer.cornerRadius = 16
     imageView.contentMode = .scaleAspectFill
     imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.isUserInteractionEnabled = true
+    imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap(_ : ))))
     return imageView
   }()
   
@@ -95,5 +103,13 @@ class ChatMessageCell: UICollectionViewCell {
   }
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  @objc func handleZoomTap(_ gestureRecognizer: UITapGestureRecognizer) {
+    print("1")
+    if let imageView = gestureRecognizer.view as? UIImageView {
+      print("imageView")
+      deledate?.performZoomInForImageView(imageView)
+    }
   }
 }

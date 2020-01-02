@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Find Love/Controllers/ChatLogVC/ChatLogVC.swift"
-            timestampString = "599670999.482689"
+            filePath = "Find Love/View/ChatMessageCell/ChatMessageCell.swift"
+            timestampString = "599688207.8744659"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
-            landmarkName = "sendMessageWithImageUrl(_:image:)"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "handleZoomTap(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

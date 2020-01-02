@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
   
   
   var user: User? {
@@ -308,7 +308,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   private func sendMessageWithImageUrl(_ imageUrl: String, image: UIImage) {
  
     let properties = ["imageUrl": imageUrl,"imageWidth": image.size.width, "imageHeight": image.size.height] as [String : Any]
-    print(properties)
+    //print(properties)
     sendMessagesWithProperties(properties)
 
   }
@@ -361,6 +361,10 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     }
   }
   
+  func performZoomInForImageView(_ imageView: UIImageView) {
+    print(1)
+  }
+  
   @objc func handleUploadTap() {
     
     let imagePickerController = UIImagePickerController()
@@ -395,6 +399,8 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessageCell
     
+    cell.deledate = self
+    
     let message = messages[indexPath.row]
     cell.textView.text = message.text
     
@@ -402,8 +408,10 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     if let text = message.text {
      cell.bubbleWidthAnchor?.constant = estimateFrameForText(text).width + 35
+      cell.textView.isHidden = false
     } else if message.imageUrl != nil {
       cell.bubbleWidthAnchor?.constant = 200
+      cell.textView.isHidden = true
     }
     return cell
   }
@@ -412,7 +420,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     var height: CGFloat = 80
     let message = messages[indexPath.row]
-    print(messages)
+    //print(messages)
     
     if let text = message.text {
       height = estimateFrameForText(text).height + 20
