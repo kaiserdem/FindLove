@@ -361,8 +361,59 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     }
   }
   
+  var startFrame: CGRect?
+  var blackBackgroundView: UIView?
+  var startingImageView: UIImageView?
+
+  
   func performZoomInForImageView(_ imageView: UIImageView) {
-    print(1)
+    startingImageView = imageView
+    startingImageView?.isHidden = true
+    
+    // конвертирует прямоуголтник
+    startFrame = imageView.superview?.convert(imageView.frame, to: nil)
+    
+    let zoomingImageView = UIImageView(frame: startFrame!) // получили картинку по фрейму
+    zoomingImageView.image = imageView.image
+    zoomingImageView.contentMode = .scaleAspectFit
+    zoomingImageView.isUserInteractionEnabled = true
+    zoomingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomOut(_:))))
+    
+    if let keyWindow = UIApplication.shared.keyWindow {
+      blackBackgroundView = UIView(frame: keyWindow.frame)
+      blackBackgroundView?.backgroundColor = .black
+      blackBackgroundView?.alpha = 0
+      keyWindow.addSubview(blackBackgroundView!)
+      
+      keyWindow.addSubview(zoomingImageView)
+      
+      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        self.blackBackgroundView?.alpha = 1
+        self.inputConteinerView.alpha = 0
+        
+        let height = self.startFrame!.height / self.startFrame!.width * keyWindow.frame.width
+        
+        zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
+        zoomingImageView.center = keyWindow.center
+        
+      }, completion: nil)
+    }
+
+  }
+  
+  @objc func handleZoomOut(_ tapGesture: UITapGestureRecognizer) {
+    if let zoomOutImageView = tapGesture.view as? UIImageView {
+      zoomOutImageView.layer.cornerRadius = 16
+      zoomOutImageView.clipsToBounds = true
+      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        zoomOutImageView.frame = self.startFrame!
+        self.blackBackgroundView?.alpha = 0
+        self.inputConteinerView.alpha = 0
+      }) { (complete) in
+        zoomOutImageView.removeFromSuperview()
+        self.startingImageView?.isHidden = false
+      }
+    }
   }
   
   @objc func handleUploadTap() {

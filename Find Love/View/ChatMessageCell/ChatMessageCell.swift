@@ -106,9 +106,7 @@ class ChatMessageCell: UICollectionViewCell {
   }
   
   @objc func handleZoomTap(_ gestureRecognizer: UITapGestureRecognizer) {
-    print("1")
     if let imageView = gestureRecognizer.view as? UIImageView {
-      print("imageView")
       deledate?.performZoomInForImageView(imageView)
     }
   }
