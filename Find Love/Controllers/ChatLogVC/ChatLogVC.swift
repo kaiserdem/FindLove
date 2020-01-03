@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import AVFoundation
+import MobileCoreServices
 
 class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
   
@@ -265,6 +267,71 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   }
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+  
+    if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
+      handleVideoSelectedForUrl(videoUrl)
+    } else {
+      handleImageSelectedForInfo(info)
+    }
+    
+    dismiss(animated: true, completion: nil) // выйти с контроллера
+  }
+  
+  // сохраняем видео в базу
+  private func handleVideoSelectedForUrl(_ url: URL) {
+    let filename = UUID().uuidString + ".mov"
+    let ref = Storage.storage().reference().child("messages_movies").child(filename)
+    
+    let uploadTask = ref.putFile(from: url, metadata: nil) { (metadata, error) in
+      if error != nil {
+        print(error!)
+        return
+      }
+      ref.downloadURL(completion: { (downloadUrl, error) in
+        if error != nil {
+          print(error!)
+          return
+        }
+        if let videoUrl = downloadUrl?.absoluteString {
+          
+          if let thumbnailImage = self.thumbnailimageForVideoUrl(url) {
+            
+            self.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { (imageUrl) in
+              
+              let properties: [String: Any] = ["videoUrl": videoUrl, "imageUrl": imageUrl, "imageWigth": thumbnailImage.size.width, "imageHight": thumbnailImage.size.height]
+              
+              self.sendMessagesWithProperties(properties)
+            })
+          }
+        }
+      })
+    }
+    uploadTask.observe(.progress) { (snapshot) in
+      if let complerionUnitCount = snapshot.progress?.completedUnitCount {
+        self.nameLabel.text = String(complerionUnitCount)
+      }
+    }
+    uploadTask.observe(.success) { (snapshot) in
+      self.nameLabel.text = self.user?.name
+    }
+  }
+  
+  // сделать картинку из видео
+  private func thumbnailimageForVideoUrl(_ videoUrl:URL) -> UIImage? {
+    // переобразовать ссылку в медиа
+    let asset = AVAsset(url: videoUrl)
+    let imageGenerate = AVAssetImageGenerator(asset: asset)
+    
+    do  {
+      let thumbnailCGImage = try imageGenerate.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
+      return UIImage(cgImage: thumbnailCGImage)
+    } catch {
+      print(error)
+    }
+    return nil
+  }
+  
+  private func handleImageSelectedForInfo(_ info: [UIImagePickerController.InfoKey: Any]) {
     
     var selectedImageFromPicker: UIImage?
     if let editingImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
@@ -273,13 +340,13 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
       selectedImageFromPicker = originalImage
     }
     if let selectedImage = selectedImageFromPicker {
-      uploadToFirebaseStorageUsingImage(selectedImage)
+      uploadToFirebaseStorageUsingImage(selectedImage) { (imageUrl) in
+        self.sendMessageWithImageUrl(imageUrl, image: selectedImage)
+      }
     }
-    
-    dismiss(animated: true, completion: nil) // выйти с контроллера
   }
   
-  private func uploadToFirebaseStorageUsingImage(_ image: UIImage) {
+  private func uploadToFirebaseStorageUsingImage(_ image: UIImage, completion: @escaping (_ imageUrl: String) -> ()) {
 
     let imageName = UUID().uuidString
     
@@ -297,8 +364,8 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
             print(error?.localizedDescription as Any)
             return
           }
-          if let imageUrl = url {
-            self.sendMessageWithImageUrl(imageUrl.absoluteString, image: image)
+          if let imageUrl = url?.absoluteString {
+            completion(imageUrl)
           }
         })
       }
@@ -308,7 +375,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   private func sendMessageWithImageUrl(_ imageUrl: String, image: UIImage) {
  
     let properties = ["imageUrl": imageUrl,"imageWidth": image.size.width, "imageHeight": image.size.height] as [String : Any]
-    //print(properties)
+    
     sendMessagesWithProperties(properties)
 
   }
@@ -422,6 +489,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   
     imagePickerController.delegate = self
     imagePickerController.allowsEditing = true
+    imagePickerController.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
     
     present(imagePickerController, animated: true, completion: nil)
   }
