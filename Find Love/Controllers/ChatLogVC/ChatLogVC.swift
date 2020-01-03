@@ -53,6 +53,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     conteinerView.backgroundColor = .white
     
     let uploadImageView = UIImageView(image: #imageLiteral(resourceName: "picture.png"))
+    uploadImageView.tintColor = .gray
     uploadImageView.isUserInteractionEnabled = true
     uploadImageView.translatesAutoresizingMaskIntoConstraints = false
     uploadImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleUploadTap)))
@@ -521,6 +522,9 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     cell.deledate = self
     
     let message = messages[indexPath.row]
+    
+    cell.message = message
+    
     cell.textView.text = message.text
     
     setupCell(cell, message: message)
@@ -532,6 +536,9 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
       cell.bubbleWidthAnchor?.constant = 200
       cell.textView.isHidden = true
     }
+    
+    cell.playBtn.isHidden = message.videoUrl == nil // если видео нет, тогда это тру
+    
     return cell
   }
   
@@ -543,7 +550,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     if let text = message.text {
       height = estimateFrameForText(text).height + 20
-    } else if let imageWidht = message.imageWidth, let imageHight = message.imageHight {
+    } else if let imageWidht = message.imageWidth, let imageHight = message.imageHeight {
       // сделали размер пропорционально
       height = CGFloat(imageHight / imageWidht * 200)
     }

@@ -56,6 +56,7 @@ class MessagesVC: UIViewController {
     tableView.rightAnchor.constraint(equalTo: backViewTable.rightAnchor).isActive = true
     
     tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
+    tableView.allowsMultipleSelectionDuringEditing = true
   }
   
 
@@ -105,6 +106,10 @@ class MessagesVC: UIViewController {
         
       }, withCancel: nil)
     }, withCancel: nil)
+    
+    ref.observe(.childMoved) { (snapchot) in // наблюдать за удвлением
+      self.attempReloadOfTable()
+    }
   }
   
   private func fetchMessageWithaMessageId(_ messageId: String) {
@@ -125,9 +130,9 @@ class MessagesVC: UIViewController {
     }, withCancel: nil)
   }
   
-  private func attempReloadOfTable() {
+  private func attempReloadOfTable() { // вызывает таймер
     timer?.invalidate()
-    timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.tableReloadTable), userInfo: nil, repeats: true)
+    timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.tableReloadTable), userInfo: nil, repeats: true)
   }
   
   @objc func tableReloadTable() {
@@ -146,7 +151,6 @@ class MessagesVC: UIViewController {
     navigationController?.pushViewController(vc, animated: true)
   }
   @IBAction func newMessageBtnAction(_ sender: Any) {
-    //showChatLogVCForUser(users)
     let newMessageVC = NewMessageVC()
     newMessageVC.messagesVC = self // какой именно контролллер
     let navController = UINavigationController(rootViewController: newMessageVC)
@@ -156,6 +160,28 @@ class MessagesVC: UIViewController {
 }
 
 extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+  
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+  
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    let message = messages[indexPath.row]
+    
+    if let chatPartnerId = message.chatPartnerId() {
+      Database.database().reference().child("user-messages").child(uid).child(chatPartnerId).removeValue { (error, ref) in
+        if error != nil {
+          print("Failed to delete messages:", error!)
+          return
+        }
+        self.messagesDictionary.removeValue(forKey: chatPartnerId)
+        self.attempReloadOfTable()
+      }
+    }
+  }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let message = self.messages[indexPath.row] //

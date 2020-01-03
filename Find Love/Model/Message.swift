@@ -16,9 +16,10 @@ class Message: NSObject { // модель сообщений
   var timestamp: NSNumber?
   var toId: String?
   
+  var videoUrl: String?
   var imageUrl: String?
   var imageWidth: Float?
-  var imageHight: Float?
+  var imageHeight: Float?
   
   init(dictionary: [String: Any]) {
     self.fromId = dictionary["fromId"] as? String
@@ -27,7 +28,8 @@ class Message: NSObject { // модель сообщений
     self.timestamp = dictionary["timestamp"] as? NSNumber
     self.imageUrl = dictionary["imageUrl"] as? String
     self.imageWidth = dictionary["imageWidth"] as? Float
-    self.imageHight = dictionary["imageHight"] as? Float
+    self.imageHeight = dictionary["imageHeight"] as? Float
+    self.videoUrl = dictionary["videoUrl"] as? String
   }
   func chatPartnerId() -> String? { // если написали сообщение себе
     // если отправитель это я, тогда возврат toId, в противном случае fromId
