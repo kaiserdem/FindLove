@@ -43,8 +43,11 @@ class MenuVC: UIViewController {
     } catch let logoutError {
       print(logoutError)
     }
-    let controll = HelloVC.init(nibName: "HelloVC", bundle: nil)
-    self.navigationController?.pushViewController(controll, animated: true)
+//    let controll = HelloVC.init(nibName: "HelloVC", bundle: nil)
+//    self.navigationController?.pushViewController(controll, animated: true)
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    _ = appDelegate.loadHelloVC()
   }
   
   

@@ -86,7 +86,8 @@ class MessagesVC: UIViewController {
   func showChatLogVCForUser(_ user: User?) {
     let vc = ChatLogVC(collectionViewLayout: UICollectionViewFlowLayout())
     vc.user = user
-    navigationController?.pushViewController(vc, animated: true)
+    present(vc, animated: true, completion: nil)
+    //self.navigationController?.pushViewController(vc, animated: true)
   }
   
   func observeUserMessages() {
@@ -108,7 +109,7 @@ class MessagesVC: UIViewController {
     }, withCancel: nil)
     
     ref.observe(.childMoved) { (snapchot) in // наблюдать за удвлением
-      self.attempReloadOfTable()
+      self.attempReloadOfTable(true)
     }
   }
   
@@ -125,14 +126,17 @@ class MessagesVC: UIViewController {
         if let chatPartnerId = message.chatPartnerId() { // если есть Id получателья
           self.messagesDictionary[chatPartnerId] = message // по toId было отправлено это message сообщение
         }
-        self.attempReloadOfTable()
+        self.attempReloadOfTable(true)
       }
     }, withCancel: nil)
   }
   
-  private func attempReloadOfTable() { // вызывает таймер
+  private func attempReloadOfTable(_ allow: Bool) { // вызывает таймер
     timer?.invalidate()
-    timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.tableReloadTable), userInfo: nil, repeats: true)
+    
+    if allow == true {
+      timer = Timer.scheduledTimer(timeInterval: 0.9, target: self, selector: #selector(self.tableReloadTable), userInfo: nil, repeats: true)
+    }
   }
   
   @objc func tableReloadTable() {
@@ -167,6 +171,8 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
   
+    self.attempReloadOfTable(false)
+    
     guard let uid = Auth.auth().currentUser?.uid else { return }
     
     let message = messages[indexPath.row]
@@ -178,7 +184,7 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
           return
         }
         self.messagesDictionary.removeValue(forKey: chatPartnerId)
-        self.attempReloadOfTable()
+        self.attempReloadOfTable(true)
       }
     }
   }

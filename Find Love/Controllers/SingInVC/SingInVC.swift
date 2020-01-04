@@ -61,8 +61,8 @@ class SingInVC: UIViewController {
         
         print("Success sing in")
         self.menuVC?.fetchUserAndSetupNavBarTitle()
-        let vc = MenuVC.init(nibName: "MenuVC", bundle: nil)
-        self.navigationController?.pushViewController(vc, animated: true)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        _ = appDelegate.checkIfUserIsLogedIn()
       }
     }
 
