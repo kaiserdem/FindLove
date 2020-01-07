@@ -73,6 +73,7 @@
                         </constraints>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" red="0.0" green="0.15362015562735301" blue="0.32107924403183019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="2K5-1Q-WP5" secondAttribute="bottom" constant="2" id="6Gh-d9-lyf"/>
                     <constraint firstItem="zuD-x0-BEg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Jf6-O0-EM9"/>
@@ -86,6 +87,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="contentView" destination="H2p-sc-9uM" id="ZGB-cy-Gdw"/>
                 <outlet property="lastMessagesLabel" destination="Sfd-wx-Tqo" id="8lu-4V-JQg"/>
                 <outlet property="timeLabel" destination="c75-HZ-rMW" id="MZG-la-MrZ"/>
                 <outlet property="userImageView" destination="2K5-1Q-WP5" id="1mu-bC-4zp"/>

@@ -9,22 +9,51 @@
 import UIKit
 
 class SearchVC: UIViewController {
-
+  
+  @IBOutlet weak var searchSettingBtn: UIButton!
+  @IBOutlet weak var collectionView: UICollectionView!
+  
+  var reviewCVCell: String = "ReviewCVCell"
+  
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      collectionView.delegate = self
+      collectionView.dataSource = self
+      collectionView.isPagingEnabled = true
+      collectionView.showsHorizontalScrollIndicator = false
+      collectionView.backgroundColor = UIColor.black
+      
+      collectionView.register(UINib(nibName: "ReviewCVCell", bundle: nil), forCellWithReuseIdentifier: "ReviewCVCell")
+      
+      searchSettingBtn.setImage(UIImage(named: "setting")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+      searchSettingBtn.imageView?.tintColor = .white
+     
+  }
 
-        // Do any additional setup after loading the view.
-    }
+  @IBAction func searchSettingBtnAction(_ sender: Any) {
+    
+  }
+  
+}
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return 20
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReviewCVCell", for: indexPath) as! ReviewCVCell
+    cell.profileImageView.image = #imageLiteral(resourceName: "image2")
+    cell.nameLabel.text = "Oleg"
+    cell.infoLabel.text = "Kyiv"
+    return cell
+  }
+  
+  
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import  FirebaseDatabase
 
 class NewMessageVC: UIViewController {
 
@@ -18,22 +19,39 @@ class NewMessageVC: UIViewController {
   var messagesVC: MessagesVC?
   var users = [User]()
   
-//  override var prefersStatusBarHidden: Bool {
-//    return true
-//  }
+  var currentUser = [User]()
+  var currentUserId = ""
   
   override func viewDidLoad() {
         super.viewDidLoad()
     
     self.navigationController?.navigationBar.isHidden = true
     uploadTableView()
+    fetchUsers()
     fetchUser()
+  }
+  
+  func fetchUser() { // выбрать пользователя
+    
+//    guard let uid = Auth.auth().currentUser?.uid else { return }
+//
+//    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+//
+//      if let dictionary = snapshot.value as? [String: AnyObject] {
+//
+//        let user = User(dictionary: dictionary)
+//        self.currentUser.append(user)
+//
+//      }
+//    }, withCancel: nil)
   }
   
   func uploadTableView() {
     
     tableView.delegate = self
     tableView.dataSource = self
+    
+    tableView.backgroundColor = .black
     
     backViewTable.addSubview(tableView)
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +63,9 @@ class NewMessageVC: UIViewController {
     tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
   }
   
-  func fetchUser() { // выбрать пользователя
+  
+  
+  func fetchUsers() { // выбрать пользователя
     Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
         let user = User(dictionary: dictionary) // пользователь
@@ -53,7 +73,6 @@ class NewMessageVC: UIViewController {
         
         self.users.append(user) // добавляем в масив
         
-        print(self.users)
         DispatchQueue.main.async { // на главном потоке асинхронно
           self.tableView.reloadData()
         }
@@ -76,12 +95,24 @@ extension NewMessageVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell
     let user = users[indexPath.row]
-    cell.userNameLabel.text = user.name
-    cell.lastMessagesLabel.text = user.email
     
-    if let profileImageView = user.profileImageUrl {
-      cell.userImageView.loadImageUsingCachWithUrlString(profileImageView)
-    }
+        let uid = Auth.auth().currentUser?.uid
+    
+    Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+    
+          if let dictionary = snapshot.value as? [String: AnyObject] {
+            let currentUser = User(dictionary: dictionary)
+            
+            if currentUser.email != user.email {
+              cell.userNameLabel.text = user.name
+              cell.lastMessagesLabel.text = user.email
+              
+              if let profileImageView = user.profileImageUrl {
+                cell.userImageView.loadImageUsingCachWithUrlString(profileImageView)
+              }
+            }
+          }
+        }, withCancel: nil)
     return cell
   }
   
@@ -93,7 +124,6 @@ extension NewMessageVC: UITableViewDataSource, UITableViewDelegate {
     
     self.dismiss(animated: true) { // закрыть
       let user = self.users[indexPath.row]
-      print(user)
       self.messagesVC?.showChatLogVCForUser(user)
     }
   }

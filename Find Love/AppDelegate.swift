@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let messagesVC = MessagesVC(nibName:"MessagesVC", bundle: nil)
     messagesVC.tabBarItem = UITabBarItem(title: "Messages", image:UIImage(named: "chat") ,tag:4)
     
-    UITabBar.appearance().barTintColor = .black
+    UITabBar.appearance().barTintColor = .clear
     
     let controllers = [feedVC, menuVC, searchVC, messagesVC]
     tabBarController.viewControllers = controllers

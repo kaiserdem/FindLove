@@ -60,7 +60,6 @@ class SingInVC: UIViewController {
         }
         
         print("Success sing in")
-        self.menuVC?.fetchUserAndSetupNavBarTitle()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         _ = appDelegate.checkIfUserIsLogedIn()
       }

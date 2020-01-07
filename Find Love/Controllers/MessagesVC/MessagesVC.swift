@@ -8,13 +8,14 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class MessagesVC: UIViewController {
   
+  @IBOutlet weak var messageBarBtnView: UIView!
+  @IBOutlet weak var chatBarBtnView: UIView!
+  @IBOutlet weak var newMessageBarBtnView: UIView!
   @IBOutlet weak var topBarView: UIView!
-  @IBOutlet weak var userNameLabel: UILabel!
-  @IBOutlet weak var menyBtn: UIButton!
-  @IBOutlet weak var newMessageBtn: UIButton!
   @IBOutlet weak var backViewTable: UIView!
   
   
@@ -26,27 +27,30 @@ class MessagesVC: UIViewController {
   var menuVC: MenuVC?
   var timer: Timer?
   
-//  override var prefersStatusBarHidden: Bool {
-//    return true
-//  }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     
     fetchUser()
     uploadTableView()
     observeUserMessages()
+    setupTopBarSettings()
   }
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-    topBarView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 25.0)
+    messageBarBtnView.roundCorners(corners: [.topLeft, .topRight], radius: 8.0)
+    chatBarBtnView.roundCorners(corners: [.topLeft, .topRight], radius: 8.0)
+    newMessageBarBtnView.roundCorners(corners: [.topLeft, .topRight], radius: 8.0)
+    
   }
   
   func uploadTableView() {
     
     tableView.delegate = self
     tableView.dataSource = self
+    
+    tableView.backgroundColor = .black
     
     backViewTable.addSubview(tableView)
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,6 +62,89 @@ class MessagesVC: UIViewController {
     tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
     tableView.allowsMultipleSelectionDuringEditing = true
   }
+  
+  private func setupTopBarSettings() {
+ 
+    let messageGestures = UITapGestureRecognizer(target: self, action:  #selector (messageBtnAction (_:)))
+    let chatBtnGestures = UITapGestureRecognizer(target: self, action:  #selector (chatBtnAction (_:)))
+    let writeBtnGestures = UITapGestureRecognizer(target: self, action:  #selector (writeBtnAction (_:)))
+    
+    self.messageBarBtnView.addGestureRecognizer(messageGestures)
+    self.chatBarBtnView.addGestureRecognizer(chatBtnGestures)
+    self.newMessageBarBtnView.addGestureRecognizer(writeBtnGestures)
+  
+  }
+  
+  @objc func messageBtnAction(_ sender:UITapGestureRecognizer){
+    
+    print("messageBtnAction")
+    
+      self.messageBarBtnView.backgroundColor = .white
+      self.messageBarBtnView.layer.shadowOffset = CGSize(width: 0.5, height: -1.0)
+      self.messageBarBtnView.layer.shadowRadius = 1.5
+      self.messageBarBtnView.layer.shadowOpacity = 0.2
+
+      self.chatBarBtnView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+      self.chatBarBtnView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+      self.chatBarBtnView.layer.shadowRadius = 0
+      self.chatBarBtnView.layer.shadowOpacity = 0
+      
+      self.newMessageBarBtnView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+      self.newMessageBarBtnView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+      self.newMessageBarBtnView.layer.shadowRadius = 0
+      self.newMessageBarBtnView.layer.shadowOpacity = 0
+    
+  }
+  
+  @objc func chatBtnAction(_ sender:UITapGestureRecognizer){
+    
+    print("chatBtnAction")
+    
+    self.chatBarBtnView.backgroundColor = .white
+    self.chatBarBtnView.layer.shadowOffset = CGSize(width: 0.5, height: -1.0)
+    self.chatBarBtnView.layer.shadowRadius = 1.5
+    self.chatBarBtnView.layer.shadowOpacity = 0.2
+    
+    self.newMessageBarBtnView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    self.newMessageBarBtnView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+    self.newMessageBarBtnView.layer.shadowRadius = 0
+    self.newMessageBarBtnView.layer.shadowOpacity = 0
+    
+    self.messageBarBtnView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    self.messageBarBtnView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+    self.messageBarBtnView.layer.shadowRadius = 0
+    self.messageBarBtnView.layer.shadowOpacity = 0
+    
+  }
+  
+  @objc func writeBtnAction(_ sender:UITapGestureRecognizer){
+    
+    print("writeBtnAction")
+    
+    self.newMessageBarBtnView.backgroundColor = .white
+    self.newMessageBarBtnView.layer.shadowOffset = CGSize(width: 0.5, height: -1.0)
+    self.newMessageBarBtnView.layer.shadowRadius = 1.5
+    self.newMessageBarBtnView.layer.shadowOpacity = 0.2
+    
+    self.messageBarBtnView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    self.messageBarBtnView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+    self.messageBarBtnView.layer.shadowRadius = 0
+    self.messageBarBtnView.layer.shadowOpacity = 0
+    
+    self.chatBarBtnView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    self.chatBarBtnView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+    self.chatBarBtnView.layer.shadowRadius = 0
+    self.chatBarBtnView.layer.shadowOpacity = 0
+    
+    
+    
+    let newMessageVC = NewMessageVC()
+    newMessageVC.messagesVC = self // какой именно контролллер
+    let navController = UINavigationController(rootViewController: newMessageVC)
+    present(navController, animated: true, completion: nil)
+    
+  }
+  
   
 
   func fetchUser() { // выбрать пользователя
@@ -78,7 +165,7 @@ class MessagesVC: UIViewController {
     messages.removeAll()
     messagesDictionary.removeAll()
     tableView.reloadData()
-    userNameLabel.text = user.name
+    //userNameLabel.text = user.name
     
     observeUserMessages()
   }
@@ -135,7 +222,7 @@ class MessagesVC: UIViewController {
     timer?.invalidate()
     
     if allow == true {
-      timer = Timer.scheduledTimer(timeInterval: 0.9, target: self, selector: #selector(self.tableReloadTable), userInfo: nil, repeats: true)
+      timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.tableReloadTable), userInfo: nil, repeats: true)
     }
   }
   
@@ -160,6 +247,7 @@ class MessagesVC: UIViewController {
     let navController = UINavigationController(rootViewController: newMessageVC)
     present(navController, animated: true, completion: nil)
   }
+  
   
 }
 
