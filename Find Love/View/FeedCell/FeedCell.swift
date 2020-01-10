@@ -69,7 +69,6 @@ class FeedCell: UITableViewCell {
     
     userPost.observeSingleEvent(of: .childAdded, with: { (snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
-        print(dictionary)
       }
     }, withCancel: nil)
   }

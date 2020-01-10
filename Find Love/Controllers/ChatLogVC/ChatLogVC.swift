@@ -494,8 +494,10 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   
   
   @objc func handleSend() { // отправляем сообщение
-    let properties = ["text": inputTextField.text!] as [String : Any]
-    sendMessagesWithProperties(properties)
+    if inputTextField.text != "" {
+      let properties = ["text": inputTextField.text!] as [String : Any]
+      sendMessagesWithProperties(properties)
+    }
   }
   
    // текстовое поле возврвщвет

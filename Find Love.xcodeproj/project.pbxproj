@@ -12,6 +12,8 @@
 		AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */; };
 		AD02EB3123B7FDB500F472A5 /* NewMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */; };
 		AD02EB3223B7FDB500F472A5 /* NewMessageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD02EB3023B7FDB500F472A5 /* NewMessageVC.xib */; };
+		AD1296FC23C5F32A00C2C94B /* ChatMessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1296FA23C5F32A00C2C94B /* ChatMessagesVC.swift */; };
+		AD1296FD23C5F32A00C2C94B /* ChatMessagesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD1296FB23C5F32A00C2C94B /* ChatMessagesVC.xib */; };
 		AD26946323B4FD2C00D49887 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946223B4FD2C00D49887 /* MessagesVC.swift */; };
 		AD26946523B4FF8100D49887 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946423B4FF8100D49887 /* User.swift */; };
 		AD26946723B538A500D49887 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946623B538A500D49887 /* Message.swift */; };
@@ -39,6 +41,8 @@
 		AD8895E523B28AFB00347A6A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD8895E423B28AFB00347A6A /* GoogleService-Info.plist */; };
 		AD8895E923B293BE00347A6A /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895E723B293BE00347A6A /* MenuVC.swift */; };
 		AD8895EA23B293BE00347A6A /* MenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8895E823B293BE00347A6A /* MenuVC.xib */; };
+		AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD98E3D323C729B9003A6DA8 /* Main.storyboard */; };
+		AD98E3D623C72AD6003A6DA8 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD98E3D523C72AD6003A6DA8 /* MessageVC.swift */; };
 		ADBA195623C2A41C009B45EC /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBA195523C2A41C009B45EC /* ExtensionUIView.swift */; };
 		ADBA195823C338B3009B45EC /* test.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADBA195723C338B3009B45EC /* test.xib */; };
 		ADBA195B23C371E6009B45EC /* ReviewCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBA195923C371E6009B45EC /* ReviewCVCell.swift */; };
@@ -51,6 +55,8 @@
 		AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageVC.swift; sourceTree = "<group>"; };
 		AD02EB3023B7FDB500F472A5 /* NewMessageVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMessageVC.xib; sourceTree = "<group>"; };
+		AD1296FA23C5F32A00C2C94B /* ChatMessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessagesVC.swift; sourceTree = "<group>"; };
+		AD1296FB23C5F32A00C2C94B /* ChatMessagesVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessagesVC.xib; sourceTree = "<group>"; };
 		AD26946223B4FD2C00D49887 /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		AD26946423B4FF8100D49887 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AD26946623B538A500D49887 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -80,6 +86,8 @@
 		AD8895E423B28AFB00347A6A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AD8895E723B293BE00347A6A /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		AD8895E823B293BE00347A6A /* MenuVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuVC.xib; sourceTree = "<group>"; };
+		AD98E3D323C729B9003A6DA8 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		AD98E3D523C72AD6003A6DA8 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
 		ADBA195523C2A41C009B45EC /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		ADBA195723C338B3009B45EC /* test.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = test.xib; sourceTree = "<group>"; };
 		ADBA195923C371E6009B45EC /* ReviewCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCVCell.swift; sourceTree = "<group>"; };
@@ -126,6 +134,15 @@
 			path = NewMessageVC;
 			sourceTree = "<group>";
 		};
+		AD1296FE23C5F33300C2C94B /* ChatMessagesVC */ = {
+			isa = PBXGroup;
+			children = (
+				AD1296FA23C5F32A00C2C94B /* ChatMessagesVC.swift */,
+				AD1296FB23C5F32A00C2C94B /* ChatMessagesVC.xib */,
+			);
+			path = ChatMessagesVC;
+			sourceTree = "<group>";
+		};
 		AD26946123B4FA3100D49887 /* MessagesVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +183,7 @@
 		AD26947123B606BA00D49887 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AD98E3D523C72AD6003A6DA8 /* MessageVC.swift */,
 				AD5A563B23BFEB450032AB2A /* FeedCell */,
 				AD26946E23B6019C00D49887 /* UserCell */,
 				AD02EB2923B793C200F472A5 /* ChatMessageCell */,
@@ -241,6 +259,7 @@
 			children = (
 				AD8895E423B28AFB00347A6A /* GoogleService-Info.plist */,
 				AD8895C223B2122D00347A6A /* AppDelegate.swift */,
+				AD98E3D323C729B9003A6DA8 /* Main.storyboard */,
 				AD26947023B6049100D49887 /* Extensions */,
 				AD26946F23B6047B00D49887 /* Model */,
 				AD26947123B606BA00D49887 /* View */,
@@ -265,6 +284,7 @@
 				AD02EB2E23B7FD6D00F472A5 /* NewMessageVC */,
 				AD26947A23B6856000D49887 /* ChatLogVC */,
 				AD5A563623BFC1380032AB2A /* SearchVC */,
+				AD1296FE23C5F33300C2C94B /* ChatMessagesVC */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -350,6 +370,9 @@
 		AD8895B723B2122D00347A6A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = Kaiserdem;
@@ -386,7 +409,9 @@
 				AD02EB3223B7FDB500F472A5 /* NewMessageVC.xib in Resources */,
 				AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */,
 				AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */,
+				AD1296FD23C5F32A00C2C94B /* ChatMessagesVC.xib in Resources */,
 				AD8895EA23B293BE00347A6A /* MenuVC.xib in Resources */,
+				AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */,
 				AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */,
 				AD02EB2623B77F8900F472A5 /* MessagesVC.xib in Resources */,
 				AD5A563A23BFC15A0032AB2A /* SearchVC.xib in Resources */,
@@ -467,7 +492,9 @@
 				AD26946C23B6019200D49887 /* UserCell.swift in Sources */,
 				AD5A563423BFBFCD0032AB2A /* FeedVC.swift in Sources */,
 				AD26BE8E23C0D47700EF1418 /* Post.swift in Sources */,
+				AD1296FC23C5F32A00C2C94B /* ChatMessagesVC.swift in Sources */,
 				AD02EB3123B7FDB500F472A5 /* NewMessageVC.swift in Sources */,
+				AD98E3D623C72AD6003A6DA8 /* MessageVC.swift in Sources */,
 				AD26946523B4FF8100D49887 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class SearchVC: UIViewController {
   
@@ -15,8 +17,12 @@ class SearchVC: UIViewController {
   
   var reviewCVCell: String = "ReviewCVCell"
   
+  var users = [User]()
+  
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      observeUser()
       
       collectionView.delegate = self
       collectionView.dataSource = self
@@ -29,6 +35,23 @@ class SearchVC: UIViewController {
       searchSettingBtn.setImage(UIImage(named: "setting")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
       searchSettingBtn.imageView?.tintColor = .white
      
+  }
+  
+  func observeUser() {
+    let ref = Database.database().reference().child("users")
+    ref.observe(.childAdded, with: { (snapshot) in
+      guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+      
+      let user = User(dictionary: dictionary)
+      self.users.append(user)
+      print(self.users.count)
+      
+      DispatchQueue.main.async {
+        self.collectionView.reloadData()
+      }
+
+    }, withCancel: nil)
+    
   }
 
   @IBAction func searchSettingBtnAction(_ sender: Any) {
@@ -44,14 +67,21 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 20
+    return users.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReviewCVCell", for: indexPath) as! ReviewCVCell
-    cell.profileImageView.image = #imageLiteral(resourceName: "image2")
-    cell.nameLabel.text = "Oleg"
-    cell.infoLabel.text = "Kyiv"
+    
+    let user = users[indexPath.row]
+    
+      cell.nameLabel.text = user.name
+      cell.infoLabel.text = user.email
+      
+      if let profileImageView = user.profileImageUrl {
+        cell.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
+      }
+    
     return cell
   }
   

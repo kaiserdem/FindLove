@@ -54,9 +54,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let messagesVC = MessagesVC(nibName:"MessagesVC", bundle: nil)
     messagesVC.tabBarItem = UITabBarItem(title: "Messages", image:UIImage(named: "chat") ,tag:4)
     
+    let chatMessagesVC = ChatMessagesVC(nibName:"ChatMessagesVC", bundle: nil)
+    chatMessagesVC.tabBarItem = UITabBarItem(title: "Chat", image:UIImage(named: "chat") ,tag: 5)
+    
+    
     UITabBar.appearance().barTintColor = .clear
     
-    let controllers = [feedVC, menuVC, searchVC, messagesVC]
+    let controllers = [feedVC, menuVC, searchVC, messagesVC, chatMessagesVC]
     tabBarController.viewControllers = controllers
     
     window?.rootViewController = tabBarController
@@ -67,7 +71,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     FirebaseApp.configure()
-    checkIfUserIsLogedIn()
+   // checkIfUserIsLogedIn()
+
 
     return true
   }
