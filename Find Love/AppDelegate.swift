@@ -17,13 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func checkIfUserIsLogedIn() { // проверка если пользователь вошел в систему
     
-    self.window = UIWindow(frame: UIScreen.main.bounds)
-    
     if Auth.auth().currentUser?.uid == nil { // если мы не вошли
       
       loadHelloVC()
-    } else {
-      loadTabBarControllers()
     }
   }
   
@@ -34,46 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window!.rootViewController = nav1
     self.window?.makeKeyAndVisible()
   }
-  
-  func loadTabBarControllers() {
-    
-    let tabBarController = UITabBarController()
-    
-    let feedVC = FeedVC(nibName: "FeedVC", bundle: nil)
-    feedVC.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(named: "feed"),
-                                     tag: 1)
-    
-    let menuVC = MenuVC(nibName: "MenuVC", bundle: nil)
-    menuVC.tabBarItem = UITabBarItem(title: "Menu", image: UIImage(named: "menu1"),
-                                     tag: 2)
-    
-    let searchVC = SearchVC(nibName: "SearchVC", bundle: nil)
-    searchVC.tabBarItem = UITabBarItem(title: "Love", image: UIImage(named: "search"),
-                                       tag: 3)
-    
-    let messagesVC = MessagesVC(nibName:"MessagesVC", bundle: nil)
-    messagesVC.tabBarItem = UITabBarItem(title: "Messages", image:UIImage(named: "chat") ,tag:4)
-    
-    let chatMessagesVC = ChatMessagesVC(nibName:"ChatMessagesVC", bundle: nil)
-    chatMessagesVC.tabBarItem = UITabBarItem(title: "Chat", image:UIImage(named: "chat") ,tag: 5)
-    
-    
-    UITabBar.appearance().barTintColor = .clear
-    
-    let controllers = [feedVC, menuVC, searchVC, messagesVC, chatMessagesVC]
-    tabBarController.viewControllers = controllers
-    
-    window?.rootViewController = tabBarController
-    self.window?.makeKeyAndVisible()
-  }
-
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     FirebaseApp.configure()
-   // checkIfUserIsLogedIn()
-
-
+    checkIfUserIsLogedIn()
+    
     return true
   }
 

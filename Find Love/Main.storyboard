@@ -349,7 +349,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="1yH-O9-SRm">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="OsZ-I5-e7d" sceneMemberID="viewController">
+                <tabBarController wantsFullScreenLayout="YES" automaticallyAdjustsScrollViewInsets="NO" id="OsZ-I5-e7d" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4Gt-yy-4Ip">
                         <autoresizingMask key="autoresizingMask"/>

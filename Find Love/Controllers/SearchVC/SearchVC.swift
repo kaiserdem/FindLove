@@ -44,7 +44,6 @@ class SearchVC: UIViewController {
       
       let user = User(dictionary: dictionary)
       self.users.append(user)
-      print(self.users.count)
       
       DispatchQueue.main.async {
         self.collectionView.reloadData()
