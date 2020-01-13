@@ -1,9 +1,9 @@
 //
-//  MessagesTableVC.swift
+//  MessagesAllVC.swift
 //  Find Love
 //
-//  Created by Kaiserdem on 26.12.2019.
-//  Copyright © 2019 Kaiserdem. All rights reserved.
+//  Created by Kaiserdem on 11.01.2020.
+//  Copyright © 2020 Kaiserdem. All rights reserved.
 //
 
 import UIKit
@@ -12,37 +12,19 @@ import FirebaseDatabase
 
 class MessagesVC: UIViewController {
   
-  @IBOutlet weak var messageBarBtnView: UIView!
-  @IBOutlet weak var chatBarBtnView: UIView!
-  @IBOutlet weak var newMessageBarBtnView: UIView!
-  @IBOutlet weak var topBarView: UIView!
-  @IBOutlet weak var backViewTable: UIView!
-  
-  
   let tableView = UITableView()
-  let cellId = "Cell"
   var users = [User]()
   var messages = [Message]()
   var messagesDictionary = [String: Message]()
   var menuVC: MenuVC?
   var timer: Timer?
   
-
   override func viewDidLoad() {
     super.viewDidLoad()
     
     fetchUser()
     uploadTableView()
     observeUserMessages()
-    setupTopBarSettings()
-  }
-  
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    messageBarBtnView.roundCorners(corners: [.topLeft, .topRight], radius: 8.0)
-    chatBarBtnView.roundCorners(corners: [.topLeft, .topRight], radius: 8.0)
-    newMessageBarBtnView.roundCorners(corners: [.topLeft, .topRight], radius: 8.0)
-    
   }
   
   func uploadTableView() {
@@ -52,103 +34,19 @@ class MessagesVC: UIViewController {
     
     tableView.backgroundColor = .black
     
-    backViewTable.addSubview(tableView)
+    self.view.addSubview(tableView)
     tableView.translatesAutoresizingMaskIntoConstraints = false
-    tableView.topAnchor.constraint(equalTo: backViewTable.topAnchor).isActive = true
-    tableView.leftAnchor.constraint(equalTo: backViewTable.leftAnchor).isActive = true
-    tableView.bottomAnchor.constraint(equalTo: backViewTable.bottomAnchor).isActive = true
-    tableView.rightAnchor.constraint(equalTo: backViewTable.rightAnchor).isActive = true
+    
+    tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+    tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0).isActive = true
+    tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+    tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true
     
     tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
     tableView.allowsMultipleSelectionDuringEditing = true
   }
-  
-  private func setupTopBarSettings() {
- 
-    let messageGestures = UITapGestureRecognizer(target: self, action:  #selector (messageBtnAction (_:)))
-    let chatBtnGestures = UITapGestureRecognizer(target: self, action:  #selector (chatBtnAction (_:)))
-    let writeBtnGestures = UITapGestureRecognizer(target: self, action:  #selector (writeBtnAction (_:)))
-    
-    self.messageBarBtnView.addGestureRecognizer(messageGestures)
-    self.chatBarBtnView.addGestureRecognizer(chatBtnGestures)
-    self.newMessageBarBtnView.addGestureRecognizer(writeBtnGestures)
-  
-  }
-  
-  @objc func messageBtnAction(_ sender:UITapGestureRecognizer){
-    
-    print("messageBtnAction")
-    
-      self.messageBarBtnView.backgroundColor = .white
-      self.messageBarBtnView.layer.shadowOffset = CGSize(width: 0.5, height: -1.0)
-      self.messageBarBtnView.layer.shadowRadius = 1.5
-      self.messageBarBtnView.layer.shadowOpacity = 0.2
-
-      self.chatBarBtnView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-      self.chatBarBtnView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-      self.chatBarBtnView.layer.shadowRadius = 0
-      self.chatBarBtnView.layer.shadowOpacity = 0
-      
-      self.newMessageBarBtnView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-      self.newMessageBarBtnView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-      self.newMessageBarBtnView.layer.shadowRadius = 0
-      self.newMessageBarBtnView.layer.shadowOpacity = 0
-    
-  }
-  
-  @objc func chatBtnAction(_ sender:UITapGestureRecognizer){
-    
-    print("chatBtnAction")
-    
-    self.chatBarBtnView.backgroundColor = .white
-    self.chatBarBtnView.layer.shadowOffset = CGSize(width: 0.5, height: -1.0)
-    self.chatBarBtnView.layer.shadowRadius = 1.5
-    self.chatBarBtnView.layer.shadowOpacity = 0.2
-    
-    self.newMessageBarBtnView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-    self.newMessageBarBtnView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-    self.newMessageBarBtnView.layer.shadowRadius = 0
-    self.newMessageBarBtnView.layer.shadowOpacity = 0
-    
-    self.messageBarBtnView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-    self.messageBarBtnView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-    self.messageBarBtnView.layer.shadowRadius = 0
-    self.messageBarBtnView.layer.shadowOpacity = 0
-    
-  }
-  
-  @objc func writeBtnAction(_ sender:UITapGestureRecognizer){
-    
-    print("writeBtnAction")
-    
-    self.newMessageBarBtnView.backgroundColor = .white
-    self.newMessageBarBtnView.layer.shadowOffset = CGSize(width: 0.5, height: -1.0)
-    self.newMessageBarBtnView.layer.shadowRadius = 1.5
-    self.newMessageBarBtnView.layer.shadowOpacity = 0.2
-    
-    self.messageBarBtnView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-    self.messageBarBtnView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-    self.messageBarBtnView.layer.shadowRadius = 0
-    self.messageBarBtnView.layer.shadowOpacity = 0
-    
-    self.chatBarBtnView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-    self.chatBarBtnView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-    self.chatBarBtnView.layer.shadowRadius = 0
-    self.chatBarBtnView.layer.shadowOpacity = 0
-    
-    
-    
-    let newMessageVC = NewMessageVC()
-    newMessageVC.messagesVC = self // какой именно контролллер
-    let navController = UINavigationController(rootViewController: newMessageVC)
-    present(navController, animated: true, completion: nil)
-    
-  }
-  
-  
-
   func fetchUser() { // выбрать пользователя
-
+    
     guard let uid = Auth.auth().currentUser?.uid else { return }
     
     Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -165,7 +63,6 @@ class MessagesVC: UIViewController {
     messages.removeAll()
     messagesDictionary.removeAll()
     tableView.reloadData()
-    //userNameLabel.text = user.name
     
     observeUserMessages()
   }
@@ -174,7 +71,7 @@ class MessagesVC: UIViewController {
     let vc = ChatLogVC(collectionViewLayout: UICollectionViewFlowLayout())
     vc.user = user
     present(vc, animated: true, completion: nil)
-    //self.navigationController?.pushViewController(vc, animated: true)
+    self.navigationController?.pushViewController(vc, animated: true)
   }
   
   func observeUserMessages() {
@@ -236,19 +133,6 @@ class MessagesVC: UIViewController {
       self.tableView.reloadData()
     })
   }
-  
-  @IBAction func menyBtnAction(_ sender: Any) {
-    let vc = MenuVC.init(nibName: "MenuVC", bundle: nil)
-    navigationController?.pushViewController(vc, animated: true)
-  }
-  @IBAction func newMessageBtnAction(_ sender: Any) {
-    let newMessageVC = NewMessageVC()
-    newMessageVC.messagesVC = self // какой именно контролллер
-    let navController = UINavigationController(rootViewController: newMessageVC)
-    present(navController, animated: true, completion: nil)
-  }
-  
-  
 }
 
 extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
@@ -258,7 +142,7 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-  
+    
     self.attempReloadOfTable(false)
     
     guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -292,11 +176,11 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
     }, withCancel: nil)
   }
   
-   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return  messages.count
   }
   
-   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell
     
     let message = messages[indexPath.row]
@@ -305,7 +189,7 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
     return cell
   }
   
-   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 65
   }
 }

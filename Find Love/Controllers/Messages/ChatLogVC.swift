@@ -1,38 +1,47 @@
 //
-//  PostVC.swift
+//  ChatLogVC.swift
 //  Find Love
 //
-//  Created by Kaiserdem on 04.01.2020.
-//  Copyright © 2020 Kaiserdem. All rights reserved.
+//  Created by Kaiserdem on 27.12.2019.
+//  Copyright © 2019 Kaiserdem. All rights reserved.
 //
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 import AVFoundation
 import MobileCoreServices
-import FirebaseDatabase
 
-class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
+class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
   
   
   var user: User? {
     didSet {
+      self.nameLabel.text = user?.name
+
+      observeMessages()
     }
   }
-  
-  var posts = [Post]()
-  var postDictionary = [String: Post]()
-  
+
+  var messages = [Message]() // масив всех сообщений
   var conteinerViewBottonAnchor: NSLayoutConstraint?
-  
+
   lazy var inputTextField: UITextField = {
     let textField = UITextField()
-    textField.placeholder = "Ведите содержание поста..."
+    textField.placeholder = "Ведите сообщение..."
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.delegate = self // подписали делегат
     return textField
   }()
-
+  
+  lazy var nameLabel: UILabel = {
+    let label = UILabel()
+    label.textAlignment = NSTextAlignment.center
+    label.tintColor = .white
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
   lazy var conteinerView: UIView = {
     let view = UIView()
     view.backgroundColor = #colorLiteral(red: 0.9030912519, green: 0.9030912519, blue: 0.9030912519, alpha: 1)
@@ -58,7 +67,7 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
     uploadImageView.heightAnchor.constraint(equalToConstant: 35).isActive = true
     
     let sendButton = UIButton(type: .system)
-    sendButton.setTitle("Опубликовать", for: .normal)
+    sendButton.setTitle("Отправить", for: .normal)
     sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
     sendButton.setTitleColor(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), for: .normal)
     sendButton.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +76,7 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
     
     sendButton.rightAnchor.constraint(equalTo: conteinerView.rightAnchor, constant: -10).isActive = true
     sendButton.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
-    sendButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+    sendButton.widthAnchor.constraint(equalToConstant: 90).isActive = true
     sendButton.heightAnchor.constraint(equalTo: conteinerView.heightAnchor).isActive = true
     
     conteinerView.addSubview(inputTextField)
@@ -86,7 +95,7 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
     separatorLineView.topAnchor.constraint(equalTo: conteinerView.topAnchor).isActive = true
     separatorLineView.widthAnchor.constraint(equalTo: conteinerView.widthAnchor).isActive = true
     separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-    
+
     return conteinerView
   }()
   
@@ -94,11 +103,13 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 5, right: 0)
     collectionView?.alwaysBounceVertical = true
-    collectionView?.backgroundColor = UIColor.white
+    collectionView?.backgroundColor = UIColor.black
     collectionView?.keyboardDismissMode = .interactive
-    
+    collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
+
     setupInputComponents()
     setupKeyboardObservise()
   }
@@ -111,7 +122,7 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     collectionView?.collectionViewLayout.invalidateLayout()
   }
-  
+
   override var inputAccessoryView: UIView? { // вю короторе отвечает за клавиатуру
     get {
       return inputConteinerView
@@ -124,23 +135,23 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
   
   func setupKeyboardObservise() {
     NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-   
+
   }
-  
-  
+
+
   @objc func handleKeyboardDidShow() {
     
-    if posts.count > 0 {
-      let indexPath = IndexPath(item: self.posts.count-1, section: 0) // последнее
+    if messages.count > 0 {
+      let indexPath = IndexPath(item: self.messages.count-1, section: 0) // последнее
       //проскролить
       self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
     }
   }
-  
+
   func setupInputComponents() { // компоненты контроллера
     
     let topConteinerView = UIView()
-    topConteinerView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    topConteinerView.backgroundColor = #colorLiteral(red: 0.2310593501, green: 0.2310593501, blue: 0.2310593501, alpha: 1)
     topConteinerView.clipsToBounds = true
     topConteinerView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(topConteinerView)
@@ -152,7 +163,7 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
     
     let backButton = UIButton(type: .system)
     backButton.setTitle("Назад", for: .normal)
-    backButton.setTitleColor(.black, for: .normal)
+    backButton.setTitleColor(.white, for: .normal)
     backButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
     backButton.translatesAutoresizingMaskIntoConstraints = false
     backButton.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
@@ -163,9 +174,40 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
     backButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
     backButton.heightAnchor.constraint(equalTo: topConteinerView.heightAnchor).isActive = true
 
+    topConteinerView.addSubview(nameLabel)
+    
+    nameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 15).isActive = true
+    nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
   }
   
-
+  func observeMessages() {
+    
+    guard let uid = Auth.auth().currentUser?.uid, let toId = user?.id else { return }
+    
+    let userMessagesRef = Database.database().reference().child("user-messages").child(uid).child(toId)
+    userMessagesRef.observe(.childAdded, with: { (snapshot) in
+      
+      let messageId = snapshot.key
+      let messageRef = Database.database().reference().child("messages").child(messageId)
+      
+      messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+        
+        let message = Message(dictionary: dictionary)
+              
+          self.messages.append(message)
+          
+          DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+            let indexPath = IndexPath(item: self.messages.count-1, section: 0) // последнее
+            //проскролить
+            self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+          }
+      }, withCancel: nil)
+    }, withCancel: nil)
+  }
   
   // принимает текст возвращает размер
   private func estimateFrameForText(_ text: String) -> CGRect {
@@ -177,13 +219,43 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
     
     return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)], context: nil)
   }
-
+  
+  private func setupCell(_ cell: ChatMessageCell, message: Message) {
+    
+    if let profileImageUrl = self.user?.profileImageUrl {
+      cell.profileImageView.loadImageUsingCachWithUrlString(profileImageUrl)
+    }
+    
+    if let messageImageUrl = message.imageUrl {
+      cell.messageImageView.loadImageUsingCachWithUrlString(messageImageUrl)
+      cell.messageImageView.isHidden = false
+      cell.bubbleView.backgroundColor = .clear
+    } else {
+      cell.messageImageView.isHidden = true
+    }
+    
+    if message.fromId == Auth.auth().currentUser?.uid { // свои сообщения
+      cell.bubbleView.backgroundColor = ChatMessageCell.blueColor 
+      cell.textView.textColor = .white
+      cell.profileImageView.isHidden = true
+      cell.buubleViewRightAnchor?.isActive = true
+      cell.buubleViewLeftAnchor?.isActive = false
+    } else {
+      cell.bubbleView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1) // не свои серый
+      cell.textView.textColor = .black
+      cell.profileImageView.isHidden = false
+      
+      cell.buubleViewRightAnchor?.isActive = false
+      cell.buubleViewLeftAnchor?.isActive = true
+    }
+  }
+  
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     dismiss(animated: true, completion: nil)
   }
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    
+  
     if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
       handleVideoSelectedForUrl(videoUrl)
     } else {
@@ -224,11 +296,11 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
     }
     uploadTask.observe(.progress) { (snapshot) in
       if let complerionUnitCount = snapshot.progress?.completedUnitCount {
-        //self.nameLabel.text = String(complerionUnitCount)
+        self.nameLabel.text = String(complerionUnitCount)
       }
     }
     uploadTask.observe(.success) { (snapshot) in
-      //self.nameLabel.text = self.user?.name
+      self.nameLabel.text = self.user?.name
     }
   }
   
@@ -263,7 +335,7 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
   }
   
   private func uploadToFirebaseStorageUsingImage(_ image: UIImage, completion: @escaping (_ imageUrl: String) -> ()) {
-    
+
     let imageName = UUID().uuidString
     
     // создали папку в базе
@@ -289,21 +361,22 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
   }
   
   private func sendMessageWithImageUrl(_ imageUrl: String, image: UIImage) {
-    
+ 
     let properties = ["imageUrl": imageUrl,"imageWidth": image.size.width, "imageHeight": image.size.height] as [String : Any]
     
     sendMessagesWithProperties(properties)
-    
+
   }
   
   private func sendMessagesWithProperties(_ properties: [String: Any]) {
     
-    let ref = Database.database().reference().child("posts")
+    let ref = Database.database().reference().child("messages")
     let childRef = ref.childByAutoId()
+    let toId = user!.id!
     let fromId = Auth.auth().currentUser!.uid
     let timestamp = Int(Date().timeIntervalSince1970)
     
-    var values = ["fromId": fromId, "timestamp": timestamp] as [String : Any]
+    var values = [ "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
     
     properties.forEach { (key: String, value: Any) in // метод принимает данные
       values[key] = value
@@ -315,17 +388,38 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
         return
       }
     }
-    
-    self.inputTextField.text = nil
-    
-    dismiss(animated: true, completion: nil)
 
+    self.inputTextField.text = nil
+
+    let refFromTo = Database.database().reference().child("user-messages").child(fromId).child(toId)
+
+    let messageId = childRef.key
+    let values2 = [messageId: 1] as! [String : Any]
+
+    refFromTo.updateChildValues(values2) { (error, ref) in
+      if error != nil {
+        print(error!)
+        return
+      }
+    }
+
+    let refToFrom = Database.database().reference().child("user-messages").child(toId).child(fromId)
+
+    let messageId3 = childRef.key
+    let values3 = [messageId3: 1] as! [String : Any]
+
+    refToFrom.updateChildValues(values3) { (error, ref) in
+      if error != nil {
+        print(error!)
+        return
+      }
+    }
   }
   
   var startFrame: CGRect?
   var blackBackgroundView: UIView?
   var startingImageView: UIImageView?
-  
+
   
   func performZoomInForImageView(_ imageView: UIImageView) {
     startingImageView = imageView
@@ -359,7 +453,7 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
         
       }, completion: nil)
     }
-    
+
   }
   
   @objc func handleZoomOut(_ tapGesture: UITapGestureRecognizer) {
@@ -380,7 +474,7 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
   @objc func handleUploadTap() {
     
     let imagePickerController = UIImagePickerController()
-    
+  
     imagePickerController.delegate = self
     imagePickerController.allowsEditing = true
     imagePickerController.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
@@ -391,19 +485,66 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
   @objc func handleBack() {
     
     dismiss(animated: true, completion: nil)
+//    let controll = MessagesVC.init(nibName: "MessagesVC", bundle: nil)
+//    self.navigationController?.pushViewController(controll, animated: true)
   }
   
   
   @objc func handleSend() { // отправляем сообщение
-    let properties = ["text": inputTextField.text!] as [String : Any]
-    sendMessagesWithProperties(properties)
-    
+    if inputTextField.text != "" {
+      let properties = ["text": inputTextField.text!] as [String : Any]
+      sendMessagesWithProperties(properties)
+    }
   }
   
-  // текстовое поле возврвщвет
+   // текстовое поле возврвщвет
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     handleSend()
     return true
   }
- 
+  
+  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return messages.count
+  }
+  
+  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessageCell
+    
+    cell.deledate = self
+    
+    let message = messages[indexPath.row]
+    
+    cell.message = message
+    
+    cell.textView.text = message.text
+    
+    setupCell(cell, message: message)
+    
+    if let text = message.text {
+     cell.bubbleWidthAnchor?.constant = estimateFrameForText(text).width + 35
+      cell.textView.isHidden = false
+    } else if message.imageUrl != nil {
+      cell.bubbleWidthAnchor?.constant = 200
+      cell.textView.isHidden = true
+    }
+    
+    cell.playBtn.isHidden = message.videoUrl == nil // если видео нет, тогда это тру
+    
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+    var height: CGFloat = 80
+    let message = messages[indexPath.row]
+    //print(messages)
+    
+    if let text = message.text {
+      height = estimateFrameForText(text).height + 20
+    } else if let imageWidht = message.imageWidth, let imageHight = message.imageHeight {
+      // сделали размер пропорционально
+      height = CGFloat(imageHight / imageWidht * 200)
+    }
+    return CGSize(width: view.frame.width, height: height)
+  }
 }

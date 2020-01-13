@@ -16,7 +16,9 @@ class NewMessageVC: UIViewController {
   @IBOutlet weak var backBtn: UIButton!
   
   let tableView = UITableView()
-  var messagesVC: MessagesVC?
+  var messagesVC: MessengerVC?
+  var messagesAllVC: MessagesVC?
+  
   var users = [User]()
   
   var currentUser = [User]()
@@ -29,21 +31,22 @@ class NewMessageVC: UIViewController {
     uploadTableView()
     fetchUsers()
     fetchUser()
+    
   }
   
   func fetchUser() { // выбрать пользователя
     
-//    guard let uid = Auth.auth().currentUser?.uid else { return }
-//
-//    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-//
-//      if let dictionary = snapshot.value as? [String: AnyObject] {
-//
-//        let user = User(dictionary: dictionary)
-//        self.currentUser.append(user)
-//
-//      }
-//    }, withCancel: nil)
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+
+    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+
+      if let dictionary = snapshot.value as? [String: AnyObject] {
+
+        let user = User(dictionary: dictionary)
+        self.currentUser.append(user)
+
+      }
+    }, withCancel: nil)
   }
   
   func uploadTableView() {
@@ -53,12 +56,13 @@ class NewMessageVC: UIViewController {
     
     tableView.backgroundColor = .black
     
-    backViewTable.addSubview(tableView)
+    self.view.addSubview(tableView)
+    
     tableView.translatesAutoresizingMaskIntoConstraints = false
-    tableView.topAnchor.constraint(equalTo: backViewTable.topAnchor).isActive = true
-    tableView.leftAnchor.constraint(equalTo: backViewTable.leftAnchor).isActive = true
-    tableView.bottomAnchor.constraint(equalTo: backViewTable.bottomAnchor).isActive = true
-    tableView.rightAnchor.constraint(equalTo: backViewTable.rightAnchor).isActive = true
+    tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+    tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0).isActive = true
+    tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+    tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true
     
     tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
   }
@@ -81,32 +85,32 @@ class NewMessageVC: UIViewController {
   }
   
   @IBAction func backBtnAction(_ sender: Any) {
-    let vc = MessagesVC.init(nibName: "MessagesVC", bundle: nil)
+    let vc = MessengerVC.init(nibName: "MessagesVC", bundle: nil)
     navigationController?.pushViewController(vc, animated: true)
   }
 }
 
 extension NewMessageVC: UITableViewDataSource, UITableViewDelegate {
-  
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return  users.count
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell
     let user = users[indexPath.row]
-    
+
         let uid = Auth.auth().currentUser?.uid
-    
+
     Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
-    
+
           if let dictionary = snapshot.value as? [String: AnyObject] {
             let currentUser = User(dictionary: dictionary)
-            
+
             if currentUser.email != user.email {
               cell.userNameLabel.text = user.name
               cell.lastMessagesLabel.text = user.email
-              
+
               if let profileImageView = user.profileImageUrl {
                 cell.userImageView.loadImageUsingCachWithUrlString(profileImageView)
               }
@@ -115,17 +119,19 @@ extension NewMessageVC: UITableViewDataSource, UITableViewDelegate {
         }, withCancel: nil)
     return cell
   }
-  
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 65
   }
-  
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    let user = self.users[indexPath.row]
     
-    self.dismiss(animated: true) { // закрыть
-      let user = self.users[indexPath.row]
-      self.messagesVC?.showChatLogVCForUser(user)
-    }
+    let vc = ChatLogVC(collectionViewLayout: UICollectionViewFlowLayout())
+    vc.user = user
+    present(vc, animated: true, completion: nil)
+    
   }
-  
+
 }

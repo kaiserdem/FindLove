@@ -13,12 +13,7 @@ class MenuVC: UIViewController {
 
   @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var titleNameLable: UILabel!
-  @IBOutlet weak var messagesBtn: UIButton!
   @IBOutlet weak var logoutBtn: UIButton!
-  
-//  override var prefersStatusBarHidden: Bool {
-//    return true
-//  }
   
   override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +38,7 @@ class MenuVC: UIViewController {
     } catch let logoutError {
       print(logoutError)
     }
-//    let controll = HelloVC.init(nibName: "HelloVC", bundle: nil)
-//    self.navigationController?.pushViewController(controll, animated: true)
+
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     _ = appDelegate.loadHelloVC()
@@ -78,7 +72,7 @@ class MenuVC: UIViewController {
   }
   
   @IBAction func messagesBtnAction(_ sender: Any) {
-    let vc = MessagesVC()
+    let vc = MessengerVC()
     self.navigationController?.pushViewController(vc, animated: true)
   }
 }

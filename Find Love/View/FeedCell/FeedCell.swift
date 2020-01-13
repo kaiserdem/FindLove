@@ -9,14 +9,15 @@
 import UIKit
 import FirebaseDatabase
 import Firebase
+
 class FeedCell: UITableViewCell {
   
+  @IBOutlet weak var timeDataLabel: UILabel!
   @IBOutlet weak var backView: UIView!
   @IBOutlet weak var countLabel: UILabel!
   @IBOutlet weak var viewsBtnLabel: UIButton!
   
   @IBOutlet weak var replyBtn: UIButton!
-  @IBOutlet weak var dislikeBtn: UIButton!
   @IBOutlet weak var likeBtn: UIButton!
   
   @IBOutlet weak var stateOnlineLabel: UIView!
@@ -36,8 +37,6 @@ class FeedCell: UITableViewCell {
   }
   
   private func setupNameAndProfileImage() {
-    
-    
 
       let ref = Database.database().reference().child("posts")
       ref.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -55,13 +54,9 @@ class FeedCell: UITableViewCell {
                 if let profileImageView = dictionary["profileImageUrl"] as? String {
                   self.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
                 }
-                
               }
             }, withCancel: nil)
-            
           }
-          
-
         }
       }, withCancel: nil)
     
@@ -69,6 +64,7 @@ class FeedCell: UITableViewCell {
     
     userPost.observeSingleEvent(of: .childAdded, with: { (snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
+        
       }
     }, withCancel: nil)
   }
@@ -107,11 +103,6 @@ class FeedCell: UITableViewCell {
   
   @IBAction func likeBtnAction(_ sender: Any) {
     print("like Btn Action")
-    
-  }
-  
-  @IBAction func dislikeBtnAction(_ sender: Any) {
-    print("dislike Btn Action")
     
   }
   

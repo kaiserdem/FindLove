@@ -36,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     FirebaseApp.configure()
     checkIfUserIsLogedIn()
     
+    UIApplication.shared.statusBarStyle = .lightContent
+    
     return true
   }
 

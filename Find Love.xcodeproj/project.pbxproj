@@ -10,9 +10,7 @@
 		10922157054E58D2595F4C55 /* Pods_Find_Love.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD710EB921D70B94626E4CDB /* Pods_Find_Love.framework */; };
 		AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */; };
 		AD02EB3123B7FDB500F472A5 /* NewMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */; };
-		AD1296FC23C5F32A00C2C94B /* ChatMessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1296FA23C5F32A00C2C94B /* ChatMessagesVC.swift */; };
-		AD1296FD23C5F32A00C2C94B /* ChatMessagesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD1296FB23C5F32A00C2C94B /* ChatMessagesVC.xib */; };
-		AD26946323B4FD2C00D49887 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946223B4FD2C00D49887 /* MessagesVC.swift */; };
+		AD26946323B4FD2C00D49887 /* MessengerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946223B4FD2C00D49887 /* MessengerVC.swift */; };
 		AD26946523B4FF8100D49887 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946423B4FF8100D49887 /* User.swift */; };
 		AD26946723B538A500D49887 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946623B538A500D49887 /* Message.swift */; };
 		AD26946923B5393B00D49887 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946823B5393B00D49887 /* Extension.swift */; };
@@ -37,7 +35,12 @@
 		AD8895E523B28AFB00347A6A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD8895E423B28AFB00347A6A /* GoogleService-Info.plist */; };
 		AD8895E923B293BE00347A6A /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895E723B293BE00347A6A /* MenuVC.swift */; };
 		AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD98E3D323C729B9003A6DA8 /* Main.storyboard */; };
-		AD98E3D623C72AD6003A6DA8 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD98E3D523C72AD6003A6DA8 /* MessageVC.swift */; };
+		ADB8DECF23CA1A15008D989E /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8DECE23CA1A15008D989E /* MessagesVC.swift */; };
+		ADB8DED123CA1A27008D989E /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8DED023CA1A27008D989E /* ChatVC.swift */; };
+		ADB8DED423CB9959008D989E /* SelectChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8DED223CB9959008D989E /* SelectChatCell.swift */; };
+		ADB8DED523CB9959008D989E /* SelectChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB8DED323CB9959008D989E /* SelectChatCell.xib */; };
+		ADB8DED823CC7D11008D989E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8DED723CC7D11008D989E /* Group.swift */; };
+		ADB8DEDA23CCCBD0008D989E /* ChatWriteMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8DED923CCCBD0008D989E /* ChatWriteMessageVC.swift */; };
 		ADBA195623C2A41C009B45EC /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBA195523C2A41C009B45EC /* ExtensionUIView.swift */; };
 		ADBA195B23C371E6009B45EC /* ReviewCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBA195923C371E6009B45EC /* ReviewCVCell.swift */; };
 		ADBA195C23C371E6009B45EC /* ReviewCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADBA195A23C371E6009B45EC /* ReviewCVCell.xib */; };
@@ -47,9 +50,7 @@
 		09A7F9FC8CF0F1991ED38035 /* Pods-Find Love.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Love.debug.xcconfig"; path = "Target Support Files/Pods-Find Love/Pods-Find Love.debug.xcconfig"; sourceTree = "<group>"; };
 		AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageVC.swift; sourceTree = "<group>"; };
-		AD1296FA23C5F32A00C2C94B /* ChatMessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessagesVC.swift; sourceTree = "<group>"; };
-		AD1296FB23C5F32A00C2C94B /* ChatMessagesVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessagesVC.xib; sourceTree = "<group>"; };
-		AD26946223B4FD2C00D49887 /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
+		AD26946223B4FD2C00D49887 /* MessengerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerVC.swift; sourceTree = "<group>"; };
 		AD26946423B4FF8100D49887 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AD26946623B538A500D49887 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		AD26946823B5393B00D49887 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -76,7 +77,12 @@
 		AD8895E423B28AFB00347A6A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AD8895E723B293BE00347A6A /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		AD98E3D323C729B9003A6DA8 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		AD98E3D523C72AD6003A6DA8 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
+		ADB8DECE23CA1A15008D989E /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
+		ADB8DED023CA1A27008D989E /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		ADB8DED223CB9959008D989E /* SelectChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChatCell.swift; sourceTree = "<group>"; };
+		ADB8DED323CB9959008D989E /* SelectChatCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChatCell.xib; sourceTree = "<group>"; };
+		ADB8DED723CC7D11008D989E /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		ADB8DED923CCCBD0008D989E /* ChatWriteMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWriteMessageVC.swift; sourceTree = "<group>"; };
 		ADBA195523C2A41C009B45EC /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		ADBA195923C371E6009B45EC /* ReviewCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCVCell.swift; sourceTree = "<group>"; };
 		ADBA195A23C371E6009B45EC /* ReviewCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCVCell.xib; sourceTree = "<group>"; };
@@ -113,31 +119,6 @@
 			path = ChatMessageCell;
 			sourceTree = "<group>";
 		};
-		AD02EB2E23B7FD6D00F472A5 /* NewMessageVC */ = {
-			isa = PBXGroup;
-			children = (
-				AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */,
-			);
-			path = NewMessageVC;
-			sourceTree = "<group>";
-		};
-		AD1296FE23C5F33300C2C94B /* ChatMessagesVC */ = {
-			isa = PBXGroup;
-			children = (
-				AD1296FA23C5F32A00C2C94B /* ChatMessagesVC.swift */,
-				AD1296FB23C5F32A00C2C94B /* ChatMessagesVC.xib */,
-			);
-			path = ChatMessagesVC;
-			sourceTree = "<group>";
-		};
-		AD26946123B4FA3100D49887 /* MessagesVC */ = {
-			isa = PBXGroup;
-			children = (
-				AD26946223B4FD2C00D49887 /* MessagesVC.swift */,
-			);
-			path = MessagesVC;
-			sourceTree = "<group>";
-		};
 		AD26946E23B6019C00D49887 /* UserCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +133,7 @@
 			children = (
 				AD26946423B4FF8100D49887 /* User.swift */,
 				AD26BE8D23C0D47700EF1418 /* Post.swift */,
+				ADB8DED723CC7D11008D989E /* Group.swift */,
 				AD26946623B538A500D49887 /* Message.swift */,
 			);
 			path = Model;
@@ -169,45 +151,13 @@
 		AD26947123B606BA00D49887 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AD98E3D523C72AD6003A6DA8 /* MessageVC.swift */,
 				AD5A563B23BFEB450032AB2A /* FeedCell */,
 				AD26946E23B6019C00D49887 /* UserCell */,
 				AD02EB2923B793C200F472A5 /* ChatMessageCell */,
 				ADBA195D23C49004009B45EC /* ReviewCVC */,
+				ADB8DED623CB9970008D989E /* SelectChatCell */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		AD26947A23B6856000D49887 /* ChatLogVC */ = {
-			isa = PBXGroup;
-			children = (
-				AD26947223B67B8A00D49887 /* ChatLogVC.swift */,
-			);
-			path = ChatLogVC;
-			sourceTree = "<group>";
-		};
-		AD26BE8A23C0CB0C00EF1418 /* PostVC */ = {
-			isa = PBXGroup;
-			children = (
-				AD26BE8B23C0CB2500EF1418 /* PostVC.swift */,
-			);
-			path = PostVC;
-			sourceTree = "<group>";
-		};
-		AD5A563123BFBF9B0032AB2A /* FeedVC */ = {
-			isa = PBXGroup;
-			children = (
-				AD5A563223BFBFCC0032AB2A /* FeedVC.swift */,
-			);
-			path = FeedVC;
-			sourceTree = "<group>";
-		};
-		AD5A563623BFC1380032AB2A /* SearchVC */ = {
-			isa = PBXGroup;
-			children = (
-				AD5A563723BFC15A0032AB2A /* SearchVC.swift */,
-			);
-			path = SearchVC;
 			sourceTree = "<group>";
 		};
 		AD5A563B23BFEB450032AB2A /* FeedCell */ = {
@@ -257,17 +207,14 @@
 		AD8895D823B2159F00347A6A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				AD8895E723B293BE00347A6A /* MenuVC.swift */,
+				AD5A563223BFBFCC0032AB2A /* FeedVC.swift */,
+				AD26BE8B23C0CB2500EF1418 /* PostVC.swift */,
+				AD5A563723BFC15A0032AB2A /* SearchVC.swift */,
+				ADB8DECD23CA1987008D989E /* Messages */,
 				AD8895D923B215BD00347A6A /* HelloVC */,
 				AD8895DF23B21F1B00347A6A /* SingInVC */,
 				AD8895DA23B215E800347A6A /* RegistrationVC */,
-				AD8895E623B293A400347A6A /* MenuVC */,
-				AD5A563123BFBF9B0032AB2A /* FeedVC */,
-				AD26BE8A23C0CB0C00EF1418 /* PostVC */,
-				AD26946123B4FA3100D49887 /* MessagesVC */,
-				AD02EB2E23B7FD6D00F472A5 /* NewMessageVC */,
-				AD26947A23B6856000D49887 /* ChatLogVC */,
-				AD5A563623BFC1380032AB2A /* SearchVC */,
-				AD1296FE23C5F33300C2C94B /* ChatMessagesVC */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -299,12 +246,26 @@
 			path = SingInVC;
 			sourceTree = "<group>";
 		};
-		AD8895E623B293A400347A6A /* MenuVC */ = {
+		ADB8DECD23CA1987008D989E /* Messages */ = {
 			isa = PBXGroup;
 			children = (
-				AD8895E723B293BE00347A6A /* MenuVC.swift */,
+				AD26946223B4FD2C00D49887 /* MessengerVC.swift */,
+				ADB8DECE23CA1A15008D989E /* MessagesVC.swift */,
+				ADB8DED023CA1A27008D989E /* ChatVC.swift */,
+				ADB8DED923CCCBD0008D989E /* ChatWriteMessageVC.swift */,
+				AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */,
+				AD26947223B67B8A00D49887 /* ChatLogVC.swift */,
 			);
-			path = MenuVC;
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		ADB8DED623CB9970008D989E /* SelectChatCell */ = {
+			isa = PBXGroup;
+			children = (
+				ADB8DED223CB9959008D989E /* SelectChatCell.swift */,
+				ADB8DED323CB9959008D989E /* SelectChatCell.xib */,
+			);
+			path = SelectChatCell;
 			sourceTree = "<group>";
 		};
 		ADBA195D23C49004009B45EC /* ReviewCVC */ = {
@@ -389,9 +350,9 @@
 			files = (
 				AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */,
 				AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */,
-				AD1296FD23C5F32A00C2C94B /* ChatMessagesVC.xib in Resources */,
 				AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */,
 				AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */,
+				ADB8DED523CB9959008D989E /* SelectChatCell.xib in Resources */,
 				AD5A563F23BFEB750032AB2A /* FeedCell.xib in Resources */,
 				AD26946D23B6019200D49887 /* UserCell.xib in Resources */,
 				AD8895DE23B2162C00347A6A /* RegistrationVC.xib in Resources */,
@@ -452,25 +413,28 @@
 			files = (
 				AD26946923B5393B00D49887 /* Extension.swift in Sources */,
 				AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */,
+				ADB8DECF23CA1A15008D989E /* MessagesVC.swift in Sources */,
+				ADB8DED823CC7D11008D989E /* Group.swift in Sources */,
 				AD5A563E23BFEB750032AB2A /* FeedCell.swift in Sources */,
 				AD8895DD23B2162C00347A6A /* RegistrationVC.swift in Sources */,
 				AD8895E223B21F5300347A6A /* SingInVC.swift in Sources */,
 				AD26947323B67B8A00D49887 /* ChatLogVC.swift in Sources */,
 				AD26BE8C23C0CB2500EF1418 /* PostVC.swift in Sources */,
 				ADBA195B23C371E6009B45EC /* ReviewCVCell.swift in Sources */,
-				AD26946323B4FD2C00D49887 /* MessagesVC.swift in Sources */,
+				AD26946323B4FD2C00D49887 /* MessengerVC.swift in Sources */,
 				AD8895D623B2128C00347A6A /* HelloVC.swift in Sources */,
+				ADB8DEDA23CCCBD0008D989E /* ChatWriteMessageVC.swift in Sources */,
+				ADB8DED123CA1A27008D989E /* ChatVC.swift in Sources */,
 				AD5A563923BFC15A0032AB2A /* SearchVC.swift in Sources */,
 				AD26946723B538A500D49887 /* Message.swift in Sources */,
 				AD8895E923B293BE00347A6A /* MenuVC.swift in Sources */,
+				ADB8DED423CB9959008D989E /* SelectChatCell.swift in Sources */,
 				AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */,
 				ADBA195623C2A41C009B45EC /* ExtensionUIView.swift in Sources */,
 				AD26946C23B6019200D49887 /* UserCell.swift in Sources */,
 				AD5A563423BFBFCD0032AB2A /* FeedVC.swift in Sources */,
 				AD26BE8E23C0D47700EF1418 /* Post.swift in Sources */,
-				AD1296FC23C5F32A00C2C94B /* ChatMessagesVC.swift in Sources */,
 				AD02EB3123B7FDB500F472A5 /* NewMessageVC.swift in Sources */,
-				AD98E3D623C72AD6003A6DA8 /* MessageVC.swift in Sources */,
 				AD26946523B4FF8100D49887 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

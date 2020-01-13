@@ -22,12 +22,7 @@ class FeedVC: UIViewController {
   var posts = [Post]()
   var postDictionary = [String: Post]()
   
-  var user: User? {
-    didSet {
-      
-    }
-  }
-  
+ 
   override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -50,19 +45,16 @@ class FeedVC: UIViewController {
   }
   
   func fetchUser() {
-    guard let uid = Auth.auth().currentUser?.uid else { // если currentUser 0 тогда выходим
-      return
-    }
+    // если currentUser 0 тогда выходим
+    guard let uid = Auth.auth().currentUser?.uid else { return }
     // получаем uid по из базы данных, берем значение
     Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
       
       if let dictionary = snapshot.value as? [String: AnyObject] {
-        
         let user = User(dictionary: dictionary)
         self.setupNavBarWithUser(user)
       }
     }, withCancel: nil)
-    
   }
   
   func setupNavBarWithUser(_ user: User) { //загрузить данные
@@ -121,7 +113,6 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let post = self.posts[indexPath.row] 
     
-    // берем
     let ref = Database.database().reference().child("users")
     ref.observe(.value, with: { (snapshot) in
       guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
