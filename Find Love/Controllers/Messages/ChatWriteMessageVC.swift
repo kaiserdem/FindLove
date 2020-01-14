@@ -451,7 +451,6 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
         
       }, completion: nil)
     }
-    
   }
   
   @objc func handleZoomOut(_ tapGesture: UITapGestureRecognizer) {
@@ -482,8 +481,6 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
   
   @objc func handleBack() {
     dismiss(animated: true, completion: nil)
-    //    let controll = MessagesVC.init(nibName: "MessagesVC", bundle: nil)
-    //    self.navigationController?.pushViewController(controll, animated: true)
   }
   
   

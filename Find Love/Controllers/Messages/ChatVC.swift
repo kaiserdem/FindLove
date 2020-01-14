@@ -90,8 +90,8 @@ extension ChatVC: UITableViewDataSource, UITableViewDelegate {
 
     cell.subjectNameLabel.text = group.subject
     cell.descriptionLabel.text = group.descriptions
-    cell.bottomLabel.text = String(describing: group.countUsers)
-    cell.topLabel.text = String(describing: group.liked)
+    cell.bottomLabel.text = String(describing: group.countUsers!)
+    cell.topLabel.text = String(describing: group.liked!)
     
     if let profileImageView = group.iconImageUrl {
       cell.iconImageView.loadImageUsingCachWithUrlString(profileImageView)

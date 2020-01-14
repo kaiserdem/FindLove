@@ -37,10 +37,10 @@ class MessagesVC: UIViewController {
     self.view.addSubview(tableView)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     
-    tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-    tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0).isActive = true
-    tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-    tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true
+    tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+    tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+    tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+    tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
     
     tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
     tableView.allowsMultipleSelectionDuringEditing = true

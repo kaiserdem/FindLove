@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
+
 
 class MenuVC: UIViewController {
 
@@ -21,6 +23,8 @@ class MenuVC: UIViewController {
     navigationController?.navigationBar.isHidden = true
     checkIfUserIsLogedIn()
     
+    logoutBtn.setImage(UIImage(named: "logout")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+    logoutBtn.imageView?.tintColor = .black
   }
 
   func checkIfUserIsLogedIn() { // проверка если пользователь вошел в систему

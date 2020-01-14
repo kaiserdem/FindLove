@@ -10,7 +10,13 @@ import UIKit
 import FirebaseDatabase
 import Firebase
 
+protocol CellSubclassDelegate: class {
+  func buttonTapped(cell: FeedCell)
+}
+
 class FeedCell: UITableViewCell {
+  
+  weak var delegate: CellSubclassDelegate?
   
   @IBOutlet weak var timeDataLabel: UILabel!
   @IBOutlet weak var backView: UIView!
@@ -34,6 +40,11 @@ class FeedCell: UITableViewCell {
     didSet {
       setupNameAndProfileImage()
     }
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    self.delegate = nil
   }
   
   private func setupNameAndProfileImage() {
@@ -93,11 +104,14 @@ class FeedCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+      
+      
 
     }
     
   @IBAction func replyBtnAction(_ sender: Any) {
     print("reply Btn Action")
+    self.delegate?.buttonTapped(cell: self)
     
   }
   

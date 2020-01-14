@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if Auth.auth().currentUser?.uid == nil { // если мы не вошли
       
       loadHelloVC()
+    } else {
+      loadFeedVC()
     }
   }
   
@@ -29,6 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     nav1.viewControllers = [mainView]
     self.window!.rootViewController = nav1
     self.window?.makeKeyAndVisible()
+  }
+  
+  func loadFeedVC() {
+    
+  let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let initialViewControlleripad : UIViewController = mainStoryboardIpad.instantiateViewController(withIdentifier: "CustomTabBar") as UIViewController
+  self.window = UIWindow(frame: UIScreen.main.bounds)
+  self.window?.rootViewController = initialViewControlleripad
+  self.window?.makeKeyAndVisible()
   }
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

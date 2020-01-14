@@ -39,7 +39,6 @@ class MessengerVC: UIViewController {
     super.viewDidLoad()
 
     setupTopBarGesture()
-    showMessageVC()
     messagesBtnClick()
   }
 

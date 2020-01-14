@@ -121,7 +121,6 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="122.5" id="6d2-Cf-ZTs"/>
                                                     <constraint firstItem="blr-8J-Vc5" firstAttribute="centerX" secondItem="RVZ-nX-Ggp" secondAttribute="centerX" id="7t6-Kb-aHR"/>
                                                     <constraint firstItem="blr-8J-Vc5" firstAttribute="centerY" secondItem="RVZ-nX-Ggp" secondAttribute="centerY" constant="-3" id="auZ-Zn-Y58"/>
                                                 </constraints>
@@ -325,7 +324,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="eKz-hJ-Y9w"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -337,7 +336,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="64"/>
+                                        <integer key="value" value="75"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
@@ -359,7 +358,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="QCg-Wq-yMB" firstAttribute="centerX" secondItem="xCI-ke-Lvd" secondAttribute="centerX" id="9vm-NM-m80"/>
                             <constraint firstItem="fov-Kp-oKp" firstAttribute="trailing" secondItem="KKC-PI-JSS" secondAttribute="trailing" constant="30" id="H0X-qh-BS8"/>
@@ -383,10 +382,10 @@
             </objects>
             <point key="canvasLocation" x="3965" y="194"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Custom Tab Bar-->
         <scene sceneID="1yH-O9-SRm">
             <objects>
-                <tabBarController wantsFullScreenLayout="YES" automaticallyAdjustsScrollViewInsets="NO" id="OsZ-I5-e7d" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="CustomTabBar" wantsFullScreenLayout="YES" automaticallyAdjustsScrollViewInsets="NO" id="OsZ-I5-e7d" customClass="CustomTabBar" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4Gt-yy-4Ip">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -413,6 +412,8 @@
                     <view key="view" contentMode="scaleToFill" id="pIF-ea-cbz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="723"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="NT5-MK-W08"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HsY-wc-35A" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -426,6 +427,8 @@
                     <view key="view" contentMode="scaleToFill" id="sHd-wh-KMf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="723"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Rtq-Kz-X8U"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="svT-Xp-Uz9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -439,6 +442,8 @@
                     <view key="view" contentMode="scaleToFill" id="3ge-fZ-yew">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="723"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="a82-3v-Efp"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o90-I9-pdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -450,7 +455,7 @@
         <image name="add" width="64" height="64"/>
         <image name="chat" width="32" height="32"/>
         <image name="feed" width="32" height="32"/>
-        <image name="logout" width="64" height="64"/>
+        <image name="logout" width="32" height="32"/>
         <image name="search" width="32" height="32"/>
         <image name="setting" width="64" height="64"/>
         <image name="userIcon" width="32" height="32"/>

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class FeedVC: UIViewController {
+class FeedVC: UIViewController, CellSubclassDelegate {
 
   @IBOutlet weak var postTextView: UITextView!
   @IBOutlet weak var profileImageView: UIImageView!
@@ -102,6 +102,17 @@ class FeedVC: UIViewController {
       }
     }, withCancel: nil)
   }
+  
+  func buttonTapped(cell: FeedCell) {
+    
+    guard let indexPath = self.tableView.indexPath(for: cell) else {
+      return
+    }
+    
+    print(indexPath.row)
+    
+  }
+  
 }
 
 extension FeedVC: UITableViewDelegate, UITableViewDataSource {
@@ -111,15 +122,17 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let post = self.posts[indexPath.row] 
+    let post = self.posts[indexPath.row]
     
-    let ref = Database.database().reference().child("users")
-    ref.observe(.value, with: { (snapshot) in
-      guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
-      
-      let user = User(dictionary: dictionary)
-     
-    }, withCancel: nil)
+    print("didSelectRowAt")
+    
+//    let ref = Database.database().reference().child("users")
+//    ref.observe(.value, with: { (snapshot) in
+//      guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+//
+//      let user = User(dictionary: dictionary)
+//
+//    }, withCancel: nil)
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -127,6 +140,7 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     
     let post = posts[indexPath.row]
     cell.post = post
+    cell.delegate = self
 
     return cell
   }
