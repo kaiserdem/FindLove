@@ -295,17 +295,17 @@
             </objects>
             <point key="canvasLocation" x="2610" y="194"/>
         </scene>
-        <!--View Controller-->
+        <!--GameVC-->
         <scene sceneID="LgH-bn-JEW">
             <objects>
-                <viewController id="9kI-NL-R1v" sceneMemberID="viewController">
+                <viewController id="9kI-NL-R1v" customClass="GameVC" customModule="Find_Love" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x8c-Dd-Wkj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="C1z-yT-Ysj"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" id="c1R-7h-xbu"/>
+                    <tabBarItem key="tabBarItem" title="" image="sexy" id="c1R-7h-xbu"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8l-yf-89v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -458,6 +458,7 @@
         <image name="logout" width="32" height="32"/>
         <image name="search" width="32" height="32"/>
         <image name="setting" width="64" height="64"/>
+        <image name="sexy" width="32" height="32"/>
         <image name="userIcon" width="32" height="32"/>
     </resources>
 </document>

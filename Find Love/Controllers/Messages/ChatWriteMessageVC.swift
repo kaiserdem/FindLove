@@ -44,7 +44,8 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
   lazy var nameLabel: UILabel = {
     let label = UILabel()
     label.textAlignment = NSTextAlignment.center
-    label.tintColor = .white
+    label.textColor = .white
+    label.font = UIFont.systemFont(ofSize: 18)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -70,8 +71,8 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     
     uploadImageView.leadingAnchor.constraint(equalTo: conteinerView.leadingAnchor, constant: 8).isActive = true
     uploadImageView.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
-    uploadImageView.widthAnchor.constraint(equalToConstant: 35).isActive = true
-    uploadImageView.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    uploadImageView.widthAnchor.constraint(equalToConstant: 28).isActive = true
+    uploadImageView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     
     let sendButton = UIButton(type: .system)
     sendButton.setTitle("Отправить", for: .normal)
@@ -113,7 +114,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     
     collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 5, right: 0)
     collectionView?.alwaysBounceVertical = true
-    collectionView?.backgroundColor = UIColor.black
+    collectionView?.backgroundColor = #colorLiteral(red: 0.1830653183, green: 0.1830653183, blue: 0.1830653183, alpha: 1)
     collectionView?.keyboardDismissMode = .interactive
     collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
     
@@ -121,6 +122,8 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     setupKeyboardObservise()
     fetchUser()
     observeMessages()
+    
+    UIApplication.shared.statusBarView?.backgroundColor = .black
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -156,22 +159,25 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
       self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
     }
   }
-  
+
   func setupInputComponents() { // компоненты контроллера
     
     let topConteinerView = UIView()
-    topConteinerView.backgroundColor = #colorLiteral(red: 0.2310593501, green: 0.2310593501, blue: 0.2310593501, alpha: 1)
+    topConteinerView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     topConteinerView.clipsToBounds = true
     topConteinerView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(topConteinerView)
     
     topConteinerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    topConteinerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+    topConteinerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
     topConteinerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    topConteinerView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+    topConteinerView.heightAnchor.constraint(equalToConstant: 44).isActive = true
     
     let backButton = UIButton(type: .system)
-    backButton.setTitle("Назад", for: .normal)
+    let image = UIImage(named: "back")
+    backButton.setImage(image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+    backButton.imageView?.contentMode = .scaleAspectFit
+    backButton.tintColor = .white
     backButton.setTitleColor(.white, for: .normal)
     backButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
     backButton.translatesAutoresizingMaskIntoConstraints = false
@@ -179,14 +185,14 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     topConteinerView.addSubview(backButton)
     
     backButton.leftAnchor.constraint(equalTo: topConteinerView.leftAnchor, constant: 10).isActive = true
-    backButton.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 15).isActive = true
-    backButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
-    backButton.heightAnchor.constraint(equalTo: topConteinerView.heightAnchor).isActive = true
+    backButton.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 0).isActive = true
+    backButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    backButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     
     topConteinerView.addSubview(nameLabel)
     
-    nameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 15).isActive = true
+    nameLabel.heightAnchor.constraint(equalTo: topConteinerView.heightAnchor).isActive = true
+    nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 0).isActive = true
     nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
   }
   

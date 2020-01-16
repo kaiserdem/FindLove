@@ -124,13 +124,20 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let post = self.posts[indexPath.row]
     
-    print("didSelectRowAt")
+    let view = //NoFavoriteWallpapers(frame: self.view.frame)
+      OpenFeedPost(frame: self.view.frame)
+
+    self.view.addSubview(view)
     
-//    let ref = Database.database().reference().child("users")
+
+//    print(post.fromId)
+//    let ref = Database.database().reference().child("users")//.child(post.fromId!)
 //    ref.observe(.value, with: { (snapshot) in
 //      guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
 //
 //      let user = User(dictionary: dictionary)
+//
+//      print(<#T##items: Any...##Any#>)
 //
 //    }, withCancel: nil)
   }

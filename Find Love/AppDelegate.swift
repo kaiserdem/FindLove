@@ -9,6 +9,16 @@
 import UIKit
 import Firebase
 
+extension UIApplication {
+  var statusBarView: UIView? {
+    if responds(to: Selector(("statusBar"))) {
+      return value(forKey: "statusBar") as? UIView
+    }
+    return nil
+  }
+}
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
