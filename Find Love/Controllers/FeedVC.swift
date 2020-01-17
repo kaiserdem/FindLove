@@ -21,6 +21,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   
   var posts = [Post]()
   var postDictionary = [String: Post]()
+  var user: User?
   
  
   override func viewDidLoad() {
@@ -31,6 +32,8 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     
     postTextView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addPostBtnAction)))
     
+    NotificationCenter.default.addObserver(self, selector: #selector(makeTransition(_:)), name: NSNotification.Name("makeTransitionToChat"), object: nil)
+    
     uploadTableView()
     fetchUser()
     observePosts()
@@ -40,6 +43,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     super.viewWillLayoutSubviews()
     
     tableView.backgroundColor = .black
+    tableView.allowsMultipleSelection = true
     postTextView.isEditable = false
     
   }
@@ -64,7 +68,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   }
   
   func writePost() {
-    let vc = PostVC(collectionViewLayout: UICollectionViewFlowLayout())
+    let vc = NewFeedPostVC(collectionViewLayout: UICollectionViewFlowLayout())
     present(vc, animated: true, completion: nil)
   }
 
@@ -103,12 +107,24 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     }, withCancel: nil)
   }
   
+  @objc func makeTransition(_ notification: Notification) {
+    if let toUser = notification.userInfo?["user"] as? User {
+      showChatLogVCForUser(toUser)
+    }
+  }
+  
+  func showChatLogVCForUser(_ user: User?) {
+    let vc = ReplyToFeedPostVC(collectionViewLayout: UICollectionViewFlowLayout())
+    vc.user = user
+    present(vc, animated: true, completion: nil)
+    self.navigationController?.pushViewController(vc, animated: true)
+  }
+  
   func buttonTapped(cell: FeedCell) {
     
     guard let indexPath = self.tableView.indexPath(for: cell) else {
       return
     }
-    
     print(indexPath.row)
     
   }
@@ -122,24 +138,40 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
     let post = self.posts[indexPath.row]
     
-    let view = //NoFavoriteWallpapers(frame: self.view.frame)
-      OpenFeedPost(frame: self.view.frame)
-
-    self.view.addSubview(view)
+    let postText = post.text
+    let time = post.timestamp
     
-
-//    print(post.fromId)
-//    let ref = Database.database().reference().child("users")//.child(post.fromId!)
-//    ref.observe(.value, with: { (snapshot) in
-//      guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
-//
-//      let user = User(dictionary: dictionary)
-//
-//      print(<#T##items: Any...##Any#>)
-//
-//    }, withCancel: nil)
+    let view = OpenFeedPost(frame: self.view.frame)
+    
+    
+    
+    let ref = Database.database().reference().child("users").child(post.fromId!)
+    ref.observeSingleEvent(of: .value, with: { (snapshot) in
+      
+      if let dictionary = snapshot.value as? [String: AnyObject] {
+        
+        let userCurrent = User(dictionary: dictionary)
+        view.user = userCurrent
+        
+        view.userNameLabel.text = dictionary["name"] as? String
+      
+        if let profileImageView = dictionary["profileImageUrl"] as? String {
+          view.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
+        }
+      }
+    }, withCancel: nil)
+    
+    let timestampDate = Date(timeIntervalSince1970: (time?.doubleValue)!)
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "hh:mm:ss a"
+    view.timeLabel.text = dateFormatter.string(from: timestampDate)
+    view.postTextView.text = postText
+    
+    self.view.addSubview(view)
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -148,6 +180,7 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     let post = posts[indexPath.row]
     cell.post = post
     cell.delegate = self
+    cell.selectionStyle = .none
 
     return cell
   }

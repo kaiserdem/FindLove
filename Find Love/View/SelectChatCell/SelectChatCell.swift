@@ -44,5 +44,16 @@ class SelectChatCell: UITableViewCell {
         }
       }
     }
+  
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
+    
+    if selected {
+      contentView.backgroundColor = .black
+    } else {
+      contentView.backgroundColor = .black
+    }
+    
+  }
     
 }

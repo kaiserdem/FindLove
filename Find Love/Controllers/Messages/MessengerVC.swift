@@ -99,8 +99,8 @@ class MessengerVC: UIViewController {
     self.messageBarBtnView.addGestureRecognizer(messageGestures)
     self.chatBarBtnView.addGestureRecognizer(chatBtnGestures)
     self.newMessageBarBtnView.addGestureRecognizer(writeBtnGestures)
-  
   }
+  
   func messagesBtnClick() {
     self.messageBarBtnView.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
     self.messageBarBtnView.layer.shadowOffset = CGSize(width: 0.5, height: -1.0)

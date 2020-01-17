@@ -97,10 +97,6 @@ class RegistrationVC: UIViewController {
       if error != nil {
         return
       }
-//      self.menuVC?.fetchUserAndSetupNavBarTitle()
-//
-//      let controll = MenuVC.init(nibName: "MenuVC", bundle: nil)
-//      self.navigationController?.pushViewController(controll, animated: true)
       let appDelegate = UIApplication.shared.delegate as! AppDelegate
       _ = appDelegate.checkIfUserIsLogedIn()
     })

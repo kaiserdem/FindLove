@@ -26,6 +26,12 @@ class ChatVC: UIViewController {
       //uploadChatGroup()
   }
   
+//  override func viewWillLayoutSubviews() {
+//    super.viewWillLayoutSubviews()
+//
+//    tableView.allowsMultipleSelection = true
+//  }
+  
   func uploadTableView() {
     
     tableView.delegate = self

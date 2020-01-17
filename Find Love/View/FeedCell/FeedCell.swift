@@ -18,7 +18,8 @@ class FeedCell: UITableViewCell {
   
   weak var delegate: CellSubclassDelegate?
   
-  @IBOutlet weak var timeDataLabel: UILabel!
+  @IBOutlet weak var timeDateLabel: UILabel!
+  @IBOutlet weak var countLikeLabel: UILabel!
   @IBOutlet weak var backView: UIView!
   @IBOutlet weak var countLabel: UILabel!
   @IBOutlet weak var viewsBtnLabel: UIButton!
@@ -48,36 +49,30 @@ class FeedCell: UITableViewCell {
   }
   
   private func setupNameAndProfileImage() {
-
-      let ref = Database.database().reference().child("posts")
+    
+    self.postTextView.text = self.post!.text
+    
+    if let seconds = self.post!.timestamp {
+      let timestampDate = Date(timeIntervalSince1970: TimeInterval(seconds))
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "hh:mm:ss a"
+      self.timeDateLabel.text = dateFormatter.string(from: timestampDate)
+    }
+    
+    if let fromId = self.post!.fromId {
+      let ref = Database.database().reference().child("users").child(fromId)
       ref.observeSingleEvent(of: .value, with: { (snapshot) in
-
+        
         if let dictionary = snapshot.value as? [String: AnyObject] {
-         
-          self.postTextView.text = self.post!.text
-          if let fromId = self.post!.fromId {
-            let ref = Database.database().reference().child("users").child(fromId)
-            ref.observeSingleEvent(of: .value, with: { (snapshot) in
-              
-              if let dictionary = snapshot.value as? [String: AnyObject] {
-                self.nameLabel.text = dictionary["name"] as? String
-                
-                if let profileImageView = dictionary["profileImageUrl"] as? String {
-                  self.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
-                }
-              }
-            }, withCancel: nil)
+          self.nameLabel.text = dictionary["name"] as? String
+          
+          if let profileImageView = dictionary["profileImageUrl"] as? String {
+            self.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
           }
         }
       }, withCancel: nil)
+    }
     
-    let userPost = ref.child(self.post!.fromId!)
-    
-    userPost.observeSingleEvent(of: .childAdded, with: { (snapshot) in
-      if let dictionary = snapshot.value as? [String: AnyObject] {
-        
-      }
-    }, withCancel: nil)
   }
   
   override func awakeFromNib() {
@@ -105,7 +100,11 @@ class FeedCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
       
-      
+      if selected {
+        contentView.backgroundColor = .black
+      } else {
+        contentView.backgroundColor = .black
+      }
 
     }
     

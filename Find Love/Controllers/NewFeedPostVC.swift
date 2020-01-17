@@ -12,7 +12,7 @@ import AVFoundation
 import MobileCoreServices
 import FirebaseDatabase
 
-class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
+class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
   
   
   var user: User? {
@@ -40,6 +40,16 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
     return view
   }()
   
+  lazy var nameLabel: UILabel = {
+    let label = UILabel()
+    label.textAlignment = NSTextAlignment.center
+    label.textColor = .white
+    label.font = UIFont.systemFont(ofSize: 18)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.text = "Новый пост"
+    return label
+  }()
+  
   lazy var inputConteinerView: UIView = {
     let conteinerView = UIView()
     conteinerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
@@ -54,20 +64,22 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
     
     uploadImageView.leadingAnchor.constraint(equalTo: conteinerView.leadingAnchor, constant: 8).isActive = true
     uploadImageView.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
-    uploadImageView.widthAnchor.constraint(equalToConstant: 35).isActive = true
-    uploadImageView.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    uploadImageView.widthAnchor.constraint(equalToConstant: 28).isActive = true
+    uploadImageView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     
     let sendButton = UIButton(type: .system)
-    sendButton.setTitle("Опубликовать", for: .normal)
-    sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-    sendButton.setTitleColor(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), for: .normal)
+
+    let image = UIImage(named: "send")
+    sendButton.setImage(image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+    sendButton.imageView?.contentMode = .scaleAspectFit
+    sendButton.tintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
     sendButton.translatesAutoresizingMaskIntoConstraints = false
     sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
     conteinerView.addSubview(sendButton)
     
     sendButton.rightAnchor.constraint(equalTo: conteinerView.rightAnchor, constant: -10).isActive = true
     sendButton.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
-    sendButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+    sendButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
     sendButton.heightAnchor.constraint(equalTo: conteinerView.heightAnchor).isActive = true
     
     conteinerView.addSubview(inputTextField)
@@ -96,11 +108,13 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
     super.viewDidLoad()
     collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 5, right: 0)
     collectionView?.alwaysBounceVertical = true
-    collectionView?.backgroundColor = UIColor.white
+    collectionView?.backgroundColor = #colorLiteral(red: 0.1830653183, green: 0.1830653183, blue: 0.1830653183, alpha: 1)
     collectionView?.keyboardDismissMode = .interactive
     
     setupInputComponents()
     setupKeyboardObservise()
+    
+    UIApplication.shared.statusBarView?.backgroundColor = .black
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -138,29 +152,37 @@ class PostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewD
   func setupInputComponents() { // компоненты контроллера
     
     let topConteinerView = UIView()
-    topConteinerView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    topConteinerView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     topConteinerView.clipsToBounds = true
     topConteinerView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(topConteinerView)
     
     topConteinerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    topConteinerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+    topConteinerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
     topConteinerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    topConteinerView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+    topConteinerView.heightAnchor.constraint(equalToConstant: 44).isActive = true
     
     let backButton = UIButton(type: .system)
-    backButton.setTitle("Назад", for: .normal)
-    backButton.setTitleColor(.black, for: .normal)
+    let image = UIImage(named: "back")
+    backButton.setImage(image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+    backButton.imageView?.contentMode = .scaleAspectFit
+    backButton.tintColor = .white
+    backButton.setTitleColor(.white, for: .normal)
     backButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
     backButton.translatesAutoresizingMaskIntoConstraints = false
     backButton.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
     topConteinerView.addSubview(backButton)
     
     backButton.leftAnchor.constraint(equalTo: topConteinerView.leftAnchor, constant: 10).isActive = true
-    backButton.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 15).isActive = true
-    backButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
-    backButton.heightAnchor.constraint(equalTo: topConteinerView.heightAnchor).isActive = true
+    backButton.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 0).isActive = true
+    backButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    backButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    
+    topConteinerView.addSubview(nameLabel)
 
+    nameLabel.heightAnchor.constraint(equalTo: topConteinerView.heightAnchor).isActive = true
+    nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 0).isActive = true
+    nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
   }
   
 
