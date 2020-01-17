@@ -18,7 +18,6 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   var user: User? {
     didSet {
       self.nameLabel.text = user?.name
-
       observeMessages()
     }
   }

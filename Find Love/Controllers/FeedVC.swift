@@ -56,6 +56,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
       
       if let dictionary = snapshot.value as? [String: AnyObject] {
         let user = User(dictionary: dictionary)
+        user.id = snapshot.key
         self.setupNavBarWithUser(user)
       }
     }, withCancel: nil)
@@ -154,6 +155,8 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
       if let dictionary = snapshot.value as? [String: AnyObject] {
         
         let userCurrent = User(dictionary: dictionary)
+        userCurrent.id = snapshot.key
+        
         view.user = userCurrent
         
         view.userNameLabel.text = dictionary["name"] as? String

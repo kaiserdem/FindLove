@@ -15,11 +15,7 @@ import FirebaseDatabase
 class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
   
   
-  var user: User? {
-    didSet {
-    }
-  }
-  
+  var user: User? 
   var posts = [Post]()
   var postDictionary = [String: Post]()
   

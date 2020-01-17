@@ -17,12 +17,10 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
   
   var user: User? {
     didSet {
-      print(user?.name)
     }
   }
   
   var posts = [Post]()
-  var postDictionary = [String: Post]()
   
   var conteinerViewBottonAnchor: NSLayoutConstraint?
   
@@ -184,19 +182,6 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
     nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
   }
   
-  
-  
-  // принимает текст возвращает размер
-  private func estimateFrameForText(_ text: String) -> CGRect {
-    
-    let size = CGSize(width: 200, height: 1000)
-    
-    // текст прислоняеться к левому краю и использует пренос строки
-    let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-    
-    return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)], context: nil)
-  }
-  
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     dismiss(animated: true, completion: nil)
   }
@@ -317,12 +302,14 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
   
   private func sendMessagesWithProperties(_ properties: [String: Any]) {
     
-    let ref = Database.database().reference().child("posts")
+    let ref = Database.database().reference().child("messages")
     let childRef = ref.childByAutoId()
+    
+    let toId = user!.id!
     let fromId = Auth.auth().currentUser!.uid
     let timestamp = Int(Date().timeIntervalSince1970)
     
-    var values = ["fromId": fromId, "timestamp": timestamp] as [String : Any]
+    var values = [ "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
     
     properties.forEach { (key: String, value: Any) in // метод принимает данные
       values[key] = value
@@ -337,59 +324,31 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
     
     self.inputTextField.text = nil
     
-    dismiss(animated: true, completion: nil)
+    let refFromTo = Database.database().reference().child("user-messages").child(fromId).child(toId)
     
+    let messageId = childRef.key
+    let values2 = [messageId: 1] as! [String : Any]
+    
+    refFromTo.updateChildValues(values2) { (error, ref) in
+      if error != nil {
+        print(error!)
+        return
+      }
+    }
+    
+    let refToFrom = Database.database().reference().child("user-messages").child(toId).child(fromId)
+    
+    let messageId3 = childRef.key
+    let values3 = [messageId3: 1] as! [String : Any]
+    
+    refToFrom.updateChildValues(values3) { (error, ref) in
+      if error != nil {
+        print(error!)
+        return
+      }
+    }
+   
   }
-  
-  /*
- private func sendMessagesWithProperties(_ properties: [String: Any]) {
- 
- let ref = Database.database().reference().child("messages")
- let childRef = ref.childByAutoId()
- let toId = user!.id!
- let fromId = Auth.auth().currentUser!.uid
- let timestamp = Int(Date().timeIntervalSince1970)
- 
- var values = [ "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
- 
- properties.forEach { (key: String, value: Any) in // метод принимает данные
- values[key] = value
- }
- 
- childRef.updateChildValues(values) { (error, ref) in
- if error != nil {
- print(error!)
- return
- }
- }
- 
- self.inputTextField.text = nil
- 
- let refFromTo = Database.database().reference().child("user-messages").child(fromId).child(toId)
- 
- let messageId = childRef.key
- let values2 = [messageId: 1] as! [String : Any]
- 
- refFromTo.updateChildValues(values2) { (error, ref) in
- if error != nil {
- print(error!)
- return
- }
- }
- 
- let refToFrom = Database.database().reference().child("user-messages").child(toId).child(fromId)
- 
- let messageId3 = childRef.key
- let values3 = [messageId3: 1] as! [String : Any]
- 
- refToFrom.updateChildValues(values3) { (error, ref) in
- if error != nil {
- print(error!)
- return
- }
- }
- }
- */
   
   @objc func handleUploadTap() {
     
@@ -403,7 +362,6 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
   }
   
   @objc func handleBack() {
-    
     dismiss(animated: true, completion: nil)
   }
   
@@ -412,6 +370,10 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
     let properties = ["text": inputTextField.text!] as [String : Any]
     sendMessagesWithProperties(properties)
     
+//    let sendMessageView = SendMessageView(frame: self.view.frame)
+//    self.view.addSubview(sendMessageView)
+    
+    dismiss(animated: true, completion: nil)
   }
   
   // текстовое поле возврвщвет
