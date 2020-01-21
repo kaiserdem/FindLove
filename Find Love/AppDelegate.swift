@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import UserNotifications
+import FirebaseInstanceID
+import FirebaseMessaging
 
 extension UIApplication {
   var statusBarView: UIView? {
@@ -21,7 +23,7 @@ extension UIApplication {
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
 
   var window: UIWindow?
   
@@ -50,76 +52,103 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func loadFeedVC() {
     
-  let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     let initialViewControlleripad : UIViewController = mainStoryboardIpad.instantiateViewController(withIdentifier: "CustomTabBar") as UIViewController
-  self.window = UIWindow(frame: UIScreen.main.bounds)
-  self.window?.rootViewController = initialViewControlleripad
-  self.window?.makeKeyAndVisible()
+    self.window = UIWindow(frame: UIScreen.main.bounds)
+    self.window?.rootViewController = initialViewControlleripad
+    self.window?.makeKeyAndVisible()
   }
+  
+  // приложение получило удаленное сообщение
+  func applicationReceivedRemoteMessage(_ remoteMessage: MessagingRemoteMessage) {
+    print(remoteMessage.appData)
+  }
+  
+  
   
   // регистирируем нотификацию с таким токеном
-  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-    
-    let  tokenParts = deviceToken.map { data -> String in
-      return String(format: "%02.2hhx", data)
-    }
-    let token = tokenParts.joined()
-    print("Device Token: \(token)")
-  }
+//  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//
+//    let  tokenParts = deviceToken.map { data -> String in
+//      return String(format: "%02.2hhx", data)
+//    }
+//    let token = tokenParts.joined()
+//    print("Device Token: \(token)")
+//  }
   
   // если ошибка регистрации нотификации
-  func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-    print("Fataled to register push notifications")
-  }
+//  func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+//    print("Fataled to register push notifications")
+//  }
   
-  func registerForPushNotifications() {
-    UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { [weak self] (isRegistered, error) in
-      guard let strongSelf = self else { return }
-      if let error = error {
-        print("Error: \(error.localizedDescription)")
-      }
-      // создали екшены
-      let actionRaed = UNNotificationAction(identifier: self!.readIdentifier, title: "Read", options: [.foreground])
-      
-      let actionDelete = UNNotificationAction(identifier: self!.deleteIdentifier, title: "Delete", options: [.destructive])
-      // обьеденили в категорию
-      let category = UNNotificationCategory(identifier: self!.actionCategoryIndentifier, actions: [actionRaed, actionDelete], intentIdentifiers: [], options: [])
-      
-       UNUserNotificationCenter.current().setNotificationCategories([category])
-      
-      strongSelf.getPushNotificationsConfigurarion()
-    }
-  }
+//  func registerForPushNotifications() {
+//    UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { [weak self] (isRegistered, error) in
+//      guard let strongSelf = self else { return }
+//      if let error = error {
+//        print("Error: \(error.localizedDescription)")
+//      }
+//      // создали екшены
+//      let actionRaed = UNNotificationAction(identifier: self!.readIdentifier, title: "Read", options: [.foreground])
+//
+//      let actionDelete = UNNotificationAction(identifier: self!.deleteIdentifier, title: "Delete", options: [.destructive])
+//      // обьеденили в категорию
+//      let category = UNNotificationCategory(identifier: self!.actionCategoryIndentifier, actions: [actionRaed, actionDelete], intentIdentifiers: [], options: [])
+//
+//       UNUserNotificationCenter.current().setNotificationCategories([category])
+//
+//      strongSelf.getPushNotificationsConfigurarion()
+//    }
+//  }
   
   // получить настройки
-  func getPushNotificationsConfigurarion() {
-    
-    UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-      guard settings.authorizationStatus == .authorized else { return }
-      // если автоизованы тогда регистрируем приложение
-      DispatchQueue.main.async {
-        UIApplication.shared.registerForRemoteNotifications()
-      }
-      
-    }
-  }
+//  func getPushNotificationsConfigurarion() {
+//
+//    UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+//      guard settings.authorizationStatus == .authorized else { return }
+//      // если автоизованы тогда регистрируем приложение
+//      DispatchQueue.main.async {
+//        UIApplication.shared.registerForRemoteNotifications()
+//      }
+//    }
+//  }
   
   // если приложение было активно в бекграунде, сработает этот метод
-  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-    let dataInfo = userInfo as! [String: Any]
-    print("Data: \(dataInfo["aps"])")
-  }
+//  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//    let dataInfo = userInfo as! [String: Any]
+//    print("Data: \(String(describing: dataInfo["aps"]))")
+//  }
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
-    FirebaseApp.configure()
-    checkIfUserIsLogedIn()
-    registerForPushNotifications()
+    //checkIfUserIsLogedIn()
     
-    if let option = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? [String: Any], let data = option["aps"] {
-      print("data: \(data)")
+    if #available(iOS 10.0, *) {
+      // For iOS 10 display notification (sent via APNS)
+      UNUserNotificationCenter.current().delegate = self
+      
+      let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+      UNUserNotificationCenter.current().requestAuthorization(
+        options: authOptions,
+        completionHandler: {_, _ in })
+    } else {
+      let settings: UIUserNotificationSettings =
+        UIUserNotificationSettings(types: [.alert, .badge, .sound],
+                                   categories: nil)
+      application.registerUserNotificationSettings(settings)
     }
-        
+    
+    application.registerForRemoteNotifications()
+    
+    FirebaseApp.configure()
+    
+    
+    
+    //registerForPushNotifications()
+    
+//    if let option = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? [String: Any], let data = option["aps"] {
+//      print("data: \(data)")
+//    }
+    
     return true
   }
 

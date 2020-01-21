@@ -3,33 +3,33 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1049488869623-gljad22ff8mbpbnkolbg94nl5jv41hnu.apps.googleusercontent.com</string>
+	<string>1049488869623-jqk9l162d6bhaefqn1s32qbbtb8frh19.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1049488869623-gljad22ff8mbpbnkolbg94nl5jv41hnu</string>
+	<string>com.googleusercontent.apps.1049488869623-jqk9l162d6bhaefqn1s32qbbtb8frh19</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDYJRbEQvFAXpJovGSm8uEJ5Nqeek2SKPQ</string>
+	<string>AIzaSyAw_QdOHo6w4pnPqorYwoZRRd16xftXgd0</string>
 	<key>GCM_SENDER_ID</key>
 	<string>1049488869623</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>kaiserdem.Find-Love</string>
+	<string>com.kaiserdem.FindLove</string>
 	<key>PROJECT_ID</key>
 	<string>findlove-f6445</string>
 	<key>STORAGE_BUCKET</key>
 	<string>findlove-f6445.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1049488869623:ios:59c9f6981575f2281b2bf2</string>
+	<string>1:1049488869623:ios:fe28ffd8b395fbd11b2bf2</string>
 	<key>DATABASE_URL</key>
 	<string>https://findlove-f6445.firebaseio.com</string>
 </dict>
