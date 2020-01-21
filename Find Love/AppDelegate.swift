@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 extension UIApplication {
   var statusBarView: UIView? {
@@ -51,14 +52,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   self.window?.rootViewController = initialViewControlleripad
   self.window?.makeKeyAndVisible()
   }
+  
+  // регистирируем нотификацию с таким токеном
+  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    
+    let  tokenParts = deviceToken.map { data -> String in
+      return String(format: "%02.2hhx", data)
+    }
+    let token = tokenParts.joined()
+    print("Device Token: \(token)")
+  }
+  
+  // если ошибка регистрации нотификации
+  func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    print("Fataled to register push notifications")
+  }
+  
+  func registerForPushNotifications() {
+    UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { [weak self] (isRegistered, error) in
+      guard let strongSelf = self else { return }
+      if let error = error {
+        print("Error: \(error.localizedDescription)")
+      }
+      strongSelf.getPushNotificationsConfigurarion()
+    }
+  }
+  
+  // получить настройки
+  func getPushNotificationsConfigurarion() {
+    
+    UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+      guard settings.authorizationStatus == .authorized else { return }
+      // если автоизованы тогда регистрируем приложение
+      DispatchQueue.main.async {
+        UIApplication.shared.registerForRemoteNotifications()
+      }
+      
+    }
+  }
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     FirebaseApp.configure()
     checkIfUserIsLogedIn()
-    
-    UIApplication.shared.statusBarStyle = .lightContent
-    
+    registerForPushNotifications()
+        
     return true
   }
 
