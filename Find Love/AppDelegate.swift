@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
   
+  let readIdentifier = "readIdentifier"
+  let deleteIdentifier = "deleteIdentifier"
+  let actionCategoryIndentifier = "categoryIndentifier"
+  
   
   func checkIfUserIsLogedIn() { // проверка если пользователь вошел в систему
     
@@ -74,6 +78,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       if let error = error {
         print("Error: \(error.localizedDescription)")
       }
+      // создали екшены
+      let actionRaed = UNNotificationAction(identifier: self!.readIdentifier, title: "Read", options: [.foreground])
+      
+      let actionDelete = UNNotificationAction(identifier: self!.deleteIdentifier, title: "Delete", options: [.destructive])
+      // обьеденили в категорию
+      let category = UNNotificationCategory(identifier: self!.actionCategoryIndentifier, actions: [actionRaed, actionDelete], intentIdentifiers: [], options: [])
+      
+       UNUserNotificationCenter.current().setNotificationCategories([category])
+      
       strongSelf.getPushNotificationsConfigurarion()
     }
   }
@@ -90,12 +103,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
     }
   }
+  
+  // если приложение было активно в бекграунде, сработает этот метод
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    let dataInfo = userInfo as! [String: Any]
+    print("Data: \(dataInfo["aps"])")
+  }
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     FirebaseApp.configure()
     checkIfUserIsLogedIn()
     registerForPushNotifications()
+    
+    if let option = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? [String: Any], let data = option["aps"] {
+      print("data: \(data)")
+    }
         
     return true
   }
@@ -104,19 +127,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationDidEnterBackground(_ application: UIApplication) {
-
   }
 
   func applicationWillEnterForeground(_ application: UIApplication) {
-
   }
 
   func applicationDidBecomeActive(_ application: UIApplication) {
-
   }
 
   func applicationWillTerminate(_ application: UIApplication) {
-
   }
 
 
