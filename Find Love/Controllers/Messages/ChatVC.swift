@@ -25,13 +25,7 @@ class ChatVC: UIViewController {
       observeGroups()
       //uploadChatGroup()
   }
-  
-//  override func viewWillLayoutSubviews() {
-//    super.viewWillLayoutSubviews()
-//
-//    tableView.allowsMultipleSelection = true
-//  }
-  
+ 
   func uploadTableView() {
     
     tableView.delegate = self
@@ -43,18 +37,18 @@ class ChatVC: UIViewController {
     tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0).isActive = true
     tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
     tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true
+    tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 140, right: 0)
     tableView.register(UINib(nibName: "SelectChatCell", bundle: nil), forCellReuseIdentifier: "SelectChatCell")
+    
   }
 
   func uploadChatGroup() {
     let ref = Database.database().reference().child("groups")
-    let childRef = ref.childByAutoId()
-    print(childRef)
     
-    let subject = "Вирт-чат для девушек"
-    let descriptions = "Парням вход закрыт"
-    let countUsers = 3
-    let liked = 5
+    let subject = "Ищу госпожу или раба"
+    let descriptions = "Кто в доме хотзяин"
+    let countUsers = 33
+    let liked = 51
     
     let values = ["subject": subject, "descriptions": descriptions, "countUsers": countUsers, "liked": liked] as [String : Any]
 
@@ -96,8 +90,8 @@ extension ChatVC: UITableViewDataSource, UITableViewDelegate {
 
     cell.subjectNameLabel.text = group.subject
     cell.descriptionLabel.text = group.descriptions
-    cell.bottomLabel.text = String(describing: group.countUsers!)
-    cell.topLabel.text = String(describing: group.liked!)
+    cell.bottomLabel.text = String(describing: group.countUsers ?? 0)
+    cell.topLabel.text = String(describing: group.liked ?? 0)
     
     if let profileImageView = group.iconImageUrl {
       cell.iconImageView.loadImageUsingCachWithUrlString(profileImageView)

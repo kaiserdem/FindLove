@@ -62,20 +62,22 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     uploadImageView.leadingAnchor.constraint(equalTo: conteinerView.leadingAnchor, constant: 8).isActive = true
     uploadImageView.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
-    uploadImageView.widthAnchor.constraint(equalToConstant: 35).isActive = true
-    uploadImageView.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    uploadImageView.widthAnchor.constraint(equalToConstant: 28).isActive = true
+    uploadImageView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     
     let sendButton = UIButton(type: .system)
-    sendButton.setTitle("Отправить", for: .normal)
-    sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-    sendButton.setTitleColor(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), for: .normal)
+    
+    let image = UIImage(named: "send")
+    sendButton.setImage(image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+    sendButton.imageView?.contentMode = .scaleAspectFit
+    sendButton.tintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
     sendButton.translatesAutoresizingMaskIntoConstraints = false
     sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
     conteinerView.addSubview(sendButton)
     
     sendButton.rightAnchor.constraint(equalTo: conteinerView.rightAnchor, constant: -10).isActive = true
     sendButton.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
-    sendButton.widthAnchor.constraint(equalToConstant: 90).isActive = true
+    sendButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
     sendButton.heightAnchor.constraint(equalTo: conteinerView.heightAnchor).isActive = true
     
     conteinerView.addSubview(inputTextField)
@@ -94,7 +96,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     separatorLineView.topAnchor.constraint(equalTo: conteinerView.topAnchor).isActive = true
     separatorLineView.widthAnchor.constraint(equalTo: conteinerView.widthAnchor).isActive = true
     separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-
+    
     return conteinerView
   }()
   
@@ -161,7 +163,11 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     topConteinerView.heightAnchor.constraint(equalToConstant: 70).isActive = true
     
     let backButton = UIButton(type: .system)
-    backButton.setTitle("Назад", for: .normal)
+    let image = UIImage(named: "back")
+    backButton.setImage(image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+    backButton.imageView?.contentMode = .scaleAspectFit
+    backButton.imageEdgeInsets = UIEdgeInsets(top: 7.0, left: 0.0, bottom: 7.0, right: 0.0)
+    backButton.tintColor = .white
     backButton.setTitleColor(.white, for: .normal)
     backButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
     backButton.translatesAutoresizingMaskIntoConstraints = false
@@ -170,8 +176,8 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     backButton.leftAnchor.constraint(equalTo: topConteinerView.leftAnchor, constant: 10).isActive = true
     backButton.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 15).isActive = true
-    backButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
-    backButton.heightAnchor.constraint(equalTo: topConteinerView.heightAnchor).isActive = true
+    backButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+    backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
     topConteinerView.addSubview(nameLabel)
     

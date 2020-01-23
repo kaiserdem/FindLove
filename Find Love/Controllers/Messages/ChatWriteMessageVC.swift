@@ -12,7 +12,7 @@ import FirebaseDatabase
 import AVFoundation
 import MobileCoreServices
 
-class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
+class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   var user: User? {
     didSet {
@@ -75,16 +75,18 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     uploadImageView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     
     let sendButton = UIButton(type: .system)
-    sendButton.setTitle("Отправить", for: .normal)
-    sendButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-    sendButton.setTitleColor(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), for: .normal)
+    
+    let image = UIImage(named: "send")
+    sendButton.setImage(image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+    sendButton.imageView?.contentMode = .scaleAspectFit
+    sendButton.tintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
     sendButton.translatesAutoresizingMaskIntoConstraints = false
     sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
     conteinerView.addSubview(sendButton)
     
     sendButton.rightAnchor.constraint(equalTo: conteinerView.rightAnchor, constant: -10).isActive = true
     sendButton.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
-    sendButton.widthAnchor.constraint(equalToConstant: 90).isActive = true
+    sendButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
     sendButton.heightAnchor.constraint(equalTo: conteinerView.heightAnchor).isActive = true
     
     conteinerView.addSubview(inputTextField)
@@ -116,7 +118,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     collectionView?.alwaysBounceVertical = true
     collectionView?.backgroundColor = #colorLiteral(red: 0.1830653183, green: 0.1830653183, blue: 0.1830653183, alpha: 1)
     collectionView?.keyboardDismissMode = .interactive
-    collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
+    collectionView?.register(ChatCell.self, forCellWithReuseIdentifier: cellId)
     
     setupInputComponents()
     setupKeyboardObservise()
@@ -177,6 +179,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     let image = UIImage(named: "back")
     backButton.setImage(image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
     backButton.imageView?.contentMode = .scaleAspectFit
+    backButton.imageEdgeInsets = UIEdgeInsets(top: 7.0, left: 0.0, bottom: 7.0, right: 0.0)
     backButton.tintColor = .white
     backButton.setTitleColor(.white, for: .normal)
     backButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -186,8 +189,8 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     
     backButton.leftAnchor.constraint(equalTo: topConteinerView.leftAnchor, constant: 10).isActive = true
     backButton.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 0).isActive = true
-    backButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-    backButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    backButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+    backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
     
     topConteinerView.addSubview(nameLabel)
     
@@ -248,7 +251,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)], context: nil)
   }
   
-  private func setupCell(_ cell: ChatMessageCell, message: Message) {
+  private func setupCell(_ cell: ChatCell, message: Message) {
     
     if let profileImageUrl = self.user?.profileImageUrl {
       cell.profileImageView.loadImageUsingCachWithUrlString(profileImageUrl)
@@ -263,7 +266,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     }
     
     if message.fromId == Auth.auth().currentUser?.uid { // свои сообщения
-      cell.bubbleView.backgroundColor = ChatMessageCell.blueColor
+      cell.bubbleView.backgroundColor = ChatCell.blueColor
       cell.textView.textColor = .white
       cell.profileImageView.isHidden = true
       cell.buubleViewRightAnchor?.isActive = true
@@ -508,9 +511,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessageCell
-    
-    cell.deledate = self
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatCell
     
     let message = messages[indexPath.row]
     
@@ -519,16 +520,41 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     cell.textView.text = message.text
     
     setupCell(cell, message: message)
-    
-    if let text = message.text {
-      cell.bubbleWidthAnchor?.constant = estimateFrameForText(text).width + 35
-      cell.textView.isHidden = false
-    } else if message.imageUrl != nil {
-      cell.bubbleWidthAnchor?.constant = 200
-      cell.textView.isHidden = true
-    }
-    
+
     cell.playBtn.isHidden = message.videoUrl == nil // если видео нет, тогда это тру
+    
+    if let userFromId = message.fromId {
+      Database.database().reference().child("users").child(userFromId).observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        if let dictionary = snapshot.value as? [String: AnyObject] {
+          let currentUser = User(dictionary: dictionary)
+          
+          cell.nameLabel.text = currentUser.name
+          
+          if let text = message.text { // размер облака сообщения
+            
+            let widthByText = self.estimateFrameForText(text).width + 35
+            let widthByName = self.estimateFrameForText(currentUser.name!).width + 35
+            
+            if widthByText >= widthByName { // по размеру текста или имени
+              cell.bubbleWidthAnchor?.constant = widthByText
+            } else {
+              cell.bubbleWidthAnchor?.constant = widthByName
+            }
+            
+            cell.textView.isHidden = false
+          } else if message.imageUrl != nil {
+            cell.bubbleWidthAnchor?.constant = 200
+            cell.textView.isHidden = true
+          }
+          
+          if let profileImageView = currentUser.profileImageUrl {
+            cell.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
+          }
+        }
+      }, withCancel: nil)
+
+    }
     
     return cell
   }
@@ -538,8 +564,10 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     var height: CGFloat = 80
     let message = messages[indexPath.row]
     
+    
     if let text = message.text {
-      height = estimateFrameForText(text).height + 20
+      height = estimateFrameForText(text).height + 45
+      
     } else if let imageWidht = message.imageWidth, let imageHight = message.imageHeight {
       // сделали размер пропорционально
       height = CGFloat(imageHight / imageWidht * 200)

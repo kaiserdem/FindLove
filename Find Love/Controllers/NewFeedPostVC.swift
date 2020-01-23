@@ -99,6 +99,8 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
   }()
   
   let cellId = "cellId"
+  
+  
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -110,7 +112,6 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     setupInputComponents()
     setupKeyboardObservise()
     
-    UIApplication.shared.statusBarView?.backgroundColor = .black
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -164,15 +165,15 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     backButton.imageView?.contentMode = .scaleAspectFit
     backButton.tintColor = .white
     backButton.setTitleColor(.white, for: .normal)
-    backButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+    backButton.imageEdgeInsets = UIEdgeInsets(top: 7.0, left: 0.0, bottom: 7.0, right: 0.0)
     backButton.translatesAutoresizingMaskIntoConstraints = false
     backButton.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
     topConteinerView.addSubview(backButton)
     
     backButton.leftAnchor.constraint(equalTo: topConteinerView.leftAnchor, constant: 10).isActive = true
     backButton.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 0).isActive = true
-    backButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-    backButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    backButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+    backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
     
     topConteinerView.addSubview(nameLabel)
 
