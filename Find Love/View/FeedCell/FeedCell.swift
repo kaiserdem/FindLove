@@ -54,7 +54,7 @@ class FeedCell: UITableViewCell {
     self.postTextView.text = self.post!.text // текст
     
     if let seconds = self.post!.timestamp {
-      let timestampDate = Date(timeIntervalSince1970: TimeInterval(seconds))
+      let timestampDate = Date(timeIntervalSince1970: TimeInterval(truncating: seconds))
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "hh:mm:ss a"
       self.timeDateLabel.text = dateFormatter.string(from: timestampDate)
@@ -86,9 +86,12 @@ class FeedCell: UITableViewCell {
 
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
-        if value == uid {
+        if arrayLiked.contains(uid) {
           self.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
           self.likeBtn.tintColor = .red
+        } else {
+          self.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+          self.likeBtn.tintColor = .white
         }
       }
       if arrayLiked.count == 0 {
@@ -127,13 +130,11 @@ class FeedCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-      
       if selected {
         contentView.backgroundColor = .black
       } else {
         contentView.backgroundColor = .black
       }
-
     }
     
   @IBAction func replyBtnAction(_ sender: Any) {

@@ -181,19 +181,6 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 0).isActive = true
     nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
   }
-  
-
-  
-  // принимает текст возвращает размер
-  private func estimateFrameForText(_ text: String) -> CGRect {
-    
-    let size = CGSize(width: 200, height: 1000)
-    
-    // текст прислоняеться к левому краю и использует пренос строки
-    let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-    
-    return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)], context: nil)
-  }
 
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     dismiss(animated: true, completion: nil)

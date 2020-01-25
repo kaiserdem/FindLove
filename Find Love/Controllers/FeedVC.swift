@@ -12,13 +12,9 @@ import FirebaseDatabase
 
 class FeedVC: UIViewController, CellSubclassDelegate {
 
-  @IBOutlet weak var postTextView: UITextView!
-  @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var backTableView: UIView!
-  @IBOutlet weak var addBtn: UIButton!
   
   let tableView = UITableView()
-  
   var posts = [Post]()
   var postDictionary = [String: Post]()
   var user: User?
@@ -26,11 +22,6 @@ class FeedVC: UIViewController, CellSubclassDelegate {
  
   override func viewDidLoad() {
         super.viewDidLoad()
-    
-    addBtn.setImage(UIImage(named: "add")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
-    addBtn.imageView?.tintColor = .white
-    
-    postTextView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addPostBtnAction)))
     
     NotificationCenter.default.addObserver(self, selector: #selector(makeTransition(_:)), name: NSNotification.Name("makeTransitionToChat"), object: nil)
     
@@ -44,30 +35,26 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     super.viewWillLayoutSubviews()
     
     tableView.backgroundColor = .black
-    tableView.allowsMultipleSelection = true
-    postTextView.isEditable = false
+    tableView.allowsMultipleSelection = false
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(true)
+    //NotificationCenter.default.removeObserver(self)
   }
   
   func fetchUser() {
     guard let uid = Auth.auth().currentUser?.uid else { return }
     
-    // получаем uid по из базы данных, берем значение
     Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
       
       if let dictionary = snapshot.value as? [String: AnyObject] {
         let user = User(dictionary: dictionary)
         user.id = snapshot.key
-        self.setupNavBarWithUser(user)
       }
     }, withCancel: nil)
   }
-  
-  func setupNavBarWithUser(_ user: User) { //загрузить данные
-    if let profileImageUrl = user.profileImageUrl {
-      profileImageView.loadImageUsingCachWithUrlString(profileImageUrl)
-    }
-  }
-  
+
   func writePost() {
     let vc = NewFeedPostVC(collectionViewLayout: UICollectionViewFlowLayout())
     present(vc, animated: true, completion: nil)
@@ -92,6 +79,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     tableView.rightAnchor.constraint(equalTo: backTableView.rightAnchor).isActive = true
     
     tableView.register(UINib(nibName: "FeedCell", bundle: nil), forCellReuseIdentifier: "FeedCell")
+    tableView.register(UINib(nibName: "AddFeedPostCell", bundle: nil), forCellReuseIdentifier: "AddFeedPostCell")
   }
   
   func observePosts() {
@@ -110,9 +98,8 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   }
   
   @objc func makeTransition(_ notification: Notification) {
-    if let toUser = notification.userInfo?["user"] as? User {
+     let toUser = notification.userInfo?["user"] as? User
       showChatLogVCForUser(toUser)
-    }
   }
   
   func showChatLogVCForUser(_ user: User?) {
@@ -189,7 +176,11 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         userCurrent.id = snapshot.key
         self.user = userCurrent
         
-        NotificationCenter.default.post(name: NSNotification.Name("makeTransitionToChat"), object: nil, userInfo: ["user": self.user as Any])
+       // let send = post.text
+       // NotificationCenter.default.post(name: NSNotification.Name("postTextToChat"), object: nil, userInfo: ["postText": send!])
+        
+        self.showChatLogVCForUser(self.user!)
+        
       }
     }, withCancel: nil)
   }
@@ -199,9 +190,43 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return posts.count
-    
   }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    if indexPath.row == 0 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "AddFeedPostCell", for: indexPath) as! AddFeedPostCell
+      cell.contentView.backgroundColor = .black
+      
+      Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        if let dictionary = snapshot.value as? [String: AnyObject] {
+          let user = User(dictionary: dictionary)
+          user.id = snapshot.key
+          if let profileImageView = user.profileImageUrl {
+            cell.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
+          }
+        }
+      }, withCancel: nil)
+      
+    } else {
+      
+      let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as! FeedCell
+      let post = posts[indexPath.row]
+      cell.post = post
+      cell.delegate = self
+      cell.selectionStyle = .none
+      return cell
+    }
+    return UITableViewCell()
+  }
+  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    if indexPath.row == 0 {
+      writePost()
+      return
+    }
     
     let post = self.posts[indexPath.row]
     
@@ -236,19 +261,11 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     self.view.addSubview(view)
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as! FeedCell
-    
-    let post = posts[indexPath.row]
-    cell.post = post
-    cell.delegate = self
-    cell.selectionStyle = .none
-    return cell
-  }
-  
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 115
+    if indexPath.row == 0 {
+      return 110
+    } else {
+      return 115
+    }
   }
-  
-  
 }

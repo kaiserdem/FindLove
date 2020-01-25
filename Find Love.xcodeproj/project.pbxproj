@@ -11,6 +11,8 @@
 		AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */; };
 		AD02EB3123B7FDB500F472A5 /* NewMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */; };
 		AD09E33D23D7647D00AAC162 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD09E33C23D7647D00AAC162 /* GoogleService-Info.plist */; };
+		AD1085A823DCA08A0009ADB3 /* AddFeedPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1085A623DCA08A0009ADB3 /* AddFeedPostCell.swift */; };
+		AD1085A923DCA08A0009ADB3 /* AddFeedPostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD1085A723DCA08A0009ADB3 /* AddFeedPostCell.xib */; };
 		AD26946323B4FD2C00D49887 /* MessengerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946223B4FD2C00D49887 /* MessengerVC.swift */; };
 		AD26946523B4FF8100D49887 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946423B4FF8100D49887 /* User.swift */; };
 		AD26946723B538A500D49887 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26946623B538A500D49887 /* Message.swift */; };
@@ -59,6 +61,8 @@
 		AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageVC.swift; sourceTree = "<group>"; };
 		AD09E33B23D7066D00AAC162 /* Find Love.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Find Love.entitlements"; sourceTree = "<group>"; };
 		AD09E33C23D7647D00AAC162 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AD1085A623DCA08A0009ADB3 /* AddFeedPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedPostCell.swift; sourceTree = "<group>"; };
+		AD1085A723DCA08A0009ADB3 /* AddFeedPostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFeedPostCell.xib; sourceTree = "<group>"; };
 		AD26946223B4FD2C00D49887 /* MessengerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerVC.swift; sourceTree = "<group>"; };
 		AD26946423B4FF8100D49887 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AD26946623B538A500D49887 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -135,6 +139,15 @@
 			path = ChatMessageCell;
 			sourceTree = "<group>";
 		};
+		AD1085AA23DCA0970009ADB3 /* AddFeedPostCell */ = {
+			isa = PBXGroup;
+			children = (
+				AD1085A623DCA08A0009ADB3 /* AddFeedPostCell.swift */,
+				AD1085A723DCA08A0009ADB3 /* AddFeedPostCell.xib */,
+			);
+			path = AddFeedPostCell;
+			sourceTree = "<group>";
+		};
 		AD26946E23B6019C00D49887 /* UserCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,9 +180,10 @@
 		AD26947123B606BA00D49887 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AD1085AA23DCA0970009ADB3 /* AddFeedPostCell */,
+				AD5A563B23BFEB450032AB2A /* FeedCell */,
 				ADB8079B23D1ADC300847897 /* SendMessageView */,
 				ADB8079023D05AE800847897 /* OpenFeedPostView */,
-				AD5A563B23BFEB450032AB2A /* FeedCell */,
 				AD26946E23B6019C00D49887 /* UserCell */,
 				AD02EB2923B793C200F472A5 /* ChatMessageCell */,
 				ADBA195D23C49004009B45EC /* ReviewCVCell */,
@@ -418,6 +432,7 @@
 				AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */,
 				AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */,
 				ADB8DED523CB9959008D989E /* SelectChatCell.xib in Resources */,
+				AD1085A923DCA08A0009ADB3 /* AddFeedPostCell.xib in Resources */,
 				AD5A563F23BFEB750032AB2A /* FeedCell.xib in Resources */,
 				AD26946D23B6019200D49887 /* UserCell.xib in Resources */,
 				ADB8079F23D1AE1F00847897 /* SendMessageView.xib in Resources */,
@@ -488,6 +503,7 @@
 				AD26947323B67B8A00D49887 /* ChatLogVC.swift in Sources */,
 				AD26BE8C23C0CB2500EF1418 /* NewFeedPostVC.swift in Sources */,
 				ADBA195B23C371E6009B45EC /* ReviewCVCell.swift in Sources */,
+				AD1085A823DCA08A0009ADB3 /* AddFeedPostCell.swift in Sources */,
 				AD26946323B4FD2C00D49887 /* MessengerVC.swift in Sources */,
 				AD8895D623B2128C00347A6A /* HelloVC.swift in Sources */,
 				ADB8DEDA23CCCBD0008D989E /* ChatWriteMessageVC.swift in Sources */,

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="102" id="KGk-i7-Jjw" customClass="AddFeedPostCell" customModule="Find_Love" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="386" height="102"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="386" height="101.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SB9-2h-MRi">
+                        <rect key="frame" x="0.0" y="0.0" width="386" height="100"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Заинтересуй своим постом" translatesAutoresizingMaskIntoConstraints="NO" id="oZX-OT-suz">
+                                <rect key="frame" x="105" y="5" width="276" height="90"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="42J-DK-RH9">
+                                <rect key="frame" x="0.0" y="5" width="90" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="42J-DK-RH9" secondAttribute="height" multiplier="1:1" id="8gl-bn-bzy"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2y-Hv-PRH">
+                                <rect key="frame" x="51" y="30" width="39" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="87n-32-CMG"/>
+                                    <constraint firstAttribute="width" secondItem="Q2y-Hv-PRH" secondAttribute="height" multiplier="41:42" id="sqX-1f-lfr"/>
+                                </constraints>
+                                <state key="normal" image="add"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="oZX-OT-suz" firstAttribute="leading" secondItem="42J-DK-RH9" secondAttribute="trailing" constant="15" id="3LF-Jz-7Pr"/>
+                            <constraint firstItem="Q2y-Hv-PRH" firstAttribute="trailing" secondItem="42J-DK-RH9" secondAttribute="trailing" id="8mT-YX-F4a"/>
+                            <constraint firstItem="42J-DK-RH9" firstAttribute="leading" secondItem="SB9-2h-MRi" secondAttribute="leading" id="FsS-qx-ObN"/>
+                            <constraint firstAttribute="trailing" secondItem="oZX-OT-suz" secondAttribute="trailing" constant="5" id="LIs-yP-Ggf"/>
+                            <constraint firstItem="42J-DK-RH9" firstAttribute="top" secondItem="SB9-2h-MRi" secondAttribute="top" constant="5" id="NpY-cm-qh5"/>
+                            <constraint firstItem="oZX-OT-suz" firstAttribute="top" secondItem="SB9-2h-MRi" secondAttribute="top" constant="5" id="YMZ-l6-NhC"/>
+                            <constraint firstAttribute="bottom" secondItem="oZX-OT-suz" secondAttribute="bottom" constant="5" id="c7U-eZ-YS2"/>
+                            <constraint firstAttribute="bottom" secondItem="42J-DK-RH9" secondAttribute="bottom" constant="5" id="iFs-nK-JdP"/>
+                            <constraint firstAttribute="height" constant="100" id="tSa-zY-ieX"/>
+                            <constraint firstItem="Q2y-Hv-PRH" firstAttribute="centerY" secondItem="42J-DK-RH9" secondAttribute="centerY" id="ujS-jU-uxA"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="SB9-2h-MRi" secondAttribute="bottom" id="7dl-7H-i8T"/>
+                    <constraint firstItem="SB9-2h-MRi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="FDs-UL-3KV"/>
+                    <constraint firstItem="SB9-2h-MRi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Q2u-ED-jAG"/>
+                    <constraint firstAttribute="trailing" secondItem="SB9-2h-MRi" secondAttribute="trailing" id="uQS-Un-AmW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="addBtn" destination="Q2y-Hv-PRH" id="Z5n-UZ-TwS"/>
+                <outlet property="postTextView" destination="oZX-OT-suz" id="Ork-y7-NVo"/>
+                <outlet property="profileImageView" destination="42J-DK-RH9" id="F6U-bg-pow"/>
+            </connections>
+            <point key="canvasLocation" x="190.40000000000001" y="197.9010494752624"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="add" width="64" height="64"/>
+    </resources>
+</document>

@@ -49,6 +49,19 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
     return label
   }()
   
+  lazy var postText: UITextView = {
+    let textView = UITextView()
+    textView.textAlignment = NSTextAlignment.left
+    textView.textColor = .white
+    textView.isEditable = false
+    textView.isSelectable = false
+    textView.font = UIFont.systemFont(ofSize: 18)
+    textView.translatesAutoresizingMaskIntoConstraints = false
+    textView.backgroundColor = .clear
+    textView.text = "Ответ на"
+    return textView
+  }()
+  
   lazy var inputConteinerView: UIView = {
     let conteinerView = UIView()
     conteinerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
@@ -111,18 +124,22 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
     setupInputComponents()
     setupKeyboardObservise()
     
+
+   // NotificationCenter.default.addObserver(self, selector: #selector(postTextValue(_:)), name: NSNotification.Name("postTextToChat"), object: nil)
+    
     UIApplication.shared.statusBarView?.backgroundColor = .black
   }
+  
+//  @objc func postTextValue(_ notification: Notification) {
+//    let toPost = notification.userInfo?["postText"] as? String
+//    print(toPost)
+//  }
   
   override func viewDidDisappear(_ animated: Bool) {
     NotificationCenter.default.removeObserver(self) // убрать обсервер
   }
   
-  // поменять констрейнты при смене ориентации
-  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-    collectionView?.collectionViewLayout.invalidateLayout()
-  }
-  
+
   override var inputAccessoryView: UIView? { // вю короторе отвечает за клавиатуру
     get {
       return inputConteinerView
@@ -180,6 +197,17 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
     nameLabel.heightAnchor.constraint(equalTo: topConteinerView.heightAnchor).isActive = true
     nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 0).isActive = true
     nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
+    
+    view.addSubview(postText)
+    
+    postText.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+    postText.topAnchor.constraint(equalTo: topConteinerView.bottomAnchor, constant: 20).isActive = true
+    postText.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+    
+    //estimateFrameForText(post).height
+    
+    postText.heightAnchor.constraint(equalToConstant: 94).isActive = true
+    
   }
   
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -369,9 +397,6 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
   @objc func handleSend() { // отправляем сообщение
     let properties = ["text": inputTextField.text!] as [String : Any]
     sendMessagesWithProperties(properties)
-    
-//    let sendMessageView = SendMessageView(frame: self.view.frame)
-//    self.view.addSubview(sendMessageView)
     
     dismiss(animated: true, completion: nil)
   }

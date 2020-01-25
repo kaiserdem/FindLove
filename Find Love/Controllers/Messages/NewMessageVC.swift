@@ -25,16 +25,15 @@ class NewMessageVC: UIViewController {
   var currentUserId = ""
   
   override func viewDidLoad() {
-        super.viewDidLoad()
+    super.viewDidLoad()
     
     self.navigationController?.navigationBar.isHidden = true
     uploadTableView()
     fetchUsers()
     fetchUser()
-    
   }
   
-  func fetchUser() { // выбрать пользователя
+  func fetchUser() {
     
     guard let uid = Auth.auth().currentUser?.uid else { return }
 

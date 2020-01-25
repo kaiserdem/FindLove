@@ -240,17 +240,6 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     }, withCancel: nil)
   }
   
-  // принимает текст возвращает размер
-  private func estimateFrameForText(_ text: String) -> CGRect {
-    
-    let size = CGSize(width: 200, height: 1000)
-    
-    // текст прислоняеться к левому краю и использует пренос строки
-    let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-    
-    return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)], context: nil)
-  }
-  
   private func setupCell(_ cell: ChatCell, message: Message) {
     
     if let profileImageUrl = self.user?.profileImageUrl {
@@ -576,3 +565,16 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
   }
 }
 
+extension UICollectionViewController {
+  
+  // принимает текст возвращает размер
+  func estimateFrameForText(_ text: String) -> CGRect {
+    
+    let size = CGSize(width: 200, height: 1000)
+    
+    // текст прислоняеться к левому краю и использует пренос строки
+    let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+    
+    return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)], context: nil)
+  }
+}
