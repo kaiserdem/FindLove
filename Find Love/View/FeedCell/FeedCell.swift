@@ -11,7 +11,8 @@ import FirebaseDatabase
 import Firebase
 
 protocol CellSubclassDelegate: class {
-  func buttonTapped(cell: FeedCell)
+  func cellTappedLike(cell: FeedCell)
+  func cellTappedReplyMessage(cell: FeedCell)
 }
 
 class FeedCell: UITableViewCell {
@@ -39,7 +40,7 @@ class FeedCell: UITableViewCell {
   
   var post: Post? {
     didSet {
-      setupNameAndProfileImage()
+      uploadPostData()
     }
   }
   
@@ -48,9 +49,9 @@ class FeedCell: UITableViewCell {
     self.delegate = nil
   }
   
-  private func setupNameAndProfileImage() {
+  private func uploadPostData() {
     
-    self.postTextView.text = self.post!.text
+    self.postTextView.text = self.post!.text // текст
     
     if let seconds = self.post!.timestamp {
       let timestampDate = Date(timeIntervalSince1970: TimeInterval(seconds))
@@ -72,6 +73,33 @@ class FeedCell: UITableViewCell {
         }
       }, withCancel: nil)
     }
+    
+    let ref = Database.database().reference().child("posts").child(post!.postId!).child("likedUsers")
+    ref.observeSingleEvent(of: .value, with: { (snapshot) in
+
+      var arrayLiked = [String]()
+
+      for child in snapshot.children {
+        let snap = child as! DataSnapshot
+        let value = snap.value as! String
+        arrayLiked.append(value)
+
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        if value == uid {
+          self.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+          self.likeBtn.tintColor = .red
+        }
+      }
+      if arrayLiked.count == 0 {
+        self.countLikeLabel.isHidden = true
+      } else {
+        self.countLikeLabel.isHidden = false
+        self.countLikeLabel.text = String(describing: arrayLiked.count)
+        self.post!.likedCount = arrayLiked.count
+      }
+    }, withCancel: nil)
+
     
   }
   
@@ -109,14 +137,12 @@ class FeedCell: UITableViewCell {
     }
     
   @IBAction func replyBtnAction(_ sender: Any) {
-    print("reply Btn Action")
-    self.delegate?.buttonTapped(cell: self)
+    self.delegate?.cellTappedReplyMessage(cell: self)
     
   }
   
   @IBAction func likeBtnAction(_ sender: Any) {
-    print("like Btn Action")
-    
+    self.delegate?.cellTappedLike(cell: self)
   }
   
 }

@@ -320,7 +320,8 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     let fromId = Auth.auth().currentUser!.uid
     let timestamp = Int(Date().timeIntervalSince1970)
     
-    var values = ["fromId": fromId, "timestamp": timestamp] as [String : Any]
+    
+    var values = ["postId": childRef.key!, "fromId": fromId, "timestamp": timestamp] as [String : Any]
     
     properties.forEach { (key: String, value: Any) in // метод принимает данные
       values[key] = value
@@ -406,7 +407,6 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
   }
   
   @objc func handleBack() {
-    
     dismiss(animated: true, completion: nil)
   }
   

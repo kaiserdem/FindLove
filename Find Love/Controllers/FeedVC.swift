@@ -37,6 +37,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     uploadTableView()
     fetchUser()
     observePosts()
+    
   }
   
   override func viewWillLayoutSubviews() {
@@ -45,12 +46,11 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     tableView.backgroundColor = .black
     tableView.allowsMultipleSelection = true
     postTextView.isEditable = false
-    
   }
   
   func fetchUser() {
-    // если currentUser 0 тогда выходим
     guard let uid = Auth.auth().currentUser?.uid else { return }
+    
     // получаем uid по из базы данных, берем значение
     Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
       
@@ -82,6 +82,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     tableView.delegate = self
     tableView.dataSource = self
     tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+    tableView.showsVerticalScrollIndicator = false
     
     backTableView.addSubview(tableView)
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -121,15 +122,77 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     self.navigationController?.pushViewController(vc, animated: true)
   }
   
-  func buttonTapped(cell: FeedCell) {
+  func cellTappedLike(cell: FeedCell) {
     
+    guard let indexPath = self.tableView.indexPath(for: cell) else { return }
+    
+    let post = posts[indexPath.row]
+    
+    let ref = Database.database().reference().child("posts").child(post.postId!).child("likedUsers")
+    
+    if post.likedCount == 0 { // если лайков нет вообще // is work
+      guard let uid = Auth.auth().currentUser?.uid else { return }
+      
+      let values = [uid: uid] as [String : Any]
+      ref.updateChildValues(values)
+      post.likedCount = 1
+      cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+      cell.likeBtn.tintColor = .red
+      cell.countLikeLabel.text = String(describing: post.likedCount)
+      
+    } else { // какие то лайки есть
+      let uid = Auth.auth().currentUser?.uid
+      
+      ref.observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        var arrayLiked = [String]()
+        
+        for child in snapshot.children {
+          let snap = child as! DataSnapshot
+          let value = snap.value as! String
+          arrayLiked.append(value) // масив всех лайков
+        }
+        if arrayLiked.contains(uid!) { // мой лайк уже есть, тогда удаляем
+          if let index = arrayLiked.index(of: uid!) {
+            arrayLiked.remove(at: index)
+            cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+            cell.likeBtn.tintColor = .white
+            cell.countLikeLabel.text = String(describing: arrayLiked.count)
+            post.likedCount = arrayLiked.count
+            ref.child(uid!).removeValue()
+          }
+        } else { // лайки есть но моего нет
+          arrayLiked.append(uid!)
+          post.likedCount = arrayLiked.count
+          cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+          cell.likeBtn.tintColor = .red
+          cell.countLikeLabel.text = String(describing: arrayLiked.count)
+          let values = [uid: uid] as! [String : Any]
+          ref.updateChildValues(values)
+        }
+      }, withCancel: nil)
+    }
+    self.tableView.reloadData()
+  }
+  
+  func cellTappedReplyMessage(cell: FeedCell) {
     guard let indexPath = self.tableView.indexPath(for: cell) else {
       return
     }
-    print(indexPath.row)
+    let post = posts[indexPath.row]
     
+    let ref = Database.database().reference().child("users").child(post.fromId!)
+    ref.observeSingleEvent(of: .value, with: { (snapshot) in
+      
+      if let dictionary = snapshot.value as? [String: AnyObject] {
+        let userCurrent = User(dictionary: dictionary)
+        userCurrent.id = snapshot.key
+        self.user = userCurrent
+        
+        NotificationCenter.default.post(name: NSNotification.Name("makeTransitionToChat"), object: nil, userInfo: ["user": self.user as Any])
+      }
+    }, withCancel: nil)
   }
-  
 }
 
 extension FeedVC: UITableViewDelegate, UITableViewDataSource {
@@ -144,10 +207,8 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     
     let postText = post.text
     let time = post.timestamp
-    
+
     let view = OpenFeedPost(frame: self.view.frame)
-    
-    
     
     let ref = Database.database().reference().child("users").child(post.fromId!)
     ref.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -156,9 +217,7 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
         
         let userCurrent = User(dictionary: dictionary)
         userCurrent.id = snapshot.key
-        
         view.user = userCurrent
-        
         view.userNameLabel.text = dictionary["name"] as? String
       
         if let profileImageView = dictionary["profileImageUrl"] as? String {
@@ -184,7 +243,6 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     cell.post = post
     cell.delegate = self
     cell.selectionStyle = .none
-
     return cell
   }
   

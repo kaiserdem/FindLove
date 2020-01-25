@@ -56,7 +56,7 @@ class OpenFeedPost: UIView {
   
   @IBAction func replyButtonAction(_ sender: UIButton) {
     
-    NotificationCenter.default.post(name: NSNotification.Name("makeTransitionToChat"), object: nil, userInfo: ["user": user])
+    NotificationCenter.default.post(name: NSNotification.Name("makeTransitionToChat"), object: nil, userInfo: ["user": user as Any])
     
     self.removeFromSuperview()
   }
