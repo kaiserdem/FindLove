@@ -507,6 +507,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     cell.message = message
     
     cell.textView.text = message.text
+    cell.timeLabel.text = setFormatDislayedTimeAndDate(from: message.timestamp as! TimeInterval, withString: false)
     
     setupCell(cell, message: message)
 
@@ -555,7 +556,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     
     
     if let text = message.text {
-      height = estimateFrameForText(text).height + 45
+      height = estimateFrameForText(text).height + 65
       
     } else if let imageWidht = message.imageWidth, let imageHight = message.imageHeight {
       // сделали размер пропорционально

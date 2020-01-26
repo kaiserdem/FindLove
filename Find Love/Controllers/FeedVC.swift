@@ -251,11 +251,7 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
       }
     }, withCancel: nil)
     
-    let timestampDate = Date(timeIntervalSince1970: (time?.doubleValue)!)
-    
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "hh:mm:ss a"
-    view.timeLabel.text = dateFormatter.string(from: timestampDate)
+    view.timeLabel.text = setFormatDislayedTimeAndDate(from: time as! TimeInterval, withString: true)
     view.postTextView.text = postText
     
     self.view.addSubview(view)

@@ -508,6 +508,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     cell.message = message
     
     cell.textView.text = message.text
+    cell.timeLabel.text = setFormatDislayedTimeAndDate(from: message.timestamp as! TimeInterval, withString: false)
     
     setupCell(cell, message: message)
     
@@ -518,9 +519,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
       cell.bubbleWidthAnchor?.constant = 200
       cell.textView.isHidden = true
     }
-    
     cell.playBtn.isHidden = message.videoUrl == nil // если видео нет, тогда это тру
-    
     return cell
   }
   
@@ -530,7 +529,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     let message = messages[indexPath.row]
     
     if let text = message.text {
-      height = estimateFrameForText(text).height + 20
+      height = estimateFrameForText(text).height + 40
     } else if let imageWidht = message.imageWidth, let imageHight = message.imageHeight {
       // сделали размер пропорционально
       height = CGFloat(imageHight / imageWidht * 200)

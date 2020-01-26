@@ -13,8 +13,8 @@ class ChatCell: UICollectionViewCell {
   
   var message: Message?
   
-  static let blueColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
-  static let grayColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+  static let blueColor = #colorLiteral(red: 0.08570486702, green: 0.2354284908, blue: 0.3383600027, alpha: 1)
+  static let grayColor = #colorLiteral(red: 0.7610357215, green: 0.7610357215, blue: 0.7610357215, alpha: 1)
   
   var playerLayer: AVPlayerLayer? //  слой видео
   var player: AVPlayer?
@@ -53,7 +53,7 @@ class ChatCell: UICollectionViewCell {
   let bubbleView: UIView = {
     let view = UIView()
     view.backgroundColor = blueColor
-    view.layer.cornerRadius = 16
+    view.layer.cornerRadius = 10
     view.layer.masksToBounds = true
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
@@ -88,6 +88,17 @@ class ChatCell: UICollectionViewCell {
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
+  
+  var timeLabel: UILabel = {
+    let label = UILabel()
+    label.text = "Yesterday 20:30"
+    label.textAlignment = NSTextAlignment.left
+    label.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.font = UIFont.systemFont(ofSize: 11)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+
 
   
   
@@ -97,6 +108,7 @@ class ChatCell: UICollectionViewCell {
     addSubview(bubbleView)
     addSubview(textView)
     addSubview(profileImageView)
+    addSubview(timeLabel)
     bubbleView.addSubview(nameLabel)
     bubbleView.addSubview(messageImageView)
     
@@ -121,7 +133,7 @@ class ChatCell: UICollectionViewCell {
     
     
     profileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
-    profileImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    profileImageView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor).isActive = true
     profileImageView.widthAnchor.constraint(equalToConstant: 32).isActive = true
     profileImageView.heightAnchor.constraint(equalToConstant: 32).isActive = true
     
@@ -135,7 +147,7 @@ class ChatCell: UICollectionViewCell {
     bubbleView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
     bubbleWidthAnchor = bubbleView.widthAnchor.constraint(equalToConstant: 200)
     bubbleWidthAnchor?.isActive = true
-    bubbleView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+    bubbleView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -20).isActive = true
     
     textView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor, constant: 8).isActive = true
     textView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 3).isActive = true
@@ -145,6 +157,11 @@ class ChatCell: UICollectionViewCell {
     nameLabel.leftAnchor.constraint(equalTo: bubbleView.leftAnchor, constant: 8).isActive = true
     nameLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 8).isActive = true
 
+    
+    timeLabel.topAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -2).isActive = true
+    timeLabel.leftAnchor.constraint(equalTo: bubbleView.leftAnchor, constant: 10).isActive = true
+    timeLabel.heightAnchor.constraint(equalToConstant: 23).isActive = true
+    timeLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
     
   }
   required init?(coder aDecoder: NSCoder) {

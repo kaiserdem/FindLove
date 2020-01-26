@@ -53,7 +53,7 @@ class FeedCell: UITableViewCell {
     
     self.postTextView.text = self.post!.text // текст
     
-    self.timeDateLabel.text = dayDifference(from: self.post!.timestamp as! TimeInterval)
+    self.timeDateLabel.text = setFormatDislayedTimeAndDate(from: self.post!.timestamp as! TimeInterval, withString: true)
     
     if let fromId = self.post!.fromId {
       let ref = Database.database().reference().child("users").child(fromId)
@@ -100,6 +100,12 @@ class FeedCell: UITableViewCell {
 
     
   }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    postTextView.centerVertically()
+  }
+
   
   override func awakeFromNib() {
         super.awakeFromNib()

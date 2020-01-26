@@ -16,7 +16,6 @@ class UserCell: UITableViewCell {
   @IBOutlet weak var lastMessagesLabel: UILabel!
   @IBOutlet weak var userNameLabel: UILabel!
   @IBOutlet weak var userImageView: UIImageView!
-  
 
   var message: Message? {
     didSet {
@@ -35,15 +34,7 @@ class UserCell: UITableViewCell {
           self.userImageView.contentMode = .scaleAspectFit
           self.userNameLabel.text = dictionary["name"] as? String
           self.lastMessagesLabel.text = self.message!.text
-          
-          if let seconds = self.message?.timestamp?.doubleValue {
-            let timestampDate = Date(timeIntervalSince1970: seconds)
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "hh:mm:ss a"
-            self.timeLabel.text = dateFormatter.string(from: timestampDate)
-          }
-          
+          self.timeLabel.text = self.setFormatDislayedTimeAndDate(from: self.message!.timestamp as! TimeInterval, withString: true)
           if let profileImageView = dictionary["profileImageUrl"] as? String {
             self.userImageView.loadImageUsingCachWithUrlString(profileImageView)
           }

@@ -85,6 +85,16 @@ class ChatMessageCell: UICollectionViewCell {
     return imageView
   }()
   
+  var timeLabel: UILabel = {
+    let label = UILabel()
+    label.text = "Yesterday 20:30"
+    label.textAlignment = NSTextAlignment.left
+    label.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.font = UIFont.systemFont(ofSize: 11)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -92,6 +102,8 @@ class ChatMessageCell: UICollectionViewCell {
     addSubview(bubbleView)
     addSubview(textView)
     addSubview(profileImageView)
+    addSubview(timeLabel)
+
     bubbleView.addSubview(messageImageView)
     
     messageImageView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor).isActive = true
@@ -115,7 +127,7 @@ class ChatMessageCell: UICollectionViewCell {
     
     
     profileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
-    profileImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    profileImageView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor).isActive = true
     profileImageView.widthAnchor.constraint(equalToConstant: 32).isActive = true
     profileImageView.heightAnchor.constraint(equalToConstant: 32).isActive = true
     
@@ -129,12 +141,16 @@ class ChatMessageCell: UICollectionViewCell {
     bubbleView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
     bubbleWidthAnchor = bubbleView.widthAnchor.constraint(equalToConstant: 200)
     bubbleWidthAnchor?.isActive = true
-    bubbleView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
-    
+    bubbleView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -20).isActive = true
     textView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor, constant: 8).isActive = true
     textView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
     textView.rightAnchor.constraint(equalTo: bubbleView.rightAnchor).isActive = true
     textView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+    
+    timeLabel.topAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -2).isActive = true
+    timeLabel.leftAnchor.constraint(equalTo: bubbleView.leftAnchor, constant: 10).isActive = true
+    timeLabel.heightAnchor.constraint(equalToConstant: 23).isActive = true
+    timeLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
     
   }
   required init?(coder aDecoder: NSCoder) {
