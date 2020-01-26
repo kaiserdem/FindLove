@@ -53,6 +53,7 @@
 		ADBA195623C2A41C009B45EC /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBA195523C2A41C009B45EC /* ExtensionUIView.swift */; };
 		ADBA195B23C371E6009B45EC /* ReviewCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBA195923C371E6009B45EC /* ReviewCVCell.swift */; };
 		ADBA195C23C371E6009B45EC /* ReviewCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADBA195A23C371E6009B45EC /* ReviewCVCell.xib */; };
+		ADFCA85723DD90FF004067A9 /* ExtensionUICollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFCA85623DD90FF004067A9 /* ExtensionUICollectionVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +106,7 @@
 		ADBA195523C2A41C009B45EC /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		ADBA195923C371E6009B45EC /* ReviewCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCVCell.swift; sourceTree = "<group>"; };
 		ADBA195A23C371E6009B45EC /* ReviewCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCVCell.xib; sourceTree = "<group>"; };
+		ADFCA85623DD90FF004067A9 /* ExtensionUICollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUICollectionVC.swift; sourceTree = "<group>"; };
 		BD710EB921D70B94626E4CDB /* Pods_Find_Love.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find_Love.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D462102E429A663397EBDFE0 /* Pods-Find Love.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Love.release.xcconfig"; path = "Target Support Files/Pods-Find Love/Pods-Find Love.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +175,7 @@
 			children = (
 				AD26946823B5393B00D49887 /* Extension.swift */,
 				ADBA195523C2A41C009B45EC /* ExtensionUIView.swift */,
+				ADFCA85623DD90FF004067A9 /* ExtensionUICollectionVC.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 				ADB8DED423CB9959008D989E /* SelectChatCell.swift in Sources */,
 				AD79AC0E23CDEC2C00FA7D09 /* GameVC.swift in Sources */,
 				AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */,
+				ADFCA85723DD90FF004067A9 /* ExtensionUICollectionVC.swift in Sources */,
 				AD46C9E923D9E22400FC7002 /* ChatCell.swift in Sources */,
 				ADBA195623C2A41C009B45EC /* ExtensionUIView.swift in Sources */,
 				AD26946C23B6019200D49887 /* UserCell.swift in Sources */,

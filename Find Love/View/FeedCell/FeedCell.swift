@@ -53,12 +53,7 @@ class FeedCell: UITableViewCell {
     
     self.postTextView.text = self.post!.text // текст
     
-    if let seconds = self.post!.timestamp {
-      let timestampDate = Date(timeIntervalSince1970: TimeInterval(truncating: seconds))
-      let dateFormatter = DateFormatter()
-      dateFormatter.dateFormat = "hh:mm:ss a"
-      self.timeDateLabel.text = dateFormatter.string(from: timestampDate)
-    }
+    self.timeDateLabel.text = dayDifference(from: self.post!.timestamp as! TimeInterval)
     
     if let fromId = self.post!.fromId {
       let ref = Database.database().reference().child("users").child(fromId)
@@ -125,7 +120,6 @@ class FeedCell: UITableViewCell {
     
     postTextView.isEditable = false
     postTextView.isScrollEnabled = false
-
   }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

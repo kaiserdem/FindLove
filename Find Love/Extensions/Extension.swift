@@ -77,34 +77,22 @@ extension UIView {
   }
 }
 
-extension RegistrationVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension UIResponder {
   
-  func handleSelectProfileImageView() {
-    let picker = UIImagePickerController()
+  func dayDifference(from interval : TimeInterval) -> String {
+    let calendar = Calendar.current
+    let date = Date(timeIntervalSince1970: interval)
     
-    picker.delegate = self
-    picker.allowsEditing = true
-    present(picker, animated: true, completion: nil)
-  }
-  
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    let dateFormatterHM = DateFormatter()
+    dateFormatterHM.dateFormat = "hh:mm"
     
-    var selectedImageFromPicker: UIImage?
-    if let editingImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-      selectedImageFromPicker = editingImage
-    } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-      selectedImageFromPicker = originalImage
+    let dateFormatterMDHM = DateFormatter()
+    dateFormatterMDHM.dateFormat = "MM-dd hh:mm" //"YYYY-MM-dd hh:mm"
+    
+    if calendar.isDateInYesterday(date) { return "Вчера \(dateFormatterHM.string(from: date))" }
+    else if calendar.isDateInToday(date) { return "Сегодня \(dateFormatterHM.string(from: date))" }
+    else {
+      return dateFormatterMDHM.string(from: date)
     }
-    if let selectedImage = selectedImageFromPicker {
-      userImageView.image = selectedImage
-      userImageView.setNeedsDisplay()
-    }
-    
-    dismiss(animated: true, completion: nil) // выйти с контроллера
-    
-  }
-  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-    print("canceled picker")
-    dismiss(animated: true, completion: nil)
   }
 }

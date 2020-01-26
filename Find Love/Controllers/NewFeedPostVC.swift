@@ -106,7 +106,7 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     super.viewDidLoad()
     collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 5, right: 0)
     collectionView?.alwaysBounceVertical = true
-    collectionView?.backgroundColor = #colorLiteral(red: 0.1830653183, green: 0.1830653183, blue: 0.1830653183, alpha: 1)
+    collectionView?.backgroundColor = #colorLiteral(red: 0.1124108919, green: 0.1124108919, blue: 0.1124108919, alpha: 1)
     collectionView?.keyboardDismissMode = .interactive
     
     setupInputComponents()
@@ -116,11 +116,6 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
   
   override func viewDidDisappear(_ animated: Bool) {
     NotificationCenter.default.removeObserver(self) // убрать обсервер
-  }
-  
-  // поменять констрейнты при смене ориентации
-  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-    collectionView?.collectionViewLayout.invalidateLayout()
   }
   
   override var inputAccessoryView: UIView? { // вю короторе отвечает за клавиатуру
@@ -228,11 +223,9 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     }
     uploadTask.observe(.progress) { (snapshot) in
       if let complerionUnitCount = snapshot.progress?.completedUnitCount {
-        //self.nameLabel.text = String(complerionUnitCount)
       }
     }
     uploadTask.observe(.success) { (snapshot) in
-      //self.nameLabel.text = self.user?.name
     }
   }
   
@@ -401,7 +394,6 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
   @objc func handleSend() { // отправляем сообщение
     let properties = ["text": inputTextField.text!] as [String : Any]
     sendMessagesWithProperties(properties)
-    
   }
   
   // текстовое поле возврвщвет

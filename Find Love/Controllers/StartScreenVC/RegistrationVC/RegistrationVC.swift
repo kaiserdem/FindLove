@@ -105,14 +105,45 @@ class RegistrationVC: UIViewController {
   @IBAction func registrationBtnAction(_ sender: Any) {
     handleRegister()
   }
+  
   @IBAction func closeBtnAction(_ sender: Any) {
     let vc = HelloVC.init(nibName: "HelloVC", bundle: nil)
     navigationController?.pushViewController(vc, animated: true)
-    
   }
   
   @IBAction func setBtnAction(_ sender: Any) {
     handleSelectProfileImageView()
   }
+}
+
+extension RegistrationVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
+  func handleSelectProfileImageView() {
+    let picker = UIImagePickerController()
+    
+    picker.delegate = self
+    picker.allowsEditing = true
+    present(picker, animated: true, completion: nil)
+  }
+  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    
+    var selectedImageFromPicker: UIImage?
+    if let editingImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+      selectedImageFromPicker = editingImage
+    } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+      selectedImageFromPicker = originalImage
+    }
+    if let selectedImage = selectedImageFromPicker {
+      userImageView.image = selectedImage
+      userImageView.setNeedsDisplay()
+    }
+    
+    dismiss(animated: true, completion: nil) // выйти с контроллера
+    
+  }
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    print("canceled picker")
+    dismiss(animated: true, completion: nil)
+  }
 }
