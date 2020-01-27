@@ -197,7 +197,7 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     let filename = UUID().uuidString + ".mov"
     let ref = Storage.storage().reference().child("messages_movies").child(filename)
     
-    let uploadTask = ref.putFile(from: url, metadata: nil) { (metadata, error) in
+    let uploadTask = ref.putFile(from: url, metadata: nil) { [weak self] (metadata, error) in
       if error != nil {
         print(error!)
         return
@@ -209,13 +209,13 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
         }
         if let videoUrl = downloadUrl?.absoluteString {
           
-          if let thumbnailImage = self.thumbnailimageForVideoUrl(url) {
+          if let thumbnailImage = self?.thumbnailimageForVideoUrl(url) {
             
-            self.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { (imageUrl) in
+            self?.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { (imageUrl) in
               
               let properties: [String: Any] = ["videoUrl": videoUrl, "imageUrl": imageUrl, "imageWigth": thumbnailImage.size.width, "imageHight": thumbnailImage.size.height]
               
-              self.sendMessagesWithProperties(properties)
+              self?.sendMessagesWithProperties(properties)
             })
           }
         }
@@ -253,8 +253,8 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
       selectedImageFromPicker = originalImage
     }
     if let selectedImage = selectedImageFromPicker {
-      uploadToFirebaseStorageUsingImage(selectedImage) { (imageUrl) in
-        self.sendMessageWithImageUrl(imageUrl, image: selectedImage)
+      uploadToFirebaseStorageUsingImage(selectedImage) { [weak self] (imageUrl) in
+        self?.sendMessageWithImageUrl(imageUrl, image: selectedImage)
       }
     }
   }

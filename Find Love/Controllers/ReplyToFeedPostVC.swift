@@ -244,11 +244,11 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
           
           if let thumbnailImage = self.thumbnailimageForVideoUrl(url) {
             
-            self.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { (imageUrl) in
+            self.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { [weak self] (imageUrl) in
               
               let properties: [String: Any] = ["videoUrl": videoUrl, "imageUrl": imageUrl, "imageWigth": thumbnailImage.size.width, "imageHight": thumbnailImage.size.height]
               
-              self.sendMessagesWithProperties(properties)
+              self?.sendMessagesWithProperties(properties)
             })
           }
         }
@@ -288,8 +288,8 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
       selectedImageFromPicker = originalImage
     }
     if let selectedImage = selectedImageFromPicker {
-      uploadToFirebaseStorageUsingImage(selectedImage) { (imageUrl) in
-        self.sendMessageWithImageUrl(imageUrl, image: selectedImage)
+      uploadToFirebaseStorageUsingImage(selectedImage) { [weak self] (imageUrl) in
+        self?.sendMessageWithImageUrl(imageUrl, image: selectedImage)
       }
     }
   }

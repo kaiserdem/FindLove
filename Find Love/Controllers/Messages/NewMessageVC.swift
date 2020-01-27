@@ -37,12 +37,12 @@ class NewMessageVC: UIViewController {
     
     guard let uid = Auth.auth().currentUser?.uid else { return }
 
-    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
 
       if let dictionary = snapshot.value as? [String: AnyObject] {
 
         let user = User(dictionary: dictionary)
-        self.currentUser.append(user)
+        self?.currentUser.append(user)
 
       }
     }, withCancel: nil)
@@ -69,15 +69,15 @@ class NewMessageVC: UIViewController {
   
   
   func fetchUsers() { // выбрать пользователя
-    Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
+    Database.database().reference().child("users").observe(.childAdded, with: { [weak self] (snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
         let user = User(dictionary: dictionary) // пользователь
         user.id = snapshot.key
         
-        self.users.append(user) // добавляем в масив
+        self?.users.append(user) // добавляем в масив
         
         DispatchQueue.main.async { // на главном потоке асинхронно
-          self.tableView.reloadData()
+          self?.tableView.reloadData()
         }
       }
     }, withCancel: nil)

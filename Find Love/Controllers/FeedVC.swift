@@ -85,14 +85,14 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   func observePosts() {
     
     let ref = Database.database().reference().child("posts")
-    ref.observe(.childAdded, with: { (snapshot) in
+    ref.observe(.childAdded, with: { [weak self](snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
         
         let post = Post(dictionary: dictionary)
-        self.posts.append(post)
+        self?.posts.append(post)
       }
       DispatchQueue.main.async {
-        self.tableView.reloadData()
+        self?.tableView.reloadData()
       }
     }, withCancel: nil)
   }
@@ -169,17 +169,17 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     let post = posts[indexPath.row]
     
     let ref = Database.database().reference().child("users").child(post.fromId!)
-    ref.observeSingleEvent(of: .value, with: { (snapshot) in
+    ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
       
       if let dictionary = snapshot.value as? [String: AnyObject] {
         let userCurrent = User(dictionary: dictionary)
         userCurrent.id = snapshot.key
-        self.user = userCurrent
+        self?.user = userCurrent
         
        // let send = post.text
        // NotificationCenter.default.post(name: NSNotification.Name("postTextToChat"), object: nil, userInfo: ["postText": send!])
         
-        self.showChatLogVCForUser(self.user!)
+        self?.showChatLogVCForUser(self?.user!)
         
       }
     }, withCancel: nil)

@@ -54,12 +54,12 @@ class MenuVC: UIViewController {
       return
     }
     // получаем uid по из базы данных, берем значение
-    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
       
       if let dictionary = snapshot.value as? [String: AnyObject] {
         
         let user = User(dictionary: dictionary)
-        self.setupNavBarWithUser(user)
+        self?.setupNavBarWithUser(user)
       }
     }, withCancel: nil)
   }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="69" id="KGk-i7-Jjw" customClass="ChatWithStrangerCell" customModule="Find_Love" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="392" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="392" height="64.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Начать час с незнакомцем" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tj-Kr-fto">
+                        <rect key="frame" x="75" y="21" width="267" height="23"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ixh-6K-iBQ">
+                        <rect key="frame" x="10" y="5" width="55" height="55"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="55" id="3PY-xT-D3x"/>
+                            <constraint firstAttribute="width" constant="55" id="ehb-nS-Qcw"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHj-0p-ZA5">
+                        <rect key="frame" x="352" y="17.5" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="9r7-7N-hBy"/>
+                            <constraint firstAttribute="height" constant="30" id="z0r-Dw-ud9"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" red="0.2023503361" green="0.35287347730000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="0tj-Kr-fto" firstAttribute="leading" secondItem="Ixh-6K-iBQ" secondAttribute="trailing" constant="10" id="6xF-gb-Nfg"/>
+                    <constraint firstItem="GHj-0p-ZA5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="IZx-pk-xgg"/>
+                    <constraint firstItem="0tj-Kr-fto" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Xxo-wf-H02"/>
+                    <constraint firstAttribute="trailing" secondItem="GHj-0p-ZA5" secondAttribute="trailing" constant="10" id="eqr-PH-f8r"/>
+                    <constraint firstItem="GHj-0p-ZA5" firstAttribute="leading" secondItem="0tj-Kr-fto" secondAttribute="trailing" constant="10" id="g6z-WC-z45"/>
+                    <constraint firstItem="Ixh-6K-iBQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="kX6-FN-uxz"/>
+                    <constraint firstItem="Ixh-6K-iBQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="tiB-yB-C08"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="arrowDoneButton" destination="GHj-0p-ZA5" id="TYM-w9-niP"/>
+                <outlet property="backContentView" destination="H2p-sc-9uM" id="TfR-u5-O6u"/>
+                <outlet property="imageViewButtonCell" destination="Ixh-6K-iBQ" id="rhu-ya-8DC"/>
+                <outlet property="textCellLabel" destination="0tj-Kr-fto" id="AtC-rh-Ji1"/>
+            </connections>
+            <point key="canvasLocation" x="196.80000000000001" y="165.06746626686657"/>
+        </tableViewCell>
+    </objects>
+</document>

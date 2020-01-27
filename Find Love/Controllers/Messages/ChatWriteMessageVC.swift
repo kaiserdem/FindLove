@@ -203,12 +203,12 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     
     guard let uid = Auth.auth().currentUser?.uid else { return }
     
-    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
       
       if let dictionary = snapshot.value as? [String: AnyObject] {
         
         let user = User(dictionary: dictionary)
-        self.currentUser.append(user)
+        self?.currentUser.append(user)
       }
     }, withCancel: nil)
   }
@@ -217,7 +217,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     
     let userMessagesRef = Database.database().reference().child("groups").child(group!.subject!).child("messages")
     
-    userMessagesRef.observe(.childAdded, with: { (snapshot) in
+    userMessagesRef.observe(.childAdded, with: { [weak self] (snapshot) in
       
       let messageId = snapshot.key
       let messageRef = userMessagesRef.child(messageId)
@@ -228,13 +228,13 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
         
         let message = Message(dictionary: dictionary)
         
-        self.messages.append(message)
+        self?.messages.append(message)
         
         DispatchQueue.main.async {
-          self.collectionView?.reloadData()
-          let indexPath = IndexPath(item: self.messages.count-1, section: 0) // последнее
+          self?.collectionView?.reloadData()
+          let indexPath = IndexPath(item: (self?.messages.count)!-1, section: 0) // последнее
           //проскролить
-          self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+          self?.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
         }
       }, withCancel: nil)
     }, withCancel: nil)
@@ -295,32 +295,32 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
         print(error!)
         return
       }
-      ref.downloadURL(completion: { (downloadUrl, error) in
+      ref.downloadURL(completion: { [weak self] (downloadUrl, error) in
         if error != nil {
           print(error!)
           return
         }
         if let videoUrl = downloadUrl?.absoluteString {
           
-          if let thumbnailImage = self.thumbnailimageForVideoUrl(url) {
+          if let thumbnailImage = self?.thumbnailimageForVideoUrl(url) {
             
-            self.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { (imageUrl) in
+            self?.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { (imageUrl) in
               
               let properties: [String: Any] = ["videoUrl": videoUrl, "imageUrl": imageUrl, "imageWigth": thumbnailImage.size.width, "imageHight": thumbnailImage.size.height]
               
-              self.sendMessagesWithProperties(properties)
+              self?.sendMessagesWithProperties(properties)
             })
           }
         }
       })
     }
-    uploadTask.observe(.progress) { (snapshot) in
+    uploadTask.observe(.progress) { [weak self] (snapshot) in
       if let complerionUnitCount = snapshot.progress?.completedUnitCount {
-        self.nameLabel.text = String(complerionUnitCount)
+        self?.nameLabel.text = String(complerionUnitCount)
       }
     }
-    uploadTask.observe(.success) { (snapshot) in
-      self.nameLabel.text = self.user?.name
+    uploadTask.observe(.success) { [weak self] (snapshot) in
+      self?.nameLabel.text = self?.user?.name
     }
   }
   
@@ -348,8 +348,8 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
       selectedImageFromPicker = originalImage
     }
     if let selectedImage = selectedImageFromPicker {
-      uploadToFirebaseStorageUsingImage(selectedImage) { (imageUrl) in
-        self.sendMessageWithImageUrl(imageUrl, image: selectedImage)
+      uploadToFirebaseStorageUsingImage(selectedImage) { [weak self] (imageUrl) in
+        self?.sendMessageWithImageUrl(imageUrl, image: selectedImage)
       }
     }
   }
@@ -459,9 +459,9 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
         zoomOutImageView.frame = self.startFrame!
         self.blackBackgroundView?.alpha = 0
         self.inputConteinerView.alpha = 0
-      }) { (complete) in
+      }) { [weak self] (complete) in
         zoomOutImageView.removeFromSuperview()
-        self.startingImageView?.isHidden = false
+        self?.startingImageView?.isHidden = false
       }
     }
   }
@@ -514,7 +514,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     cell.playBtn.isHidden = message.videoUrl == nil // если видео нет, тогда это тру
     
     if let userFromId = message.fromId {
-      Database.database().reference().child("users").child(userFromId).observeSingleEvent(of: .value, with: { (snapshot) in
+      Database.database().reference().child("users").child(userFromId).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
         
         if let dictionary = snapshot.value as? [String: AnyObject] {
           let currentUser = User(dictionary: dictionary)
@@ -523,8 +523,8 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
           
           if let text = message.text { // размер облака сообщения
             
-            let widthByText = self.estimateFrameForText(text).width + 35
-            let widthByName = self.estimateFrameForText(currentUser.name!).width + 35
+            let widthByText = (self?.estimateFrameForText(text).width)! + 35
+            let widthByName = (self?.estimateFrameForText(currentUser.name!).width)! + 35
             
             if widthByText >= widthByName { // по размеру текста или имени
               cell.bubbleWidthAnchor?.constant = widthByText

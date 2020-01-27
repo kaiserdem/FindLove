@@ -191,7 +191,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     guard let uid = Auth.auth().currentUser?.uid, let toId = user?.id else { return }
     
     let userMessagesRef = Database.database().reference().child("user-messages").child(uid).child(toId)
-    userMessagesRef.observe(.childAdded, with: { (snapshot) in
+    userMessagesRef.observe(.childAdded, with: { [weak self] (snapshot) in
       
       let messageId = snapshot.key
       let messageRef = Database.database().reference().child("messages").child(messageId)
@@ -202,13 +202,13 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
         
         let message = Message(dictionary: dictionary)
               
-          self.messages.append(message)
+          self?.messages.append(message)
           
           DispatchQueue.main.async {
-            self.collectionView?.reloadData()
-            let indexPath = IndexPath(item: self.messages.count-1, section: 0) // последнее
+            self?.collectionView?.reloadData()
+            let indexPath = IndexPath(item: (self?.messages.count)!-1, section: 0) // последнее
             //проскролить
-            self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+            self?.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
           }
       }, withCancel: nil)
     }, withCancel: nil)
@@ -264,7 +264,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     let filename = UUID().uuidString + ".mov"
     let ref = Storage.storage().reference().child("messages_movies").child(filename)
     
-    let uploadTask = ref.putFile(from: url, metadata: nil) { (metadata, error) in
+    let uploadTask = ref.putFile(from: url, metadata: nil) { [weak self] (metadata, error) in
       if error != nil {
         print(error!)
         return
@@ -276,25 +276,25 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
         }
         if let videoUrl = downloadUrl?.absoluteString {
           
-          if let thumbnailImage = self.thumbnailimageForVideoUrl(url) {
+          if let thumbnailImage = self?.thumbnailimageForVideoUrl(url) {
             
-            self.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { (imageUrl) in
+            self?.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { (imageUrl) in
               
               let properties: [String: Any] = ["videoUrl": videoUrl, "imageUrl": imageUrl, "imageWigth": thumbnailImage.size.width, "imageHight": thumbnailImage.size.height]
               
-              self.sendMessagesWithProperties(properties)
+              self?.sendMessagesWithProperties(properties)
             })
           }
         }
       })
     }
-    uploadTask.observe(.progress) { (snapshot) in
+    uploadTask.observe(.progress) { [weak self] (snapshot) in
       if let complerionUnitCount = snapshot.progress?.completedUnitCount {
-        self.nameLabel.text = String(complerionUnitCount)
+        self?.nameLabel.text = String(complerionUnitCount)
       }
     }
-    uploadTask.observe(.success) { (snapshot) in
-      self.nameLabel.text = self.user?.name
+    uploadTask.observe(.success) { [weak self] (snapshot) in
+      self?.nameLabel.text = self?.user?.name
     }
   }
   
@@ -322,8 +322,8 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
       selectedImageFromPicker = originalImage
     }
     if let selectedImage = selectedImageFromPicker {
-      uploadToFirebaseStorageUsingImage(selectedImage) { (imageUrl) in
-        self.sendMessageWithImageUrl(imageUrl, image: selectedImage)
+      uploadToFirebaseStorageUsingImage(selectedImage) { [weak self] (imageUrl) in
+        self?.sendMessageWithImageUrl(imageUrl, image: selectedImage)
       }
     }
   }
@@ -458,9 +458,9 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
         zoomOutImageView.frame = self.startFrame!
         self.blackBackgroundView?.alpha = 0
         self.inputConteinerView.alpha = 0
-      }) { (complete) in
+      }) { [weak self] (complete) in
         zoomOutImageView.removeFromSuperview()
-        self.startingImageView?.isHidden = false
+        self?.startingImageView?.isHidden = false
       }
     }
   }

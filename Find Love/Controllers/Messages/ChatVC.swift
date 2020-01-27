@@ -67,14 +67,14 @@ class ChatVC: UIViewController {
   func observeGroups() {
     
     let ref = Database.database().reference().child("groups")
-    ref.observe(.childAdded, with: { (snapshot) in
+    ref.observe(.childAdded, with: { [weak self] (snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
         
         let group = Group(dictionary: dictionary)
-        self.groups.append(group)
+        self?.groups.append(group)
       }
       DispatchQueue.main.async {
-        self.tableView.reloadData()
+        self?.tableView.reloadData()
       }
     }, withCancel: nil)
   }
@@ -118,14 +118,14 @@ extension ChatVC: UITableViewDataSource, UITableViewDelegate {
     
     
     let ref = Database.database().reference().child("groups").child(group.subject!)
-    ref.observe(.value, with: { (snapshot) in
+    ref.observe(.value, with: { [weak self] (snapshot) in
       guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
       
       let groupDict = Group(dictionary: dictionary)
       
       let vc = ChatWriteMessageVC(collectionViewLayout: UICollectionViewFlowLayout())
       vc.group = groupDict
-      self.present(vc, animated: true, completion: nil)
+      self?.present(vc, animated: true, completion: nil)
       
     }, withCancel: nil)
   }

@@ -43,18 +43,19 @@ class MessagesVC: UIViewController {
     tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
     
     tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
+    tableView.register(UINib(nibName: "ChatWithStrangerCell", bundle: nil), forCellReuseIdentifier:"ChatWithStrangerCell")
     tableView.allowsMultipleSelectionDuringEditing = true
   }
   func fetchUser() { // выбрать пользователя
     
     guard let uid = Auth.auth().currentUser?.uid else { return }
     
-    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
       
       if let dictionary = snapshot.value as? [String: AnyObject] {
         
         let user = User(dictionary: dictionary)
-        self.setupNavBarWithUser(user)
+        self?.setupNavBarWithUser(user)
       }
     }, withCancel: nil)
   }
@@ -65,6 +66,11 @@ class MessagesVC: UIViewController {
     tableView.reloadData()
     
     observeUserMessages()
+  }
+  
+  func openSearchStrangerView() {
+    let view =  SearchStrangerForChatView(frame: self.view.frame)
+    self.view.addSubview(view)
   }
   
   func showChatLogVCForUser(_ user: User?) {
@@ -80,20 +86,20 @@ class MessagesVC: UIViewController {
     
     // ссылка на все сообщения пользователя
     let ref = Database.database().reference().child("user-messages").child(uid)
-    ref.observe(.childAdded, with: { (snapshot) in
+    ref.observe(.childAdded, with: { [weak self] (snapshot) in
       
       // ключ сообщения
       let userId = snapshot.key
       Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
         
         let messageId = snapshot.key
-        self.fetchMessageWithaMessageId(messageId)
+        self?.fetchMessageWithaMessageId(messageId)
         
       }, withCancel: nil)
     }, withCancel: nil)
     
-    ref.observe(.childMoved) { (snapchot) in // наблюдать за удвлением
-      self.attempReloadOfTable(true)
+    ref.observe(.childMoved) { [weak self] (snapchot) in // наблюдать за удвлением
+      self?.attempReloadOfTable(true)
     }
   }
   
@@ -102,15 +108,15 @@ class MessagesVC: UIViewController {
     let messageReference = Database.database().reference().child("messages").child(messageId)
     
     // проверяем папку messages на новые сообщения
-    messageReference.observeSingleEvent(of: .value, with: { (snapshot) in
+    messageReference.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
       
       if let dictionary = snapshot.value as? [String: AnyObject] { // словарь из всего
         let message = Message(dictionary: dictionary) // помещаем в сообщение
         
         if let chatPartnerId = message.chatPartnerId() { // если есть Id получателья
-          self.messagesDictionary[chatPartnerId] = message // по toId было отправлено это message сообщение
+          self?.messagesDictionary[chatPartnerId] = message // по toId было отправлено это message сообщение
         }
-        self.attempReloadOfTable(true)
+        self?.attempReloadOfTable(true)
       }
     }, withCancel: nil)
   }
@@ -150,29 +156,35 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
     let message = messages[indexPath.row]
     
     if let chatPartnerId = message.chatPartnerId() {
-      Database.database().reference().child("user-messages").child(uid).child(chatPartnerId).removeValue { (error, ref) in
+      Database.database().reference().child("user-messages").child(uid).child(chatPartnerId).removeValue { [weak self] (error, ref) in
         if error != nil {
           print("Failed to delete messages:", error!)
           return
         }
-        self.messagesDictionary.removeValue(forKey: chatPartnerId)
-        self.attempReloadOfTable(true)
+        self?.messagesDictionary.removeValue(forKey: chatPartnerId)
+        self?.attempReloadOfTable(true)
       }
     }
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    if indexPath.row == 0 {
+      openSearchStrangerView()
+      return
+    }
+    
     let message = self.messages[indexPath.row] //
     guard let chatPartnerId = message.chatPartnerId() else { return }
     
     // берем
     let ref = Database.database().reference().child("users").child(chatPartnerId)
-    ref.observe(.value, with: { (snapshot) in
+    ref.observe(.value, with: { [weak self] (snapshot) in
       guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
       
       let user = User(dictionary: dictionary)
       user.id = chatPartnerId
-      self.showChatLogVCForUser(user)
+      self?.showChatLogVCForUser(user)
     }, withCancel: nil)
   }
   
@@ -181,12 +193,19 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    if indexPath.row == 0 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "ChatWithStrangerCell", for: indexPath) as! ChatWithStrangerCell
+    } else {
+      
     let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell
     
     let message = messages[indexPath.row]
     cell.message = message
     
     return cell
+    }
+    return UITableViewCell()
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
