@@ -67,7 +67,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AgK-fD-zzw">
-                    <rect key="frame" x="30" y="428" width="315" height="36"/>
+                    <rect key="frame" x="30" y="423" width="315" height="36"/>
                     <color key="backgroundColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Войти">
@@ -120,7 +120,7 @@
                 <constraint firstItem="AgK-fD-zzw" firstAttribute="trailing" secondItem="6IH-P1-f5n" secondAttribute="trailing" id="iRW-X4-mc9"/>
                 <constraint firstItem="AgK-fD-zzw" firstAttribute="leading" secondItem="6IH-P1-f5n" secondAttribute="leading" id="kKK-Dw-GD2"/>
                 <constraint firstItem="6IH-P1-f5n" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="l2n-81-znv"/>
-                <constraint firstItem="AgK-fD-zzw" firstAttribute="top" secondItem="6IH-P1-f5n" secondAttribute="bottom" constant="55" id="sIZ-fU-Ell"/>
+                <constraint firstItem="AgK-fD-zzw" firstAttribute="top" secondItem="6IH-P1-f5n" secondAttribute="bottom" constant="50" id="sIZ-fU-Ell"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="B2i-Nn-a4f" secondAttribute="trailing" constant="30" id="ttl-cF-ROs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TeU-vd-f0g" secondAttribute="trailing" constant="30" id="uoW-aA-b4z"/>
                 <constraint firstItem="rDl-z1-bPe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="vkp-CT-mNE"/>

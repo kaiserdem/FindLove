@@ -20,17 +20,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9La-Vj-5kW">
-                        <rect key="frame" x="35" y="5" width="298" height="92.5"/>
+                        <rect key="frame" x="45" y="5" width="288" height="92.5"/>
                         <subviews>
                             <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Название чата" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gwM-UJ-m5g">
-                                <rect key="frame" x="0.0" y="0.0" width="298" height="46.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="46.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Описание" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Alj-sd-Zte">
-                                <rect key="frame" x="0.0" y="46.5" width="298" height="46"/>
+                                <rect key="frame" x="0.0" y="46.5" width="288" height="46"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -79,7 +79,7 @@
                     <constraint firstItem="3dK-E2-MOw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="4ng-d2-Hee"/>
                     <constraint firstAttribute="bottom" secondItem="3dK-E2-MOw" secondAttribute="bottom" constant="10" id="6AT-Zy-CNo"/>
                     <constraint firstAttribute="bottom" secondItem="9La-Vj-5kW" secondAttribute="bottom" constant="5" id="7UJ-Mj-B0c"/>
-                    <constraint firstItem="9La-Vj-5kW" firstAttribute="leading" secondItem="Gn0-yA-4ba" secondAttribute="trailing" constant="5" id="F2b-9j-ucR"/>
+                    <constraint firstItem="9La-Vj-5kW" firstAttribute="leading" secondItem="Gn0-yA-4ba" secondAttribute="trailing" constant="15" id="F2b-9j-ucR"/>
                     <constraint firstAttribute="trailing" secondItem="3dK-E2-MOw" secondAttribute="trailing" constant="10" id="QlU-KE-oHz"/>
                     <constraint firstItem="9La-Vj-5kW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Zj6-T9-OH3"/>
                     <constraint firstItem="Gn0-yA-4ba" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="aLQ-gF-arh"/>

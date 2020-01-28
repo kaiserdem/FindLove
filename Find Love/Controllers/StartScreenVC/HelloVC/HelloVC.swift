@@ -15,7 +15,7 @@ class HelloVC: UIViewController {
   @IBOutlet weak var registrationBtn: UIButton!
   
   
-  weak var menuVC: MenuVC?
+  weak var menuVC: ProfileVC?
   
   override var prefersStatusBarHidden: Bool {
     return true
@@ -35,7 +35,7 @@ class HelloVC: UIViewController {
     if Auth.auth().currentUser == nil {
       perform(#selector(handleLogin), with: nil, afterDelay: 0)
     } else {
-      let vc = MenuVC.init(nibName: "MenuVC", bundle: nil)
+      let vc = ProfileVC.init(nibName: "MenuVC", bundle: nil)
       navigationController?.pushViewController(vc, animated: true)
     }
   }

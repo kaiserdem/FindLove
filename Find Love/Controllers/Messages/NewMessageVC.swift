@@ -62,7 +62,7 @@ class NewMessageVC: UIViewController {
     tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0).isActive = true
     tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
     tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true
-    
+    tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 140, right: 0)
     tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
   }
   

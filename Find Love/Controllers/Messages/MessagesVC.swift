@@ -16,7 +16,7 @@ class MessagesVC: UIViewController {
   var users = [User]()
   var messages = [Message]()
   var messagesDictionary = [String: Message]()
-  var menuVC: MenuVC?
+  var menuVC: ProfileVC?
   var timer: Timer?
   
   override func viewDidLoad() {
@@ -196,6 +196,7 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
     
     if indexPath.row == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "ChatWithStrangerCell", for: indexPath) as! ChatWithStrangerCell
+      return cell
     } else {
       
     let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell

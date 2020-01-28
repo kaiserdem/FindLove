@@ -26,7 +26,7 @@ class RegistrationVC: UIViewController {
   @IBOutlet weak var emailTF: UITextField!
   @IBOutlet weak var nameTextField: UITextField!
   
-  weak var menuVC: MenuVC?
+  weak var menuVC: ProfileVC?
   
   override var prefersStatusBarHidden: Bool {
     return true

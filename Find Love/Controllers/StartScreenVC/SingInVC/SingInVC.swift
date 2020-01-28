@@ -17,7 +17,7 @@ class SingInVC: UIViewController {
   @IBOutlet weak var forgotPasswordBtn: UIButton!
   @IBOutlet weak var passwordTF: UITextField!
   
-  weak var menuVC: MenuVC?
+  weak var menuVC: ProfileVC?
   
   @IBOutlet weak var enterBtn: UIButton!
   

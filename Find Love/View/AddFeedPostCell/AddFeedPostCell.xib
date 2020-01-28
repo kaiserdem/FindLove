@@ -26,7 +26,7 @@
                                 <rect key="frame" x="110" y="5" width="271" height="90"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="42J-DK-RH9">
@@ -41,7 +41,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="945-Wc-uKv">
-                                <rect key="frame" x="64" y="27" width="46" height="46"/>
+                                <rect key="frame" x="67" y="27" width="46" height="46"/>
                                 <subviews>
                                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2y-Hv-PRH">
                                         <rect key="frame" x="3.5" y="3.5" width="39" height="39"/>
@@ -73,7 +73,7 @@
                             <constraint firstItem="42J-DK-RH9" firstAttribute="leading" secondItem="SB9-2h-MRi" secondAttribute="leading" id="FsS-qx-ObN"/>
                             <constraint firstAttribute="trailing" secondItem="oZX-OT-suz" secondAttribute="trailing" constant="5" id="LIs-yP-Ggf"/>
                             <constraint firstItem="42J-DK-RH9" firstAttribute="top" secondItem="SB9-2h-MRi" secondAttribute="top" constant="5" id="NpY-cm-qh5"/>
-                            <constraint firstItem="945-Wc-uKv" firstAttribute="trailing" secondItem="42J-DK-RH9" secondAttribute="trailing" constant="20" id="OYd-9u-2y0"/>
+                            <constraint firstItem="945-Wc-uKv" firstAttribute="trailing" secondItem="42J-DK-RH9" secondAttribute="trailing" constant="23" id="OYd-9u-2y0"/>
                             <constraint firstItem="oZX-OT-suz" firstAttribute="top" secondItem="SB9-2h-MRi" secondAttribute="top" constant="5" id="YMZ-l6-NhC"/>
                             <constraint firstAttribute="bottom" secondItem="oZX-OT-suz" secondAttribute="bottom" constant="5" id="c7U-eZ-YS2"/>
                             <constraint firstAttribute="bottom" secondItem="42J-DK-RH9" secondAttribute="bottom" constant="5" id="iFs-nK-JdP"/>

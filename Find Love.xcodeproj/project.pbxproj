@@ -37,7 +37,7 @@
 		AD8895DE23B2162C00347A6A /* RegistrationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8895DC23B2162C00347A6A /* RegistrationVC.xib */; };
 		AD8895E223B21F5300347A6A /* SingInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895E023B21F5300347A6A /* SingInVC.swift */; };
 		AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8895E123B21F5300347A6A /* SingInVC.xib */; };
-		AD8895E923B293BE00347A6A /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895E723B293BE00347A6A /* MenuVC.swift */; };
+		AD8895E923B293BE00347A6A /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895E723B293BE00347A6A /* ProfileVC.swift */; };
 		AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD98E3D323C729B9003A6DA8 /* Main.storyboard */; };
 		ADB8079223D05B1300847897 /* OpenFeedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8079123D05B1300847897 /* OpenFeedPost.swift */; };
 		ADB8079423D05B2100847897 /* OpenFeedPost.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB8079323D05B2100847897 /* OpenFeedPost.xib */; };
@@ -53,6 +53,8 @@
 		ADBA195623C2A41C009B45EC /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBA195523C2A41C009B45EC /* ExtensionUIView.swift */; };
 		ADBA195B23C371E6009B45EC /* ReviewCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBA195923C371E6009B45EC /* ReviewCVCell.swift */; };
 		ADBA195C23C371E6009B45EC /* ReviewCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADBA195A23C371E6009B45EC /* ReviewCVCell.xib */; };
+		ADE0ABFF23E01E4C00653D18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */; };
+		ADE0AC0123E01E5800653D18 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE0AC0023E01E5800653D18 /* SettingsView.xib */; };
 		ADFCA85723DD90FF004067A9 /* ExtensionUICollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFCA85623DD90FF004067A9 /* ExtensionUICollectionVC.swift */; };
 		ADFCA85B23DDEDFC004067A9 /* ChatWithStrangerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFCA85923DDEDFC004067A9 /* ChatWithStrangerCell.swift */; };
 		ADFCA85C23DDEDFC004067A9 /* ChatWithStrangerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADFCA85A23DDEDFC004067A9 /* ChatWithStrangerCell.xib */; };
@@ -94,7 +96,7 @@
 		AD8895DC23B2162C00347A6A /* RegistrationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationVC.xib; sourceTree = "<group>"; };
 		AD8895E023B21F5300347A6A /* SingInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInVC.swift; sourceTree = "<group>"; };
 		AD8895E123B21F5300347A6A /* SingInVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingInVC.xib; sourceTree = "<group>"; };
-		AD8895E723B293BE00347A6A /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
+		AD8895E723B293BE00347A6A /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		AD98E3D323C729B9003A6DA8 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		ADB8079123D05B1300847897 /* OpenFeedPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFeedPost.swift; sourceTree = "<group>"; };
 		ADB8079323D05B2100847897 /* OpenFeedPost.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenFeedPost.xib; sourceTree = "<group>"; };
@@ -110,6 +112,8 @@
 		ADBA195523C2A41C009B45EC /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		ADBA195923C371E6009B45EC /* ReviewCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCVCell.swift; sourceTree = "<group>"; };
 		ADBA195A23C371E6009B45EC /* ReviewCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCVCell.xib; sourceTree = "<group>"; };
+		ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		ADE0AC0023E01E5800653D18 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		ADFCA85623DD90FF004067A9 /* ExtensionUICollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUICollectionVC.swift; sourceTree = "<group>"; };
 		ADFCA85923DDEDFC004067A9 /* ChatWithStrangerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWithStrangerCell.swift; sourceTree = "<group>"; };
 		ADFCA85A23DDEDFC004067A9 /* ChatWithStrangerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatWithStrangerCell.xib; sourceTree = "<group>"; };
@@ -140,13 +144,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		AD02EB2923B793C200F472A5 /* ChatMessageCell */ = {
+		AD02EB2923B793C200F472A5 /* ChatMessageCVCell */ = {
 			isa = PBXGroup;
 			children = (
 				AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */,
 				AD46C9E823D9E22400FC7002 /* ChatCell.swift */,
 			);
-			path = ChatMessageCell;
+			path = ChatMessageCVCell;
 			sourceTree = "<group>";
 		};
 		AD1085AA23DCA0970009ADB3 /* AddFeedPostCell */ = {
@@ -191,6 +195,7 @@
 		AD26947123B606BA00D49887 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ADE0ABFD23E01E2300653D18 /* SettingsView */,
 				ADFCA85D23DDFCAF004067A9 /* SearchStrangerForChatView */,
 				ADFCA85823DDED92004067A9 /* ChatWithStrangerCell */,
 				AD1085AA23DCA0970009ADB3 /* AddFeedPostCell */,
@@ -198,7 +203,7 @@
 				ADB8079023D05AE800847897 /* OpenFeedPostView */,
 				ADB8079B23D1ADC300847897 /* SendMessageView */,
 				AD26946E23B6019C00D49887 /* UserCell */,
-				AD02EB2923B793C200F472A5 /* ChatMessageCell */,
+				AD02EB2923B793C200F472A5 /* ChatMessageCVCell */,
 				ADBA195D23C49004009B45EC /* ReviewCVCell */,
 				ADB8DED623CB9970008D989E /* SelectChatCell */,
 			);
@@ -278,7 +283,7 @@
 				ADB8DECD23CA1987008D989E /* Messages */,
 				AD5A563723BFC15A0032AB2A /* SearchVC.swift */,
 				AD79AC0D23CDEC2C00FA7D09 /* GameVC.swift */,
-				AD8895E723B293BE00347A6A /* MenuVC.swift */,
+				AD8895E723B293BE00347A6A /* ProfileVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -357,6 +362,15 @@
 				ADBA195A23C371E6009B45EC /* ReviewCVCell.xib */,
 			);
 			name = ReviewCVCell;
+			sourceTree = "<group>";
+		};
+		ADE0ABFD23E01E2300653D18 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */,
+				ADE0AC0023E01E5800653D18 /* SettingsView.xib */,
+			);
+			path = SettingsView;
 			sourceTree = "<group>";
 		};
 		ADFCA85823DDED92004067A9 /* ChatWithStrangerCell */ = {
@@ -461,6 +475,7 @@
 				ADFCA85C23DDEDFC004067A9 /* ChatWithStrangerCell.xib in Resources */,
 				ADB8079423D05B2100847897 /* OpenFeedPost.xib in Resources */,
 				AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */,
+				ADE0AC0123E01E5800653D18 /* SettingsView.xib in Resources */,
 				AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */,
 				AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */,
 				ADB8DED523CB9959008D989E /* SelectChatCell.xib in Resources */,
@@ -545,7 +560,8 @@
 				AD5A563923BFC15A0032AB2A /* SearchVC.swift in Sources */,
 				ADB8079D23D1AE1200847897 /* SendMessageView.swift in Sources */,
 				AD26946723B538A500D49887 /* Message.swift in Sources */,
-				AD8895E923B293BE00347A6A /* MenuVC.swift in Sources */,
+				AD8895E923B293BE00347A6A /* ProfileVC.swift in Sources */,
+				ADE0ABFF23E01E4C00653D18 /* SettingsView.swift in Sources */,
 				ADB8DED423CB9959008D989E /* SelectChatCell.swift in Sources */,
 				AD79AC0E23CDEC2C00FA7D09 /* GameVC.swift in Sources */,
 				AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */,
