@@ -39,11 +39,17 @@
 		AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8895E123B21F5300347A6A /* SingInVC.xib */; };
 		AD8895E923B293BE00347A6A /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895E723B293BE00347A6A /* ProfileVC.swift */; };
 		AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD98E3D323C729B9003A6DA8 /* Main.storyboard */; };
+		ADB4CD3C23E0AFAF001DD8AF /* InfornatioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB4CD3B23E0AFAF001DD8AF /* InfornatioView.swift */; };
+		ADB4CD3E23E0AFC3001DD8AF /* InfornatioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB4CD3D23E0AFC3001DD8AF /* InfornatioView.xib */; };
+		ADB4CD4223E18BE4001DD8AF /* StatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB4CD4123E18BE4001DD8AF /* StatusView.xib */; };
+		ADB4CD4423E18BF2001DD8AF /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB4CD4323E18BF2001DD8AF /* StatusView.swift */; };
+		ADB4CD4723E1977D001DD8AF /* OrientationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB4CD4623E1977D001DD8AF /* OrientationView.xib */; };
+		ADB4CD4923E19788001DD8AF /* OrientationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB4CD4823E19788001DD8AF /* OrientationView.swift */; };
+		ADB4CD4C23E19C8B001DD8AF /* AboutSelfView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB4CD4B23E19C8B001DD8AF /* AboutSelfView.xib */; };
+		ADB4CD4E23E19C97001DD8AF /* AboutSelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB4CD4D23E19C97001DD8AF /* AboutSelfView.swift */; };
 		ADB8079223D05B1300847897 /* OpenFeedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8079123D05B1300847897 /* OpenFeedPost.swift */; };
 		ADB8079423D05B2100847897 /* OpenFeedPost.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB8079323D05B2100847897 /* OpenFeedPost.xib */; };
 		ADB8079A23D19DC600847897 /* ReplyToFeedPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8079923D19DC600847897 /* ReplyToFeedPostVC.swift */; };
-		ADB8079D23D1AE1200847897 /* SendMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8079C23D1AE1200847897 /* SendMessageView.swift */; };
-		ADB8079F23D1AE1F00847897 /* SendMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB8079E23D1AE1F00847897 /* SendMessageView.xib */; };
 		ADB8DECF23CA1A15008D989E /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8DECE23CA1A15008D989E /* MessagesVC.swift */; };
 		ADB8DED123CA1A27008D989E /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8DED023CA1A27008D989E /* ChatVC.swift */; };
 		ADB8DED423CB9959008D989E /* SelectChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8DED223CB9959008D989E /* SelectChatCell.swift */; };
@@ -98,11 +104,17 @@
 		AD8895E123B21F5300347A6A /* SingInVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingInVC.xib; sourceTree = "<group>"; };
 		AD8895E723B293BE00347A6A /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		AD98E3D323C729B9003A6DA8 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		ADB4CD3B23E0AFAF001DD8AF /* InfornatioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfornatioView.swift; sourceTree = "<group>"; };
+		ADB4CD3D23E0AFC3001DD8AF /* InfornatioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfornatioView.xib; sourceTree = "<group>"; };
+		ADB4CD4123E18BE4001DD8AF /* StatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusView.xib; sourceTree = "<group>"; };
+		ADB4CD4323E18BF2001DD8AF /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
+		ADB4CD4623E1977D001DD8AF /* OrientationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrientationView.xib; sourceTree = "<group>"; };
+		ADB4CD4823E19788001DD8AF /* OrientationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationView.swift; sourceTree = "<group>"; };
+		ADB4CD4B23E19C8B001DD8AF /* AboutSelfView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutSelfView.xib; sourceTree = "<group>"; };
+		ADB4CD4D23E19C97001DD8AF /* AboutSelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSelfView.swift; sourceTree = "<group>"; };
 		ADB8079123D05B1300847897 /* OpenFeedPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFeedPost.swift; sourceTree = "<group>"; };
 		ADB8079323D05B2100847897 /* OpenFeedPost.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenFeedPost.xib; sourceTree = "<group>"; };
 		ADB8079923D19DC600847897 /* ReplyToFeedPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyToFeedPostVC.swift; sourceTree = "<group>"; };
-		ADB8079C23D1AE1200847897 /* SendMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageView.swift; sourceTree = "<group>"; };
-		ADB8079E23D1AE1F00847897 /* SendMessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMessageView.xib; sourceTree = "<group>"; };
 		ADB8DECE23CA1A15008D989E /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		ADB8DED023CA1A27008D989E /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		ADB8DED223CB9959008D989E /* SelectChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChatCell.swift; sourceTree = "<group>"; };
@@ -195,13 +207,13 @@
 		AD26947123B606BA00D49887 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ADB4CD3A23E0AF60001DD8AF /* ProfileViews */,
 				ADE0ABFD23E01E2300653D18 /* SettingsView */,
 				ADFCA85D23DDFCAF004067A9 /* SearchStrangerForChatView */,
 				ADFCA85823DDED92004067A9 /* ChatWithStrangerCell */,
 				AD1085AA23DCA0970009ADB3 /* AddFeedPostCell */,
 				AD5A563B23BFEB450032AB2A /* FeedCell */,
 				ADB8079023D05AE800847897 /* OpenFeedPostView */,
-				ADB8079B23D1ADC300847897 /* SendMessageView */,
 				AD26946E23B6019C00D49887 /* UserCell */,
 				AD02EB2923B793C200F472A5 /* ChatMessageCVCell */,
 				ADBA195D23C49004009B45EC /* ReviewCVCell */,
@@ -315,6 +327,53 @@
 			path = SingInVC;
 			sourceTree = "<group>";
 		};
+		ADB4CD3A23E0AF60001DD8AF /* ProfileViews */ = {
+			isa = PBXGroup;
+			children = (
+				ADB4CD4A23E19C7E001DD8AF /* AboutSelfView */,
+				ADB4CD4523E1976B001DD8AF /* OrientationView */,
+				ADB4CD4023E18BBB001DD8AF /* StatusView */,
+				ADB4CD3F23E18BA0001DD8AF /* InformationView */,
+			);
+			path = ProfileViews;
+			sourceTree = "<group>";
+		};
+		ADB4CD3F23E18BA0001DD8AF /* InformationView */ = {
+			isa = PBXGroup;
+			children = (
+				ADB4CD3B23E0AFAF001DD8AF /* InfornatioView.swift */,
+				ADB4CD3D23E0AFC3001DD8AF /* InfornatioView.xib */,
+			);
+			path = InformationView;
+			sourceTree = "<group>";
+		};
+		ADB4CD4023E18BBB001DD8AF /* StatusView */ = {
+			isa = PBXGroup;
+			children = (
+				ADB4CD4323E18BF2001DD8AF /* StatusView.swift */,
+				ADB4CD4123E18BE4001DD8AF /* StatusView.xib */,
+			);
+			path = StatusView;
+			sourceTree = "<group>";
+		};
+		ADB4CD4523E1976B001DD8AF /* OrientationView */ = {
+			isa = PBXGroup;
+			children = (
+				ADB4CD4823E19788001DD8AF /* OrientationView.swift */,
+				ADB4CD4623E1977D001DD8AF /* OrientationView.xib */,
+			);
+			path = OrientationView;
+			sourceTree = "<group>";
+		};
+		ADB4CD4A23E19C7E001DD8AF /* AboutSelfView */ = {
+			isa = PBXGroup;
+			children = (
+				ADB4CD4D23E19C97001DD8AF /* AboutSelfView.swift */,
+				ADB4CD4B23E19C8B001DD8AF /* AboutSelfView.xib */,
+			);
+			path = AboutSelfView;
+			sourceTree = "<group>";
+		};
 		ADB8079023D05AE800847897 /* OpenFeedPostView */ = {
 			isa = PBXGroup;
 			children = (
@@ -322,15 +381,6 @@
 				ADB8079323D05B2100847897 /* OpenFeedPost.xib */,
 			);
 			path = OpenFeedPostView;
-			sourceTree = "<group>";
-		};
-		ADB8079B23D1ADC300847897 /* SendMessageView */ = {
-			isa = PBXGroup;
-			children = (
-				ADB8079C23D1AE1200847897 /* SendMessageView.swift */,
-				ADB8079E23D1AE1F00847897 /* SendMessageView.xib */,
-			);
-			path = SendMessageView;
 			sourceTree = "<group>";
 		};
 		ADB8DECD23CA1987008D989E /* Messages */ = {
@@ -472,17 +522,20 @@
 			files = (
 				AD09E33D23D7647D00AAC162 /* GoogleService-Info.plist in Resources */,
 				AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */,
+				ADB4CD4C23E19C8B001DD8AF /* AboutSelfView.xib in Resources */,
 				ADFCA85C23DDEDFC004067A9 /* ChatWithStrangerCell.xib in Resources */,
 				ADB8079423D05B2100847897 /* OpenFeedPost.xib in Resources */,
 				AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */,
 				ADE0AC0123E01E5800653D18 /* SettingsView.xib in Resources */,
 				AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */,
+				ADB4CD3E23E0AFC3001DD8AF /* InfornatioView.xib in Resources */,
 				AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */,
 				ADB8DED523CB9959008D989E /* SelectChatCell.xib in Resources */,
+				ADB4CD4723E1977D001DD8AF /* OrientationView.xib in Resources */,
 				AD1085A923DCA08A0009ADB3 /* AddFeedPostCell.xib in Resources */,
 				AD5A563F23BFEB750032AB2A /* FeedCell.xib in Resources */,
+				ADB4CD4223E18BE4001DD8AF /* StatusView.xib in Resources */,
 				AD26946D23B6019200D49887 /* UserCell.xib in Resources */,
-				ADB8079F23D1AE1F00847897 /* SendMessageView.xib in Resources */,
 				ADFCA86123DDFDA9004067A9 /* SearchStrangerForChatView.xib in Resources */,
 				AD8895DE23B2162C00347A6A /* RegistrationVC.xib in Resources */,
 				ADBA195C23C371E6009B45EC /* ReviewCVCell.xib in Resources */,
@@ -541,6 +594,7 @@
 			files = (
 				ADFCA85F23DDFD9E004067A9 /* SearchStrangerForChatView.swift in Sources */,
 				AD26946923B5393B00D49887 /* Extension.swift in Sources */,
+				ADB4CD4423E18BF2001DD8AF /* StatusView.swift in Sources */,
 				ADB8079223D05B1300847897 /* OpenFeedPost.swift in Sources */,
 				AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */,
 				ADB8DECF23CA1A15008D989E /* MessagesVC.swift in Sources */,
@@ -548,6 +602,7 @@
 				AD5A563E23BFEB750032AB2A /* FeedCell.swift in Sources */,
 				AD8895DD23B2162C00347A6A /* RegistrationVC.swift in Sources */,
 				AD8895E223B21F5300347A6A /* SingInVC.swift in Sources */,
+				ADB4CD4E23E19C97001DD8AF /* AboutSelfView.swift in Sources */,
 				ADB8079A23D19DC600847897 /* ReplyToFeedPostVC.swift in Sources */,
 				AD26947323B67B8A00D49887 /* ChatLogVC.swift in Sources */,
 				AD26BE8C23C0CB2500EF1418 /* NewFeedPostVC.swift in Sources */,
@@ -558,10 +613,10 @@
 				ADB8DEDA23CCCBD0008D989E /* ChatWriteMessageVC.swift in Sources */,
 				ADB8DED123CA1A27008D989E /* ChatVC.swift in Sources */,
 				AD5A563923BFC15A0032AB2A /* SearchVC.swift in Sources */,
-				ADB8079D23D1AE1200847897 /* SendMessageView.swift in Sources */,
 				AD26946723B538A500D49887 /* Message.swift in Sources */,
 				AD8895E923B293BE00347A6A /* ProfileVC.swift in Sources */,
 				ADE0ABFF23E01E4C00653D18 /* SettingsView.swift in Sources */,
+				ADB4CD3C23E0AFAF001DD8AF /* InfornatioView.swift in Sources */,
 				ADB8DED423CB9959008D989E /* SelectChatCell.swift in Sources */,
 				AD79AC0E23CDEC2C00FA7D09 /* GameVC.swift in Sources */,
 				AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */,
@@ -574,6 +629,7 @@
 				AD26BE8E23C0D47700EF1418 /* Post.swift in Sources */,
 				AD02EB3123B7FDB500F472A5 /* NewMessageVC.swift in Sources */,
 				AD26946523B4FF8100D49887 /* User.swift in Sources */,
+				ADB4CD4923E19788001DD8AF /* OrientationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

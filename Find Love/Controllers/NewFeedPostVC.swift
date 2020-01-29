@@ -202,7 +202,7 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
         print(error!)
         return
       }
-      ref.downloadURL(completion: { (downloadUrl, error) in
+      ref.downloadURL(completion: { [weak self] (downloadUrl, error) in
         if error != nil {
           print(error!)
           return
@@ -211,7 +211,7 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
           
           if let thumbnailImage = self?.thumbnailimageForVideoUrl(url) {
             
-            self?.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { (imageUrl) in
+            self?.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { [weak self] (imageUrl) in
               
               let properties: [String: Any] = ["videoUrl": videoUrl, "imageUrl": imageUrl, "imageWigth": thumbnailImage.size.width, "imageHight": thumbnailImage.size.height]
               
