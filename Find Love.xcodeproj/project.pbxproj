@@ -330,10 +330,10 @@
 		ADB4CD3A23E0AF60001DD8AF /* ProfileViews */ = {
 			isa = PBXGroup;
 			children = (
-				ADB4CD4A23E19C7E001DD8AF /* AboutSelfView */,
-				ADB4CD4523E1976B001DD8AF /* OrientationView */,
-				ADB4CD4023E18BBB001DD8AF /* StatusView */,
 				ADB4CD3F23E18BA0001DD8AF /* InformationView */,
+				ADB4CD4023E18BBB001DD8AF /* StatusView */,
+				ADB4CD4523E1976B001DD8AF /* OrientationView */,
+				ADB4CD4A23E19C7E001DD8AF /* AboutSelfView */,
 			);
 			path = ProfileViews;
 			sourceTree = "<group>";

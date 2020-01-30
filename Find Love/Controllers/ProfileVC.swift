@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-import FirebaseDatabase
+import FirebaseStorage
 
 
 class ProfileVC: UIViewController {
@@ -28,12 +28,22 @@ class ProfileVC: UIViewController {
   @IBOutlet weak var settingsBtn: UIButton!
   
   var user: User?
+  
+  let pickerData = ["Мужской", "Женский"]
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     navigationController?.navigationBar.isHidden = true
     setupBtnSetting()
     fetchUser()
+    
+    
+    self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(sender:))))
+  }
+  
+  @objc func keyboardWillHide(sender: NSNotification) {
+    view.endEditing(true)
   }
   
   func fetchUser() {
@@ -42,9 +52,9 @@ class ProfileVC: UIViewController {
     Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
       
       if let dictionary = snapshot.value as? [String: AnyObject] {
-        print(dictionary)
         let user = User(dictionary: dictionary)
         user.id = snapshot.key
+        self?.user = user
         self?.loadUserData(user)
         
       }
@@ -99,18 +109,49 @@ class ProfileVC: UIViewController {
     }
   }
   
+  func setImage() {
+    
+//    guard let uid = Auth.auth().currentUser?.uid else { return }
+//
+//    let imageUrl = user?.profileImageUrl
+//
+//    let imageName = NSUUID().uuidString // генерирует случайный айди
+//    // создали папку  для картинке в базе
+//    let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
+//
+//
+//    if let profileImage = self.profileImageView.image, let  uploadData = profileImage.jpegData(compressionQuality: 0.1) {
+//      storageRef.putData(uploadData, metadata: nil, completion: { [weak self] (metadata, error) in
+//
+//        if error != nil {
+//          print(error ?? "")
+//          return
+//        }
+//        // могут быть ошибки
+//        storageRef.downloadURL(completion: { [weak self] (url, error) in
+//          if error != nil {
+//            print(error!.localizedDescription)
+//            return
+//          }
+//          if let profileImageUrl = url?.absoluteString {
+//
+//            let values = [ "profileImageUrl": profileImageUrl]
+//            self?.registeUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
+//          }
+//        })
+//      })
+//    }
+  }
   
   
   @IBAction func changeDataBtnAction(_ sender: Any) {
+    print("info")
     let view = InfornatioView(frame: self.view.frame)
     self.view.addSubview(view)
   }
   @IBAction func changeDescriptionBtnAction(_ sender: Any) {
     let view = AboutSelfView(frame: self.view.frame)
     self.view.addSubview(view)
-  }
-  @IBAction func changeImageBtnAction(_ sender: Any) {
-    print("changeImageBtnAction")
   }
   @IBAction func changeStatusBtnAction(_ sender: Any) {
     let view = StatusView(frame: self.view.frame)
@@ -124,7 +165,25 @@ class ProfileVC: UIViewController {
     let view = SettingsView(frame: self.view.frame)
     self.view.addSubview(view)
   }
-  
+  @IBAction func changeImageBtnAction(_ sender: Any) {
+    print("Set image")
+    handleSelectProfileImageView()
+    
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    let imageUrl = user?.profileImageUrl
+    
+    let ref = Storage.storage().reference().child("profile_images")
+    
+    //    let pictureRef = Storage.storage().reference().child("\(userUid)/profilePic.jpg")
+    //    pictureRef.delete { error in
+    //      if let error = error {
+    //        // Uh-oh, an error occurred!
+    //      } else {
+    //        // File deleted successfully
+    //      }
+    //    }
+  }
   private func setupBtnSetting() {
     changeDataBtn.setImage(UIImage(named: "pen")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
     changeDataBtn.imageView?.tintColor = .white
@@ -146,4 +205,36 @@ class ProfileVC: UIViewController {
     settingsBtn.layer.borderWidth = 2
     settingsBtn.layer.borderColor = UIColor.blue.cgColor
   }  
+}
+
+extension ProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  
+  func handleSelectProfileImageView() {
+    let picker = UIImagePickerController()
+    
+    picker.delegate = self
+    picker.allowsEditing = true
+    present(picker, animated: true, completion: nil)
+  }
+  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    
+    var selectedImageFromPicker: UIImage?
+    if let editingImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+      selectedImageFromPicker = editingImage
+    } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+      selectedImageFromPicker = originalImage
+    }
+    if let selectedImage = selectedImageFromPicker {
+      profileImageView.image = selectedImage
+      profileImageView.setNeedsDisplay()
+    }
+    
+    dismiss(animated: true, completion: nil) // выйти с контроллера
+    
+  }
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    print("canceled picker")
+    dismiss(animated: true, completion: nil)
+  }
 }

@@ -23,6 +23,7 @@
                 <outlet property="nameLabel" destination="TIX-vT-4KZ" id="EwS-ah-IWH"/>
                 <outlet property="nameSeparator" destination="qWY-uH-YDX" id="GUf-Qy-SMc"/>
                 <outlet property="nameTextField" destination="waN-uc-81Z" id="W9g-1e-wVc"/>
+                <outlet property="pickerView" destination="cED-Ta-f8H" id="JfE-bp-W3f"/>
                 <outlet property="saveBtn" destination="dWE-tU-27A" id="iQI-31-UNI"/>
                 <outlet property="titleLabel" destination="DCd-06-y94" id="DiL-p3-IdX"/>
             </connections>
@@ -215,9 +216,17 @@
                         <constraint firstAttribute="height" constant="1" id="rwq-WR-0hD"/>
                     </constraints>
                 </view>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cED-Ta-f8H">
+                    <rect key="frame" x="0.0" y="487" width="375" height="180"/>
+                    <color key="backgroundColor" red="0.8826177716255188" green="0.89001113176345825" blue="0.90314030647277832" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="180" id="FaK-w6-6nF"/>
+                    </constraints>
+                </pickerView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="cED-Ta-f8H" firstAttribute="trailing" secondItem="tHc-ak-S26" secondAttribute="trailing" id="4an-m7-ccj"/>
                 <constraint firstItem="OPJ-6J-ioL" firstAttribute="leading" secondItem="dNf-ru-nLD" secondAttribute="leading" constant="50" id="DPU-ZF-AT7"/>
                 <constraint firstItem="OPJ-6J-ioL" firstAttribute="leading" secondItem="qWY-uH-YDX" secondAttribute="leading" id="Jx9-bp-TCp"/>
                 <constraint firstItem="OPJ-6J-ioL" firstAttribute="trailing" secondItem="qWY-uH-YDX" secondAttribute="trailing" id="MB9-nM-Meg"/>
@@ -225,8 +234,10 @@
                 <constraint firstItem="ZXz-tQ-V67" firstAttribute="bottom" secondItem="4iz-Mz-HAF" secondAttribute="bottom" id="Xkq-PR-IVf"/>
                 <constraint firstItem="OPJ-6J-ioL" firstAttribute="leading" secondItem="ZXz-tQ-V67" secondAttribute="leading" id="YI9-Zw-g88"/>
                 <constraint firstItem="tHc-ak-S26" firstAttribute="trailing" secondItem="yzZ-su-nQe" secondAttribute="trailing" constant="30" id="aef-zT-lW9"/>
+                <constraint firstItem="cED-Ta-f8H" firstAttribute="leading" secondItem="tHc-ak-S26" secondAttribute="leading" id="bdr-7e-qKE"/>
                 <constraint firstItem="yzZ-su-nQe" firstAttribute="top" secondItem="tHc-ak-S26" secondAttribute="top" constant="40" id="kRl-t9-Cgy"/>
                 <constraint firstItem="yzZ-su-nQe" firstAttribute="leading" secondItem="tHc-ak-S26" secondAttribute="leading" constant="30" id="mhP-Mh-Fqz"/>
+                <constraint firstItem="tHc-ak-S26" firstAttribute="bottom" secondItem="cED-Ta-f8H" secondAttribute="bottom" id="nRV-zz-5av"/>
                 <constraint firstItem="OPJ-6J-ioL" firstAttribute="centerX" secondItem="yzZ-su-nQe" secondAttribute="centerX" id="pwv-Qa-MgS"/>
                 <constraint firstItem="OPJ-6J-ioL" firstAttribute="bottom" secondItem="cry-FZ-btO" secondAttribute="bottom" id="r64-vX-40V"/>
                 <constraint firstItem="OPJ-6J-ioL" firstAttribute="trailing" secondItem="ZXz-tQ-V67" secondAttribute="trailing" id="tYR-Po-NHd"/>

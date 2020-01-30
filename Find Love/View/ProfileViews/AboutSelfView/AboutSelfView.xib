@@ -19,6 +19,7 @@
                 <outlet property="aboutSelfView" destination="hHm-43-ik8" id="vT0-Ud-Fu0"/>
                 <outlet property="closeBtn" destination="QNt-Mv-xh0" id="1IB-KU-Dag"/>
                 <outlet property="saveBtn" destination="jVF-M2-eaK" id="YWU-SG-DYZ"/>
+                <outlet property="titleLabel" destination="jkv-pO-OQz" id="h1s-pj-exP"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

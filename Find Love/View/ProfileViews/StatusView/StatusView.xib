@@ -16,6 +16,7 @@
                 <outlet property="closeBtn" destination="QTn-Z0-vlu" id="M97-CF-5DR"/>
                 <outlet property="saveBtn" destination="EeP-op-56L" id="jVZ-X1-sEc"/>
                 <outlet property="statusLabel" destination="ymd-yQ-VQi" id="rBP-9D-PzL"/>
+                <outlet property="statusSeparator" destination="0t0-WD-C2N" id="WWH-c2-ihh"/>
                 <outlet property="statusTextView" destination="A4h-Zh-Vqe" id="s03-oG-pYA"/>
                 <outlet property="statusView" destination="efw-pb-I8M" id="TMt-fa-Dsa"/>
                 <outlet property="titleLabel" destination="COE-To-bSt" id="MZE-Qw-5y0"/>

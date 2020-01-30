@@ -15,13 +15,8 @@ class RegistrationVC: UIViewController {
   
   @IBOutlet weak var userImageView: UIImageView!
   @IBOutlet weak var setPhotoBtn: UIButton!
-  @IBOutlet weak var findeAgeToTF: UITextField!
-  @IBOutlet weak var findeAgeFromTF: UITextField!
-  @IBOutlet weak var findGenderSegCont: UISegmentedControl!
-  @IBOutlet weak var genderSegCont: UISegmentedControl!
   @IBOutlet weak var closeBtn: UIButton!
   @IBOutlet weak var registrationBtn: UIButton!
-  @IBOutlet weak var ageTF: UITextField!
   @IBOutlet weak var passwordTF: UITextField!
   @IBOutlet weak var emailTF: UITextField!
   @IBOutlet weak var nameTextField: UITextField!
@@ -66,7 +61,7 @@ class RegistrationVC: UIViewController {
       let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
       
       if let profileImage = self.userImageView.image, let  uploadData = profileImage.jpegData(compressionQuality: 0.1) {
-        storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+        storageRef.putData(uploadData, metadata: nil, completion: { [weak self] (metadata, error) in
           
           if error != nil {
             print(error ?? "")
@@ -81,7 +76,7 @@ class RegistrationVC: UIViewController {
             if let profileImageUrl = url?.absoluteString {
               
               let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl]
-              self.registeUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
+              self?.registeUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
             }
           })
         })

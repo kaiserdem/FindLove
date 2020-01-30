@@ -23,8 +23,7 @@ class AboutSelfView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     commonInit()
-    
-    setupBtnSettings()
+    registerNotificationObservers()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -37,13 +36,24 @@ class AboutSelfView: UIView {
     aboutSelfView.fixInView(self)
     aboutSelfView.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.8)
   }
-  
-  private func setupBtnSettings() {
+  func registerNotificationObservers() {
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
   }
+  @objc func keyboardWillAppear(_ notification: Notification) {
+    aboutSelfLabel.textColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+    aboutSelfSeparator.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+  }
+  @objc func keyboardWillDisappear(_ notification: Notification) {
+    aboutSelfLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    aboutSelfSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+  }
+  
   @IBAction func saveBtnAction(_ sender: Any) {
   }
   
   @IBAction func closeBtnAction(_ sender: Any) {
+    NotificationCenter.default.removeObserver(self)
     self.removeFromSuperview()
   }
   

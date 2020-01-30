@@ -17,6 +17,7 @@
                 <outlet property="orientationLabel" destination="9gu-rO-5Xx" id="Wab-S9-gPu"/>
                 <outlet property="orientationSeparator" destination="SmI-gg-mjP" id="Mad-zB-jUX"/>
                 <outlet property="orientationView" destination="7IU-d7-wgr" id="vOb-SH-Bu4"/>
+                <outlet property="pickerView" destination="Pd6-6y-axE" id="WcY-Z6-QD0"/>
                 <outlet property="saveBtn" destination="q6V-Kh-hUH" id="3Fx-n4-Zfu"/>
                 <outlet property="titleLabel" destination="FpE-RD-BZ8" id="weM-L3-hy5"/>
             </connections>
@@ -27,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WFi-ln-15Q">
-                    <rect key="frame" x="30" y="60" width="315" height="300"/>
+                    <rect key="frame" x="30" y="90" width="315" height="300"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NGt-A3-e66">
                             <rect key="frame" x="20" y="85.5" width="275" height="174.5"/>
@@ -141,20 +142,30 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SmI-gg-mjP">
-                    <rect key="frame" x="50" y="206" width="275" height="1"/>
+                    <rect key="frame" x="50" y="236" width="275" height="1"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="UNP-RK-NVC"/>
                     </constraints>
                 </view>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pd6-6y-axE">
+                    <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="216" id="soG-dp-hKg"/>
+                    </constraints>
+                </pickerView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="WFi-ln-15Q" firstAttribute="top" secondItem="5Px-hG-Frh" secondAttribute="top" constant="40" id="4tg-wU-EOj"/>
+                <constraint firstItem="WFi-ln-15Q" firstAttribute="top" secondItem="5Px-hG-Frh" secondAttribute="top" constant="70" id="4tg-wU-EOj"/>
+                <constraint firstItem="Pd6-6y-axE" firstAttribute="bottom" secondItem="5Px-hG-Frh" secondAttribute="bottom" id="KeR-G0-Rig"/>
                 <constraint firstItem="SmI-gg-mjP" firstAttribute="centerX" secondItem="WFi-ln-15Q" secondAttribute="centerX" id="Mrr-PW-63t"/>
                 <constraint firstItem="WFi-ln-15Q" firstAttribute="leading" secondItem="5Px-hG-Frh" secondAttribute="leading" constant="30" id="VL1-au-hA0"/>
                 <constraint firstItem="5Px-hG-Frh" firstAttribute="trailing" secondItem="WFi-ln-15Q" secondAttribute="trailing" constant="30" id="XBn-7C-Odo"/>
+                <constraint firstItem="Pd6-6y-axE" firstAttribute="trailing" secondItem="5Px-hG-Frh" secondAttribute="trailing" id="bP1-gG-bYs"/>
                 <constraint firstItem="SmI-gg-mjP" firstAttribute="bottom" secondItem="rKA-JW-Dik" secondAttribute="bottom" constant="2" id="f7s-IY-j2S"/>
+                <constraint firstItem="Pd6-6y-axE" firstAttribute="leading" secondItem="5Px-hG-Frh" secondAttribute="leading" id="gyJ-TF-BNO"/>
                 <constraint firstItem="WFi-ln-15Q" firstAttribute="centerX" secondItem="7IU-d7-wgr" secondAttribute="centerX" id="hQt-xO-NWL"/>
                 <constraint firstItem="SmI-gg-mjP" firstAttribute="leading" secondItem="7IU-d7-wgr" secondAttribute="leading" constant="50" id="iBm-SZ-n5n"/>
             </constraints>

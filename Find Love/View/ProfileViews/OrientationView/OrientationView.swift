@@ -9,10 +9,11 @@
 import UIKit
 import Firebase
 
-class OrientationView: UIView {
+class OrientationView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
   
   @IBOutlet var orientationView: UIView!
   
+  @IBOutlet weak var pickerView: UIPickerView!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var orientationSeparator: UIView!
   @IBOutlet weak var orientationLabel: UILabel!
@@ -20,10 +21,15 @@ class OrientationView: UIView {
   @IBOutlet weak var saveBtn: UIButton!
   @IBOutlet weak var closeBtn: UIButton!
   
+  var genderArray =  ["Парни", "Девушки", "Девушки и парни"]
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     commonInit()
     setupBtnSettings()
+    pickerView.isHidden = true
+    pickerView.delegate = self
+    pickerView.dataSource = self
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -36,6 +42,40 @@ class OrientationView: UIView {
     orientationView.fixInView(self)
     orientationView.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.8)
   }
+  
+  @IBAction func saveBtnAction(_ sender: Any) {
+    
+  }
+  
+  @IBAction func orientationBtnAction(_ sender: Any) {
+    pickerView.isHidden = false
+    orientationLabel.textColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+    orientationSeparator.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+  }
+  
+  @IBAction func closeBtnAction(_ sender: Any) {
+    self.removeFromSuperview()
+  }
+  
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return genderArray.count
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    orientationBtn.titleLabel!.text = genderArray[row]
+    orientationLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    orientationSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    pickerView.isHidden = true
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return genderArray[row]
+  }
+  
   private func setupBtnSettings() {
     orientationBtn.setImage(UIImage(named: "down")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
     orientationBtn.tintColor = .white
@@ -44,15 +84,7 @@ class OrientationView: UIView {
     orientationBtn.imageView?.bottomAnchor.constraint(equalTo: orientationBtn.bottomAnchor, constant: -5.0).isActive = true
     orientationBtn.imageView?.heightAnchor.constraint(equalToConstant: 15).isActive = true
     orientationBtn.imageView?.widthAnchor.constraint(equalToConstant: 15).isActive = true
-    
     orientationBtn.translatesAutoresizingMaskIntoConstraints = false
     orientationBtn.imageView?.translatesAutoresizingMaskIntoConstraints = false
-  }
-  @IBAction func saveBtnAction(_ sender: Any) {
-  }
-  @IBAction func orientationBtnAction(_ sender: Any) {
-  }
-  @IBAction func closeBtnAction(_ sender: Any) {
-    self.removeFromSuperview()
   }
 }
