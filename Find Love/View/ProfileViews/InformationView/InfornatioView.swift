@@ -64,6 +64,12 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
   }
   @objc func keyboardWillAppear(_ notification: Notification) {
+    
+    if nameTextField.text!.count > 1 {
+      saveBtn.isEnabled = true
+      saveBtn.setTitleColor(.white, for: .normal)
+    }
+    
     nameLabel.textColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
     nameSeparator.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
     genderLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -88,6 +94,9 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     let borderColor = UIColor.white
     backView.layer.borderWidth = 0.5
     backView.layer.borderColor = borderColor.withAlphaComponent(opacity).cgColor
+    
+    saveBtn.isEnabled = false
+    saveBtn.setTitleColor(.gray, for: .normal)
     
     nameTextField.attributedPlaceholder = NSAttributedString(string: "Имя", attributes:[NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)])
   }
@@ -180,6 +189,8 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
       print(genderBtn.titleLabel!.text)
     }
     pickerView.isHidden = true
+    saveBtn.isEnabled = true
+    saveBtn.setTitleColor(.white, for: .normal)
     reloadInputViews()
   }
   

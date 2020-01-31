@@ -42,7 +42,7 @@ class User: NSObject {
   var email: String?
   var profileImageUrl: String?
   var age: Int?
-  var staus: String?
+  var status: String?
   var aboutSelf: String?
   var orientation: String?
   var gender: String?
@@ -54,7 +54,7 @@ class User: NSObject {
     self.email = dictionary["email"] as? String
     self.profileImageUrl = dictionary["profileImageUrl"] as? String
     self.age = dictionary["age"] as? Int
-    self.staus = dictionary["staus"] as? String
+    self.status = dictionary["status"] as? String
     self.aboutSelf = dictionary["aboutSelf"] as? String
     self.gender = dictionary["gender"] as? String
     self.orientation = dictionary["orientation"] as? String

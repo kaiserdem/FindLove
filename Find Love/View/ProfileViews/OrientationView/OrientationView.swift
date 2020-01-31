@@ -45,13 +45,43 @@ class OrientationView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     orientationView.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.8)
     backView.layer.borderWidth = 0.5
     
+    saveBtn.isEnabled = false
+    saveBtn.setTitleColor(.gray, for: .normal)
+    
     let opacity:CGFloat = 0.3
     let borderColor = UIColor.white
     backView.layer.borderColor = borderColor.withAlphaComponent(opacity).cgColor
   }
   
   @IBAction func saveBtnAction(_ sender: Any) {
+    guard let orientationTextValue = orientationBtn.titleLabel?.text else { // если пустые, принт, выходим
+      print("Error: field is empty")
+      return
+    }
     
+    let ref = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
+    
+    print(beforeOrientation)
+    if beforeOrientation != orientationTextValue {
+      let orientationStr = orientationValidator(string: orientationTextValue)
+      let valuesGender = ["orientation": orientationStr] as [String : Any]
+      ref.updateChildValues(valuesGender)
+    } else {
+      saveBtn.isEnabled = false
+      saveBtn.setTitleColor(.gray, for: .normal)
+    }
+    
+    removeFromSuperview()
+  }
+  
+  private func orientationValidator(string: String) -> String {
+    if string == "Девушки" {
+      return "1"
+    } else if string == "Парни" {
+      return "2"
+    } else {
+      return "3"
+    }
   }
   
   @IBAction func orientationBtnAction(_ sender: Any) {
@@ -73,10 +103,13 @@ class OrientationView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
   }
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    orientationBtn.titleLabel!.text = genderArray[row]
+    orientationBtn.setTitle(genderArray[row], for: .normal)
     orientationLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     orientationSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     pickerView.isHidden = true
+    
+    saveBtn.isEnabled = true
+    saveBtn.setTitleColor(.white, for: .normal)
   }
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

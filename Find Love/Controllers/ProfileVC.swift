@@ -96,15 +96,14 @@ class ProfileVC: UIViewController {
     if user.age != nil {
       ageLabel.textColor = .white
       let ageString = String(describing: user.age!)
-      print(ageString)
       ageLabel.text = String(describing:"Возраст: \(String(describing: user.age!))")
     } else {
       ageLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
       ageLabel.text = "Введите свой возраст"
     }
-    if user.staus != nil {
+    if user.status != nil {
       statusTextView.textColor = .white
-      statusTextView.text = user.staus
+      statusTextView.text = user.status
 //      let height = self.estimateFrameForText(user.staus!).height
 //      heightConstraintStatusTextView.constant = height
     } else {
@@ -160,12 +159,15 @@ class ProfileVC: UIViewController {
   @IBAction func changeDescriptionBtnAction(_ sender: Any) {
     let view = AboutSelfView(frame: self.view.frame)
     
+    
     if user?.aboutSelf != nil {
       view.aboutSelfTextView.text = user!.aboutSelf!
-      let height = estimateFrameForText(user!.staus!).height
+      view.beforeAboutSelfText = user!.aboutSelf!
+      let height = estimateFrameForText(user!.status!).height + 10
       view.heightConstraintAboutSelfTextView.constant = height
     } else {
       view.aboutSelfTextView.text = "Опишите себя, свои интересы и увлечения"
+      view.beforeAboutSelfText = "Опишите себя, свои интересы и увлечения"
     }
     self.view.addSubview(view)
   }
@@ -173,12 +175,14 @@ class ProfileVC: UIViewController {
   @IBAction func changeStatusBtnAction(_ sender: Any) {
     let view = StatusView(frame: self.view.frame)
     
-    if user?.staus != nil {
-      view.statusTextView.text = user!.staus!
-      let height = estimateFrameForText(user!.staus!).height
+    if user?.status != nil {
+      view.statusTextView.text = user!.status!
+      view.beforeStatusText = user!.status!
+      let height = estimateFrameForText(user!.status!).height + 10
       view.heightConstraintStatusTextView.constant = height
     } else {
       view.statusTextView.text = "Тут пока пусто, опишите свое настроение"
+      view.beforeStatusText = "Тут пока пусто, опишите свое настроение"
     }
     self.view.addSubview(view)
   }
@@ -188,8 +192,10 @@ class ProfileVC: UIViewController {
     
     if user?.orientation != nil {
       view.orientationBtn.setTitle(orientationValidator(string: user!.orientation!), for: .normal)
+      view.beforeOrientation = orientationValidator(string: user!.orientation!)
     } else {
       view.orientationBtn.setTitle("Девушки или парни", for: .normal)
+      view.beforeOrientation = "Девушки или парни"
     }
     self.view.addSubview(view)
   }
