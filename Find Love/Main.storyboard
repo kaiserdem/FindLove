@@ -194,7 +194,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eAG-gr-b3d">
-                                <rect key="frame" x="0.0" y="94" width="414" height="719"/>
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sSb-4q-ens">
                                     <size key="itemSize" width="50" height="50"/>
@@ -240,7 +240,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y8H-P5-M1y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2610" y="194"/>
+            <point key="canvasLocation" x="-59" y="869"/>
         </scene>
         <!--GameVC-->
         <scene sceneID="LgH-bn-JEW">
@@ -256,7 +256,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8l-yf-89v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3272" y="194"/>
+            <point key="canvasLocation" x="583" y="878"/>
         </scene>
         <!--ProfileVC-->
         <scene sceneID="Zp3-Af-uPF">
@@ -554,7 +554,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ofc-k1-fr5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3963.7681159420295" y="193.52678571428569"/>
+            <point key="canvasLocation" x="2610" y="194"/>
         </scene>
         <!--Custom Tab Bar-->
         <scene sceneID="1yH-O9-SRm">
@@ -570,8 +570,6 @@
                     <connections>
                         <segue destination="Yku-Q6-7cK" kind="relationship" relationship="viewControllers" id="Wli-6g-MfC"/>
                         <segue destination="c6E-gv-5fL" kind="relationship" relationship="viewControllers" id="9nz-Bg-Amd"/>
-                        <segue destination="KWN-qe-DWc" kind="relationship" relationship="viewControllers" id="iAI-jk-HaZ"/>
-                        <segue destination="9kI-NL-R1v" kind="relationship" relationship="viewControllers" id="n3w-EB-Yax"/>
                         <segue destination="Ybx-RV-JTM" kind="relationship" relationship="viewControllers" id="1h3-Ui-p7v"/>
                     </connections>
                 </tabBarController>

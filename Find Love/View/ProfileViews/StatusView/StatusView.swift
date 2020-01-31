@@ -20,6 +20,8 @@ class StatusView: UIView {
   @IBOutlet weak var statusTextView: UITextView!
   @IBOutlet weak var saveBtn: UIButton!
   @IBOutlet weak var closeBtn: UIButton!
+  
+  var beforeStatusText = ""
  
   override init(frame: CGRect) {
     super.init(frame: frame)

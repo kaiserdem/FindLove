@@ -39,6 +39,9 @@
 		AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8895E123B21F5300347A6A /* SingInVC.xib */; };
 		AD8895E923B293BE00347A6A /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895E723B293BE00347A6A /* ProfileVC.swift */; };
 		AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD98E3D323C729B9003A6DA8 /* Main.storyboard */; };
+		ADB4A24F23E44240001D1A6A /* ExtensionAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB4A24E23E44240001D1A6A /* ExtensionAlertController.swift */; };
+		ADB4A25323E44CC0001D1A6A /* CustomAlertWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB4A25223E44CC0001D1A6A /* CustomAlertWarning.swift */; };
+		ADB4A25523E44CCF001D1A6A /* CustomAlertWarning.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB4A25423E44CCF001D1A6A /* CustomAlertWarning.xib */; };
 		ADB4CD3C23E0AFAF001DD8AF /* InfornatioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB4CD3B23E0AFAF001DD8AF /* InfornatioView.swift */; };
 		ADB4CD3E23E0AFC3001DD8AF /* InfornatioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB4CD3D23E0AFC3001DD8AF /* InfornatioView.xib */; };
 		ADB4CD4223E18BE4001DD8AF /* StatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB4CD4123E18BE4001DD8AF /* StatusView.xib */; };
@@ -104,6 +107,9 @@
 		AD8895E123B21F5300347A6A /* SingInVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingInVC.xib; sourceTree = "<group>"; };
 		AD8895E723B293BE00347A6A /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		AD98E3D323C729B9003A6DA8 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		ADB4A24E23E44240001D1A6A /* ExtensionAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionAlertController.swift; sourceTree = "<group>"; };
+		ADB4A25223E44CC0001D1A6A /* CustomAlertWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertWarning.swift; sourceTree = "<group>"; };
+		ADB4A25423E44CCF001D1A6A /* CustomAlertWarning.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomAlertWarning.xib; sourceTree = "<group>"; };
 		ADB4CD3B23E0AFAF001DD8AF /* InfornatioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfornatioView.swift; sourceTree = "<group>"; };
 		ADB4CD3D23E0AFC3001DD8AF /* InfornatioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfornatioView.xib; sourceTree = "<group>"; };
 		ADB4CD4123E18BE4001DD8AF /* StatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusView.xib; sourceTree = "<group>"; };
@@ -198,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				AD26946823B5393B00D49887 /* Extension.swift */,
+				ADB4A24E23E44240001D1A6A /* ExtensionAlertController.swift */,
 				ADBA195523C2A41C009B45EC /* ExtensionUIView.swift */,
 				ADFCA85623DD90FF004067A9 /* ExtensionUICollectionVC.swift */,
 			);
@@ -327,9 +334,19 @@
 			path = SingInVC;
 			sourceTree = "<group>";
 		};
+		ADB4A25123E44C64001D1A6A /* CustomAlertWarning */ = {
+			isa = PBXGroup;
+			children = (
+				ADB4A25223E44CC0001D1A6A /* CustomAlertWarning.swift */,
+				ADB4A25423E44CCF001D1A6A /* CustomAlertWarning.xib */,
+			);
+			path = CustomAlertWarning;
+			sourceTree = "<group>";
+		};
 		ADB4CD3A23E0AF60001DD8AF /* ProfileViews */ = {
 			isa = PBXGroup;
 			children = (
+				ADB4A25123E44C64001D1A6A /* CustomAlertWarning */,
 				ADB4CD3F23E18BA0001DD8AF /* InformationView */,
 				ADB4CD4023E18BBB001DD8AF /* StatusView */,
 				ADB4CD4523E1976B001DD8AF /* OrientationView */,
@@ -526,6 +543,7 @@
 				ADFCA85C23DDEDFC004067A9 /* ChatWithStrangerCell.xib in Resources */,
 				ADB8079423D05B2100847897 /* OpenFeedPost.xib in Resources */,
 				AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */,
+				ADB4A25523E44CCF001D1A6A /* CustomAlertWarning.xib in Resources */,
 				ADE0AC0123E01E5800653D18 /* SettingsView.xib in Resources */,
 				AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */,
 				ADB4CD3E23E0AFC3001DD8AF /* InfornatioView.xib in Resources */,
@@ -596,6 +614,7 @@
 				AD26946923B5393B00D49887 /* Extension.swift in Sources */,
 				ADB4CD4423E18BF2001DD8AF /* StatusView.swift in Sources */,
 				ADB8079223D05B1300847897 /* OpenFeedPost.swift in Sources */,
+				ADB4A25323E44CC0001D1A6A /* CustomAlertWarning.swift in Sources */,
 				AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */,
 				ADB8DECF23CA1A15008D989E /* MessagesVC.swift in Sources */,
 				ADB8DED823CC7D11008D989E /* Group.swift in Sources */,
@@ -604,6 +623,7 @@
 				AD8895E223B21F5300347A6A /* SingInVC.swift in Sources */,
 				ADB4CD4E23E19C97001DD8AF /* AboutSelfView.swift in Sources */,
 				ADB8079A23D19DC600847897 /* ReplyToFeedPostVC.swift in Sources */,
+				ADB4A24F23E44240001D1A6A /* ExtensionAlertController.swift in Sources */,
 				AD26947323B67B8A00D49887 /* ChatLogVC.swift in Sources */,
 				AD26BE8C23C0CB2500EF1418 /* NewFeedPostVC.swift in Sources */,
 				ADBA195B23C371E6009B45EC /* ReviewCVCell.swift in Sources */,

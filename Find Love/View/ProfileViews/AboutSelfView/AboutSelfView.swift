@@ -21,6 +21,8 @@ class AboutSelfView: UIView {
   @IBOutlet weak var saveBtn: UIButton!
   @IBOutlet weak var closeBtn: UIButton!
   
+  var beforeAboutSelfText = ""
+  
   @IBOutlet weak var backView: UIView!
   override init(frame: CGRect) {
     super.init(frame: frame)

@@ -27,21 +27,31 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
   @IBOutlet weak var closeBtn: UIButton!
   @IBOutlet weak var backView: UIView!
   
+  var beforeName = ""
+  var beforeAge = ""
+  var beforeGender = ""
+  
+  
   var genderArray = ["Мужской","Женский",]
   var ageArray = [Int]()
   var pickerValue = 1
   
   var user: User?
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     commonInit()
-    
+
     registerNotificationObservers()
     setupBtnSettings()
     
-    for i in 0 ... 100 {
+    for i in 16 ... 100 {
       ageArray.append(i)
     }
+  }
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    beforeName = nameTextField.text!
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -49,7 +59,7 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     commonInit()
   }
   
-  func registerNotificationObservers() {
+  private func registerNotificationObservers() {
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
   }
@@ -78,6 +88,8 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     let borderColor = UIColor.white
     backView.layer.borderWidth = 0.5
     backView.layer.borderColor = borderColor.withAlphaComponent(opacity).cgColor
+    
+    nameTextField.attributedPlaceholder = NSAttributedString(string: "Имя", attributes:[NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)])
   }
   
   @IBAction func selectAgeBtnAction(_ sender: Any) {
@@ -106,6 +118,35 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
   
   @IBAction func saveBtnAction(_ sender: Any) {
     
+    guard let name = nameTextField.text , let age = ageBtn.titleLabel?.text, let gender = genderBtn.titleLabel?.text else { // если пустые, принт, выходим
+      print("Error: field is empty")
+      return
+    }
+    if nameTextField.text?.isEmpty == true {
+      let view = CustomAlertWarning(frame: self.infornatioView.frame)
+      infornatioView.addSubview(view)
+      return
+    }
+    
+    let ref = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
+    
+    if beforeName != name {
+      let valuesName = ["name": name] as [String : Any]
+      ref.updateChildValues(valuesName)
+    }
+    
+    if beforeGender != gender {
+      let genderStr = genderValidator(string: gender)
+      let valuesGender = ["gender": genderStr] as [String : Any]
+      ref.updateChildValues(valuesGender)
+    }
+    
+    if beforeAge != age {
+      let ageInt = Int(age)
+      let valuesName = ["age": ageInt] as [String : Any]
+      ref.updateChildValues(valuesName)
+    }
+    removeFromSuperview()
   }
   
   @IBAction func closeBtnAction(_ sender: Any) {
@@ -127,15 +168,19 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     if pickerValue == 0 {
-      ageBtn.titleLabel!.text = String(describing: ageArray[row])
+      ageBtn.setTitle(String(describing:ageArray[row]), for: .normal)
+      //ageBtn.titleLabel!.text = String(describing:ageArray[row])
       ageLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
       ageSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+      print(ageBtn.titleLabel!.text)
     } else {
-      genderBtn.titleLabel!.text = String(describing: genderArray[row])
+      genderBtn.setTitle(String(describing:genderArray[row]), for: .normal)
       genderLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
       genderSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+      print(genderBtn.titleLabel!.text)
     }
     pickerView.isHidden = true
+    reloadInputViews()
   }
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -149,19 +194,33 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     }
     return ""
   }
+  private func genderValidator(string: String) -> String {
+    if string == "Мужской" {
+      return "1"
+    } else {
+      return "2"
+    }
+  }
   
   private func setupBtnSettings() {
     
-    ageBtn.setImage(UIImage(named: "down")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+    let image = UIImage(named: "down")
     ageBtn.tintColor = .white
-    ageBtn.imageView?.trailingAnchor.constraint(equalTo: ageSeparator.trailingAnchor, constant: 0.0).isActive = true
-    ageBtn.imageView?.bottomAnchor.constraint(equalTo: ageBtn.bottomAnchor, constant: -5.0).isActive = true
-    ageBtn.imageView?.heightAnchor.constraint(equalToConstant: 15).isActive = true
-    ageBtn.imageView?.widthAnchor.constraint(equalToConstant: 15).isActive = true
+    let blurredProfileView = UIImageView(image: image)
+    blurredProfileView.contentMode = UIView.ContentMode.scaleAspectFit
+    blurredProfileView.layer.masksToBounds = true
+    ageBtn.addSubview(blurredProfileView)
     
-    ageBtn.translatesAutoresizingMaskIntoConstraints = false
-    ageBtn.imageView?.translatesAutoresizingMaskIntoConstraints = false
+    blurredProfileView.rightAnchor.constraint(equalTo: ageBtn.rightAnchor).isActive = true
     
+    blurredProfileView.widthAnchor.constraint(equalToConstant: 15).isActive = true
+    blurredProfileView.heightAnchor.constraint(equalToConstant: 15).isActive = true
+    
+    blurredProfileView.bottomAnchor.constraint(equalTo: ageBtn.bottomAnchor, constant: -5.0).isActive = true
+    blurredProfileView.translatesAutoresizingMaskIntoConstraints = false
+
+    ageBtn.tintColor = .white
+
     genderBtn.setImage(UIImage(named: "down")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
     genderBtn.tintColor = .white
     genderBtn.imageView?.trailingAnchor.constraint(equalTo: genderSeparator.trailingAnchor, constant: 0.0).isActive = true

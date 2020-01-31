@@ -68,7 +68,7 @@ class ProfileVC: UIViewController {
     
     if user.gender != nil {
       genderLabel.textColor = .white
-      genderLabel.text = genderValidator(string: user.gender!)
+      genderLabel.text = String(describing: "Пол: \(genderValidator(string: user.gender!))")
     } else {
       genderLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
       genderLabel.text = "Введите свой пол"
@@ -95,6 +95,8 @@ class ProfileVC: UIViewController {
     
     if user.age != nil {
       ageLabel.textColor = .white
+      let ageString = String(describing: user.age!)
+      print(ageString)
       ageLabel.text = String(describing:"Возраст: \(String(describing: user.age!))")
     } else {
       ageLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
@@ -114,7 +116,7 @@ class ProfileVC: UIViewController {
       self.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
     }
   }
-  func genderValidator(string: String) -> String {
+  private func genderValidator(string: String) -> String {
     if string == "1" {
       return "Мужской"
     } else {
@@ -122,7 +124,7 @@ class ProfileVC: UIViewController {
     }
   }
   
-  func orientationValidator(string: String) -> String {
+  private func orientationValidator(string: String) -> String {
     if string == "1" {
       return "Девушки"
     } else if string == "2" {
@@ -135,17 +137,22 @@ class ProfileVC: UIViewController {
   @IBAction func changeDataBtnAction(_ sender: Any) {
     
     let view = InfornatioView(frame: self.view.frame)
+    view.beforeName = (user?.name)!
     
     view.nameTextField.text = user?.name
     if user?.age !=  nil {
       view.ageBtn.setTitle(String(describing: user!.age!), for: .normal)
+      view.beforeAge = String(describing: user!.age!)
     } else {
       view.ageBtn.setTitle("Тут пока пусто", for: .normal)
+      view.beforeAge = String(describing:"Тут пока пусто")
     }
-    if user?.age != nil {
+    if user?.gender != nil {
+      view.beforeGender = genderValidator(string: (user?.gender!)!)
       view.genderBtn.setTitle(genderValidator(string: (user?.gender!)!), for: .normal)
     } else {
       view.genderBtn.setTitle("Выбрать из списка", for: .normal)
+      view.beforeGender = "Выбрать из списка"
     }
     self.view.addSubview(view)
   }
@@ -197,11 +204,11 @@ class ProfileVC: UIViewController {
     print("Set image")
     handleSelectProfileImageView()
     
-    guard let uid = Auth.auth().currentUser?.uid else { return }
-    
-    let imageUrl = user?.profileImageUrl
-    
-    let ref = Storage.storage().reference().child("profile_images")
+//    guard let uid = Auth.auth().currentUser?.uid else { return }
+//
+//    let imageUrl = user?.profileImageUrl
+//
+//    let ref = Storage.storage().reference().child("profile_images")
     
     //    let pictureRef = Storage.storage().reference().child("\(userUid)/profilePic.jpg")
     //    pictureRef.delete { error in

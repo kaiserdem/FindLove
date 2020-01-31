@@ -23,6 +23,7 @@ class OrientationView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
   @IBOutlet weak var backView: UIView!
   
   var genderArray =  ["Парни", "Девушки", "Девушки и парни"]
+  var beforeOrientation = ""
   
   override init(frame: CGRect) {
     super.init(frame: frame)
