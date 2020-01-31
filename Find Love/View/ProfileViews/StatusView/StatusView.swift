@@ -11,6 +11,8 @@ import Firebase
 
 class StatusView: UIView {
   
+  @IBOutlet weak var heightConstraintStatusTextView: NSLayoutConstraint!
+  @IBOutlet weak var backView: UIView!
   @IBOutlet var statusView: UIView!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var statusSeparator: UIView!
@@ -34,6 +36,11 @@ class StatusView: UIView {
     Bundle.main.loadNibNamed("StatusView", owner: self, options: nil)
     statusView.fixInView(self)
     statusView.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.8)
+    backView.layer.borderWidth = 0.5
+    
+    let opacity:CGFloat = 0.3
+    let borderColor = UIColor.white
+    backView.layer.borderColor = borderColor.withAlphaComponent(opacity).cgColor
   }
   
   func registerNotificationObservers() {

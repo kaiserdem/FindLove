@@ -17,7 +17,9 @@
                 <outlet property="aboutSelfSeparator" destination="hza-o7-tUr" id="5O3-5a-heB"/>
                 <outlet property="aboutSelfTextView" destination="dLk-dX-1MO" id="I2n-KD-wqK"/>
                 <outlet property="aboutSelfView" destination="hHm-43-ik8" id="vT0-Ud-Fu0"/>
+                <outlet property="backView" destination="FGk-eJ-FkW" id="Jml-Yt-bmT"/>
                 <outlet property="closeBtn" destination="QNt-Mv-xh0" id="1IB-KU-Dag"/>
+                <outlet property="heightConstraintAboutSelfTextView" destination="4es-pq-acA" id="tpw-ic-kJJ"/>
                 <outlet property="saveBtn" destination="jVF-M2-eaK" id="YWU-SG-DYZ"/>
                 <outlet property="titleLabel" destination="jkv-pO-OQz" id="h1s-pj-exP"/>
             </connections>
@@ -66,7 +68,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="hV5-dZ-nDq"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <state key="normal" title="Сохранить">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
@@ -85,7 +87,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="JMF-ZW-zKM"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <state key="normal" title="Отмена">
                                                 <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>

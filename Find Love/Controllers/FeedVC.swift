@@ -19,14 +19,12 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   var postDictionary = [String: Post]()
   var user: User?
   
- 
   override func viewDidLoad() {
         super.viewDidLoad()
     
     NotificationCenter.default.addObserver(self, selector: #selector(makeTransition(_:)), name: NSNotification.Name("makeTransitionToChat"), object: nil)
     
     uploadTableView()
-    fetchUser()
     observePosts()
     
   }
@@ -42,28 +40,12 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     super.viewDidDisappear(true)
     //NotificationCenter.default.removeObserver(self)
   }
-  
-  func fetchUser() {
-    guard let uid = Auth.auth().currentUser?.uid else { return }
-    
-    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-      
-      if let dictionary = snapshot.value as? [String: AnyObject] {
-        let user = User(dictionary: dictionary)
-        user.id = snapshot.key
-      }
-    }, withCancel: nil)
-  }
 
   func writePost() {
     let vc = NewFeedPostVC(collectionViewLayout: UICollectionViewFlowLayout())
     present(vc, animated: true, completion: nil)
   }
 
-  @IBAction func addPostBtnAction(_ sender: Any) {
-    writePost()
-  }
-  
   func uploadTableView() {
     
     tableView.delegate = self

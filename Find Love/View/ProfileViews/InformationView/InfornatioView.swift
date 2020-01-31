@@ -25,14 +25,17 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
   @IBOutlet weak var genderLabel: UILabel!
   @IBOutlet weak var saveBtn: UIButton!
   @IBOutlet weak var closeBtn: UIButton!
+  @IBOutlet weak var backView: UIView!
   
   var genderArray = ["Мужской","Женский",]
   var ageArray = [Int]()
   var pickerValue = 1
   
+  var user: User?
   override init(frame: CGRect) {
     super.init(frame: frame)
     commonInit()
+    
     registerNotificationObservers()
     setupBtnSettings()
     
@@ -40,7 +43,7 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
       ageArray.append(i)
     }
   }
-  
+
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     commonInit()
@@ -53,6 +56,10 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
   @objc func keyboardWillAppear(_ notification: Notification) {
     nameLabel.textColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
     nameSeparator.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+    genderLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    genderSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    ageLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    ageSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
   }
   @objc func keyboardWillDisappear(_ notification: Notification) {
     nameLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -66,6 +73,11 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     pickerView.isHidden = true
     pickerView.delegate = self
     pickerView.dataSource = self
+    
+    let opacity:CGFloat = 0.3
+    let borderColor = UIColor.white
+    backView.layer.borderWidth = 0.5
+    backView.layer.borderColor = borderColor.withAlphaComponent(opacity).cgColor
   }
   
   @IBAction func selectAgeBtnAction(_ sender: Any) {
@@ -76,6 +88,8 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     ageSeparator.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
     genderLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     genderSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    nameLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    nameSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
   }
   
   @IBAction func selectGenderBtnAction(_ sender: Any) {
@@ -86,9 +100,12 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     genderSeparator.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
     ageLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     ageSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    nameLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    nameSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
   }
   
   @IBAction func saveBtnAction(_ sender: Any) {
+    
   }
   
   @IBAction func closeBtnAction(_ sender: Any) {
@@ -125,14 +142,12 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     
     if component == 0 {
       if pickerValue == 0 {
-        
         return String(describing: ageArray[row])
       } else  {
         return String(describing:genderArray[row])
       }
     }
     return ""
-    
   }
   
   private func setupBtnSettings() {

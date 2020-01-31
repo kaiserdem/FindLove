@@ -543,6 +543,8 @@
                         <outlet property="changeStatusBtn" destination="yUy-mc-gb1" id="Awg-hC-xoa"/>
                         <outlet property="descriptionUserTextView" destination="EX1-Br-LRI" id="hQ0-uB-wLT"/>
                         <outlet property="genderLabel" destination="I0r-Gs-CRq" id="xDy-pI-fnG"/>
+                        <outlet property="heightConstraintDescriptionTextView" destination="ltX-VM-Pbf" id="QGE-lh-dtR"/>
+                        <outlet property="heightConstraintStatusTextView" destination="c31-ao-zRA" id="fIU-TY-h0z"/>
                         <outlet property="nameTitleLabel" destination="eQM-xF-V0I" id="RaV-XD-LBt"/>
                         <outlet property="orientationLabel" destination="IGG-f6-qE9" id="l57-BX-eYV"/>
                         <outlet property="profileImageView" destination="fw1-Et-l83" id="3Vt-gh-avx"/>

@@ -13,6 +13,7 @@ class AboutSelfView: UIView {
   
   @IBOutlet var aboutSelfView: UIView!
   
+  @IBOutlet weak var heightConstraintAboutSelfTextView: NSLayoutConstraint!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var aboutSelfSeparator: UIView!
   @IBOutlet weak var aboutSelfLabel: UILabel!
@@ -20,6 +21,7 @@ class AboutSelfView: UIView {
   @IBOutlet weak var saveBtn: UIButton!
   @IBOutlet weak var closeBtn: UIButton!
   
+  @IBOutlet weak var backView: UIView!
   override init(frame: CGRect) {
     super.init(frame: frame)
     commonInit()
@@ -35,6 +37,11 @@ class AboutSelfView: UIView {
     Bundle.main.loadNibNamed("AboutSelfView", owner: self, options: nil)
     aboutSelfView.fixInView(self)
     aboutSelfView.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.8)
+    
+    let opacity:CGFloat = 0.3
+    let borderColor = UIColor.white
+    backView.layer.borderWidth = 0.5
+    backView.layer.borderColor = borderColor.withAlphaComponent(opacity).cgColor
   }
   func registerNotificationObservers() {
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)

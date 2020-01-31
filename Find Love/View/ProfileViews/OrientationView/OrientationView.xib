@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrientationView" customModule="Find_Love" customModuleProvider="target">
             <connections>
+                <outlet property="backView" destination="WFi-ln-15Q" id="3J3-0V-Yg7"/>
                 <outlet property="closeBtn" destination="l9t-s6-dbP" id="GVZ-If-EXo"/>
                 <outlet property="orientationBtn" destination="rKA-JW-Dik" id="qIq-AD-at0"/>
                 <outlet property="orientationLabel" destination="9gu-rO-5Xx" id="Wab-S9-gPu"/>

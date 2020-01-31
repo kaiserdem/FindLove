@@ -27,9 +27,9 @@ class ProfileVC: UIViewController {
   @IBOutlet weak var changeImageBtn: UIButton!
   @IBOutlet weak var settingsBtn: UIButton!
   
+  @IBOutlet weak var heightConstraintDescriptionTextView: NSLayoutConstraint!
+  @IBOutlet weak var heightConstraintStatusTextView: NSLayoutConstraint!
   var user: User?
-  
-  let pickerData = ["Мужской", "Женский"]
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -38,11 +38,13 @@ class ProfileVC: UIViewController {
     setupBtnSetting()
     fetchUser()
     
-    
     self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(sender:))))
   }
   
   @objc func keyboardWillHide(sender: NSNotification) {
+    let infornatioView = InfornatioView(frame: self.view.frame)
+    infornatioView.ageBtn.endEditing(true)
+    infornatioView.genderBtn.endEditing(true)
     view.endEditing(true)
   }
   
@@ -65,27 +67,48 @@ class ProfileVC: UIViewController {
     self.nameTitleLabel.text = user.name
     
     if user.gender != nil {
-      self.genderLabel.text = genderValidator(string: user.gender!)
+      genderLabel.textColor = .white
+      genderLabel.text = genderValidator(string: user.gender!)
     } else {
-      self.genderLabel.text = "Введите свой пол"
+      genderLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
+      genderLabel.text = "Введите свой пол"
     }
     
     if user.orientation != nil {
-      self.orientationLabel.text = orientationValidator(string: user.orientation!)
+      orientationLabel.textColor = .white
+      orientationLabel.text = orientationValidator(string: user.orientation!)
     } else {
-      self.orientationLabel.text = "Введите свой предпочтения"
+      orientationLabel.text = "Введите свой предпочтения"
+      orientationLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
+    }
+    
+    if user.aboutSelf != nil {
+      descriptionUserTextView.textColor = .white
+      descriptionUserTextView.text = user.aboutSelf
+//      let height = self.estimateFrameForText(user.aboutSelf!).height
+//      heightConstraintDescriptionTextView.constant = height
+    } else {
+      descriptionUserTextView.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
+      descriptionUserTextView.text = "Опишите себя, свои интересы и увлечения"
     }
     
     
-    let aboutSelf = user.aboutSelf ?? "Опишите себя, свои интересы и увлечения"
-    self.descriptionUserTextView.text = aboutSelf
     if user.age != nil {
-      self.ageLabel.text = String(describing:"Возраст: \(String(describing: user.age!))")
+      ageLabel.textColor = .white
+      ageLabel.text = String(describing:"Возраст: \(String(describing: user.age!))")
     } else {
-      self.ageLabel.text = "Введите свой возраст"
+      ageLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
+      ageLabel.text = "Введите свой возраст"
     }
-    let status = user.staus ?? "Тут пока пусто, опишите свое настроение"
-    self.statusTextView.text = status
+    if user.staus != nil {
+      statusTextView.textColor = .white
+      statusTextView.text = user.staus
+//      let height = self.estimateFrameForText(user.staus!).height
+//      heightConstraintStatusTextView.constant = height
+    } else {
+      statusTextView.text = "Тут пока пусто, опишите свое настроение"
+      statusTextView.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
+    }
  
     if let profileImageView = user.profileImageUrl {
       self.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
@@ -93,9 +116,9 @@ class ProfileVC: UIViewController {
   }
   func genderValidator(string: String) -> String {
     if string == "1" {
-      return "Мужчина"
+      return "Мужской"
     } else {
-      return "Женщина"
+      return "Женский"
     }
   }
   
@@ -109,62 +132,67 @@ class ProfileVC: UIViewController {
     }
   }
   
-  func setImage() {
-    
-//    guard let uid = Auth.auth().currentUser?.uid else { return }
-//
-//    let imageUrl = user?.profileImageUrl
-//
-//    let imageName = NSUUID().uuidString // генерирует случайный айди
-//    // создали папку  для картинке в базе
-//    let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
-//
-//
-//    if let profileImage = self.profileImageView.image, let  uploadData = profileImage.jpegData(compressionQuality: 0.1) {
-//      storageRef.putData(uploadData, metadata: nil, completion: { [weak self] (metadata, error) in
-//
-//        if error != nil {
-//          print(error ?? "")
-//          return
-//        }
-//        // могут быть ошибки
-//        storageRef.downloadURL(completion: { [weak self] (url, error) in
-//          if error != nil {
-//            print(error!.localizedDescription)
-//            return
-//          }
-//          if let profileImageUrl = url?.absoluteString {
-//
-//            let values = [ "profileImageUrl": profileImageUrl]
-//            self?.registeUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
-//          }
-//        })
-//      })
-//    }
-  }
-  
-  
   @IBAction func changeDataBtnAction(_ sender: Any) {
-    print("info")
+    
     let view = InfornatioView(frame: self.view.frame)
+    
+    view.nameTextField.text = user?.name
+    if user?.age !=  nil {
+      view.ageBtn.setTitle(String(describing: user!.age!), for: .normal)
+    } else {
+      view.ageBtn.setTitle("Тут пока пусто", for: .normal)
+    }
+    if user?.age != nil {
+      view.genderBtn.setTitle(genderValidator(string: (user?.gender!)!), for: .normal)
+    } else {
+      view.genderBtn.setTitle("Выбрать из списка", for: .normal)
+    }
     self.view.addSubview(view)
   }
+  
   @IBAction func changeDescriptionBtnAction(_ sender: Any) {
     let view = AboutSelfView(frame: self.view.frame)
+    
+    if user?.aboutSelf != nil {
+      view.aboutSelfTextView.text = user!.aboutSelf!
+      let height = estimateFrameForText(user!.staus!).height
+      view.heightConstraintAboutSelfTextView.constant = height
+    } else {
+      view.aboutSelfTextView.text = "Опишите себя, свои интересы и увлечения"
+    }
     self.view.addSubview(view)
   }
+  
   @IBAction func changeStatusBtnAction(_ sender: Any) {
     let view = StatusView(frame: self.view.frame)
+    
+    if user?.staus != nil {
+      view.statusTextView.text = user!.staus!
+      let height = estimateFrameForText(user!.staus!).height
+      view.heightConstraintStatusTextView.constant = height
+    } else {
+      view.statusTextView.text = "Тут пока пусто, опишите свое настроение"
+    }
     self.view.addSubview(view)
   }
+  
   @IBAction func changeOrientationBtnAction(_ sender: Any) {
     let view = OrientationView(frame: self.view.frame)
+    
+    if user?.orientation != nil {
+      view.orientationBtn.setTitle(orientationValidator(string: user!.orientation!), for: .normal)
+    } else {
+      view.orientationBtn.setTitle("Девушки или парни", for: .normal)
+    }
     self.view.addSubview(view)
   }
+  
   @IBAction func settingsBtnAction(_ sender: Any) {
     let view = SettingsView(frame: self.view.frame)
+    view.emailTextField.text = user?.email!
     self.view.addSubview(view)
   }
+  
   @IBAction func changeImageBtnAction(_ sender: Any) {
     print("Set image")
     handleSelectProfileImageView()

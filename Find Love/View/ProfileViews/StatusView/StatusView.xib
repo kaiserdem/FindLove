@@ -13,7 +13,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StatusView" customModule="Find_Love" customModuleProvider="target">
             <connections>
+                <outlet property="backView" destination="Q9N-3P-bbt" id="2RO-2g-d3o"/>
                 <outlet property="closeBtn" destination="QTn-Z0-vlu" id="M97-CF-5DR"/>
+                <outlet property="heightConstraintStatusTextView" destination="r4z-ot-8OH" id="PNW-sP-hqU"/>
                 <outlet property="saveBtn" destination="EeP-op-56L" id="jVZ-X1-sEc"/>
                 <outlet property="statusLabel" destination="ymd-yQ-VQi" id="rBP-9D-PzL"/>
                 <outlet property="statusSeparator" destination="0t0-WD-C2N" id="WWH-c2-ihh"/>

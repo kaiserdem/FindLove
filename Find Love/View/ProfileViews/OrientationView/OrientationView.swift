@@ -20,6 +20,7 @@ class OrientationView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
   @IBOutlet weak var orientationBtn: UIButton!
   @IBOutlet weak var saveBtn: UIButton!
   @IBOutlet weak var closeBtn: UIButton!
+  @IBOutlet weak var backView: UIView!
   
   var genderArray =  ["Парни", "Девушки", "Девушки и парни"]
   
@@ -41,6 +42,11 @@ class OrientationView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     Bundle.main.loadNibNamed("OrientationView", owner: self, options: nil)
     orientationView.fixInView(self)
     orientationView.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.8)
+    backView.layer.borderWidth = 0.5
+    
+    let opacity:CGFloat = 0.3
+    let borderColor = UIColor.white
+    backView.layer.borderColor = borderColor.withAlphaComponent(opacity).cgColor
   }
   
   @IBAction func saveBtnAction(_ sender: Any) {

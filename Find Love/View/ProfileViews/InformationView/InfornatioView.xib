@@ -15,6 +15,7 @@
                 <outlet property="ageBtn" destination="4iz-Mz-HAF" id="4H7-Ux-Olj"/>
                 <outlet property="ageLabel" destination="EFe-8h-r58" id="gnp-bd-Ekm"/>
                 <outlet property="ageSeparator" destination="ZXz-tQ-V67" id="v8X-Vs-31D"/>
+                <outlet property="backView" destination="yzZ-su-nQe" id="FLE-ne-7dN"/>
                 <outlet property="closeBtn" destination="fId-pl-qCR" id="rfb-YU-fFS"/>
                 <outlet property="genderBtn" destination="cry-FZ-btO" id="Cz8-Fj-y3J"/>
                 <outlet property="genderLabel" destination="1pt-qz-rQA" id="ukd-6n-z9V"/>
@@ -107,7 +108,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cry-FZ-btO">
                                                     <rect key="frame" x="0.0" y="0.0" width="275" height="31.5"/>
                                                     <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                                    <state key="normal" title="Парень" image="down"/>
+                                                    <state key="normal" title="Выбрать из списка" image="down"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
@@ -222,6 +223,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="180" id="FaK-w6-6nF"/>
                     </constraints>
+                    <viewLayoutGuide key="safeArea" id="1kX-B6-RZE"/>
                 </pickerView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -10,6 +10,7 @@ import UIKit
 
 class OpenFeedPost: UIView {
 
+  @IBOutlet weak var backView: UIView!
   @IBOutlet var openFeedPost: UIView!
   @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var timeLabel: UILabel!
@@ -27,6 +28,13 @@ class OpenFeedPost: UIView {
     super.init(frame: frame)
     commonInit()
     
+    openFeedPost.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.8)
+    backView.layer.borderWidth = 0.5
+    
+    let opacity:CGFloat = 0.3
+    let borderColor = UIColor.white
+    backView.layer.borderColor = borderColor.withAlphaComponent(opacity).cgColor
+    
     replyButton.applyGradient2(with: [#colorLiteral(red: 0.02352941176, green: 0.1764705882, blue: 0.5333333333, alpha: 1), #colorLiteral(red: 0.1529411765, green: 0.4509803922, blue: 0.8666666667, alpha: 1), #colorLiteral(red: 0.2196078431, green: 0.7921568627, blue: 0.7176470588, alpha: 1)], gradient: .horizontal)
     replyButton.layer.cornerRadius = 25
     postTextView.layer.cornerRadius = 6
@@ -43,6 +51,7 @@ class OpenFeedPost: UIView {
   func commonInit() {
     Bundle.main.loadNibNamed("OpenFeedPost", owner: self, options: nil)
     openFeedPost.fixInView(self)
+    
   }
 
   @IBAction func replyButtonAction(_ sender: UIButton) {

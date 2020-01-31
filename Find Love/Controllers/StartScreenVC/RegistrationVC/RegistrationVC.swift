@@ -13,6 +13,7 @@ import FirebaseStorage
 
 class RegistrationVC: UIViewController {
   
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var userImageView: UIImageView!
   @IBOutlet weak var setPhotoBtn: UIButton!
   @IBOutlet weak var closeBtn: UIButton!
@@ -30,6 +31,7 @@ class RegistrationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+      activityIndicator.isHidden = true
       
         navigationController?.navigationBar.isHidden = true
       
@@ -44,11 +46,16 @@ class RegistrationVC: UIViewController {
   func handleRegister() {
     guard let email = emailTF.text , let password = passwordTF.text, let name = nameTextField.text else { // если пустые, принт, выходим
       print("Error: field is empty")
+      
+      activityIndicator.isHidden = true
+      activityIndicator.stopAnimating()
       return
     }
-    Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+    Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
       if error != nil { // если ошибка, принт, выходим
         print("Error")
+        self?.activityIndicator.isHidden = true
+        self?.activityIndicator.stopAnimating()
         return
       }
       // успешно
@@ -60,7 +67,7 @@ class RegistrationVC: UIViewController {
       // создали папку  для картинке в базе
       let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
       
-      if let profileImage = self.userImageView.image, let  uploadData = profileImage.jpegData(compressionQuality: 0.1) {
+      if let profileImage = self?.userImageView.image, let  uploadData = profileImage.jpegData(compressionQuality: 0.1) {
         storageRef.putData(uploadData, metadata: nil, completion: { [weak self] (metadata, error) in
           
           if error != nil {
@@ -88,16 +95,20 @@ class RegistrationVC: UIViewController {
     
     let ref = Database.database().reference()
     let userReference = ref.child("users").child(uid) // создали папку пользователя
-    userReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
+    userReference.updateChildValues(values, withCompletionBlock: { [weak self] (error, ref) in
       if error != nil {
         return
       }
+      self?.activityIndicator.isHidden = true
+      self?.activityIndicator.stopAnimating()
       let appDelegate = UIApplication.shared.delegate as! AppDelegate
       _ = appDelegate.checkIfUserIsLogedIn()
     })
   }
   
   @IBAction func registrationBtnAction(_ sender: Any) {
+    activityIndicator.isHidden = false
+    activityIndicator.startAnimating()
     handleRegister()
   }
   

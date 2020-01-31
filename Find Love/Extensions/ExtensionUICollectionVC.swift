@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UICollectionViewController {
+extension UIResponder {
   
   // принимает текст возвращает размер
   func estimateFrameForText(_ text: String) -> CGRect {

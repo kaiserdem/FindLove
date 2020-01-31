@@ -11,6 +11,7 @@ import Firebase
 
 class SingInVC: UIViewController {
 
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var emailTF: UITextField!
   @IBOutlet weak var closeBtnTopConstraints: NSLayoutConstraint!
   @IBOutlet weak var closeBtn: UIButton!
@@ -27,6 +28,7 @@ class SingInVC: UIViewController {
   
   override func viewDidLoad() {
         super.viewDidLoad()
+    activityIndicator.isHidden = true
       
       navigationController?.navigationBar.isHidden = true
 
@@ -38,12 +40,12 @@ class SingInVC: UIViewController {
   }
   
   @objc func keyboardWillShow(sender: NSNotification) {
-    self.view.frame.origin.y = -100 //
+    self.view.frame.origin.y = -100
     closeBtnTopConstraints.constant = 130
   }
   
   @objc func keyboardWillHide(sender: NSNotification) {
-    self.view.frame.origin.y = 0 // 
+    self.view.frame.origin.y = 0
     closeBtnTopConstraints.constant = 30
     view.endEditing(true)
   }
@@ -53,19 +55,24 @@ class SingInVC: UIViewController {
         print("Form is not valid")
         return
       }
-      Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+      Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
         if error != nil {
           print("Error sing in")
+          self?.activityIndicator.stopAnimating()
+          self?.activityIndicator.isHidden = true
           return
         }
         
         print("Success sing in")
+        self?.activityIndicator.stopAnimating()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         _ = appDelegate.checkIfUserIsLogedIn()
       }
     }
 
   @IBAction func enterBtnAction(_ sender: Any) {
+    activityIndicator.isHidden = false
+    activityIndicator.startAnimating()
     handleLogin()
   }
   @IBAction func forgotPasswordBtnAction(_ sender: Any) {

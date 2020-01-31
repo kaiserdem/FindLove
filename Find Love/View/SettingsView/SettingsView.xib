@@ -15,9 +15,11 @@
             <connections>
                 <outlet property="allowRandomChatsSwitch" destination="hhh-fH-pc2" id="SzX-uv-n6X"/>
                 <outlet property="deleteAccount" destination="RvU-6L-ycO" id="2uJ-9h-SB7"/>
+                <outlet property="emailTextField" destination="cta-cc-Ta1" id="vQr-Ud-di6"/>
                 <outlet property="exitAccountBtn" destination="1af-Id-hCQ" id="TKt-2e-BoQ"/>
                 <outlet property="getMessageFromManSwitch" destination="o6i-UE-M6m" id="s22-me-M6c"/>
                 <outlet property="getMessageFromWomanSwitch" destination="Spw-gj-v3w" id="JK2-MA-2cX"/>
+                <outlet property="getNotificationSwitch" destination="JhG-2Z-VZ6" id="Gns-ga-afh"/>
                 <outlet property="privacyBtn" destination="dR1-A1-Qat" id="3rV-S1-FNQ"/>
                 <outlet property="restorePurchasesBtn" destination="yOu-HJ-Bew" id="zOT-Ff-fRb"/>
                 <outlet property="settingsView" destination="iN0-l3-epB" id="YuX-rz-lPw"/>

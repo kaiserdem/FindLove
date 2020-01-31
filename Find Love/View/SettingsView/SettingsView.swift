@@ -19,6 +19,8 @@ class SettingsView: UIView {
   @IBOutlet weak var privacyBtn: UIButton!
   @IBOutlet weak var exitAccountBtn: UIButton!
  
+  @IBOutlet weak var emailTextField: UITextField!
+  @IBOutlet weak var getNotificationSwitch: UISwitch!
   @IBOutlet weak var getMessageFromWomanSwitch: UISwitch!
   @IBOutlet weak var getMessageFromManSwitch: UISwitch!
   @IBOutlet weak var allowRandomChatsSwitch: UISwitch!
