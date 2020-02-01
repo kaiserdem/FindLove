@@ -174,7 +174,7 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
       return
     }
     
-    let message = self.messages[indexPath.row] //
+    let message = self.messages[indexPath.row - 1] //
     guard let chatPartnerId = message.chatPartnerId() else { return }
     
     // берем
@@ -189,7 +189,7 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return  messages.count
+    return  messages.count + 1
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -201,7 +201,7 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
       
     let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell
     
-    let message = messages[indexPath.row]
+    let message = messages[indexPath.row - 1]
     cell.message = message
     
     return cell

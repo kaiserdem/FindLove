@@ -14,16 +14,14 @@ import MobileCoreServices
 
 class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
   
-  
+  var messages = [Message]() // масив всех сообщений
+  var conteinerViewBottonAnchor: NSLayoutConstraint?
   var user: User? {
     didSet {
       self.nameLabel.text = user?.name
       observeMessages()
     }
   }
-
-  var messages = [Message]() // масив всех сообщений
-  var conteinerViewBottonAnchor: NSLayoutConstraint?
 
   lazy var inputTextField: UITextField = {
     let textField = UITextField()
@@ -36,7 +34,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   lazy var nameLabel: UILabel = {
     let label = UILabel()
     label.textAlignment = NSTextAlignment.center
-    label.tintColor = .white
+    label.textColor = .white
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -234,6 +232,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
       cell.profileImageView.isHidden = true
       cell.buubleViewRightAnchor?.isActive = true
       cell.buubleViewLeftAnchor?.isActive = false
+      
     } else {
       cell.bubbleView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1) // не свои серый
       cell.textView.textColor = .black
@@ -504,21 +503,46 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     cell.deledate = self
     
     let message = messages[indexPath.row]
-    
     cell.message = message
     
-    cell.textView.text = message.text
     cell.timeLabel.text = setFormatDislayedTimeAndDate(from: message.timestamp as! TimeInterval, withString: false)
     
     setupCell(cell, message: message)
     
-    if let text = message.text {
-     cell.bubbleWidthAnchor?.constant = estimateFrameForText(text).width + 35
-      cell.textView.isHidden = false
-    } else if message.imageUrl != nil {
-      cell.bubbleWidthAnchor?.constant = 200
-      cell.textView.isHidden = true
+    
+    
+    if message.responseToText == nil { // это не ответ
+      cell.textView.text = message.text
+      if let text = message.text {
+        cell.bubbleWidthAnchor?.constant = estimateFrameForText(text).width + 35
+        cell.bubbleView.layer.borderWidth = 0
+        cell.textView.isHidden = false
+      } else if message.imageUrl != nil {
+        cell.bubbleWidthAnchor?.constant = 200
+        cell.textView.isHidden = true
+      }
+      
+    } else { // если это ответ
+      
+      if let text = message.text {
+        cell.textView.text = "Ответ на пост: \n\(message.responseToText!) \n \n\(text)"
+        cell.bubbleWidthAnchor?.constant = self.view.frame.maxX - 60
+        cell.bubbleView.backgroundColor = .white
+        
+        cell.bubbleView.layer.borderWidth = 1.0
+        cell.bubbleView.layer.borderColor = UIColor.red.cgColor
+        cell.textView.textColor = .black
+        cell.textView.isHidden = false
+      } else if message.imageUrl != nil {
+        cell.bubbleWidthAnchor?.constant = 200
+        cell.textView.isHidden = true
+      }
     }
+    
+    
+    
+    
+    
     cell.playBtn.isHidden = message.videoUrl == nil // если видео нет, тогда это тру
     return cell
   }
@@ -528,12 +552,27 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     var height: CGFloat = 80
     let message = messages[indexPath.row]
     
-    if let text = message.text {
-      height = estimateFrameForText(text).height + 40
-    } else if let imageWidht = message.imageWidth, let imageHight = message.imageHeight {
-      // сделали размер пропорционально
-      height = CGFloat(imageHight / imageWidht * 200)
+    if message.responseToText == nil {
+      
+      if let text = message.text {
+        height = estimateFrameForText(text).height + 40
+      } else if let imageWidht = message.imageWidth, let imageHight = message.imageHeight {
+        // сделали размер пропорционально
+        height = CGFloat(imageHight / imageWidht * 200)
+      }
+      
+    } else { // если это ответ
+      
+      let responseHeight = estimateFrameForText(message.responseToText!).height + 20
+      if let text = message.text {
+        height = estimateFrameForText(text).height + 30 + responseHeight
+      } else if let imageWidht = message.imageWidth, let imageHight = message.imageHeight {
+        // сделали размер пропорционально
+        height = CGFloat(imageHight / imageWidht * 200)
+      }
     }
+    
+    
     return CGSize(width: view.frame.width, height: height)
   }
 }

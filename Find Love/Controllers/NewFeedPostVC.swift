@@ -17,7 +17,6 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
   
   var user: User? 
   var posts = [Post]()
-  var postDictionary = [String: Post]()
   
   var conteinerViewBottonAnchor: NSLayoutConstraint?
   
@@ -110,7 +109,7 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     collectionView?.keyboardDismissMode = .interactive
     
     setupInputComponents()
-    setupKeyboardObservise()
+    //setupKeyboardObservise()
     
   }
   
@@ -128,18 +127,18 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     return true
   }
   
-  func setupKeyboardObservise() {
-    NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-  }
-  
-  @objc func handleKeyboardDidShow() {
-    
-    if posts.count > 0 {
-      let indexPath = IndexPath(item: self.posts.count-1, section: 0) // последнее
-      //проскролить
-      self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-    }
-  }
+//  func setupKeyboardObservise() {
+//    NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+//  }
+//
+//  @objc func handleKeyboardDidShow() {
+//
+//    if posts.count > 0 {
+//      let indexPath = IndexPath(item: self.posts.count-1, section: 0) // последнее
+//      //проскролить
+//      self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+//    }
+//  }
   
   func setupInputComponents() { // компоненты контроллера
     

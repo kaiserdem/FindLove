@@ -45,7 +45,6 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
     label.textColor = .white
     label.font = UIFont.systemFont(ofSize: 18)
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.text = "Ответ на пост"
     return label
   }()
   
@@ -58,7 +57,6 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
     textView.font = UIFont.systemFont(ofSize: 18)
     textView.translatesAutoresizingMaskIntoConstraints = false
     textView.backgroundColor = .clear
-    textView.text = "Ответ на"
     return textView
   }()
   
@@ -121,19 +119,22 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
     collectionView?.backgroundColor = #colorLiteral(red: 0.1830653183, green: 0.1830653183, blue: 0.1830653183, alpha: 1)
     collectionView?.keyboardDismissMode = .interactive
     
-    setupInputComponents()
-    setupKeyboardObservise()
+    
     
 
-   // NotificationCenter.default.addObserver(self, selector: #selector(postTextValue(_:)), name: NSNotification.Name("postTextToChat"), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(postTextValue(_:)), name: NSNotification.Name("postTextToChat"), object: nil)
     
     UIApplication.shared.statusBarView?.backgroundColor = .black
+    
+    setupInputComponents()
+    setupKeyboardObservise()
   }
   
-//  @objc func postTextValue(_ notification: Notification) {
-//    let toPost = notification.userInfo?["postText"] as? String
-//    print(toPost)
-//  }
+  @objc func postTextValue(_ notification: Notification) {
+    let toPost = notification.userInfo?["postText"] as? String
+    
+    postText.text = toPost
+  }
   
   override func viewDidDisappear(_ animated: Bool) {
     NotificationCenter.default.removeObserver(self) // убрать обсервер
@@ -203,8 +204,6 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
     postText.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
     postText.topAnchor.constraint(equalTo: topConteinerView.bottomAnchor, constant: 20).isActive = true
     postText.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-    
-    //estimateFrameForText(post).height
     
     postText.heightAnchor.constraint(equalToConstant: 94).isActive = true
     
@@ -337,7 +336,9 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
     let fromId = Auth.auth().currentUser!.uid
     let timestamp = Int(Date().timeIntervalSince1970)
     
-    var values = [ "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
+    let responseToText = postText.text
+    
+    var values = [ "toId": toId, "fromId": fromId, "timestamp": timestamp, "responseToText": responseToText] as [String : Any]
     
     properties.forEach { (key: String, value: Any) in // метод принимает данные
       values[key] = value
@@ -375,17 +376,14 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
         return
       }
     }
-   
   }
   
   @objc func handleUploadTap() {
     
     let imagePickerController = UIImagePickerController()
-    
     imagePickerController.delegate = self
     imagePickerController.allowsEditing = true
     imagePickerController.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
-    
     present(imagePickerController, animated: true, completion: nil)
   }
   
@@ -393,11 +391,9 @@ class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UIColl
     dismiss(animated: true, completion: nil)
   }
   
-  
   @objc func handleSend() { // отправляем сообщение
     let properties = ["text": inputTextField.text!] as [String : Any]
     sendMessagesWithProperties(properties)
-    
     dismiss(animated: true, completion: nil)
   }
   

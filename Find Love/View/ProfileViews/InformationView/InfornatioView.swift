@@ -65,10 +65,11 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
   }
   @objc func keyboardWillAppear(_ notification: Notification) {
     
-    if nameTextField.text!.count > 1 {
+    if nameTextField.text!.count > 1 && nameTextField.text != beforeName {
       saveBtn.isEnabled = true
       saveBtn.setTitleColor(.white, for: .normal)
     }
+    
     
     nameLabel.textColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
     nameSeparator.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
@@ -181,12 +182,10 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
       //ageBtn.titleLabel!.text = String(describing:ageArray[row])
       ageLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
       ageSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-      print(ageBtn.titleLabel!.text)
     } else {
       genderBtn.setTitle(String(describing:genderArray[row]), for: .normal)
       genderLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
       genderSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-      print(genderBtn.titleLabel!.text)
     }
     pickerView.isHidden = true
     saveBtn.isEnabled = true

@@ -11,10 +11,12 @@ import FirebaseAuth
 
 class Message: NSObject { // модель сообщений
   
+  var response: String?
   var fromId: String?
   var text: String?
   var timestamp: NSNumber?
   var toId: String?
+  var responseToText: String?
   
   var videoUrl: String?
   var imageUrl: String?
@@ -30,6 +32,7 @@ class Message: NSObject { // модель сообщений
     self.imageWidth = dictionary["imageWidth"] as? Float
     self.imageHeight = dictionary["imageHeight"] as? Float
     self.videoUrl = dictionary["videoUrl"] as? String
+    self.responseToText = dictionary["responseToText"] as? String
   }
   func chatPartnerId() -> String? { // если написали сообщение себе
     // если отправитель это я, тогда возврат toId, в противном случае fromId

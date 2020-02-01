@@ -18,6 +18,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   var posts = [Post]()
   var postDictionary = [String: Post]()
   var user: User?
+  var currentPostText = ""
   
   override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,15 +88,16 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   func showChatLogVCForUser(_ user: User?) {
     let vc = ReplyToFeedPostVC(collectionViewLayout: UICollectionViewFlowLayout())
     vc.user = user
-    present(vc, animated: true, completion: nil)
-    self.navigationController?.pushViewController(vc, animated: true)
+    present(vc, animated: true) {
+      NotificationCenter.default.post(name: NSNotification.Name("postTextToChat"), object: nil, userInfo: ["postText": self.currentPostText])
+    }
   }
   
   func cellTappedLike(cell: FeedCell) {
     
     guard let indexPath = self.tableView.indexPath(for: cell) else { return }
     
-    let post = posts[indexPath.row]
+    let post = posts[indexPath.row - 1]
     
     let ref = Database.database().reference().child("posts").child(post.postId!).child("likedUsers")
     
@@ -148,7 +150,8 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     guard let indexPath = self.tableView.indexPath(for: cell) else {
       return
     }
-    let post = posts[indexPath.row]
+    let post = posts[indexPath.row - 1]
+    currentPostText = post.text!
     
     let ref = Database.database().reference().child("users").child(post.fromId!)
     ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
@@ -157,12 +160,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         let userCurrent = User(dictionary: dictionary)
         userCurrent.id = snapshot.key
         self?.user = userCurrent
-        
-       // let send = post.text
-       // NotificationCenter.default.post(name: NSNotification.Name("postTextToChat"), object: nil, userInfo: ["postText": send!])
-        
         self?.showChatLogVCForUser(self?.user!)
-        
       }
     }, withCancel: nil)
   }
@@ -171,12 +169,13 @@ class FeedVC: UIViewController, CellSubclassDelegate {
 extension FeedVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return posts.count
+    return posts.count + 1
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     if indexPath.row == 0 {
+      
       let cell = tableView.dequeueReusableCell(withIdentifier: "AddFeedPostCell", for: indexPath) as! AddFeedPostCell
       cell.contentView.backgroundColor = .black
       
@@ -185,6 +184,7 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
         if let dictionary = snapshot.value as? [String: AnyObject] {
           let user = User(dictionary: dictionary)
           user.id = snapshot.key
+          self.user = user
           if let profileImageView = user.profileImageUrl {
             cell.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
           }
@@ -194,7 +194,8 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     } else {
       
       let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as! FeedCell
-      let post = posts[indexPath.row]
+      
+      let post = posts[indexPath.row - 1]
       cell.post = post
       cell.delegate = self
       cell.selectionStyle = .none
@@ -210,7 +211,9 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
       return
     }
     
-    let post = self.posts[indexPath.row]
+    let post = self.posts[indexPath.row - 1]
+    
+    currentPostText = post.text!
     
     let postText = post.text
     let time = post.timestamp
