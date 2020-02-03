@@ -62,6 +62,8 @@
 		ADBA195623C2A41C009B45EC /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBA195523C2A41C009B45EC /* ExtensionUIView.swift */; };
 		ADBA195B23C371E6009B45EC /* ReviewCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBA195923C371E6009B45EC /* ReviewCVCell.swift */; };
 		ADBA195C23C371E6009B45EC /* ReviewCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADBA195A23C371E6009B45EC /* ReviewCVCell.xib */; };
+		ADC55A8923E74591002BEAF7 /* UserProfileInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC55A8823E74591002BEAF7 /* UserProfileInfoView.xib */; };
+		ADC55A8B23E7459B002BEAF7 /* UserProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC55A8A23E7459B002BEAF7 /* UserProfileInfoView.swift */; };
 		ADE0ABFF23E01E4C00653D18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */; };
 		ADE0AC0123E01E5800653D18 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE0AC0023E01E5800653D18 /* SettingsView.xib */; };
 		ADFCA85723DD90FF004067A9 /* ExtensionUICollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFCA85623DD90FF004067A9 /* ExtensionUICollectionVC.swift */; };
@@ -130,6 +132,8 @@
 		ADBA195523C2A41C009B45EC /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		ADBA195923C371E6009B45EC /* ReviewCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCVCell.swift; sourceTree = "<group>"; };
 		ADBA195A23C371E6009B45EC /* ReviewCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCVCell.xib; sourceTree = "<group>"; };
+		ADC55A8823E74591002BEAF7 /* UserProfileInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileInfoView.xib; sourceTree = "<group>"; };
+		ADC55A8A23E7459B002BEAF7 /* UserProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInfoView.swift; sourceTree = "<group>"; };
 		ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		ADE0AC0023E01E5800653D18 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		ADFCA85623DD90FF004067A9 /* ExtensionUICollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUICollectionVC.swift; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 		AD26947123B606BA00D49887 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ADC55A8723E74547002BEAF7 /* UserProfileInfoView */,
 				ADB4CD3A23E0AF60001DD8AF /* ProfileViews */,
 				ADE0ABFD23E01E2300653D18 /* SettingsView */,
 				ADFCA85D23DDFCAF004067A9 /* SearchStrangerForChatView */,
@@ -431,6 +436,15 @@
 			name = ReviewCVCell;
 			sourceTree = "<group>";
 		};
+		ADC55A8723E74547002BEAF7 /* UserProfileInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				ADC55A8A23E7459B002BEAF7 /* UserProfileInfoView.swift */,
+				ADC55A8823E74591002BEAF7 /* UserProfileInfoView.xib */,
+			);
+			path = UserProfileInfoView;
+			sourceTree = "<group>";
+		};
 		ADE0ABFD23E01E2300653D18 /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -544,6 +558,7 @@
 				ADB8079423D05B2100847897 /* OpenFeedPost.xib in Resources */,
 				AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */,
 				ADB4A25523E44CCF001D1A6A /* CustomAlertWarning.xib in Resources */,
+				ADC55A8923E74591002BEAF7 /* UserProfileInfoView.xib in Resources */,
 				ADE0AC0123E01E5800653D18 /* SettingsView.xib in Resources */,
 				AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */,
 				ADB4CD3E23E0AFC3001DD8AF /* InfornatioView.xib in Resources */,
@@ -610,6 +625,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADC55A8B23E7459B002BEAF7 /* UserProfileInfoView.swift in Sources */,
 				ADFCA85F23DDFD9E004067A9 /* SearchStrangerForChatView.swift in Sources */,
 				AD26946923B5393B00D49887 /* Extension.swift in Sources */,
 				ADB4CD4423E18BF2001DD8AF /* StatusView.swift in Sources */,

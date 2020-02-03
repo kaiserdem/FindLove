@@ -54,6 +54,7 @@ class StatusView: UIView {
   }
   
   @objc func keyboardWillAppear(_ notification: Notification) {
+    
     if statusTextView.text.count > 5 {
       saveBtn.isEnabled = true
       saveBtn.setTitleColor(.white, for: .normal)

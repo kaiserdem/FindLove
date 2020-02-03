@@ -14,7 +14,8 @@ class CustomAlertWarning: UIView {
   @IBOutlet weak var backView: UIView!
   @IBOutlet weak var label: UILabel!
   @IBOutlet weak var textTextView: UITextView!
-  
+  @IBOutlet weak var textViewConstraintHeight: NSLayoutConstraint!
+  @IBOutlet weak var backViewConstraintCenterY: NSLayoutConstraint!
   override init(frame: CGRect) {
     super.init(frame: frame)
     commonInit()
@@ -36,6 +37,7 @@ class CustomAlertWarning: UIView {
     let borderColor = UIColor.white
     backView.layer.borderWidth = 0.5
     backView.layer.borderColor = borderColor.withAlphaComponent(opacity).cgColor
+    textTextView.textAlignment = .center
   }
   
   @IBAction func closeBtnAction(_ sender: Any) {

@@ -63,7 +63,7 @@ class OrientationView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     
     print(beforeOrientation)
     if beforeOrientation != orientationTextValue {
-      let orientationStr = orientationValidator(string: orientationTextValue)
+      let orientationStr = orientationValidatorToIndex(string: orientationTextValue)
       let valuesGender = ["orientation": orientationStr] as [String : Any]
       ref.updateChildValues(valuesGender)
     } else {
@@ -72,16 +72,6 @@ class OrientationView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     }
     
     removeFromSuperview()
-  }
-  
-  private func orientationValidator(string: String) -> String {
-    if string == "Девушки" {
-      return "1"
-    } else if string == "Парни" {
-      return "2"
-    } else {
-      return "3"
-    }
   }
   
   @IBAction func orientationBtnAction(_ sender: Any) {

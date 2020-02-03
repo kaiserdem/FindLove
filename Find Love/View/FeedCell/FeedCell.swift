@@ -13,6 +13,7 @@ import Firebase
 protocol CellSubclassDelegate: class {
   func cellTappedLike(cell: FeedCell)
   func cellTappedReplyMessage(cell: FeedCell)
+  func cellTappedImageProfile(cell: FeedCell)
 }
 
 class FeedCell: UITableViewCell {
@@ -24,18 +25,14 @@ class FeedCell: UITableViewCell {
   @IBOutlet weak var backView: UIView!
   @IBOutlet weak var countLabel: UILabel!
   @IBOutlet weak var viewsBtnLabel: UIButton!
-  
   @IBOutlet weak var replyBtn: UIButton!
   @IBOutlet weak var likeBtn: UIButton!
-  
   @IBOutlet weak var stateOnlineLabel: UIView!
-  
   @IBOutlet weak var locationLabel: UILabel!
   @IBOutlet weak var ageLabel: UILabel!
   @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var profileImageView: UIImageView!
+  @IBOutlet weak var userProfileImageView: UIImageView!
   @IBOutlet weak var postTextView: UITextView!
-  
   @IBOutlet weak var backGradientView: UIView!
   
   var post: Post? {
@@ -43,7 +40,7 @@ class FeedCell: UITableViewCell {
       uploadPostData()
     }
   }
-  
+
   override func prepareForReuse() {
     super.prepareForReuse()
     self.delegate = nil
@@ -57,20 +54,20 @@ class FeedCell: UITableViewCell {
     
     if let fromId = self.post!.fromId {
       let ref = Database.database().reference().child("users").child(fromId)
-      ref.observeSingleEvent(of: .value, with: { (snapshot) in
+      ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
         
         if let dictionary = snapshot.value as? [String: AnyObject] {
-          self.nameLabel.text = dictionary["name"] as? String
+          self?.nameLabel.text = dictionary["name"] as? String
           
           if let profileImageView = dictionary["profileImageUrl"] as? String {
-            self.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
+            self?.userProfileImageView.loadImageUsingCachWithUrlString(profileImageView)
           }
         }
       }, withCancel: nil)
     }
     
     let ref = Database.database().reference().child("posts").child(post!.postId!).child("likedUsers")
-    ref.observeSingleEvent(of: .value, with: { (snapshot) in
+    ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
 
       var arrayLiked = [String]()
 
@@ -82,19 +79,19 @@ class FeedCell: UITableViewCell {
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
         if arrayLiked.contains(uid) {
-          self.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
-          self.likeBtn.tintColor = .red
+          self?.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+          self?.likeBtn.tintColor = .red
         } else {
-          self.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
-          self.likeBtn.tintColor = .white
+          self?.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+          self?.likeBtn.tintColor = .white
         }
       }
       if arrayLiked.count == 0 {
-        self.countLikeLabel.isHidden = true
+        self?.countLikeLabel.isHidden = true
       } else {
-        self.countLikeLabel.isHidden = false
-        self.countLikeLabel.text = String(describing: arrayLiked.count)
-        self.post!.likedCount = arrayLiked.count
+        self?.countLikeLabel.isHidden = false
+        self?.countLikeLabel.text = String(describing: arrayLiked.count)
+        self?.post!.likedCount = arrayLiked.count
       }
     }, withCancel: nil)
 
@@ -126,6 +123,10 @@ class FeedCell: UITableViewCell {
     
     postTextView.isEditable = false
     postTextView.isScrollEnabled = false
+    
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+    tapGestureRecognizer.numberOfTapsRequired = 1
+    userProfileImageView.addGestureRecognizer(tapGestureRecognizer)
   }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -139,11 +140,14 @@ class FeedCell: UITableViewCell {
     
   @IBAction func replyBtnAction(_ sender: Any) {
     self.delegate?.cellTappedReplyMessage(cell: self)
-    
   }
   
   @IBAction func likeBtnAction(_ sender: Any) {
     self.delegate?.cellTappedLike(cell: self)
   }
   
+  @objc func imageTapped(_ sender: UITapGestureRecognizer) {
+    self.delegate?.cellTappedImageProfile(cell: self)
+  }
+
 }

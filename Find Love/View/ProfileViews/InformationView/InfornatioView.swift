@@ -146,7 +146,7 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     }
     
     if beforeGender != gender {
-      let genderStr = genderValidator(string: gender)
+      let genderStr = genderValidatorToIndex(string: gender)
       let valuesGender = ["gender": genderStr] as [String : Any]
       ref.updateChildValues(valuesGender)
     }
@@ -204,30 +204,23 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     }
     return ""
   }
-  private func genderValidator(string: String) -> String {
-    if string == "Мужской" {
-      return "1"
-    } else {
-      return "2"
-    }
-  }
   
   private func setupBtnSettings() {
     
     let image = UIImage(named: "down")
     ageBtn.tintColor = .white
-    let blurredProfileView = UIImageView(image: image)
-    blurredProfileView.contentMode = UIView.ContentMode.scaleAspectFit
-    blurredProfileView.layer.masksToBounds = true
-    ageBtn.addSubview(blurredProfileView)
+    let buttonView = UIImageView(image: image)
+    buttonView.contentMode = UIView.ContentMode.scaleAspectFit
+    buttonView.layer.masksToBounds = true
+    ageBtn.addSubview(buttonView)
     
-    blurredProfileView.rightAnchor.constraint(equalTo: ageBtn.rightAnchor).isActive = true
+    buttonView.rightAnchor.constraint(equalTo: ageBtn.rightAnchor).isActive = true
     
-    blurredProfileView.widthAnchor.constraint(equalToConstant: 15).isActive = true
-    blurredProfileView.heightAnchor.constraint(equalToConstant: 15).isActive = true
+    buttonView.widthAnchor.constraint(equalToConstant: 15).isActive = true
+    buttonView.heightAnchor.constraint(equalToConstant: 15).isActive = true
     
-    blurredProfileView.bottomAnchor.constraint(equalTo: ageBtn.bottomAnchor, constant: -5.0).isActive = true
-    blurredProfileView.translatesAutoresizingMaskIntoConstraints = false
+    buttonView.bottomAnchor.constraint(equalTo: ageBtn.bottomAnchor, constant: -5.0).isActive = true
+    buttonView.translatesAutoresizingMaskIntoConstraints = false
 
     ageBtn.tintColor = .white
 

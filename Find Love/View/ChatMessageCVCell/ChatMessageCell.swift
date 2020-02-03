@@ -31,6 +31,7 @@ class ChatMessageCell: UICollectionViewCell {
   let textView: UITextView = {
     let tv = UITextView()
     tv.isEditable = false
+    tv.isScrollEnabled = false
     tv.font = UIFont.systemFont(ofSize: 16)
     tv.backgroundColor = .clear
     tv.translatesAutoresizingMaskIntoConstraints = false
@@ -61,6 +62,7 @@ class ChatMessageCell: UICollectionViewCell {
     view.layer.cornerRadius = 16
     view.layer.masksToBounds = true
     view.translatesAutoresizingMaskIntoConstraints = false
+    
     return view
   }()
   

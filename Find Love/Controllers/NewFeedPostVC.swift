@@ -52,6 +52,7 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     
     let uploadImageView = UIImageView(image: #imageLiteral(resourceName: "picture.png"))
     uploadImageView.tintColor = .gray
+    uploadImageView.isHidden = true
     uploadImageView.isUserInteractionEnabled = true
     uploadImageView.translatesAutoresizingMaskIntoConstraints = false
     uploadImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleUploadTap)))
@@ -79,7 +80,7 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     
     conteinerView.addSubview(inputTextField)
     
-    inputTextField.leadingAnchor.constraint(equalTo: uploadImageView.trailingAnchor, constant: 8).isActive = true
+    inputTextField.leadingAnchor.constraint(equalTo: conteinerView.leadingAnchor, constant: 8).isActive = true
     inputTextField.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
     inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor).isActive = true
     inputTextField.heightAnchor.constraint(equalTo: conteinerView.heightAnchor).isActive = true
@@ -109,8 +110,6 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     collectionView?.keyboardDismissMode = .interactive
     
     setupInputComponents()
-    //setupKeyboardObservise()
-    
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -127,19 +126,7 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     return true
   }
   
-//  func setupKeyboardObservise() {
-//    NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-//  }
-//
-//  @objc func handleKeyboardDidShow() {
-//
-//    if posts.count > 0 {
-//      let indexPath = IndexPath(item: self.posts.count-1, section: 0) // последнее
-//      //проскролить
-//      self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-//    }
-//  }
-  
+
   func setupInputComponents() { // компоненты контроллера
     
     let topConteinerView = UIView()
@@ -391,6 +378,24 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
   
   
   @objc func handleSend() { // отправляем сообщение
+    
+    if (inputTextField.text?.isEmpty)! {
+      let viewCustomAlertWarning = CustomAlertWarning(frame: self.view.frame)
+      viewCustomAlertWarning.textTextView.text = "Пост не может быть пустым"
+      viewCustomAlertWarning.backViewConstraintCenterY.constant = -70
+      view.addSubview(viewCustomAlertWarning)
+      return
+      
+    } else if (inputTextField.text?.count)! > 200 {
+      let viewCustomAlertWarning = CustomAlertWarning(frame: self.view.frame)
+      viewCustomAlertWarning.label.text = "Ошибка"
+      viewCustomAlertWarning.textViewConstraintHeight.constant = 95
+      viewCustomAlertWarning.textTextView.text = "Превышено максимально допустимое количество символов. Текст не должен привышать 200 символов."
+      viewCustomAlertWarning.backViewConstraintCenterY.constant = -85
+      view.addSubview(viewCustomAlertWarning)
+      return
+    }
+    
     let properties = ["text": inputTextField.text!] as [String : Any]
     sendMessagesWithProperties(properties)
   }

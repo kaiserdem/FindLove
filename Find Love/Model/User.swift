@@ -8,32 +8,6 @@
 
 import Foundation
 
-//enum Gender: String {
-//  case Male, Female
-//  func validator() -> String {
-//    switch self {
-//    case .Male:
-//      return "Мужчина"
-//    case .Female:
-//      return "Женщина"
-//    }
-//  }
-//}
-//
-//enum Orientation: String {
-//  case Man, Woman, Multy
-//  func validator() -> String {
-//    switch self {
-//    case .Man:
-//      return "Парни"
-//    case .Woman:
-//      return "Девушки"
-//    case .Multy:
-//      return "Девушки и парни"
-//    }
-//  }
-//}
-//
 
 class User: NSObject {
   

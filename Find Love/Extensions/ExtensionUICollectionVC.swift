@@ -22,3 +22,41 @@ extension UIResponder {
   }
 }
 
+extension UIResponder {
+  
+  func genderValidatorToText(string: String) -> String {
+    if string == "1" {
+      return "Мужской"
+    } else {
+      return "Женский"
+    }
+  }
+  
+  func orientationValidatorToText(string: String) -> String {
+    if string == "1" {
+      return "Девушки"
+    } else if string == "2" {
+      return "Парни"
+    } else {
+      return "Девушки и парни"
+    }
+  }
+  
+  func genderValidatorToIndex(string: String) -> String {
+    if string == "Мужской" {
+      return "1"
+    } else {
+      return "2"
+    }
+  }
+  
+  func orientationValidatorToIndex(string: String) -> String {
+    if string == "Девушки" {
+      return "1"
+    } else if string == "Парни" {
+      return "2"
+    } else {
+      return "3"
+    }
+  }
+}
