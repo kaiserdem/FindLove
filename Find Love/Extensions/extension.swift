@@ -1,12 +1,43 @@
 //
-//  ExtensionUICollectionVC.swift
+//  extension.swift
 //  Find Love
 //
-//  Created by Kaiserdem on 26.01.2020.
+//  Created by Kaiserdem on 04.02.2020.
 //  Copyright © 2020 Kaiserdem. All rights reserved.
 //
 
+import Foundation
+
 import UIKit
+
+extension UIResponder {
+  
+  func setFormatDislayedTimeAndDate(from interval : TimeInterval, withString: Bool) -> String {
+    let calendar = Calendar.current
+    let date = Date(timeIntervalSince1970: interval)
+    
+    let dateFormatterHM = DateFormatter()
+    dateFormatterHM.dateFormat = "hh:mm"
+    
+    let dateFormatterMDHM = DateFormatter()
+    dateFormatterMDHM.dateFormat = "MM-dd hh:mm" //"YYYY-MM-dd hh:mm"
+    
+    if withString == true {
+      if calendar.isDateInYesterday(date) { return "Вчера \(dateFormatterHM.string(from: date))" }
+      else if calendar.isDateInToday(date) { return "Сегодня \(dateFormatterHM.string(from: date))" }
+      else {
+        return dateFormatterMDHM.string(from: date)
+      }
+    } else {
+      if calendar.isDateInYesterday(date) { return "\(dateFormatterHM.string(from: date))" }
+      else if calendar.isDateInToday(date) { return "\(dateFormatterHM.string(from: date))" }
+      else {
+        return dateFormatterMDHM.string(from: date)
+      }
+    }
+  }
+}
+
 
 extension UIResponder {
   

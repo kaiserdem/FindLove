@@ -9,16 +9,36 @@
 import UIKit
 
 class StatusViewCell: UITableViewCell {
-
+  
+  weak var delegate: ChangeBntCellDelegate?
+  @IBOutlet weak var changeStatusBtn: UIButton!
+  @IBOutlet weak var statusTextView: UITextView!
+  
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
+      changeStatusBtn.setImage(UIImage(named: "pen")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+      changeStatusBtn.imageView?.tintColor = .white
+
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    self.delegate = nil
+  }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+      if selected {
+        contentView.backgroundColor = .black
+      } else {
+        contentView.backgroundColor = .black
+      }
     }
+  
+  @IBAction func statusBtnAction(_ sender: Any) {
+    print("statusBtnAction")
+    self.delegate?.changeStatusTapped(cell: self)
+
+  }
     
 }

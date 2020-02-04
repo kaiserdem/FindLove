@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   // если приложение было активно в бекграунде, сработает этот метод
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
     let dataInfo = userInfo as! [String: Any]
-    print("Data: \(String(describing: dataInfo["aps"]))")
+    //print("Data: \(String(describing: dataInfo["aps"]))")
   }
   
   func registerForPushNotifications() {

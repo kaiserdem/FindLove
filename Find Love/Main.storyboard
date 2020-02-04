@@ -57,10 +57,10 @@
                                         <rect key="frame" x="15" y="45" width="384" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVZ-nX-Ggp">
-                                                <rect key="frame" x="0.0" y="0.0" width="122.5" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="188" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Сообщения" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blr-8J-Vc5">
-                                                        <rect key="frame" x="9.5" y="12" width="103.5" height="20.5"/>
+                                                        <rect key="frame" x="42.5" y="12" width="103.5" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -73,10 +73,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhA-mc-CIS">
-                                                <rect key="frame" x="130.5" y="0.0" width="123" height="50"/>
+                                                <rect key="frame" x="196" y="0.0" width="188" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Чат" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iuv-4g-cur">
-                                                        <rect key="frame" x="46" y="12" width="31" height="20.5"/>
+                                                        <rect key="frame" x="78.5" y="12" width="31" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -86,22 +86,6 @@
                                                 <constraints>
                                                     <constraint firstItem="iuv-4g-cur" firstAttribute="centerY" secondItem="nhA-mc-CIS" secondAttribute="centerY" constant="-3" id="68w-FS-3eY"/>
                                                     <constraint firstItem="iuv-4g-cur" firstAttribute="centerX" secondItem="nhA-mc-CIS" secondAttribute="centerX" id="7AJ-Lg-vDZ"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyI-ER-J6Y">
-                                                <rect key="frame" x="261.5" y="0.0" width="122.5" height="50"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Написать" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTG-yb-yeM">
-                                                        <rect key="frame" x="20" y="12" width="82" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="eTG-yb-yeM" firstAttribute="centerY" secondItem="gyI-ER-J6Y" secondAttribute="centerY" constant="-3" id="M0a-4C-dGy"/>
-                                                    <constraint firstItem="eTG-yb-yeM" firstAttribute="centerX" secondItem="gyI-ER-J6Y" secondAttribute="centerX" id="NRf-Qv-4q5"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -129,9 +113,6 @@
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCf-a3-FLl" userLabel="newMessageContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="723"/>
-                                        <connections>
-                                            <segue destination="CF6-LU-ZoC" kind="embed" identifier="NewMessageVC" id="1DV-i3-ixH"/>
-                                        </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="69r-CJ-Mkz" userLabel="messageALLConteonerView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="723"/>
@@ -176,7 +157,6 @@
                         <outlet property="chatContentView" destination="t0e-1k-KoJ" id="Bd5-h3-9b4"/>
                         <outlet property="messageAllContentView" destination="69r-CJ-Mkz" id="yQ5-AS-IdT"/>
                         <outlet property="messageBarBtnView" destination="RVZ-nX-Ggp" id="Id5-HG-S7o"/>
-                        <outlet property="newMessageBarBtnView" destination="gyI-ER-J6Y" id="EBC-Ig-oPY"/>
                         <outlet property="newMessageConteinerView" destination="XCf-a3-FLl" id="YsV-0k-mCa"/>
                         <outlet property="topBarView" destination="aLI-Gp-Jpt" id="5M4-4N-jEX"/>
                     </connections>
@@ -240,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y8H-P5-M1y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-59" y="869"/>
+            <point key="canvasLocation" x="532" y="877"/>
         </scene>
         <!--GameVC-->
         <scene sceneID="LgH-bn-JEW">
@@ -256,12 +236,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8l-yf-89v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="583" y="878"/>
+            <point key="canvasLocation" x="533" y="194"/>
         </scene>
-        <!--ProfileVC-->
+        <!--View Controller-->
         <scene sceneID="Zp3-Af-uPF">
             <objects>
-                <viewController id="Ybx-RV-JTM" customClass="ProfileVC" customModule="Find_Love" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Ybx-RV-JTM" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="xCI-ke-Lvd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -273,7 +253,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1BV-Ti-JBy">
-                                <rect key="frame" x="0.0" y="123" width="414" height="660"/>
+                                <rect key="frame" x="0.0" y="123" width="414" height="709"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTH-1G-Itx">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
@@ -351,7 +331,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="l6c-3j-hkj">
-                                        <rect key="frame" x="0.0" y="163" width="414" height="84.5"/>
+                                        <rect key="frame" x="0.0" y="175" width="414" height="84.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Статус" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2F9-si-b0v">
                                                 <rect key="frame" x="176" y="0.0" width="62" height="21.5"/>
@@ -377,7 +357,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="Pmf-8U-dea">
-                                        <rect key="frame" x="0.0" y="308" width="414" height="84.5"/>
+                                        <rect key="frame" x="0.0" y="332.5" width="414" height="84.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мне нравяться" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j4g-d8-vn7">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="21.5"/>
@@ -394,7 +374,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="c1T-nT-QYF">
-                                        <rect key="frame" x="0.0" y="438" width="414" height="114.5"/>
+                                        <rect key="frame" x="0.0" y="474.5" width="414" height="114.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Обо мне" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cmn-VJ-mqL">
                                                 <rect key="frame" x="169" y="0.0" width="76" height="21.5"/>
@@ -420,7 +400,7 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YHz-21-IBW">
-                                        <rect key="frame" x="102" y="620" width="210" height="40"/>
+                                        <rect key="frame" x="102" y="669" width="210" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="210" id="Phk-RN-oUl"/>
                                             <constraint firstAttribute="height" constant="40" id="diL-2F-2pg"/>
@@ -452,7 +432,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUy-mc-gb1">
-                                <rect key="frame" x="374" y="286" width="30" height="30"/>
+                                <rect key="frame" x="374" y="298" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7Dz-Mt-JfF"/>
                                     <constraint firstAttribute="width" constant="30" id="PAq-RZ-hVZ"/>
@@ -469,7 +449,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfO-rN-a7N">
-                                <rect key="frame" x="374" y="431" width="30" height="30"/>
+                                <rect key="frame" x="374" y="455.5" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="GYs-g0-a1A"/>
                                     <constraint firstAttribute="width" constant="30" id="Vhz-vv-agh"/>
@@ -486,7 +466,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rg-JR-cf1">
-                                <rect key="frame" x="374" y="561" width="30" height="30"/>
+                                <rect key="frame" x="374" y="597.5" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="VnM-DW-fcG"/>
                                     <constraint firstAttribute="height" constant="30" id="cgT-XL-bOJ"/>
@@ -554,7 +534,38 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ofc-k1-fr5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2610" y="194"/>
+            <point key="canvasLocation" x="532" y="-480"/>
+        </scene>
+        <!--ProfileVC-->
+        <scene sceneID="oVE-FN-4YQ">
+            <objects>
+                <viewController id="XmI-S3-8Xy" customClass="ProfileVC" customModule="Find_Love" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7Lc-Lk-tDO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dj1-Pg-p0r">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dj1-Pg-p0r" firstAttribute="top" secondItem="BP8-aL-PeB" secondAttribute="top" id="B10-Ev-Se9"/>
+                            <constraint firstItem="dj1-Pg-p0r" firstAttribute="trailing" secondItem="BP8-aL-PeB" secondAttribute="trailing" id="hUO-4C-O2B"/>
+                            <constraint firstItem="dj1-Pg-p0r" firstAttribute="bottom" secondItem="BP8-aL-PeB" secondAttribute="bottom" id="jsm-SQ-rs4"/>
+                            <constraint firstItem="dj1-Pg-p0r" firstAttribute="leading" secondItem="BP8-aL-PeB" secondAttribute="leading" id="sAS-Kc-ny8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BP8-aL-PeB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="userIcon" id="4Ua-Wn-qPz"/>
+                    <connections>
+                        <outlet property="backView" destination="dj1-Pg-p0r" id="ANk-Fd-p3V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DZA-2B-sMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2608.6956521739135" y="193.52678571428569"/>
         </scene>
         <!--Custom Tab Bar-->
         <scene sceneID="1yH-O9-SRm">
@@ -570,27 +581,12 @@
                     <connections>
                         <segue destination="Yku-Q6-7cK" kind="relationship" relationship="viewControllers" id="Wli-6g-MfC"/>
                         <segue destination="c6E-gv-5fL" kind="relationship" relationship="viewControllers" id="9nz-Bg-Amd"/>
-                        <segue destination="Ybx-RV-JTM" kind="relationship" relationship="viewControllers" id="1h3-Ui-p7v"/>
+                        <segue destination="XmI-S3-8Xy" kind="relationship" relationship="viewControllers" id="lwZ-Mf-aJY"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OXh-Ia-rmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="584" y="194"/>
-        </scene>
-        <!--New MessageVC-->
-        <scene sceneID="HJR-dn-atd">
-            <objects>
-                <viewController id="CF6-LU-ZoC" customClass="NewMessageVC" customModule="Find_Love" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="pIF-ea-cbz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="723"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="NT5-MK-W08"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HsY-wc-35A" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2610" y="857"/>
+            <point key="canvasLocation" x="1945" y="-536"/>
         </scene>
         <!--MessagesVC-->
         <scene sceneID="Pe5-xl-cmM">
@@ -605,7 +601,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="svT-Xp-Uz9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1268" y="857"/>
+            <point key="canvasLocation" x="1626" y="857"/>
         </scene>
         <!--ChatVC-->
         <scene sceneID="Ncy-ep-jkj">
@@ -620,7 +616,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o90-I9-pdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1943" y="857"/>
+            <point key="canvasLocation" x="2293" y="857"/>
         </scene>
     </scenes>
     <resources>

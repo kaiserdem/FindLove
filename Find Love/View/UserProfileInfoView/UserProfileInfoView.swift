@@ -31,9 +31,15 @@ class UserProfileInfoView: UIView {
   @IBOutlet weak var genderLabel: UILabel!
   @IBOutlet weak var ageLabel: UILabel!
   @IBOutlet weak var orientationLabel: UILabel!
-
   @IBOutlet weak var userNameLabel: UILabel!
   @IBOutlet weak var profileImageView: UIImageView!
+  @IBOutlet weak var aboutSelfSeparatorView: UIView!
+  @IBOutlet weak var orientationSeparatorView: UIView!
+  @IBOutlet weak var statusSeparatorView: UIView!
+  @IBOutlet weak var ageSeparatorView: UIView!
+  @IBOutlet weak var genderSeparatorView: UIView!
+
+
   
   var user: User?
   weak var feedVC: FeedVC?
@@ -53,6 +59,8 @@ class UserProfileInfoView: UIView {
     profileImageView.layoutIfNeeded()
     statusTextView.layer.cornerRadius = 8
     aboutSelfTextView.layer.cornerRadius = 8
+    ageLabel.layer.cornerRadius = 8
+    ageLabel.layoutIfNeeded()
     
   }
   

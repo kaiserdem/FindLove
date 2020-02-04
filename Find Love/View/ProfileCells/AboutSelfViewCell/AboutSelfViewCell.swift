@@ -9,16 +9,36 @@
 import UIKit
 
 class AboutSelfViewCell: UITableViewCell {
+  
+  weak var delegate: ChangeBntCellDelegate?
+  
+  @IBOutlet weak var changeAboutSelfBtn: UIButton!
+  @IBOutlet weak var aboutSelfTextView: UITextView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+      changeAboutSelfBtn.setImage(UIImage(named: "pen")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+      changeAboutSelfBtn.imageView?.tintColor = .white
+    
     }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    self.delegate = nil
+  }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+      if selected {
+        contentView.backgroundColor = .black
+      } else {
+        contentView.backgroundColor = .black
+      }
     }
+  
+  @IBAction func aboutSelfBtnAction(_ sender: Any) {
+    print("aboutSelfBtnAction")
+    self.delegate?.changeAboutSelfTapped(cell: self)
+  }
     
 }

@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,10 +29,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q9N-3P-bbt">
-                    <rect key="frame" x="30" y="60" width="315" height="350"/>
+                    <rect key="frame" x="30" y="60" width="315" height="325"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fdk-IO-HAP">
-                            <rect key="frame" x="20" y="97" width="275" height="223"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="fdk-IO-HAP">
+                            <rect key="frame" x="20" y="97" width="275" height="198"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="N2a-XN-8za">
                                     <rect key="frame" x="0.0" y="0.0" width="275" height="73"/>
@@ -60,7 +59,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="nQL-m2-DA0">
-                                    <rect key="frame" x="0.0" y="128" width="275" height="95"/>
+                                    <rect key="frame" x="0.0" y="103" width="275" height="95"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EeP-op-56L">
                                             <rect key="frame" x="0.0" y="0.0" width="275" height="40"/>
@@ -132,7 +131,6 @@
                         <constraint firstItem="0t0-WD-C2N" firstAttribute="top" secondItem="A4h-Zh-Vqe" secondAttribute="bottom" constant="3" id="GJG-XF-aaQ"/>
                         <constraint firstAttribute="trailing" secondItem="fdk-IO-HAP" secondAttribute="trailing" constant="20" id="GLf-gF-OBw"/>
                         <constraint firstAttribute="bottom" secondItem="fdk-IO-HAP" secondAttribute="bottom" constant="30" id="Qk8-d1-NRp"/>
-                        <constraint firstAttribute="height" constant="350" id="Qtx-XZ-h1L"/>
                         <constraint firstItem="fdk-IO-HAP" firstAttribute="leading" secondItem="Q9N-3P-bbt" secondAttribute="leading" constant="20" id="SMH-zR-5ke"/>
                         <constraint firstItem="0t0-WD-C2N" firstAttribute="leading" secondItem="Q9N-3P-bbt" secondAttribute="leading" constant="20" id="SXI-gK-k5M"/>
                         <constraint firstAttribute="trailing" secondItem="0t0-WD-C2N" secondAttribute="trailing" constant="20" id="WS0-zd-8hm"/>

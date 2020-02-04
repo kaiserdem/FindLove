@@ -10,12 +10,6 @@ import UIKit
 import FirebaseDatabase
 import Firebase
 
-protocol CellSubclassDelegate: class {
-  func cellTappedLike(cell: FeedCell)
-  func cellTappedReplyMessage(cell: FeedCell)
-  func cellTappedImageProfile(cell: FeedCell)
-}
-
 class FeedCell: UITableViewCell {
   
   weak var delegate: CellSubclassDelegate?

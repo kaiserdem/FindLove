@@ -1,21 +1,82 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="AboutSelfViewCell" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" id="KGk-i7-Jjw" customClass="AboutSelfViewCell" customModule="Find_Love" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="106"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="380" height="105.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="cdcewcqwefeqwdewqf" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jn4-us-BIX">
+                        <rect key="frame" x="20" y="50" width="340" height="45.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRJ-mW-FCJ">
+                        <rect key="frame" x="340" y="10" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="CAK-NW-9jh"/>
+                            <constraint firstAttribute="width" constant="30" id="Mtq-2H-ylj"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                        <state key="normal" image="pen"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="aboutSelfBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="AC6-td-3Yi"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Обо мне" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1A-xK-yKl">
+                        <rect key="frame" x="20" y="10" width="340" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="jGp-hI-XOJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="p1A-xK-yKl" secondAttribute="trailing" constant="20" id="0t9-fX-68Y"/>
+                    <constraint firstItem="Jn4-us-BIX" firstAttribute="top" secondItem="p1A-xK-yKl" secondAttribute="bottom" id="1J3-N6-OkH"/>
+                    <constraint firstItem="p1A-xK-yKl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="I5R-wG-Sg1"/>
+                    <constraint firstAttribute="bottom" secondItem="Jn4-us-BIX" secondAttribute="bottom" constant="10" id="Obj-go-PMr"/>
+                    <constraint firstItem="Jn4-us-BIX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Q6T-LM-zT9"/>
+                    <constraint firstAttribute="trailing" secondItem="GRJ-mW-FCJ" secondAttribute="trailing" constant="10" id="RgT-9d-y0E"/>
+                    <constraint firstAttribute="trailing" secondItem="Jn4-us-BIX" secondAttribute="trailing" constant="20" id="Uiz-FJ-i2e"/>
+                    <constraint firstItem="GRJ-mW-FCJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ZKb-Lg-sLh"/>
+                    <constraint firstItem="p1A-xK-yKl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="bSW-Zc-Zuu"/>
+                </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="aboutSelfTextView" destination="Jn4-us-BIX" id="Had-LW-fyX"/>
+                <outlet property="changeAboutSelfBtn" destination="GRJ-mW-FCJ" id="gj5-Cb-Lio"/>
+            </connections>
+            <point key="canvasLocation" x="188.80000000000001" y="182.60869565217394"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="pen" width="32" height="32"/>
+    </resources>
 </document>

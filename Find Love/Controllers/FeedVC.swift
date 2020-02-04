@@ -10,6 +10,13 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
+protocol CellSubclassDelegate: class {
+  func cellTappedLike(cell: FeedCell)
+  func cellTappedReplyMessage(cell: FeedCell)
+  func cellTappedImageProfile(cell: FeedCell)
+}
+
+
 class FeedVC: UIViewController, CellSubclassDelegate {
 
   @IBOutlet weak var backTableView: UIView!
@@ -18,6 +25,11 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   var posts = [Post]()
   var postDictionary = [String: Post]()
   var user: User?
+  var currentUser: User?  {
+    didSet {
+      UserDefaults.standard.save(currentUser, forKey: "likedWallpapers")
+    }
+  }
   var currentPostText = ""
   
   override func viewDidLoad() {
@@ -113,6 +125,8 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         } else {
           userProfileInfoView.ageLabelHeightConstraint.constant = 0
           userProfileInfoView.ageLabel.isHidden = true
+          userProfileInfoView.ageSeparatorView.isHidden = true
+        
         }
         
         
@@ -125,18 +139,20 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         } else {
           userProfileInfoView.genderLabelHeightConstraint.constant = 0
           userProfileInfoView.genderLabel.isHidden = true
+          userProfileInfoView.genderSeparatorView.isHidden = true
         }
         
         
         
     
-        if user.status != nil {
+        if user.aboutSelf != nil {
           userProfileInfoView.aboutSelfTextView.text = String(describing:"O себе: \n\(user.aboutSelf!)")
           let height = (self?.estimateFrameForText(user.aboutSelf!).height)! + 20
           userProfileInfoView.aboutSelfTextViewHeightConstraint.constant = height
         } else {
           userProfileInfoView.aboutSelfTextViewHeightConstraint.constant = 0
           userProfileInfoView.aboutSelfTextView.isHidden = true
+          userProfileInfoView.aboutSelfSeparatorView.isHidden = true
         }
         
         
@@ -149,6 +165,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         } else {
           userProfileInfoView.statusTextViewHeightConstraint.constant = 0
           userProfileInfoView.statusTextView.isHidden = true
+          userProfileInfoView.statusSeparatorView.isHidden = true
         }
         
         
@@ -163,6 +180,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         } else {
           userProfileInfoView.orientationLabelHeightConstraint.constant = 0
           userProfileInfoView.orientationLabel.isHidden = true
+          userProfileInfoView.orientationSeparatorView.isHidden = true
         }
         
         
@@ -177,7 +195,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   
   
   func cellTappedLike(cell: FeedCell) {
-    
+        
     guard let indexPath = self.tableView.indexPath(for: cell) else { return }
     
     let post = posts[indexPath.row - 1]
@@ -262,12 +280,13 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: "AddFeedPostCell", for: indexPath) as! AddFeedPostCell
       cell.contentView.backgroundColor = .black
       
-      Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
+      Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
         
         if let dictionary = snapshot.value as? [String: AnyObject] {
           let user = User(dictionary: dictionary)
           user.id = snapshot.key
-          self.user = user
+          self?.user = user
+          self?.currentUser = user
           if let profileImageView = user.profileImageUrl {
             cell.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
           }

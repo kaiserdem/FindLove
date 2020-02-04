@@ -63,13 +63,11 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
   }
+  
   @objc func keyboardWillAppear(_ notification: Notification) {
     
-    if nameTextField.text!.count > 1 && nameTextField.text != beforeName {
-      saveBtn.isEnabled = true
-      saveBtn.setTitleColor(.white, for: .normal)
-    }
-    
+    saveBtn.isEnabled = true
+    saveBtn.setTitleColor(.white, for: .normal)
     
     nameLabel.textColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
     nameSeparator.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)

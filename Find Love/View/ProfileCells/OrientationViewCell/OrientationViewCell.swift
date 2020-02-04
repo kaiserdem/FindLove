@@ -9,16 +9,35 @@
 import UIKit
 
 class OrientationViewCell: UITableViewCell {
+  
+  weak var delegate: ChangeBntCellDelegate?
+  
+  @IBOutlet weak var changeOrientationBtn: UIButton!
+  @IBOutlet weak var orientationLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
+      changeOrientationBtn.setImage(UIImage(named: "pen")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+      changeOrientationBtn.imageView?.tintColor = .white
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    self.delegate = nil
+  }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+      if selected {
+        contentView.backgroundColor = .black
+      } else {
+        contentView.backgroundColor = .black
+      }
     }
+  
+  @IBAction func changeOrientationBtnAction(_ sender: Any) {
+    print("changeOrientationBtnAction")
+    self.delegate?.changeOrientationTapped(cell: self)
+  }
     
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="SettingsViewCell" customModule="Find_Love" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="415" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="415" height="69.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ct-Kp-hBR">
+                        <rect key="frame" x="102.5" y="15" width="210" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="210" id="Uu8-BD-b03"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="W5e-IN-aiL"/>
+                            <constraint firstAttribute="height" constant="40" id="mrS-y0-oAF"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="210" id="uTy-gU-Fx3"/>
+                        </constraints>
+                        <state key="normal">
+                            <attributedString key="attributedTitle">
+                                <fragment content="Настройки">
+                                    <attributes>
+                                        <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <font key="NSFont" metaFont="system" size="21"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                        </state>
+                        <connections>
+                            <action selector="settingsBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rFl-2C-nt9"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="7Ct-Kp-hBR" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="UEH-fh-oWa"/>
+                    <constraint firstItem="7Ct-Kp-hBR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="XM8-X9-tsN"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="settingsBtn" destination="7Ct-Kp-hBR" id="MVi-Hf-TtH"/>
+            </connections>
+            <point key="canvasLocation" x="213.59999999999999" y="166.41679160419793"/>
+        </tableViewCell>
+    </objects>
+</document>

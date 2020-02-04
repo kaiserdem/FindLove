@@ -55,11 +55,9 @@ class StatusView: UIView {
   
   @objc func keyboardWillAppear(_ notification: Notification) {
     
-    if statusTextView.text.count > 5 {
-      saveBtn.isEnabled = true
-      saveBtn.setTitleColor(.white, for: .normal)
-    }
-    
+    saveBtn.isEnabled = true
+    saveBtn.setTitleColor(.white, for: .normal)
+   
     statusTextView.text = ""
     statusLabel.textColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
     statusSeparator.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
