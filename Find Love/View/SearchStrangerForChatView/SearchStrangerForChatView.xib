@@ -35,7 +35,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAE-5Q-EYA">
-                    <rect key="frame" x="20" y="121" width="335" height="425"/>
+                    <rect key="frame" x="20" y="141" width="335" height="385"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyU-s4-ebc">
                             <rect key="frame" x="280" y="5" width="50" height="50"/>
@@ -49,7 +49,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94h-Sm-U1J">
-                            <rect key="frame" x="17.5" y="335" width="300" height="60"/>
+                            <rect key="frame" x="17.5" y="305" width="300" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="300" id="W0M-gp-zos"/>
                                 <constraint firstAttribute="height" constant="60" id="sed-n4-9h2"/>
@@ -68,7 +68,7 @@
                             </connections>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="QEZ-Cu-ogQ">
-                            <rect key="frame" x="12.5" y="174.5" width="310" height="105.5"/>
+                            <rect key="frame" x="12.5" y="164.5" width="310" height="105.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="LQP-yC-e17">
                                     <rect key="frame" x="0.0" y="0.0" width="90" height="105.5"/>
@@ -187,12 +187,12 @@
                         <constraint firstItem="lSV-Yh-NmG" firstAttribute="centerX" secondItem="VAE-5Q-EYA" secondAttribute="centerX" id="A9Q-Gd-VQb"/>
                         <constraint firstItem="fyU-s4-ebc" firstAttribute="top" secondItem="FeQ-9W-Bx1" secondAttribute="top" constant="5" id="FK2-HC-fpi"/>
                         <constraint firstItem="C4z-lV-nDh" firstAttribute="top" secondItem="lSV-Yh-NmG" secondAttribute="bottom" constant="30" id="Ggu-bu-qM3"/>
-                        <constraint firstItem="FeQ-9W-Bx1" firstAttribute="bottom" secondItem="94h-Sm-U1J" secondAttribute="bottom" constant="30" id="Hzd-TA-pFd"/>
+                        <constraint firstItem="FeQ-9W-Bx1" firstAttribute="bottom" secondItem="94h-Sm-U1J" secondAttribute="bottom" constant="20" id="Hzd-TA-pFd"/>
                         <constraint firstItem="94h-Sm-U1J" firstAttribute="centerX" secondItem="VAE-5Q-EYA" secondAttribute="centerX" id="VBk-4q-Ufw"/>
                         <constraint firstItem="C4z-lV-nDh" firstAttribute="centerX" secondItem="VAE-5Q-EYA" secondAttribute="centerX" id="VDp-Zj-SuX"/>
-                        <constraint firstItem="94h-Sm-U1J" firstAttribute="top" secondItem="QEZ-Cu-ogQ" secondAttribute="bottom" constant="55" id="crW-ZO-chN"/>
+                        <constraint firstItem="94h-Sm-U1J" firstAttribute="top" secondItem="QEZ-Cu-ogQ" secondAttribute="bottom" constant="35" id="crW-ZO-chN"/>
                         <constraint firstAttribute="width" constant="335" id="f6a-eb-48B"/>
-                        <constraint firstItem="QEZ-Cu-ogQ" firstAttribute="top" secondItem="C4z-lV-nDh" secondAttribute="bottom" constant="30" id="tQF-tm-3CP"/>
+                        <constraint firstItem="QEZ-Cu-ogQ" firstAttribute="top" secondItem="C4z-lV-nDh" secondAttribute="bottom" constant="20" id="tQF-tm-3CP"/>
                         <constraint firstItem="lSV-Yh-NmG" firstAttribute="top" secondItem="fyU-s4-ebc" secondAttribute="bottom" constant="10" id="ujb-pw-0qo"/>
                         <constraint firstAttribute="trailing" secondItem="fyU-s4-ebc" secondAttribute="trailing" constant="5" id="xj7-Zz-yNT"/>
                     </constraints>

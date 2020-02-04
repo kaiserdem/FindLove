@@ -42,10 +42,11 @@ class ProfileVC: UIViewController, ChangeBntCellDelegate {
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-    tableView.tableFooterView = UIView()
-    tableView.separatorInset = .zero
-    tableView.layoutMargins = .zero
-    tableView.allowsMultipleSelection = false
+//    tableView.allowsSelection = false 
+    tableView.tableFooterView = UIView() // убрать все что ниже
+//    tableView.separatorInset = .zero
+//    tableView.layoutMargins = .zero
+//    tableView.allowsMultipleSelection = false
   }
   
   func uploadTableView() {

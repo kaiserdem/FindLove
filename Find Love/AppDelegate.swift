@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
       return String(format: "%02.2hhx", data)
     }
     let token = tokenParts.joined()
-    print("Device Token: \(token)")
+    //print("Device Token: \(token)")
   }
   
   // если ошибка регистрации нотификации
