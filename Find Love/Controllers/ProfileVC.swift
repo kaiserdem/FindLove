@@ -44,9 +44,6 @@ class ProfileVC: UIViewController, ChangeBntCellDelegate {
     super.viewWillLayoutSubviews()
     tableView.allowsSelection = false 
     tableView.tableFooterView = UIView() // убрать все что ниже
-//    tableView.separatorInset = .zero
-//    tableView.layoutMargins = .zero
-//    tableView.allowsMultipleSelection = false
   }
   
   func uploadTableView() {
@@ -237,109 +234,73 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
     if indexPath.row == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "InformationViewCell", for: indexPath) as! InformationViewCell
       cell.delegate = self
-//      Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
-//
-//        if let dictionary = snapshot.value as? [String: AnyObject] {
-//          let user = User(dictionary: dictionary)
-//          user.id = snapshot.key
-//          self?.user = user
-          
+      
       cell.nameLabel.text = user!.name!
-          
+      
       if user!.gender != nil {
-            cell.genderLabel.textColor = .white
+        cell.genderLabel.textColor = .white
         let gender = user!.gender!
-            let genderString = genderValidatorToText(string: gender)
+        let genderString = genderValidatorToText(string: gender)
         cell.genderLabel.text = "Пол: \(genderString)"
-            
-          } else {
-            cell.genderLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
-            cell.genderLabel.text = "Введите свой пол"
-          }
-          
+      } else {
+        cell.genderLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
+        cell.genderLabel.text = "Введите свой пол"
+      }
+      
       if user!.age != nil {
-            cell.ageLabel.textColor = .white
-            let ageString = String(describing: user!.age!)
-            cell.ageLabel.text = String(describing:"Возраст: \(ageString)")
-          } else {
-            cell.ageLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
-            cell.ageLabel.text = "Введите свой возраст"
-          }
-          
-          if let profileImageView = user!.profileImageUrl {
-            cell.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
-          }
-//        }
-//        }, withCancel: nil)
+        cell.ageLabel.textColor = .white
+        let ageString = String(describing: user!.age!)
+        cell.ageLabel.text = String(describing:"Возраст: \(ageString)")
+      } else {
+        cell.ageLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
+        cell.ageLabel.text = "Введите свой возраст"
+      }
+      if let profileImageView = user!.profileImageUrl {
+        cell.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
+      }
       
     }
     
     if indexPath.row == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "StatusViewCell", for: indexPath) as! StatusViewCell
       cell.delegate = self
-//      Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
-//
-//        if let dictionary = snapshot.value as? [String: AnyObject] {
-//          let user = User(dictionary: dictionary)
-//          user.id = snapshot.key
-//          self?.user = user
-//
-          if user!.status != nil {
-            cell.statusTextView.textColor = .white
-            cell.statusTextView.text = user!.status
-            //      let height = self.estimateFrameForText(user.staus!).height
-            //      heightConstraintStatusTextView.constant = height
-          } else {
-            cell.statusTextView.text = "Тут пока пусто, опишите свое настроение"
-            cell.statusTextView.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
-          }
-//        }
-//        }, withCancel: nil)
       
+      if user!.status != nil {
+        cell.statusTextView.textColor = .white
+        cell.statusTextView.text = user!.status
+      } else {
+        cell.statusTextView.text = "Тут пока пусто, опишите свое настроение"
+        cell.statusTextView.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
+      }
       
     }
     
     if indexPath.row == 2 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "OrientationViewCell", for: indexPath) as! OrientationViewCell
       cell.delegate = self
-//    Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
-//
-//        if let dictionary = snapshot.value as? [String: AnyObject] {
-//          let user = User(dictionary: dictionary)
-//          user.id = snapshot.key
-//          self?.user = user
-          if user!.orientation != nil {
-            cell.orientationLabel.textColor = .white
-            cell.orientationLabel.text = orientationValidatorToText(string: user!.orientation!)
-          } else {
-            cell.orientationLabel.text = "Введите свой предпочтения"
-            cell.orientationLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
-          }
-//        }
-//        }, withCancel: nil)
+      
+      if user!.orientation != nil {
+        cell.orientationLabel.textColor = .white
+        cell.orientationLabel.text = orientationValidatorToText(string: user!.orientation!)
+      } else {
+        cell.orientationLabel.text = "Введите свой предпочтения"
+        cell.orientationLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
+      }
+      
     }
     
     if indexPath.row == 3 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "AboutSelfViewCell", for: indexPath) as! AboutSelfViewCell
       cell.delegate = self
-//      Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
-//
-//        if let dictionary = snapshot.value as? [String: AnyObject] {
-//          let user = User(dictionary: dictionary)
-//          user.id = snapshot.key
-//          self?.user = user
       
-          if user!.aboutSelf != nil {
-            cell.aboutSelfTextView.textColor = .white
-            cell.aboutSelfTextView.text = user!.aboutSelf
-            //      let height = self.estimateFrameForText(user.aboutSelf!).height
-            //      heightConstraintDescriptionTextView.constant = height
-          } else {
-            cell.aboutSelfTextView.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
-            cell.aboutSelfTextView.text = "Опишите себя, свои интересы и увлечения"
-          }
-//        }
-//        }, withCancel: nil)
+      if user!.aboutSelf != nil {
+        cell.aboutSelfTextView.textColor = .white
+        cell.aboutSelfTextView.text = user!.aboutSelf
+      } else {
+        cell.aboutSelfTextView.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
+        cell.aboutSelfTextView.text = "Опишите себя, свои интересы и увлечения"
+      }
+      
     }
     
     if indexPath.row == 4 {

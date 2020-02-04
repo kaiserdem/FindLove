@@ -141,6 +141,7 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     if beforeName != name {
       let valuesName = ["name": name] as [String : Any]
       ref.updateChildValues(valuesName)
+      
     }
     
     if beforeGender != gender {
