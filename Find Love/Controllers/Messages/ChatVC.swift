@@ -92,7 +92,7 @@ extension ChatVC: UITableViewDataSource, UITableViewDelegate {
     cell.descriptionLabel.text = group.descriptions
     
     if let profileImageView = group.iconImageUrl {
-      cell.iconImageView.loadImageUsingCachWithUrlString(profileImageView)
+      cell.iconImageView.loadImageUsingCache(profileImageView)
     } else {
       cell.iconImageView.image = UIImage(named: "fire")
     }

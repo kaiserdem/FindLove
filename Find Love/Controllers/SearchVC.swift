@@ -78,7 +78,7 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
       cell.infoLabel.text = user.email
       
       if let profileImageView = user.profileImageUrl {
-        cell.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
+        cell.profileImageView.loadImageUsingCache(profileImageView)
       }
     
     return cell

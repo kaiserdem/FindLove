@@ -244,11 +244,11 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
   private func setupCell(_ cell: ChatCell, message: Message) {
     
     if let profileImageUrl = self.user?.profileImageUrl {
-      cell.profileImageView.loadImageUsingCachWithUrlString(profileImageUrl)
+      cell.profileImageView.loadImageUsingCache(profileImageUrl)
     }
     
     if let messageImageUrl = message.imageUrl {
-      cell.messageImageView.loadImageUsingCachWithUrlString(messageImageUrl)
+      cell.messageImageView.loadImageUsingCache(messageImageUrl)
       cell.messageImageView.isHidden = false
       cell.bubbleView.backgroundColor = .clear
     } else {
@@ -540,7 +540,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
           }
           
           if let profileImageView = currentUser.profileImageUrl {
-            cell.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
+            cell.profileImageView.loadImageUsingCache(profileImageView)
           }
         }
       }, withCancel: nil)

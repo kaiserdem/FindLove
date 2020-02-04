@@ -36,7 +36,7 @@ class UserCell: UITableViewCell {
           self.lastMessagesLabel.text = self.message!.text
           self.timeLabel.text = self.setFormatDislayedTimeAndDate(from: self.message!.timestamp as! TimeInterval, withString: true)
           if let profileImageView = dictionary["profileImageUrl"] as? String {
-            self.userImageView.loadImageUsingCachWithUrlString(profileImageView)
+            self.userImageView.loadImageUsingCache(profileImageView)
           }
         }
       }, withCancel: nil)

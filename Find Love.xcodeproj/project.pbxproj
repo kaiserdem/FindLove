@@ -75,7 +75,6 @@
 		ADE0ABFF23E01E4C00653D18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */; };
 		ADE0AC0123E01E5800653D18 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE0AC0023E01E5800653D18 /* SettingsView.xib */; };
 		ADEE6F9A23E9871E008352C0 /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6F9923E9871E008352C0 /* extension.swift */; };
-		ADFCA85723DD90FF004067A9 /* cdcc.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFCA85623DD90FF004067A9 /* cdcc.swift */; };
 		ADFCA85B23DDEDFC004067A9 /* ChatWithStrangerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFCA85923DDEDFC004067A9 /* ChatWithStrangerCell.swift */; };
 		ADFCA85C23DDEDFC004067A9 /* ChatWithStrangerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADFCA85A23DDEDFC004067A9 /* ChatWithStrangerCell.xib */; };
 		ADFCA85F23DDFD9E004067A9 /* SearchStrangerForChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFCA85E23DDFD9E004067A9 /* SearchStrangerForChatView.swift */; };
@@ -157,7 +156,6 @@
 		ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		ADE0AC0023E01E5800653D18 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		ADEE6F9923E9871E008352C0 /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
-		ADFCA85623DD90FF004067A9 /* cdcc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cdcc.swift; sourceTree = "<group>"; };
 		ADFCA85923DDEDFC004067A9 /* ChatWithStrangerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWithStrangerCell.swift; sourceTree = "<group>"; };
 		ADFCA85A23DDEDFC004067A9 /* ChatWithStrangerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatWithStrangerCell.xib; sourceTree = "<group>"; };
 		ADFCA85E23DDFD9E004067A9 /* SearchStrangerForChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStrangerForChatView.swift; sourceTree = "<group>"; };
@@ -235,7 +233,6 @@
 				ADB4A24E23E44240001D1A6A /* UIViewController.swift */,
 				ADBA195523C2A41C009B45EC /* UIView.swift */,
 				ADEE6F9923E9871E008352C0 /* extension.swift */,
-				ADFCA85623DD90FF004067A9 /* cdcc.swift */,
 				ADFD0F4623E980D4008D2B9C /* UserDefault.swift */,
 			);
 			path = Extensions;
@@ -750,7 +747,6 @@
 				AD79AC0E23CDEC2C00FA7D09 /* GameVC.swift in Sources */,
 				AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */,
 				ADFCA85B23DDEDFC004067A9 /* ChatWithStrangerCell.swift in Sources */,
-				ADFCA85723DD90FF004067A9 /* cdcc.swift in Sources */,
 				AD46C9E923D9E22400FC7002 /* ChatCell.swift in Sources */,
 				ADBA195623C2A41C009B45EC /* UIView.swift in Sources */,
 				ADEE6F9A23E9871E008352C0 /* extension.swift in Sources */,

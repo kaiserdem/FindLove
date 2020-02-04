@@ -37,7 +37,7 @@ class SelectChatCell: UITableViewCell {
         self.topLabel.text = dictionary["liked"] as? String
           
         if let iconImageView = dictionary["iconImageUrl"] as? String {
-          self.iconImageView.loadImageUsingCachWithUrlString(iconImageView)
+          self.iconImageView.loadImageUsingCache(iconImageView)
         } else {
           self.iconImageView.image = UIImage(named: "fire")
         }

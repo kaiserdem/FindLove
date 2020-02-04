@@ -256,7 +256,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         cell.ageLabel.text = "Введите свой возраст"
       }
       if let profileImageView = user!.profileImageUrl {
-        cell.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
+        cell.profileImageView.loadImageUsingCache(profileImageView)
       }
       
     }

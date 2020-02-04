@@ -54,7 +54,7 @@ class FeedCell: UITableViewCell {
           self?.nameLabel.text = dictionary["name"] as? String
           
           if let profileImageView = dictionary["profileImageUrl"] as? String {
-            self?.userProfileImageView.loadImageUsingCachWithUrlString(profileImageView)
+            self?.userProfileImageView.loadImageUsingCache(profileImageView)
           }
         }
       }, withCancel: nil)

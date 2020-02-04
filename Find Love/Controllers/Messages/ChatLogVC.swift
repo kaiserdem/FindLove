@@ -215,11 +215,11 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   private func setupCell(_ cell: ChatMessageCell, message: Message) {
     
     if let profileImageUrl = self.user?.profileImageUrl {
-      cell.profileImageView.loadImageUsingCachWithUrlString(profileImageUrl)
+      cell.profileImageView.loadImageUsingCache(profileImageUrl)
     }
     
     if let messageImageUrl = message.imageUrl {
-      cell.messageImageView.loadImageUsingCachWithUrlString(messageImageUrl)
+      cell.messageImageView.loadImageUsingCache(messageImageUrl)
       cell.messageImageView.isHidden = false
       cell.bubbleView.backgroundColor = .clear
     } else {

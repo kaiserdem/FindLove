@@ -184,7 +184,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         }
         
         
-        userProfileInfoView.profileImageView.loadImageUsingCachWithUrlString(user.profileImageUrl!)
+        userProfileInfoView.profileImageView.loadImageUsingCache(user.profileImageUrl!)
         
         self?.view.addSubview(userProfileInfoView)
         
@@ -288,7 +288,7 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
           self?.user = user
           self?.currentUser = user
           if let profileImageView = user.profileImageUrl {
-            cell.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
+            cell.profileImageView.loadImageUsingCache(profileImageView)
           }
         }
       }, withCancel: nil)
@@ -333,7 +333,7 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
         view.userNameLabel.text = dictionary["name"] as? String
       
         if let profileImageView = dictionary["profileImageUrl"] as? String {
-          view.profileImageView.loadImageUsingCachWithUrlString(profileImageView)
+          view.profileImageView.loadImageUsingCache(profileImageView)
         }
       }
     }, withCancel: nil)
