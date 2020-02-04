@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="398" height="125.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="bdlfcbdlshbfldahsdBDK;HAbfc;kadbvCHK;AD" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o98-ny-TXE">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o98-ny-TXE">
                         <rect key="frame" x="20" y="50" width="358" height="65"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

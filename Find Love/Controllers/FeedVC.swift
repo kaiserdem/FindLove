@@ -27,7 +27,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   var user: User?
   var currentUser: User?  {
     didSet {
-      UserDefaults.standard.save(currentUser, forKey: "likedWallpapers")
+      UserDefaults.standard.save(currentUser, forKey: "currentUserKey")
     }
   }
   var currentPostText = ""
