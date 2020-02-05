@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		10922157054E58D2595F4C55 /* Pods_Find_Love.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD710EB921D70B94626E4CDB /* Pods_Find_Love.framework */; };
 		AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */; };
-		AD02EB3123B7FDB500F472A5 /* NewMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */; };
 		AD09E33D23D7647D00AAC162 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD09E33C23D7647D00AAC162 /* GoogleService-Info.plist */; };
 		AD1085A823DCA08A0009ADB3 /* AddFeedPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1085A623DCA08A0009ADB3 /* AddFeedPostCell.swift */; };
 		AD1085A923DCA08A0009ADB3 /* AddFeedPostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD1085A723DCA08A0009ADB3 /* AddFeedPostCell.xib */; };
@@ -74,7 +73,7 @@
 		ADC55A9B23E8792B002BEAF7 /* AboutSelfViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC55A9923E8792B002BEAF7 /* AboutSelfViewCell.xib */; };
 		ADE0ABFF23E01E4C00653D18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */; };
 		ADE0AC0123E01E5800653D18 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE0AC0023E01E5800653D18 /* SettingsView.xib */; };
-		ADEE6F9A23E9871E008352C0 /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6F9923E9871E008352C0 /* extension.swift */; };
+		ADEE6F9A23E9871E008352C0 /* UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6F9923E9871E008352C0 /* UIResponder.swift */; };
 		ADFCA85B23DDEDFC004067A9 /* ChatWithStrangerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFCA85923DDEDFC004067A9 /* ChatWithStrangerCell.swift */; };
 		ADFCA85C23DDEDFC004067A9 /* ChatWithStrangerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADFCA85A23DDEDFC004067A9 /* ChatWithStrangerCell.xib */; };
 		ADFCA85F23DDFD9E004067A9 /* SearchStrangerForChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFCA85E23DDFD9E004067A9 /* SearchStrangerForChatView.swift */; };
@@ -87,7 +86,6 @@
 /* Begin PBXFileReference section */
 		09A7F9FC8CF0F1991ED38035 /* Pods-Find Love.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Love.debug.xcconfig"; path = "Target Support Files/Pods-Find Love/Pods-Find Love.debug.xcconfig"; sourceTree = "<group>"; };
 		AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
-		AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageVC.swift; sourceTree = "<group>"; };
 		AD09E33B23D7066D00AAC162 /* Find Love.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Find Love.entitlements"; sourceTree = "<group>"; };
 		AD09E33C23D7647D00AAC162 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AD1085A623DCA08A0009ADB3 /* AddFeedPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedPostCell.swift; sourceTree = "<group>"; };
@@ -155,7 +153,7 @@
 		ADC55A9923E8792B002BEAF7 /* AboutSelfViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutSelfViewCell.xib; sourceTree = "<group>"; };
 		ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		ADE0AC0023E01E5800653D18 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
-		ADEE6F9923E9871E008352C0 /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
+		ADEE6F9923E9871E008352C0 /* UIResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResponder.swift; sourceTree = "<group>"; };
 		ADFCA85923DDEDFC004067A9 /* ChatWithStrangerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWithStrangerCell.swift; sourceTree = "<group>"; };
 		ADFCA85A23DDEDFC004067A9 /* ChatWithStrangerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatWithStrangerCell.xib; sourceTree = "<group>"; };
 		ADFCA85E23DDFD9E004067A9 /* SearchStrangerForChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStrangerForChatView.swift; sourceTree = "<group>"; };
@@ -232,7 +230,7 @@
 				AD26946823B5393B00D49887 /* UIImageView.swift */,
 				ADB4A24E23E44240001D1A6A /* UIViewController.swift */,
 				ADBA195523C2A41C009B45EC /* UIView.swift */,
-				ADEE6F9923E9871E008352C0 /* extension.swift */,
+				ADEE6F9923E9871E008352C0 /* UIResponder.swift */,
 				ADFD0F4623E980D4008D2B9C /* UserDefault.swift */,
 			);
 			path = Extensions;
@@ -435,9 +433,8 @@
 				AD26946223B4FD2C00D49887 /* MessengerVC.swift */,
 				ADB8DECE23CA1A15008D989E /* MessagesVC.swift */,
 				ADB8DED023CA1A27008D989E /* ChatVC.swift */,
-				ADB8DED923CCCBD0008D989E /* ChatWriteMessageVC.swift */,
-				AD02EB2F23B7FDB500F472A5 /* NewMessageVC.swift */,
 				AD26947223B67B8A00D49887 /* ChatLogVC.swift */,
+				ADB8DED923CCCBD0008D989E /* ChatWriteMessageVC.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -749,12 +746,11 @@
 				ADFCA85B23DDEDFC004067A9 /* ChatWithStrangerCell.swift in Sources */,
 				AD46C9E923D9E22400FC7002 /* ChatCell.swift in Sources */,
 				ADBA195623C2A41C009B45EC /* UIView.swift in Sources */,
-				ADEE6F9A23E9871E008352C0 /* extension.swift in Sources */,
+				ADEE6F9A23E9871E008352C0 /* UIResponder.swift in Sources */,
 				AD26946C23B6019200D49887 /* UserCell.swift in Sources */,
 				ADFD0F4723E980D4008D2B9C /* UserDefault.swift in Sources */,
 				AD5A563423BFBFCD0032AB2A /* FeedVC.swift in Sources */,
 				AD26BE8E23C0D47700EF1418 /* Post.swift in Sources */,
-				AD02EB3123B7FDB500F472A5 /* NewMessageVC.swift in Sources */,
 				AD26946523B4FF8100D49887 /* User.swift in Sources */,
 				ADB4CD4923E19788001DD8AF /* OrientationView.swift in Sources */,
 				ADC55A9623E878FD002BEAF7 /* OrientationViewCell.swift in Sources */,

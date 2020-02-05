@@ -134,7 +134,6 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   
   func setupKeyboardObservise() {
     NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-
   }
 
 
@@ -194,7 +193,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
       let messageId = snapshot.key
       let messageRef = Database.database().reference().child("messages").child(messageId)
       
-      messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+      messageRef.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
         
         guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
         
@@ -254,7 +253,6 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     } else {
       handleImageSelectedForInfo(info)
     }
-    
     dismiss(animated: true, completion: nil) // выйти с контроллера
   }
   
@@ -280,7 +278,6 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
             self?.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { (imageUrl) in
               
               let properties: [String: Any] = ["videoUrl": videoUrl, "imageUrl": imageUrl, "imageWigth": thumbnailImage.size.width, "imageHight": thumbnailImage.size.height]
-              
               self?.sendMessagesWithProperties(properties)
             })
           }
@@ -407,6 +404,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
         return
       }
     }
+    inputConteinerView.isHidden = false
   }
   
   var startFrame: CGRect?
@@ -467,16 +465,20 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   @objc func handleUploadTap() {
     
     let imagePickerController = UIImagePickerController()
+    
   
     imagePickerController.delegate = self
     imagePickerController.allowsEditing = true
     imagePickerController.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
     
-    present(imagePickerController, animated: true, completion: nil)
+    present(imagePickerController, animated: true) {
+      self.inputConteinerView.isHidden = true
+    }
   }
   
   @objc func handleBack() {
-    dismiss(animated: true, completion: nil)
+    dismiss(animated: true) {
+    }
   }
   
   
@@ -509,8 +511,6 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     setupCell(cell, message: message)
     
-    
-    
     if message.responseToText == nil { // это не ответ
       cell.textView.text = message.text
       if let text = message.text {
@@ -538,11 +538,6 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
         cell.textView.isHidden = true
       }
     }
-    
-    
-    
-    
-    
     cell.playBtn.isHidden = message.videoUrl == nil // если видео нет, тогда это тру
     return cell
   }
@@ -558,7 +553,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
         height = estimateFrameForText(text).height + 40
       } else if let imageWidht = message.imageWidth, let imageHight = message.imageHeight {
         // сделали размер пропорционально
-        height = CGFloat(imageHight / imageWidht * 200)
+        height = CGFloat(imageHight / imageWidht * 200) + 20
       }
       
     } else { // если это ответ
@@ -571,8 +566,6 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
         height = CGFloat(imageHight / imageWidht * 200)
       }
     }
-    
-    
     return CGSize(width: view.frame.width, height: height)
   }
 }

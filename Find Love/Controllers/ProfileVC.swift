@@ -139,7 +139,7 @@ class ProfileVC: UIViewController, ChangeBntCellDelegate {
   }
   
   func changeImageTapped(cell: InformationViewCell) {
-    
+    handleSelectProfileImageView()
   }
   
   @objc func keyboardWillHide(sender: NSNotification) {

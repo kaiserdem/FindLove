@@ -13,7 +13,7 @@ import FirebaseDatabase
 import AVFoundation
 import MobileCoreServices
 
-class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
   
   var user: User? {
     didSet {
@@ -214,28 +214,32 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     }, withCancel: nil)
   }
   
+  // утечка памяти, не работает [weak self]
   func observeMessages() {
     
     let userMessagesRef = Database.database().reference().child("groups").child(group!.subject!).child("messages")
     
-    userMessagesRef.observe(.childAdded, with: { [weak self] (snapshot) in
+    userMessagesRef.observe(.childAdded, with: {  (snapshot) in
       
       let messageId = snapshot.key
       let messageRef = userMessagesRef.child(messageId)
       
-      messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+      messageRef.observeSingleEvent(of: .value, with: {  (snapshot) in
         
         guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
         
         let message = Message(dictionary: dictionary)
         
-        self?.messages.append(message)
+        self.messages.append(message)
+        
+        print("1 \(self.messages.count)")
         
         DispatchQueue.main.async {
-          self?.collectionView?.reloadData()
-          let indexPath = IndexPath(item: (self?.messages.count)!-1, section: 0) // последнее
+          self.collectionView?.reloadData()
+          print("2 \(self.messages.count)")
+          let indexPath = IndexPath(item: (self.messages.count)-1, section: 0) // последнее
           //проскролить
-          self?.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+          self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
         }
       }, withCancel: nil)
     }, withCancel: nil)
@@ -474,8 +478,10 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     imagePickerController.delegate = self
     imagePickerController.allowsEditing = true
     imagePickerController.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
-    
-    present(imagePickerController, animated: true, completion: nil)
+
+    present(imagePickerController, animated: true) {
+      self.inputConteinerView.removeFromSuperview()
+    }
   }
   
   @objc func handleBack() {
@@ -544,9 +550,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
           }
         }
       }, withCancel: nil)
-
     }
-    
     return cell
   }
   
@@ -555,13 +559,12 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     var height: CGFloat = 80
     let message = messages[indexPath.row]
     
-    
     if let text = message.text {
       height = estimateFrameForText(text).height + 65
       
     } else if let imageWidht = message.imageWidth, let imageHight = message.imageHeight {
       // сделали размер пропорционально
-      height = CGFloat(imageHight / imageWidht * 200)
+      height = CGFloat(imageHight / imageWidht * 200) + 30
     }
     return CGSize(width: view.frame.width, height: height)
   }
