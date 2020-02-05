@@ -16,7 +16,6 @@ protocol CellSubclassDelegate: class {
   func cellTappedImageProfile(cell: FeedCell)
 }
 
-
 class FeedVC: UIViewController, CellSubclassDelegate {
 
   @IBOutlet weak var backTableView: UIView!
@@ -82,16 +81,16 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     let ref = Database.database().reference().child("posts")
     ref.observe(.childAdded, with: { [weak self](snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
-        
         let post = Post(dictionary: dictionary)
         self?.posts.append(post)
       }
       DispatchQueue.main.async {
+        self?.posts.reverse()
         self?.tableView.reloadData()
       }
     }, withCancel: nil)
   }
-  
+
   @objc func makeTransition(_ notification: Notification) {
      let toUser = notification.userInfo?["user"] as? User
       showChatLogVCForUser(toUser)

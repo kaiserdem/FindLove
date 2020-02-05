@@ -442,16 +442,16 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
       
       keyWindow.addSubview(zoomingImageView)
       
-      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-        self.blackBackgroundView?.alpha = 1
-        self.inputConteinerView.alpha = 0
-        
-        let height = self.startFrame!.height / self.startFrame!.width * keyWindow.frame.width
-        
-        zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
-        zoomingImageView.center = keyWindow.center
-        
-      }, completion: nil)
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+          self.blackBackgroundView?.alpha = 1
+          self.inputConteinerView.alpha = 0
+          
+          let height = self.startFrame!.height / self.startFrame!.width * keyWindow.frame.width
+          
+          zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
+          zoomingImageView.center = keyWindow.center
+          
+        }, completion: nil)
     }
   }
   
@@ -462,7 +462,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
       UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
         zoomOutImageView.frame = self.startFrame!
         self.blackBackgroundView?.alpha = 0
-        self.inputConteinerView.alpha = 0
+        self.inputConteinerView.alpha = 1
       }) { [weak self] (complete) in
         zoomOutImageView.removeFromSuperview()
         self?.startingImageView?.isHidden = false

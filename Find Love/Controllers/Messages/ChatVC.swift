@@ -23,7 +23,7 @@ class ChatVC: UIViewController {
         super.viewDidLoad()
       uploadTableView()
       observeGroups()
-      //uploadChatGroup()
+     // uploadChatGroup()
   }
  
   func uploadTableView() {
@@ -45,10 +45,10 @@ class ChatVC: UIViewController {
   func uploadChatGroup() {
     let ref = Database.database().reference().child("groups")
     
-    let subject = "Ищу госпожу или раба"
-    let descriptions = "Кто в доме хотзяин"
-    let countUsers = 33
-    let liked = 51
+    let subject = "Женатые и замужние"
+    let descriptions = "Территория свободы "
+    let countUsers = 47
+    let liked = 1
     
     let values = ["subject": subject, "descriptions": descriptions, "countUsers": countUsers, "liked": liked] as [String : Any]
 

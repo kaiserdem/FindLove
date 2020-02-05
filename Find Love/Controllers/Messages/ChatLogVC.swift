@@ -243,7 +243,9 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   }
   
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-    dismiss(animated: true, completion: nil)
+    dismiss(animated: true) {
+      self.inputConteinerView.alpha = 1
+    }
   }
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -454,7 +456,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
       UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
         zoomOutImageView.frame = self.startFrame!
         self.blackBackgroundView?.alpha = 0
-        self.inputConteinerView.alpha = 0
+        self.inputConteinerView.alpha = 1
       }) { [weak self] (complete) in
         zoomOutImageView.removeFromSuperview()
         self?.startingImageView?.isHidden = false
@@ -465,22 +467,19 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   @objc func handleUploadTap() {
     
     let imagePickerController = UIImagePickerController()
-    
   
     imagePickerController.delegate = self
     imagePickerController.allowsEditing = true
     imagePickerController.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
     
     present(imagePickerController, animated: true) {
-      self.inputConteinerView.isHidden = true
+      self.inputConteinerView.alpha = 0
     }
   }
   
   @objc func handleBack() {
-    dismiss(animated: true) {
-    }
+    dismiss(animated: true, completion: nil)
   }
-  
   
   @objc func handleSend() { // отправляем сообщение
     if inputTextField.text != "" {

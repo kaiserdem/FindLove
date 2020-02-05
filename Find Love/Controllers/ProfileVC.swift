@@ -213,10 +213,9 @@ extension ProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDele
       //profileImageView.image = selectedImage
       //profileImageView.setNeedsDisplay()
     }
-
     dismiss(animated: true, completion: nil) // выйти с контроллера
-
   }
+  
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     print("canceled picker")
     dismiss(animated: true, completion: nil)
@@ -246,7 +245,6 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         cell.genderLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
         cell.genderLabel.text = "Введите свой пол"
       }
-      
       if user!.age != nil {
         cell.ageLabel.textColor = .white
         let ageString = String(describing: user!.age!)
@@ -258,9 +256,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
       if let profileImageView = user!.profileImageUrl {
         cell.profileImageView.loadImageUsingCache(profileImageView)
       }
-      
     }
-    
     if indexPath.row == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "StatusViewCell", for: indexPath) as! StatusViewCell
       cell.delegate = self
@@ -272,9 +268,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         cell.statusTextView.text = "Тут пока пусто, опишите свое настроение"
         cell.statusTextView.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
       }
-      
     }
-    
     if indexPath.row == 2 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "OrientationViewCell", for: indexPath) as! OrientationViewCell
       cell.delegate = self
@@ -286,9 +280,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         cell.orientationLabel.text = "Введите свой предпочтения"
         cell.orientationLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
       }
-      
     }
-    
     if indexPath.row == 3 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "AboutSelfViewCell", for: indexPath) as! AboutSelfViewCell
       cell.delegate = self
@@ -300,9 +292,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         cell.aboutSelfTextView.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
         cell.aboutSelfTextView.text = "Опишите себя, свои интересы и увлечения"
       }
-      
     }
-    
     if indexPath.row == 4 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsViewCell", for: indexPath) as! SettingsViewCell
       cell.delegate = self
