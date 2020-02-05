@@ -232,11 +232,9 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
         
         self.messages.append(message)
         
-        print("1 \(self.messages.count)")
         
         DispatchQueue.main.async {
           self.collectionView?.reloadData()
-          print("2 \(self.messages.count)")
           let indexPath = IndexPath(item: (self.messages.count)-1, section: 0) // последнее
           //проскролить
           self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)

@@ -36,7 +36,6 @@ class OrientationViewCell: UITableViewCell {
     }
   
   @IBAction func changeOrientationBtnAction(_ sender: Any) {
-    print("changeOrientationBtnAction")
     self.delegate?.changeOrientationTapped(cell: self)
   }
     

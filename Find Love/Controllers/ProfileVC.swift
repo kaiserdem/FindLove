@@ -165,7 +165,7 @@ class ProfileVC: UIViewController, ChangeBntCellDelegate {
         switch properties {
         case "status":
           if user!.status != nil {
-            heightReturn = estimateFrameForText(user!.status!).height + 20
+            heightReturn = estimateFrameForText(user!.status!).height + 80
             if heightReturn < 100 {
               return 100
             }
@@ -217,7 +217,6 @@ extension ProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDele
   }
   
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-    print("canceled picker")
     dismiss(animated: true, completion: nil)
   }
 }

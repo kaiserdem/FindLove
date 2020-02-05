@@ -36,7 +36,6 @@ class StatusViewCell: UITableViewCell {
     }
   
   @IBAction func statusBtnAction(_ sender: Any) {
-    print("statusBtnAction")
     self.delegate?.changeStatusTapped(cell: self)
 
   }

@@ -38,7 +38,6 @@ class SettingsViewCell: UITableViewCell {
   }
   
   @IBAction func settingsBtnAction(_ sender: Any) {
-    print("settingsBtnAction")
     self.delegate?.settingsButtonTapped(cell: self)
   }
   

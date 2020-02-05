@@ -43,22 +43,18 @@ class ReviewCVCell: UICollectionViewCell {
   }
   
   @IBAction func messageBtnAction(_ sender: Any) {
-    print("starBtnAction")
     messageBtn.blink()
   }
   
   @IBAction func dislikeBtnAction(_ sender: Any) {
-    print("dislikeBtnAction")
     dislaikeBtn.blink()
   }
   
   @IBAction func likeBtnAction(_ sender: Any) {
-    print("likeBtnAction")
     likeBtn.blink()
   }
   
   @IBAction func closeBtnAction(_ sender: Any) {
-    print("closeBtnAction")
     closeBtn.blink()
   }
 }

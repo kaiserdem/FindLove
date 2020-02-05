@@ -37,7 +37,6 @@ class AboutSelfViewCell: UITableViewCell {
     }
   
   @IBAction func aboutSelfBtnAction(_ sender: Any) {
-    print("aboutSelfBtnAction")
     self.delegate?.changeAboutSelfTapped(cell: self)
   }
     

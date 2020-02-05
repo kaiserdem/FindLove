@@ -43,11 +43,9 @@ class InformationViewCell: UITableViewCell {
   }
   
   @IBAction func changeDataAction(_ sender: Any) {
-    print("changeDataAction")
     self.delegate?.changeInfoTapped(cell: self)
   }
   @IBAction func changeImageBtnAction(_ sender: Any) {
-    print("changeImageBtnAction")
     self.delegate?.changeImageTapped(cell: self)
   }
   
