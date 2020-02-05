@@ -414,7 +414,6 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
       }
     }
     self.inputTextField.text = nil
-
   }
   
   var startFrame: CGRect?
@@ -509,8 +508,8 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatCell
     
+    cell.deledate = self
     let message = messages[indexPath.row]
-    
     cell.message = message
     
     cell.textView.text = message.text

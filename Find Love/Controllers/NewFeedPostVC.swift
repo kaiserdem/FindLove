@@ -12,7 +12,7 @@ import AVFoundation
 import MobileCoreServices
 import FirebaseDatabase
 
-class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
+class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   
   var user: User? 
@@ -50,18 +50,18 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     conteinerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
     conteinerView.backgroundColor = .white
     
-    let uploadImageView = UIImageView(image: #imageLiteral(resourceName: "picture.png"))
-    uploadImageView.tintColor = .gray
-    uploadImageView.isHidden = true
-    uploadImageView.isUserInteractionEnabled = true
-    uploadImageView.translatesAutoresizingMaskIntoConstraints = false
-    uploadImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleUploadTap)))
-    conteinerView.addSubview(uploadImageView)
-    
-    uploadImageView.leadingAnchor.constraint(equalTo: conteinerView.leadingAnchor, constant: 8).isActive = true
-    uploadImageView.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
-    uploadImageView.widthAnchor.constraint(equalToConstant: 28).isActive = true
-    uploadImageView.heightAnchor.constraint(equalToConstant: 28).isActive = true
+//    let uploadImageView = UIImageView(image: #imageLiteral(resourceName: "picture.png"))
+//    uploadImageView.tintColor = .gray
+//    uploadImageView.isHidden = true
+//    uploadImageView.isUserInteractionEnabled = true
+//    uploadImageView.translatesAutoresizingMaskIntoConstraints = false
+//    //uploadImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleUploadTap)))
+//    conteinerView.addSubview(uploadImageView)
+//
+//    uploadImageView.leadingAnchor.constraint(equalTo: conteinerView.leadingAnchor, constant: 8).isActive = true
+//    uploadImageView.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
+//    uploadImageView.widthAnchor.constraint(equalToConstant: 28).isActive = true
+//    uploadImageView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     
     let sendButton = UIButton(type: .system)
 
@@ -163,114 +163,6 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
     nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
   }
 
-  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-    dismiss(animated: true, completion: nil)
-  }
-  
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    
-    if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
-      handleVideoSelectedForUrl(videoUrl)
-    } else {
-      handleImageSelectedForInfo(info)
-    }
-    
-    dismiss(animated: true, completion: nil) // выйти с контроллера
-  }
-  
-  // сохраняем видео в базу
-  private func handleVideoSelectedForUrl(_ url: URL) {
-    let filename = UUID().uuidString + ".mov"
-    let ref = Storage.storage().reference().child("messages_movies").child(filename)
-    
-    let uploadTask = ref.putFile(from: url, metadata: nil) { [weak self] (metadata, error) in
-      if error != nil {
-        print(error!)
-        return
-      }
-      ref.downloadURL(completion: { [weak self] (downloadUrl, error) in
-        if error != nil {
-          print(error!)
-          return
-        }
-        if let videoUrl = downloadUrl?.absoluteString {
-          
-          if let thumbnailImage = self?.thumbnailimageForVideoUrl(url) {
-            
-            self?.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { [weak self] (imageUrl) in
-              
-              let properties: [String: Any] = ["videoUrl": videoUrl, "imageUrl": imageUrl, "imageWigth": thumbnailImage.size.width, "imageHight": thumbnailImage.size.height]
-              
-              self?.sendMessagesWithProperties(properties)
-            })
-          }
-        }
-      })
-    }
-    uploadTask.observe(.progress) { (snapshot) in
-      if let complerionUnitCount = snapshot.progress?.completedUnitCount {
-      }
-    }
-    uploadTask.observe(.success) { (snapshot) in
-    }
-  }
-  
-  // сделать картинку из видео
-  private func thumbnailimageForVideoUrl(_ videoUrl:URL) -> UIImage? {
-    // переобразовать ссылку в медиа
-    let asset = AVAsset(url: videoUrl)
-    let imageGenerate = AVAssetImageGenerator(asset: asset)
-    
-    do  {
-      let thumbnailCGImage = try imageGenerate.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
-      return UIImage(cgImage: thumbnailCGImage)
-    } catch {
-      print(error)
-    }
-    return nil
-  }
-  
-  private func handleImageSelectedForInfo(_ info: [UIImagePickerController.InfoKey: Any]) {
-    
-    var selectedImageFromPicker: UIImage?
-    if let editingImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-      selectedImageFromPicker = editingImage
-    } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-      selectedImageFromPicker = originalImage
-    }
-    if let selectedImage = selectedImageFromPicker {
-      uploadToFirebaseStorageUsingImage(selectedImage) { [weak self] (imageUrl) in
-        self?.sendMessageWithImageUrl(imageUrl, image: selectedImage)
-      }
-    }
-  }
-  
-  private func uploadToFirebaseStorageUsingImage(_ image: UIImage, completion: @escaping (_ imageUrl: String) -> ()) {
-    
-    let imageName = UUID().uuidString
-    
-    // создали папку в базе
-    let ref = Storage.storage().reference().child("message_images").child(imageName)
-    if let uploadData = image.jpegData(compressionQuality: 0.75) {
-      ref.putData(uploadData, metadata: nil) { (metadata, error) in
-        if error != nil {
-          print(error?.localizedDescription as Any)
-          return
-        }
-        // сохранили картинку
-        ref.downloadURL(completion: { (url, error) in
-          if error != nil {
-            print(error?.localizedDescription as Any)
-            return
-          }
-          if let imageUrl = url?.absoluteString {
-            completion(imageUrl)
-          }
-        })
-      }
-    }
-  }
-  
   private func sendMessageWithImageUrl(_ imageUrl: String, image: UIImage) {
     
     let properties = ["imageUrl": imageUrl,"imageWidth": image.size.width, "imageHeight": image.size.height] as [String : Any]
@@ -299,78 +191,11 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
         return
       }
     }
-    
     self.inputTextField.text = nil
     
     dismiss(animated: true, completion: nil)
-
   }
-  
-  var startFrame: CGRect?
-  var blackBackgroundView: UIView?
-  var startingImageView: UIImageView?
-  
-  
-  func performZoomInForImageView(_ imageView: UIImageView) {
-    startingImageView = imageView
-    startingImageView?.isHidden = true
-    
-    // конвертирует прямоуголтник
-    startFrame = imageView.superview?.convert(imageView.frame, to: nil)
-    
-    let zoomingImageView = UIImageView(frame: startFrame!) // получили картинку по фрейму
-    zoomingImageView.image = imageView.image
-    zoomingImageView.contentMode = .scaleAspectFit
-    zoomingImageView.isUserInteractionEnabled = true
-    zoomingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomOut(_:))))
-    
-    if let keyWindow = UIApplication.shared.keyWindow {
-      blackBackgroundView = UIView(frame: keyWindow.frame)
-      blackBackgroundView?.backgroundColor = .black
-      blackBackgroundView?.alpha = 0
-      keyWindow.addSubview(blackBackgroundView!)
-      
-      keyWindow.addSubview(zoomingImageView)
-      
-      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-        self.blackBackgroundView?.alpha = 1
-        self.inputConteinerView.alpha = 0
-        
-        let height = self.startFrame!.height / self.startFrame!.width * keyWindow.frame.width
-        
-        zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
-        zoomingImageView.center = keyWindow.center
-        
-      }, completion: nil)
-    }
-    
-  }
-  
-  @objc func handleZoomOut(_ tapGesture: UITapGestureRecognizer) {
-    if let zoomOutImageView = tapGesture.view as? UIImageView {
-      zoomOutImageView.layer.cornerRadius = 16
-      zoomOutImageView.clipsToBounds = true
-      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-        zoomOutImageView.frame = self.startFrame!
-        self.blackBackgroundView?.alpha = 0
-        self.inputConteinerView.alpha = 0
-      }) { (complete) in
-        zoomOutImageView.removeFromSuperview()
-        self.startingImageView?.isHidden = false
-      }
-    }
-  }
-  
-  @objc func handleUploadTap() {
-    
-    let imagePickerController = UIImagePickerController()
-    
-    imagePickerController.delegate = self
-    imagePickerController.allowsEditing = true
-    imagePickerController.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
-    
-    present(imagePickerController, animated: true, completion: nil)
-  }
+ 
   
   @objc func handleBack() {
     dismiss(animated: true, completion: nil)

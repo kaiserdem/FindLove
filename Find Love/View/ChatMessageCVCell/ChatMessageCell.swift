@@ -9,10 +9,6 @@
 import UIKit
 import AVFoundation
 
-protocol ImageZomable {
-  func performZoomInForImageView(_ imageView: UIImageView)
-}
-
 class ChatMessageCell: UICollectionViewCell {
   
   var deledate: ImageZomable?

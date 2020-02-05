@@ -10,6 +10,10 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
+protocol ImageZomable {
+  func performZoomInForImageView(_ imageView: UIImageView)
+}
+
 class MessengerVC: UIViewController {
   
   @IBOutlet weak var chatContentView: UIView!

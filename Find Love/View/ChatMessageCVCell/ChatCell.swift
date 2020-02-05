@@ -12,6 +12,7 @@ import AVFoundation
 class ChatCell: UICollectionViewCell {
   
   var message: Message?
+  var deledate: ImageZomable?
   
   static let blueColor = #colorLiteral(red: 0.08570486702, green: 0.2354284908, blue: 0.3383600027, alpha: 1)
   static let grayColor = #colorLiteral(red: 0.7610357215, green: 0.7610357215, blue: 0.7610357215, alpha: 1)
@@ -76,6 +77,7 @@ class ChatCell: UICollectionViewCell {
     imageView.contentMode = .scaleAspectFill
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.isUserInteractionEnabled = true
+    imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap(_ : ))))
     return imageView
   }()
   
@@ -189,6 +191,16 @@ class ChatCell: UICollectionViewCell {
     playerLayer?.removeFromSuperlayer()
     player?.pause()
     activityIndicatorView.stopAnimating()
+  }
+  
+  @objc func handleZoomTap(_ gestureRecognizer: UITapGestureRecognizer) {
+    
+    if message?.videoUrl != nil {
+      return
+    }
+    if let imageView = gestureRecognizer.view as? UIImageView {
+      deledate?.performZoomInForImageView(imageView)
+    }
   }
   
 }
