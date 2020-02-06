@@ -33,10 +33,6 @@ class MessengerVC: UIViewController {
     messagesBtnClick()
   }
   
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(true)
-  }
-
   func showMessageVC() {
     addChild(messagesAllVC)
     

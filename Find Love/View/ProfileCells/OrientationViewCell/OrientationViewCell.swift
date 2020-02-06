@@ -10,7 +10,7 @@ import UIKit
 
 class OrientationViewCell: UITableViewCell {
   
-  weak var delegate: ChangeBntCellDelegate?
+  weak var delegate: ProtocolProfileCellsDelegate?
   
   @IBOutlet weak var changeOrientationBtn: UIButton!
   @IBOutlet weak var orientationLabel: UILabel!

@@ -10,7 +10,7 @@ import UIKit
 
 class InformationViewCell: UITableViewCell {
   
-  weak var delegate: ChangeBntCellDelegate?
+  weak var delegate: ProtocolProfileCellsDelegate?
   
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var profileImageView: UIImageView!

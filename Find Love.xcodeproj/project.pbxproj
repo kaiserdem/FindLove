@@ -23,6 +23,8 @@
 		AD26BE8E23C0D47700EF1418 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26BE8D23C0D47700EF1418 /* Post.swift */; };
 		AD293CAD23BC1D530091808F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD293CAC23BC1D530091808F /* Assets.xcassets */; };
 		AD46C9E923D9E22400FC7002 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD46C9E823D9E22400FC7002 /* ChatCell.swift */; };
+		AD4CC09A23EC8ADD004352F8 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */; };
+		AD4CC09B23EC8ADD004352F8 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */; };
 		AD5A563423BFBFCD0032AB2A /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5A563223BFBFCC0032AB2A /* FeedVC.swift */; };
 		AD5A563923BFC15A0032AB2A /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5A563723BFC15A0032AB2A /* SearchVC.swift */; };
 		AD5A563E23BFEB750032AB2A /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5A563C23BFEB750032AB2A /* FeedCell.swift */; };
@@ -74,6 +76,15 @@
 		ADE0ABFF23E01E4C00653D18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */; };
 		ADE0AC0123E01E5800653D18 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE0AC0023E01E5800653D18 /* SettingsView.xib */; };
 		ADEE6F9A23E9871E008352C0 /* UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6F9923E9871E008352C0 /* UIResponder.swift */; };
+		ADEE6F9C23EB32D6008352C0 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6F9B23EB32D6008352C0 /* SettingsVC.swift */; };
+		ADEE6FA023EB3CB9008352C0 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6F9E23EB3CB9008352C0 /* SettingsSwitchCell.swift */; };
+		ADEE6FA123EB3CB9008352C0 /* SettingsSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADEE6F9F23EB3CB9008352C0 /* SettingsSwitchCell.xib */; };
+		ADEE6FA423EB3E23008352C0 /* SettingsTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6FA223EB3E23008352C0 /* SettingsTextFieldCell.swift */; };
+		ADEE6FA523EB3E23008352C0 /* SettingsTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADEE6FA323EB3E23008352C0 /* SettingsTextFieldCell.xib */; };
+		ADEE6FA823EB3F3E008352C0 /* SettingButtonNextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6FA623EB3F3E008352C0 /* SettingButtonNextCell.swift */; };
+		ADEE6FA923EB3F3E008352C0 /* SettingButtonNextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADEE6FA723EB3F3E008352C0 /* SettingButtonNextCell.xib */; };
+		ADEE6FB123EC6AD1008352C0 /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6FAF23EC6AD1008352C0 /* TestVC.swift */; };
+		ADEE6FB223EC6AD1008352C0 /* TestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADEE6FB023EC6AD1008352C0 /* TestVC.xib */; };
 		ADFCA85B23DDEDFC004067A9 /* ChatWithStrangerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFCA85923DDEDFC004067A9 /* ChatWithStrangerCell.swift */; };
 		ADFCA85C23DDEDFC004067A9 /* ChatWithStrangerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADFCA85A23DDEDFC004067A9 /* ChatWithStrangerCell.xib */; };
 		ADFCA85F23DDFD9E004067A9 /* SearchStrangerForChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFCA85E23DDFD9E004067A9 /* SearchStrangerForChatView.swift */; };
@@ -101,6 +112,8 @@
 		AD26BE8D23C0D47700EF1418 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		AD293CAC23BC1D530091808F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD46C9E823D9E22400FC7002 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
+		AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsHeaderCell.xib; sourceTree = "<group>"; };
 		AD5A563223BFBFCC0032AB2A /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		AD5A563723BFC15A0032AB2A /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		AD5A563C23BFEB750032AB2A /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
@@ -154,6 +167,15 @@
 		ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		ADE0AC0023E01E5800653D18 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		ADEE6F9923E9871E008352C0 /* UIResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResponder.swift; sourceTree = "<group>"; };
+		ADEE6F9B23EB32D6008352C0 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		ADEE6F9E23EB3CB9008352C0 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
+		ADEE6F9F23EB3CB9008352C0 /* SettingsSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsSwitchCell.xib; sourceTree = "<group>"; };
+		ADEE6FA223EB3E23008352C0 /* SettingsTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextFieldCell.swift; sourceTree = "<group>"; };
+		ADEE6FA323EB3E23008352C0 /* SettingsTextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTextFieldCell.xib; sourceTree = "<group>"; };
+		ADEE6FA623EB3F3E008352C0 /* SettingButtonNextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingButtonNextCell.swift; sourceTree = "<group>"; };
+		ADEE6FA723EB3F3E008352C0 /* SettingButtonNextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingButtonNextCell.xib; sourceTree = "<group>"; };
+		ADEE6FAF23EC6AD1008352C0 /* TestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
+		ADEE6FB023EC6AD1008352C0 /* TestVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestVC.xib; sourceTree = "<group>"; };
 		ADFCA85923DDEDFC004067A9 /* ChatWithStrangerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWithStrangerCell.swift; sourceTree = "<group>"; };
 		ADFCA85A23DDEDFC004067A9 /* ChatWithStrangerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatWithStrangerCell.xib; sourceTree = "<group>"; };
 		ADFCA85E23DDFD9E004067A9 /* SearchStrangerForChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStrangerForChatView.swift; sourceTree = "<group>"; };
@@ -244,6 +266,7 @@
 				ADC55A8723E74547002BEAF7 /* UserProfileInfoView */,
 				ADB4CD3A23E0AF60001DD8AF /* ProfileViews */,
 				ADE0ABFD23E01E2300653D18 /* SettingsView */,
+				ADEE6F9D23EB3C51008352C0 /* SettingsCells */,
 				ADFCA85D23DDFCAF004067A9 /* SearchStrangerForChatView */,
 				ADFCA85823DDED92004067A9 /* ChatWithStrangerCell */,
 				AD1085AA23DCA0970009ADB3 /* AddFeedPostCell */,
@@ -255,6 +278,17 @@
 				ADB8DED623CB9970008D989E /* SelectChatCell */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		AD4CC09723EC7A64004352F8 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				AD5A563723BFC15A0032AB2A /* SearchVC.swift */,
+				AD79AC0D23CDEC2C00FA7D09 /* GameVC.swift */,
+				ADEE6FAF23EC6AD1008352C0 /* TestVC.swift */,
+				ADEE6FB023EC6AD1008352C0 /* TestVC.xib */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		AD5A563B23BFEB450032AB2A /* FeedCell */ = {
@@ -328,9 +362,7 @@
 				AD79AC0B23CDEB2600FA7D09 /* StartScreenVC */,
 				AD79AC0C23CDEB9B00FA7D09 /* FeedScreenVC */,
 				ADB8DECD23CA1987008D989E /* Messages */,
-				AD5A563723BFC15A0032AB2A /* SearchVC.swift */,
-				AD79AC0D23CDEC2C00FA7D09 /* GameVC.swift */,
-				AD8895E723B293BE00347A6A /* ProfileVC.swift */,
+				AD4CC09723EC7A64004352F8 /* New Group */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -435,6 +467,8 @@
 				ADB8DED023CA1A27008D989E /* ChatVC.swift */,
 				AD26947223B67B8A00D49887 /* ChatLogVC.swift */,
 				ADB8DED923CCCBD0008D989E /* ChatWriteMessageVC.swift */,
+				AD8895E723B293BE00347A6A /* ProfileVC.swift */,
+				ADEE6F9B23EB32D6008352C0 /* SettingsVC.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -521,6 +555,21 @@
 				ADE0AC0023E01E5800653D18 /* SettingsView.xib */,
 			);
 			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		ADEE6F9D23EB3C51008352C0 /* SettingsCells */ = {
+			isa = PBXGroup;
+			children = (
+				ADEE6F9E23EB3CB9008352C0 /* SettingsSwitchCell.swift */,
+				ADEE6F9F23EB3CB9008352C0 /* SettingsSwitchCell.xib */,
+				ADEE6FA223EB3E23008352C0 /* SettingsTextFieldCell.swift */,
+				ADEE6FA323EB3E23008352C0 /* SettingsTextFieldCell.xib */,
+				ADEE6FA623EB3F3E008352C0 /* SettingButtonNextCell.swift */,
+				ADEE6FA723EB3F3E008352C0 /* SettingButtonNextCell.xib */,
+				AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */,
+				AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */,
+			);
+			path = SettingsCells;
 			sourceTree = "<group>";
 		};
 		ADFCA85823DDED92004067A9 /* ChatWithStrangerCell */ = {
@@ -630,6 +679,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD09E33D23D7647D00AAC162 /* GoogleService-Info.plist in Resources */,
+				AD4CC09B23EC8ADD004352F8 /* SettingsHeaderCell.xib in Resources */,
 				AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */,
 				ADC55A9323E878D6002BEAF7 /* StatusViewCell.xib in Resources */,
 				ADB4CD4C23E19C8B001DD8AF /* AboutSelfView.xib in Resources */,
@@ -639,9 +689,11 @@
 				ADB4A25523E44CCF001D1A6A /* CustomAlertWarning.xib in Resources */,
 				ADC55A9B23E8792B002BEAF7 /* AboutSelfViewCell.xib in Resources */,
 				ADC55A8923E74591002BEAF7 /* UserProfileInfoView.xib in Resources */,
+				ADEE6FA123EB3CB9008352C0 /* SettingsSwitchCell.xib in Resources */,
 				ADE0AC0123E01E5800653D18 /* SettingsView.xib in Resources */,
 				AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */,
 				ADB4CD3E23E0AFC3001DD8AF /* InfornatioView.xib in Resources */,
+				ADEE6FB223EC6AD1008352C0 /* TestVC.xib in Resources */,
 				AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */,
 				ADB8DED523CB9959008D989E /* SelectChatCell.xib in Resources */,
 				ADB4CD4723E1977D001DD8AF /* OrientationView.xib in Resources */,
@@ -649,11 +701,13 @@
 				AD5A563F23BFEB750032AB2A /* FeedCell.xib in Resources */,
 				ADB4CD4223E18BE4001DD8AF /* StatusView.xib in Resources */,
 				ADFD0F4523E898C5008D2B9C /* SettingsViewCell.xib in Resources */,
+				ADEE6FA523EB3E23008352C0 /* SettingsTextFieldCell.xib in Resources */,
 				AD26946D23B6019200D49887 /* UserCell.xib in Resources */,
 				ADC55A8F23E878A7002BEAF7 /* InformationViewCell.xib in Resources */,
 				ADFCA86123DDFDA9004067A9 /* SearchStrangerForChatView.xib in Resources */,
 				AD8895DE23B2162C00347A6A /* RegistrationVC.xib in Resources */,
 				ADC55A9723E878FD002BEAF7 /* OrientationViewCell.xib in Resources */,
+				ADEE6FA923EB3F3E008352C0 /* SettingButtonNextCell.xib in Resources */,
 				ADBA195C23C371E6009B45EC /* ReviewCVCell.xib in Resources */,
 				AD293CAD23BC1D530091808F /* Assets.xcassets in Resources */,
 			);
@@ -713,13 +767,16 @@
 				ADFCA85F23DDFD9E004067A9 /* SearchStrangerForChatView.swift in Sources */,
 				AD26946923B5393B00D49887 /* UIImageView.swift in Sources */,
 				ADB4CD4423E18BF2001DD8AF /* StatusView.swift in Sources */,
+				ADEE6FA423EB3E23008352C0 /* SettingsTextFieldCell.swift in Sources */,
 				ADB8079223D05B1300847897 /* OpenFeedPost.swift in Sources */,
 				ADB4A25323E44CC0001D1A6A /* CustomAlertWarning.swift in Sources */,
 				AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */,
 				ADB8DECF23CA1A15008D989E /* MessagesVC.swift in Sources */,
+				ADEE6FB123EC6AD1008352C0 /* TestVC.swift in Sources */,
 				ADB8DED823CC7D11008D989E /* Group.swift in Sources */,
 				AD5A563E23BFEB750032AB2A /* FeedCell.swift in Sources */,
 				AD8895DD23B2162C00347A6A /* RegistrationVC.swift in Sources */,
+				ADEE6FA823EB3F3E008352C0 /* SettingButtonNextCell.swift in Sources */,
 				AD8895E223B21F5300347A6A /* SingInVC.swift in Sources */,
 				ADB4CD4E23E19C97001DD8AF /* AboutSelfView.swift in Sources */,
 				ADB8079A23D19DC600847897 /* ReplyToFeedPostVC.swift in Sources */,
@@ -730,6 +787,7 @@
 				ADBA195B23C371E6009B45EC /* ReviewCVCell.swift in Sources */,
 				AD1085A823DCA08A0009ADB3 /* AddFeedPostCell.swift in Sources */,
 				AD26946323B4FD2C00D49887 /* MessengerVC.swift in Sources */,
+				ADEE6FA023EB3CB9008352C0 /* SettingsSwitchCell.swift in Sources */,
 				AD8895D623B2128C00347A6A /* HelloVC.swift in Sources */,
 				ADB8DEDA23CCCBD0008D989E /* ChatWriteMessageVC.swift in Sources */,
 				ADB8DED123CA1A27008D989E /* ChatVC.swift in Sources */,
@@ -741,11 +799,13 @@
 				ADE0ABFF23E01E4C00653D18 /* SettingsView.swift in Sources */,
 				ADB4CD3C23E0AFAF001DD8AF /* InfornatioView.swift in Sources */,
 				ADB8DED423CB9959008D989E /* SelectChatCell.swift in Sources */,
+				AD4CC09A23EC8ADD004352F8 /* SettingsHeaderCell.swift in Sources */,
 				AD79AC0E23CDEC2C00FA7D09 /* GameVC.swift in Sources */,
 				AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */,
 				ADFCA85B23DDEDFC004067A9 /* ChatWithStrangerCell.swift in Sources */,
 				AD46C9E923D9E22400FC7002 /* ChatCell.swift in Sources */,
 				ADBA195623C2A41C009B45EC /* UIView.swift in Sources */,
+				ADEE6F9C23EB32D6008352C0 /* SettingsVC.swift in Sources */,
 				ADEE6F9A23E9871E008352C0 /* UIResponder.swift in Sources */,
 				AD26946C23B6019200D49887 /* UserCell.swift in Sources */,
 				ADFD0F4723E980D4008D2B9C /* UserDefault.swift in Sources */,

@@ -35,8 +35,8 @@ class HelloVC: UIViewController {
     if Auth.auth().currentUser == nil {
       perform(#selector(handleLogin), with: nil, afterDelay: 0)
     } else {
-      let vc = ProfileVC.init(nibName: "MenuVC", bundle: nil)
-      navigationController?.pushViewController(vc, animated: true)
+//      let vc = ProfileVC.init(nibName: "MenuVC", bundle: nil)
+//      navigationController?.pushViewController(vc, animated: true)
     }
   }
   

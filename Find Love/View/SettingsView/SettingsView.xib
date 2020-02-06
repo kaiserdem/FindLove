@@ -332,6 +332,7 @@
                 <constraint firstItem="hZf-Th-yru" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xcb-C5-Cqd"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="50.724637681159422" y="35.491071428571423"/>
         </view>
     </objects>
     <resources>

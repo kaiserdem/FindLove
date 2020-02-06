@@ -274,7 +274,9 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
   }
   
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-    dismiss(animated: true, completion: nil)
+    dismiss(animated: true) {
+      self.inputConteinerView.alpha = 1
+    }
   }
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -477,7 +479,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     imagePickerController.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
 
     present(imagePickerController, animated: true) {
-      self.inputConteinerView.removeFromSuperview()
+      self.inputConteinerView.alpha = 0
     }
   }
   

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
-protocol ChangeBntCellDelegate: class {
+protocol ProtocolProfileCellsDelegate: class {
   func changeAboutSelfTapped(cell: AboutSelfViewCell)
   func changeStatusTapped(cell: StatusViewCell)
   func changeOrientationTapped(cell: OrientationViewCell)
@@ -19,7 +19,7 @@ protocol ChangeBntCellDelegate: class {
   func settingsButtonTapped(cell: SettingsViewCell)
 }
 
-class ProfileVC: UIViewController, ChangeBntCellDelegate {
+class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
   
   @IBOutlet weak var backView: UIView!
   
@@ -133,9 +133,16 @@ class ProfileVC: UIViewController, ChangeBntCellDelegate {
   }
   
   func settingsButtonTapped(cell: SettingsViewCell) {
-    let view = SettingsView(frame: self.view.frame)
-    view.emailTextField.text = user?.email!
-    self.view.addSubview(view)
+    
+//
+//    let viewController = TestVC(nibName: "TestVC", bundle: nil)
+//    self.present(viewController, animated: true, completion: nil)
+    //self.navigationController?.pushViewController(viewController, animated: true)
+
+    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let newViewController = storyBoard.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsVC
+    self.present(newViewController, animated: true, completion: nil)
+    
   }
   
   func changeImageTapped(cell: InformationViewCell) {

@@ -225,6 +225,7 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
 
     genderBtn.setImage(UIImage(named: "down")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
     genderBtn.tintColor = .white
+    
     genderBtn.imageView?.trailingAnchor.constraint(equalTo: genderSeparator.trailingAnchor, constant: 0.0).isActive = true
     genderBtn.imageView?.bottomAnchor.constraint(equalTo: genderBtn.bottomAnchor, constant: -5.0).isActive = true
     genderBtn.imageView?.heightAnchor.constraint(equalToConstant: 15).isActive = true

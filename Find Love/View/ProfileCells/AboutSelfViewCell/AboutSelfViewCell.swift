@@ -10,7 +10,7 @@ import UIKit
 
 class AboutSelfViewCell: UITableViewCell {
   
-  weak var delegate: ChangeBntCellDelegate?
+  weak var delegate: ProtocolProfileCellsDelegate?
   
   @IBOutlet weak var changeAboutSelfBtn: UIButton!
   @IBOutlet weak var aboutSelfTextView: UITextView!

@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsViewCell: UITableViewCell {
   
-  weak var delegate: ChangeBntCellDelegate?
+  weak var delegate: ProtocolProfileCellsDelegate?
   
   @IBOutlet weak var settingsBtn: UIButton!
   

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 extension UIViewController {
   
@@ -16,7 +17,18 @@ extension UIViewController {
       
       let alert = UIAlertController(title: title, message: nil,
                                     preferredStyle: UIAlertController.Style.alert)
-      alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+      
+      alert.addAction(UIAlertAction(title: "Да", style: .cancel, handler: { (action: UIAlertAction!) in
+        do {
+          try Auth.auth().signOut()
+        } catch let logoutError {
+          print(logoutError)
+        }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        _ = appDelegate.loadHelloVC()
+      }))
+      
+      alert.addAction(UIAlertAction(title: "Отменить", style: UIAlertAction.Style.default, handler: nil))
       
       let popOver = alert.popoverPresentationController
       popOver?.sourceView  = self.view

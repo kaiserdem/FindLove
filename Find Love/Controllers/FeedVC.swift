@@ -118,32 +118,23 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         let userProfileInfoView = UserProfileInfoView(frame: (self?.view.frame)!)
         userProfileInfoView.userNameLabel.text = user.name
         
-        
         if user.age != nil {
           userProfileInfoView.ageLabel.text = String(describing:"Возраст: \(user.age!)")
         } else {
           userProfileInfoView.ageLabelHeightConstraint.constant = 0
           userProfileInfoView.ageLabel.isHidden = true
           userProfileInfoView.ageSeparatorView.isHidden = true
-        
         }
         
-        
-        
         if user.gender != nil {
-          
           guard let gen = self?.genderValidatorToText(string: user.gender!) else { return }
-          
           userProfileInfoView.genderLabel.text = String(describing: "Пол: \(String(describing: gen))")
         } else {
           userProfileInfoView.genderLabelHeightConstraint.constant = 0
           userProfileInfoView.genderLabel.isHidden = true
           userProfileInfoView.genderSeparatorView.isHidden = true
         }
-        
-        
-        
-    
+      
         if user.aboutSelf != nil {
           userProfileInfoView.aboutSelfTextView.text = String(describing:"O себе: \n\(user.aboutSelf!)")
           let height = (self?.estimateFrameForText(user.aboutSelf!).height)! + 20
@@ -153,9 +144,6 @@ class FeedVC: UIViewController, CellSubclassDelegate {
           userProfileInfoView.aboutSelfTextView.isHidden = true
           userProfileInfoView.aboutSelfSeparatorView.isHidden = true
         }
-        
-        
-        
         
         if user.status != nil {
           userProfileInfoView.statusTextView.text = String(describing:"Статус: \n\(user.status!)")
@@ -167,12 +155,8 @@ class FeedVC: UIViewController, CellSubclassDelegate {
           userProfileInfoView.statusSeparatorView.isHidden = true
         }
         
-        
         if user.orientation != nil {
-          
           guard let orientation = self?.orientationValidatorToText(string: user.orientation!) else { return }
-          
-          print(orientation)
           userProfileInfoView.orientationLabel.text = String(describing:"Нравяться: \(orientation)")
           let height = (self?.estimateFrameForText(user.orientation!).height)! + 10
           userProfileInfoView.orientationLabelHeightConstraint.constant = height
@@ -184,11 +168,9 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         
         
         userProfileInfoView.profileImageView.loadImageUsingCache(user.profileImageUrl!)
-        
+
         self?.view.addSubview(userProfileInfoView)
-        
       }
-      
       }, withCancel: nil)
   }
   
@@ -196,7 +178,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   func cellTappedLike(cell: FeedCell) {
         
     guard let indexPath = self.tableView.indexPath(for: cell) else { return }
-    
+    print(indexPath.row)
     let post = posts[indexPath.row - 1]
     
     let ref = Database.database().reference().child("posts").child(post.postId!).child("likedUsers")
@@ -278,7 +260,6 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
       
       let cell = tableView.dequeueReusableCell(withIdentifier: "AddFeedPostCell", for: indexPath) as! AddFeedPostCell
       cell.contentView.backgroundColor = .black
-      
       Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
         
         if let dictionary = snapshot.value as? [String: AnyObject] {

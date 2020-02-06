@@ -534,7 +534,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ofc-k1-fr5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="532" y="-480"/>
+            <point key="canvasLocation" x="532" y="-496"/>
         </scene>
         <!--ProfileVC-->
         <scene sceneID="oVE-FN-4YQ">
@@ -566,6 +566,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DZA-2B-sMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2608.6956521739135" y="193.52678571428569"/>
+        </scene>
+        <!--SettingsVC-->
+        <scene sceneID="iAb-NR-rf5">
+            <objects>
+                <viewController storyboardIdentifier="SettingsVC" id="Rva-ih-ERO" customClass="SettingsVC" customModule="Find_Love" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cCS-x3-kjL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Настройки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kH-15-vk3">
+                                <rect key="frame" x="140" y="34" width="134.5" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="QkA-Rg-cYK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iu5-C7-xwR">
+                                <rect key="frame" x="354" y="64" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="UVu-a6-exT"/>
+                                    <constraint firstAttribute="width" constant="40" id="ut7-gb-TFn"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="cancel"/>
+                                <connections>
+                                    <action selector="cencelBtnAction:" destination="Rva-ih-ERO" eventType="touchUpInside" id="cw2-CZ-3iU"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xKg-pz-0iN">
+                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="cCS-x3-kjL" id="vJP-nx-Zmf"/>
+                                    <outlet property="delegate" destination="cCS-x3-kjL" id="E83-Hd-eWC"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xKg-pz-0iN" firstAttribute="trailing" secondItem="84V-s0-aYP" secondAttribute="trailing" id="0fq-Rt-W6t"/>
+                            <constraint firstItem="Iu5-C7-xwR" firstAttribute="top" secondItem="84V-s0-aYP" secondAttribute="top" constant="20" id="3Fo-Kb-FG2"/>
+                            <constraint firstItem="xKg-pz-0iN" firstAttribute="top" secondItem="Iu5-C7-xwR" secondAttribute="bottom" id="3Ly-F8-Au3"/>
+                            <constraint firstItem="84V-s0-aYP" firstAttribute="trailing" secondItem="Iu5-C7-xwR" secondAttribute="trailing" constant="20" id="6jr-DN-iEp"/>
+                            <constraint firstItem="xKg-pz-0iN" firstAttribute="bottom" secondItem="84V-s0-aYP" secondAttribute="bottom" id="8mM-mf-iQd"/>
+                            <constraint firstItem="6kH-15-vk3" firstAttribute="top" secondItem="cCS-x3-kjL" secondAttribute="top" constant="34" id="LDz-RG-Be2"/>
+                            <constraint firstItem="xKg-pz-0iN" firstAttribute="leading" secondItem="84V-s0-aYP" secondAttribute="leading" id="R1q-WK-ToA"/>
+                            <constraint firstItem="6kH-15-vk3" firstAttribute="centerX" secondItem="cCS-x3-kjL" secondAttribute="centerX" id="fCk-lk-U1T"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="84V-s0-aYP"/>
+                    </view>
+                    <connections>
+                        <outlet property="cencelBtn" destination="Iu5-C7-xwR" id="iPf-Wy-dzu"/>
+                        <outlet property="tableView" destination="xKg-pz-0iN" id="Bfv-gy-UBB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cgR-yl-shM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3369.5652173913045" y="194.86607142857142"/>
         </scene>
         <!--Custom Tab Bar-->
         <scene sceneID="1yH-O9-SRm">
@@ -620,6 +680,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cancel" width="128" height="128"/>
         <image name="chat" width="32" height="32"/>
         <image name="feed" width="32" height="32"/>
         <image name="pen" width="32" height="32"/>

@@ -35,7 +35,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="fID-ED-Kp1"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Регистрация">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
@@ -54,7 +54,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="eAb-Sa-Jyo"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Войти">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>

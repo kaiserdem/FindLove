@@ -10,7 +10,7 @@ import UIKit
 
 class StatusViewCell: UITableViewCell {
   
-  weak var delegate: ChangeBntCellDelegate?
+  weak var delegate: ProtocolProfileCellsDelegate?
   @IBOutlet weak var changeStatusBtn: UIButton!
   @IBOutlet weak var statusTextView: UITextView!
   
