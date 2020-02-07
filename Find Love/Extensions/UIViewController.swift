@@ -7,37 +7,25 @@
 //
 
 import UIKit
-import Firebase
 
 extension UIViewController {
   
-  func postAlert(_ title: String) {
+  func showAlert(title: String!, success: (() -> Void)? , cancel: (() -> Void)?) {
     
-    DispatchQueue.main.async(execute: { () -> Void in
+    DispatchQueue.main.async(execute: { [weak self] () -> Void in
       
-      let alert = UIAlertController(title: title, message: nil,
-                                    preferredStyle: UIAlertController.Style.alert)
+      let alertController = UIAlertController(title: title, message: nil, preferredStyle: UIAlertController.Style.alert)
       
-      alert.addAction(UIAlertAction(title: "Да", style: .cancel, handler: { (action: UIAlertAction!) in
-        do {
-          try Auth.auth().signOut()
-        } catch let logoutError {
-          print(logoutError)
-        }
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        _ = appDelegate.loadHelloVC()
-      }))
+      let successAction: UIAlertAction = UIAlertAction(title: "Да", style: .default) {
+        action -> Void in success?()
+      }
+      let cancelAction: UIAlertAction = UIAlertAction(title: "Отменить", style: .cancel) {
+        action -> Void in cancel?()
+      }
       
-      alert.addAction(UIAlertAction(title: "Отменить", style: UIAlertAction.Style.default, handler: nil))
-      
-      let popOver = alert.popoverPresentationController
-      popOver?.sourceView  = self.view
-      popOver?.sourceRect = self.view.bounds
-      popOver?.permittedArrowDirections = UIPopoverArrowDirection.any
-      
-      self.present(alert, animated: true, completion: nil)
-      
+      alertController.addAction(successAction)
+      alertController.addAction(cancelAction)
+      self?.present(alertController, animated: true, completion: nil)
     })
-    
   }
 }

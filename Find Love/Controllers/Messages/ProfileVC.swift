@@ -133,12 +133,6 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
   }
   
   func settingsButtonTapped(cell: SettingsViewCell) {
-    
-//
-//    let viewController = TestVC(nibName: "TestVC", bundle: nil)
-//    self.present(viewController, animated: true, completion: nil)
-    //self.navigationController?.pushViewController(viewController, animated: true)
-
     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     let newViewController = storyBoard.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsVC
     self.present(newViewController, animated: true, completion: nil)

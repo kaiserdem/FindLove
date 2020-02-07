@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 
 protocol ProtocolSettingsCellDelegate: class {
   func nextButtonTapped(cell: SettingButtonNextCell)
@@ -38,8 +38,42 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
     tableView.tableFooterView = UIView() // убрать все что ниже
   }
   
+  private func sendMessameToSupport() {
+    let email = "kievlandmarks@gmail.com"
+    if let url = URL(string: "mailto:\(email)") {
+      if #available(iOS 10.0, *) {
+        UIApplication.shared.open(url)
+      } else {
+        UIApplication.shared.openURL(url)
+      }
+    }
+  }
   
-  func uploadTableView() {
+  private func handleLogout() {
+    do {
+      try Auth.auth().signOut()
+    } catch let logoutError {
+      print(logoutError)
+    }
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    _ = appDelegate.loadHelloVC()
+  }
+  
+  private func deleteAccountFromFirebace() {
+    let user = Auth.auth().currentUser
+    
+    user?.delete { [weak self] error in
+      if error != nil {
+        print("Account deleted.")
+        self?.handleLogout()
+      } else {
+        print("An error happened.")
+      }
+    }
+  }
+  
+  
+  private func uploadTableView() {
     
     tableView.delegate = self
     tableView.dataSource = self
@@ -59,43 +93,34 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
   
   func nextButtonTapped(cell: SettingButtonNextCell) {
     guard let indexPath = self.tableView.indexPath(for: cell) else { return }
-    print(indexPath.row)
     
     if indexPath.row == 7 {
       print("restore purchases")
     }
     if indexPath.row == 8 {
       print("support")
-      let email = "kievlandmarks@gmail.com"
-      if let url = URL(string: "mailto:\(email)") {
-        if #available(iOS 10.0, *) {
-          UIApplication.shared.open(url)
-        } else {
-          UIApplication.shared.openURL(url)
-        }
-      }
+      sendMessameToSupport()
     }
     if indexPath.row == 9 {
-      print("privacy")
+      let view = SettingPrivacyView(frame: self.view.frame)
+      self.view.addSubview(view)
     }
     if indexPath.row == 10 {
-      print("exit")
-      postAlert("Вы действительно хотите выйти из аккаунта?")
+      showAlert(title: "Вы действительно хотите выйти из аккаунта?",success: { [weak self] () -> Void in
+        self?.handleLogout()
+      }) { () -> Void in
+        print("user canceled")
+      }
     }
     if indexPath.row == 11 {
       print("delete account")
-      
-      /*
- let user = Auth.auth().currentUser
- 
- user?.delete { error in
- if let error = error {
- // An error happened.
- } else {
- // Account deleted.
- }
- }
- */
+      showAlert(title: "Вы действительно хотите удалить из аккаунт со всеми его данными?",success: { [weak self] () -> Void in
+        print("success")
+        self?.deleteAccountFromFirebace()
+      }) { () -> Void in
+        print("user canceled")
+      }
+      //deleteAccountFromFirebace()  // удалили, дальше нужно выйти
     }
   }
 

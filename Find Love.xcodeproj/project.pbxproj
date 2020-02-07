@@ -25,6 +25,8 @@
 		AD46C9E923D9E22400FC7002 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD46C9E823D9E22400FC7002 /* ChatCell.swift */; };
 		AD4CC09A23EC8ADD004352F8 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */; };
 		AD4CC09B23EC8ADD004352F8 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */; };
+		AD4CC09D23EDDA16004352F8 /* SettingPrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4CC09C23EDDA16004352F8 /* SettingPrivacyView.swift */; };
+		AD4CC09F23EDDA1E004352F8 /* SettingPrivacyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD4CC09E23EDDA1E004352F8 /* SettingPrivacyView.xib */; };
 		AD5A563423BFBFCD0032AB2A /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5A563223BFBFCC0032AB2A /* FeedVC.swift */; };
 		AD5A563923BFC15A0032AB2A /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5A563723BFC15A0032AB2A /* SearchVC.swift */; };
 		AD5A563E23BFEB750032AB2A /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5A563C23BFEB750032AB2A /* FeedCell.swift */; };
@@ -114,6 +116,8 @@
 		AD46C9E823D9E22400FC7002 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
 		AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsHeaderCell.xib; sourceTree = "<group>"; };
+		AD4CC09C23EDDA16004352F8 /* SettingPrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPrivacyView.swift; sourceTree = "<group>"; };
+		AD4CC09E23EDDA1E004352F8 /* SettingPrivacyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingPrivacyView.xib; sourceTree = "<group>"; };
 		AD5A563223BFBFCC0032AB2A /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		AD5A563723BFC15A0032AB2A /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		AD5A563C23BFEB750032AB2A /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
@@ -264,8 +268,8 @@
 				ADB4A25123E44C64001D1A6A /* CustomAlertWarning */,
 				ADC55A9C23E88844002BEAF7 /* ProfileCells */,
 				ADC55A8723E74547002BEAF7 /* UserProfileInfoView */,
-				ADB4CD3A23E0AF60001DD8AF /* ProfileViews */,
-				ADE0ABFD23E01E2300653D18 /* SettingsView */,
+				ADB4CD3A23E0AF60001DD8AF /* ProfileAlertViews */,
+				ADE0ABFD23E01E2300653D18 /* SettingsViewDelete */,
 				ADEE6F9D23EB3C51008352C0 /* SettingsCells */,
 				ADFCA85D23DDFCAF004067A9 /* SearchStrangerForChatView */,
 				ADFCA85823DDED92004067A9 /* ChatWithStrangerCell */,
@@ -276,6 +280,8 @@
 				AD02EB2923B793C200F472A5 /* ChatMessageCVCell */,
 				ADBA195D23C49004009B45EC /* ReviewCVCell */,
 				ADB8DED623CB9970008D989E /* SelectChatCell */,
+				AD4CC09C23EDDA16004352F8 /* SettingPrivacyView.swift */,
+				AD4CC09E23EDDA1E004352F8 /* SettingPrivacyView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -403,7 +409,7 @@
 			path = CustomAlertWarning;
 			sourceTree = "<group>";
 		};
-		ADB4CD3A23E0AF60001DD8AF /* ProfileViews */ = {
+		ADB4CD3A23E0AF60001DD8AF /* ProfileAlertViews */ = {
 			isa = PBXGroup;
 			children = (
 				ADB4CD3F23E18BA0001DD8AF /* InformationView */,
@@ -411,7 +417,7 @@
 				ADB4CD4523E1976B001DD8AF /* OrientationView */,
 				ADB4CD4A23E19C7E001DD8AF /* AboutSelfView */,
 			);
-			path = ProfileViews;
+			path = ProfileAlertViews;
 			sourceTree = "<group>";
 		};
 		ADB4CD3F23E18BA0001DD8AF /* InformationView */ = {
@@ -548,13 +554,13 @@
 			path = AboutSelfViewCell;
 			sourceTree = "<group>";
 		};
-		ADE0ABFD23E01E2300653D18 /* SettingsView */ = {
+		ADE0ABFD23E01E2300653D18 /* SettingsViewDelete */ = {
 			isa = PBXGroup;
 			children = (
 				ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */,
 				ADE0AC0023E01E5800653D18 /* SettingsView.xib */,
 			);
-			path = SettingsView;
+			path = SettingsViewDelete;
 			sourceTree = "<group>";
 		};
 		ADEE6F9D23EB3C51008352C0 /* SettingsCells */ = {
@@ -680,6 +686,7 @@
 			files = (
 				AD09E33D23D7647D00AAC162 /* GoogleService-Info.plist in Resources */,
 				AD4CC09B23EC8ADD004352F8 /* SettingsHeaderCell.xib in Resources */,
+				AD4CC09F23EDDA1E004352F8 /* SettingPrivacyView.xib in Resources */,
 				AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */,
 				ADC55A9323E878D6002BEAF7 /* StatusViewCell.xib in Resources */,
 				ADB4CD4C23E19C8B001DD8AF /* AboutSelfView.xib in Resources */,
@@ -803,6 +810,7 @@
 				AD79AC0E23CDEC2C00FA7D09 /* GameVC.swift in Sources */,
 				AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */,
 				ADFCA85B23DDEDFC004067A9 /* ChatWithStrangerCell.swift in Sources */,
+				AD4CC09D23EDDA16004352F8 /* SettingPrivacyView.swift in Sources */,
 				AD46C9E923D9E22400FC7002 /* ChatCell.swift in Sources */,
 				ADBA195623C2A41C009B45EC /* UIView.swift in Sources */,
 				ADEE6F9C23EB32D6008352C0 /* SettingsVC.swift in Sources */,

@@ -34,6 +34,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   override func viewDidLoad() {
         super.viewDidLoad()
     
+    
     NotificationCenter.default.addObserver(self, selector: #selector(makeTransition(_:)), name: NSNotification.Name("makeTransitionToChat"), object: nil)
     
     uploadTableView()
