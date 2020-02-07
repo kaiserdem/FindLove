@@ -29,8 +29,8 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let obj = UserDefaults.standard.retrieve(object: User.self, fromKey: "currentUserKey")
-    user = obj
+    let objUser = UserDefaults.standard.retrieve(object: User.self, fromKey: "currentUserKey")
+    user = objUser
     
     navigationController?.navigationBar.isHidden = true
     

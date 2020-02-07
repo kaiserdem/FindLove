@@ -18,8 +18,14 @@ class User: NSObject, Codable {
   var age: Int?
   var status: String?
   var aboutSelf: String?
-  var orientation: String?
   var gender: String?
+  var orientation: String?
+  var getRandomChat: String?
+  var getMessageFromMen: String?
+  var getMessageFromWomen: String?
+  var purchases: String?
+  
+  
   
   
   init(dictionary: [String: AnyObject]) {
@@ -32,5 +38,9 @@ class User: NSObject, Codable {
     self.aboutSelf = dictionary["aboutSelf"] as? String
     self.gender = dictionary["gender"] as? String
     self.orientation = dictionary["orientation"] as? String
+    self.getRandomChat = dictionary["getRandomChat"] as? String
+    self.getMessageFromMen = dictionary["getMessageFromMen"] as? String
+    self.getMessageFromWomen = dictionary["getMessageFromWomen"] as? String
+    self.purchases = dictionary["purchases"] as? String
   }
 }

@@ -230,9 +230,8 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   }
   
   func cellTappedReplyMessage(cell: FeedCell) {
-    guard let indexPath = self.tableView.indexPath(for: cell) else {
-      return
-    }
+    
+    guard let indexPath = self.tableView.indexPath(for: cell) else { return }
     let post = posts[indexPath.row - 1]
     currentPostText = post.text!
     

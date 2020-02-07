@@ -23,6 +23,8 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
   override func viewDidLoad() {
         super.viewDidLoad()
     
+    let objUser = UserDefaults.standard.retrieve(object: User.self, fromKey: "currentUserKey")
+    user = objUser
     
     uploadTableView()
     
@@ -37,6 +39,29 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
     tableView.allowsSelection = false
     tableView.tableFooterView = UIView() // убрать все что ниже
   }
+  
+  private func setValueToDatabase(_ name: String, _ value: String) {
+    
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    let ref = Database.database().reference().child("users").child(uid)
+    
+    let valuesStatus = [name: value] as [String : Any]
+    ref.updateChildValues(valuesStatus)
+  }
+  
+  /*
+ let ref = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
+ 
+ if beforeStatusText != status {
+ let valuesStatus = ["status": status] as [String : Any]
+ ref.updateChildValues(valuesStatus)
+ 
+ } else {
+ saveBtn.isEnabled = false
+ saveBtn.setTitleColor(.gray, for: .normal)
+ }
+ */
   
   private func sendMessameToSupport() {
     let email = "kievlandmarks@gmail.com"
@@ -72,7 +97,6 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
     }
   }
   
-  
   private func uploadTableView() {
     
     tableView.delegate = self
@@ -98,7 +122,6 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
       print("restore purchases")
     }
     if indexPath.row == 8 {
-      print("support")
       sendMessameToSupport()
     }
     if indexPath.row == 9 {
@@ -129,6 +152,7 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
   }
   
 }
+
 extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -151,6 +175,13 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     if indexPath.row == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
       cell.outletLabel.text = "Разрешить случайные чаты"
+      if user?.getRandomChat != nil {
+        if user?.getRandomChat! == "0" {
+          cell.outletSwitch.isOn = false
+        } else {
+          cell.outletSwitch.isOn = true
+        }
+      }
       cell.outletSwitch.addTarget(self, action: #selector(getRandomChatsAction(_ :)), for: .touchUpInside)
       return cell
     }
@@ -158,6 +189,13 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     if indexPath.row == 2 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
       cell.outletLabel.text = "Получать сообщения от парней"
+      if user?.getMessageFromMen != nil {
+        if user?.getRandomChat! == "0" {
+          cell.outletSwitch.isOn = false
+        } else {
+          cell.outletSwitch.isOn = true
+        }
+      }
       cell.outletSwitch.addTarget(self, action: #selector(getMessageFromMenAction(_ :)), for: .touchUpInside)
       return cell
     }
@@ -165,6 +203,13 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     if indexPath.row == 3 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
       cell.outletLabel.text = "Получать сообщения от девушек"
+      if user?.getMessageFromWomen != nil {
+        if user?.getMessageFromWomen! == "0" {
+          cell.outletSwitch.isOn = false
+        } else {
+          cell.outletSwitch.isOn = true
+        }
+      }
       cell.outletSwitch.addTarget(self, action: #selector(getMessageFromWomenAction(_ :)), for: .touchUpInside)
       cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
       return cell
@@ -176,7 +221,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
       cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
       return cell
     }
-    
+    // функционал не создан
     if indexPath.row == 5 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell", for: indexPath) as! SettingsSwitchCell
       cell.outletLabel.text = "Получать уведомления"
@@ -186,6 +231,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     
     if indexPath.row == 6 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsTextFieldCell", for: indexPath) as! SettingsTextFieldCell
+      cell.outletTextField.text = user?.email! ?? "someEmail@gmail.com"
       return cell
     }
     
@@ -227,19 +273,44 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
   }
   
   @objc func getRandomChatsAction(_ sender: UISwitch) {
-    print("get Random Chats Action")
+    if sender.isOn == true {
+      print("on")
+      setValueToDatabase("getRandomChat", "1")
+    } else {
+      print("off")
+      setValueToDatabase("getRandomChat", "0")
+    }
   }
   
   @objc func getMessageFromMenAction(_ sender: UISwitch) {
-    print("get Message From Men Action")
+    if sender.isOn == true {
+      print("on")
+      setValueToDatabase("getMessageFromMen", "1")
+    } else {
+      print("off")
+      setValueToDatabase("getMessageFromMen", "0")
+    }
   }
   
   @objc func getMessageFromWomenAction(_ sender: UISwitch) {
-    print("get Message From Women Action")
+    if sender.isOn == true {
+      print("on")
+      setValueToDatabase("getMessageFromWomen", "1")
+    } else {
+      print("off")
+      setValueToDatabase("getMessageFromWomen", "0")
+    }
   }
   
+  // функционал не создан
   @objc func getNotificationAction(_ sender: UISwitch) {
-    print("get Notification Action")
+    if sender.isOn == true {
+      print("on")
+      //setValueToDatabase("getMessageFromWomen", "1")
+    } else {
+      print("off")
+      //setValueToDatabase("getMessageFromWomen", "0")
+    }
   }
   
   
