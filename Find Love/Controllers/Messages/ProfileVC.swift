@@ -23,6 +23,10 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
   
   @IBOutlet weak var backView: UIView!
   
+  var startFrame: CGRect?
+  var blackBackgroundView: UIView?
+  var startingImageView: UIImageView?
+  
   let tableView = UITableView()
   var user: User?
   
@@ -143,6 +147,62 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
     handleSelectProfileImageView()
   }
   
+  func performZoomInForImageView(_ imageView: UIImageView) {
+    startingImageView = imageView
+    startingImageView?.isHidden = true
+    
+    // конвертирует прямоуголтник
+    startFrame = imageView.superview?.convert(imageView.frame, to: nil)
+    
+    let zoomingImageView = UIImageView(frame: startFrame!) // получили картинку по фрейму
+    zoomingImageView.image = imageView.image
+    zoomingImageView.contentMode = .scaleAspectFit
+    zoomingImageView.isUserInteractionEnabled = true
+    zoomingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomOut(_:))))
+    
+    if let keyWindow = UIApplication.shared.keyWindow {
+      blackBackgroundView = UIView(frame: keyWindow.frame)
+      blackBackgroundView?.backgroundColor = .black
+      blackBackgroundView?.alpha = 0
+      keyWindow.addSubview(blackBackgroundView!)
+      
+      keyWindow.addSubview(zoomingImageView)
+      
+      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        self.blackBackgroundView?.alpha = 1
+        
+        let height = self.startFrame!.height / self.startFrame!.width * keyWindow.frame.width
+        
+        zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
+        zoomingImageView.center = keyWindow.center
+        
+      }, completion: nil)
+    }
+  }
+  
+  @objc func handleZoomOut(_ tapGesture: UITapGestureRecognizer) {
+    if let zoomOutImageView = tapGesture.view as? UIImageView {
+      DispatchQueue.main.async {
+        zoomOutImageView.layer.cornerRadius = 52
+        zoomOutImageView.clipsToBounds = true
+      }
+      
+      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        zoomOutImageView.frame = self.startFrame!
+        self.blackBackgroundView?.alpha = 0
+      }) { [weak self] (complete) in
+        zoomOutImageView.removeFromSuperview()
+        self?.startingImageView?.isHidden = false
+      }
+    }
+  }
+  
+  @objc func handelZoomTap(_ gestureRecognizer: UITapGestureRecognizer) {
+    if let imageView = gestureRecognizer.view as? UIImageView {
+      performZoomInForImageView(imageView)
+    }
+  }
+  
   @objc func keyboardWillHide(sender: NSNotification) {
     let infornatioView = InfornatioView(frame: self.view.frame)
     infornatioView.ageBtn.endEditing(true)
@@ -255,6 +315,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
       }
       if let profileImageView = user!.profileImageUrl {
         cell.profileImageView.loadImageUsingCache(profileImageView)
+        cell.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handelZoomTap)))
       }
     }
     if indexPath.row == 1 {
