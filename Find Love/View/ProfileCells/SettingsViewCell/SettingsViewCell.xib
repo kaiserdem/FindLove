@@ -19,23 +19,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="415" height="69.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ct-Kp-hBR">
-                        <rect key="frame" x="102.5" y="15" width="210" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="210" id="Uu8-BD-b03"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="W5e-IN-aiL"/>
-                            <constraint firstAttribute="height" constant="40" id="mrS-y0-oAF"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="210" id="uTy-gU-Fx3"/>
-                        </constraints>
-                        <state key="normal">
-                            <attributedString key="attributedTitle">
-                                <fragment content="Настройки">
-                                    <attributes>
-                                        <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <font key="NSFont" metaFont="system" size="21"/>
-                                    </attributes>
-                                </fragment>
-                            </attributedString>
+                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ct-Kp-hBR">
+                        <rect key="frame" x="5" y="5" width="405" height="59.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                        <inset key="imageEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                        <state key="normal" title="Открыть настройки">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <connections>
                             <action selector="settingsBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rFl-2C-nt9"/>
@@ -44,8 +33,12 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstItem="7Ct-Kp-hBR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="9YA-Ui-bRe"/>
+                    <constraint firstItem="7Ct-Kp-hBR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="H1t-XR-1Qi"/>
                     <constraint firstItem="7Ct-Kp-hBR" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="UEH-fh-oWa"/>
                     <constraint firstItem="7Ct-Kp-hBR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="XM8-X9-tsN"/>
+                    <constraint firstAttribute="bottom" secondItem="7Ct-Kp-hBR" secondAttribute="bottom" constant="5" id="ddD-av-j0W"/>
+                    <constraint firstAttribute="trailing" secondItem="7Ct-Kp-hBR" secondAttribute="trailing" constant="5" id="nwx-VD-WZd"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

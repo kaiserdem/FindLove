@@ -17,10 +17,18 @@ class SettingsViewCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    //settingsBtn.backgroundColor = .clear
-    //settingsBtn.layer.cornerRadius = 12
-    //settingsBtn.layer.borderWidth = 2
-    //settingsBtn.layer.borderColor = UIColor.white.cgColor
+    let image = UIImage(named: "right")
+    let buttonView = UIImageView(image: image)
+    buttonView.contentMode = UIView.ContentMode.scaleAspectFit
+    buttonView.layer.masksToBounds = true
+    settingsBtn.tintColor = .white
+    settingsBtn.addSubview(buttonView)
+    
+    buttonView.rightAnchor.constraint(equalTo: settingsBtn.rightAnchor).isActive = true
+    buttonView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    buttonView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    buttonView.centerYAnchor.constraint(equalTo: settingsBtn.centerYAnchor, constant: 0).isActive = true
+    buttonView.translatesAutoresizingMaskIntoConstraints = false
   }
   
   override func prepareForReuse() {

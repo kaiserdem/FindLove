@@ -61,7 +61,6 @@ class OrientationView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     
     let ref = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
     
-    print(beforeOrientation)
     if beforeOrientation != orientationTextValue {
       let orientationStr = orientationValidatorToIndex(string: orientationTextValue)
       let valuesGender = ["orientation": orientationStr] as [String : Any]
