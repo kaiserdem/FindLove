@@ -75,8 +75,6 @@
 		ADC55A9723E878FD002BEAF7 /* OrientationViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC55A9523E878FD002BEAF7 /* OrientationViewCell.xib */; };
 		ADC55A9A23E8792B002BEAF7 /* AboutSelfViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC55A9823E8792B002BEAF7 /* AboutSelfViewCell.swift */; };
 		ADC55A9B23E8792B002BEAF7 /* AboutSelfViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC55A9923E8792B002BEAF7 /* AboutSelfViewCell.xib */; };
-		ADE0ABFF23E01E4C00653D18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */; };
-		ADE0AC0123E01E5800653D18 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE0AC0023E01E5800653D18 /* SettingsView.xib */; };
 		ADEE6F9A23E9871E008352C0 /* UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6F9923E9871E008352C0 /* UIResponder.swift */; };
 		ADEE6F9C23EB32D6008352C0 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6F9B23EB32D6008352C0 /* SettingsVC.swift */; };
 		ADEE6FA023EB3CB9008352C0 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6F9E23EB3CB9008352C0 /* SettingsSwitchCell.swift */; };
@@ -85,8 +83,6 @@
 		ADEE6FA523EB3E23008352C0 /* SettingsTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADEE6FA323EB3E23008352C0 /* SettingsTextFieldCell.xib */; };
 		ADEE6FA823EB3F3E008352C0 /* SettingButtonNextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6FA623EB3F3E008352C0 /* SettingButtonNextCell.swift */; };
 		ADEE6FA923EB3F3E008352C0 /* SettingButtonNextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADEE6FA723EB3F3E008352C0 /* SettingButtonNextCell.xib */; };
-		ADEE6FB123EC6AD1008352C0 /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE6FAF23EC6AD1008352C0 /* TestVC.swift */; };
-		ADEE6FB223EC6AD1008352C0 /* TestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADEE6FB023EC6AD1008352C0 /* TestVC.xib */; };
 		ADFCA85B23DDEDFC004067A9 /* ChatWithStrangerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFCA85923DDEDFC004067A9 /* ChatWithStrangerCell.swift */; };
 		ADFCA85C23DDEDFC004067A9 /* ChatWithStrangerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADFCA85A23DDEDFC004067A9 /* ChatWithStrangerCell.xib */; };
 		ADFCA85F23DDFD9E004067A9 /* SearchStrangerForChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFCA85E23DDFD9E004067A9 /* SearchStrangerForChatView.swift */; };
@@ -168,8 +164,6 @@
 		ADC55A9523E878FD002BEAF7 /* OrientationViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrientationViewCell.xib; sourceTree = "<group>"; };
 		ADC55A9823E8792B002BEAF7 /* AboutSelfViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSelfViewCell.swift; sourceTree = "<group>"; };
 		ADC55A9923E8792B002BEAF7 /* AboutSelfViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutSelfViewCell.xib; sourceTree = "<group>"; };
-		ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		ADE0AC0023E01E5800653D18 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		ADEE6F9923E9871E008352C0 /* UIResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResponder.swift; sourceTree = "<group>"; };
 		ADEE6F9B23EB32D6008352C0 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		ADEE6F9E23EB3CB9008352C0 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
@@ -178,8 +172,6 @@
 		ADEE6FA323EB3E23008352C0 /* SettingsTextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTextFieldCell.xib; sourceTree = "<group>"; };
 		ADEE6FA623EB3F3E008352C0 /* SettingButtonNextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingButtonNextCell.swift; sourceTree = "<group>"; };
 		ADEE6FA723EB3F3E008352C0 /* SettingButtonNextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingButtonNextCell.xib; sourceTree = "<group>"; };
-		ADEE6FAF23EC6AD1008352C0 /* TestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
-		ADEE6FB023EC6AD1008352C0 /* TestVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestVC.xib; sourceTree = "<group>"; };
 		ADFCA85923DDEDFC004067A9 /* ChatWithStrangerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWithStrangerCell.swift; sourceTree = "<group>"; };
 		ADFCA85A23DDEDFC004067A9 /* ChatWithStrangerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatWithStrangerCell.xib; sourceTree = "<group>"; };
 		ADFCA85E23DDFD9E004067A9 /* SearchStrangerForChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStrangerForChatView.swift; sourceTree = "<group>"; };
@@ -269,7 +261,6 @@
 				ADC55A9C23E88844002BEAF7 /* ProfileCells */,
 				ADC55A8723E74547002BEAF7 /* UserProfileInfoView */,
 				ADB4CD3A23E0AF60001DD8AF /* ProfileAlertViews */,
-				ADE0ABFD23E01E2300653D18 /* SettingsViewDelete */,
 				ADEE6F9D23EB3C51008352C0 /* SettingsCells */,
 				ADFCA85D23DDFCAF004067A9 /* SearchStrangerForChatView */,
 				ADFCA85823DDED92004067A9 /* ChatWithStrangerCell */,
@@ -280,8 +271,7 @@
 				AD02EB2923B793C200F472A5 /* ChatMessageCVCell */,
 				ADBA195D23C49004009B45EC /* ReviewCVCell */,
 				ADB8DED623CB9970008D989E /* SelectChatCell */,
-				AD4CC09C23EDDA16004352F8 /* SettingPrivacyView.swift */,
-				AD4CC09E23EDDA1E004352F8 /* SettingPrivacyView.xib */,
+				ADF0B58523EF0620009C03A1 /* SettingPrivacyView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -291,8 +281,6 @@
 			children = (
 				AD5A563723BFC15A0032AB2A /* SearchVC.swift */,
 				AD79AC0D23CDEC2C00FA7D09 /* GameVC.swift */,
-				ADEE6FAF23EC6AD1008352C0 /* TestVC.swift */,
-				ADEE6FB023EC6AD1008352C0 /* TestVC.xib */,
 			);
 			path = "New Group";
 			sourceTree = "<group>";
@@ -554,15 +542,6 @@
 			path = AboutSelfViewCell;
 			sourceTree = "<group>";
 		};
-		ADE0ABFD23E01E2300653D18 /* SettingsViewDelete */ = {
-			isa = PBXGroup;
-			children = (
-				ADE0ABFE23E01E4C00653D18 /* SettingsView.swift */,
-				ADE0AC0023E01E5800653D18 /* SettingsView.xib */,
-			);
-			path = SettingsViewDelete;
-			sourceTree = "<group>";
-		};
 		ADEE6F9D23EB3C51008352C0 /* SettingsCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -576,6 +555,15 @@
 				AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */,
 			);
 			path = SettingsCells;
+			sourceTree = "<group>";
+		};
+		ADF0B58523EF0620009C03A1 /* SettingPrivacyView */ = {
+			isa = PBXGroup;
+			children = (
+				AD4CC09C23EDDA16004352F8 /* SettingPrivacyView.swift */,
+				AD4CC09E23EDDA1E004352F8 /* SettingPrivacyView.xib */,
+			);
+			path = SettingPrivacyView;
 			sourceTree = "<group>";
 		};
 		ADFCA85823DDED92004067A9 /* ChatWithStrangerCell */ = {
@@ -697,10 +685,8 @@
 				ADC55A9B23E8792B002BEAF7 /* AboutSelfViewCell.xib in Resources */,
 				ADC55A8923E74591002BEAF7 /* UserProfileInfoView.xib in Resources */,
 				ADEE6FA123EB3CB9008352C0 /* SettingsSwitchCell.xib in Resources */,
-				ADE0AC0123E01E5800653D18 /* SettingsView.xib in Resources */,
 				AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */,
 				ADB4CD3E23E0AFC3001DD8AF /* InfornatioView.xib in Resources */,
-				ADEE6FB223EC6AD1008352C0 /* TestVC.xib in Resources */,
 				AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */,
 				ADB8DED523CB9959008D989E /* SelectChatCell.xib in Resources */,
 				ADB4CD4723E1977D001DD8AF /* OrientationView.xib in Resources */,
@@ -779,7 +765,6 @@
 				ADB4A25323E44CC0001D1A6A /* CustomAlertWarning.swift in Sources */,
 				AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */,
 				ADB8DECF23CA1A15008D989E /* MessagesVC.swift in Sources */,
-				ADEE6FB123EC6AD1008352C0 /* TestVC.swift in Sources */,
 				ADB8DED823CC7D11008D989E /* Group.swift in Sources */,
 				AD5A563E23BFEB750032AB2A /* FeedCell.swift in Sources */,
 				AD8895DD23B2162C00347A6A /* RegistrationVC.swift in Sources */,
@@ -803,7 +788,6 @@
 				ADC55A8E23E878A7002BEAF7 /* InformationViewCell.swift in Sources */,
 				ADC55A9223E878D6002BEAF7 /* StatusViewCell.swift in Sources */,
 				AD8895E923B293BE00347A6A /* ProfileVC.swift in Sources */,
-				ADE0ABFF23E01E4C00653D18 /* SettingsView.swift in Sources */,
 				ADB4CD3C23E0AFAF001DD8AF /* InfornatioView.swift in Sources */,
 				ADB8DED423CB9959008D989E /* SelectChatCell.swift in Sources */,
 				AD4CC09A23EC8ADD004352F8 /* SettingsHeaderCell.swift in Sources */,

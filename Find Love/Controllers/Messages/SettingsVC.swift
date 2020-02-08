@@ -11,10 +11,11 @@ import Firebase
 
 protocol ProtocolSettingsCellDelegate: class {
   func nextButtonTapped(cell: SettingButtonNextCell)
+  func saveTextFieldTapped(cell: SettingsTextFieldCell, string: String)
 }
 
 class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
-
+  
   @IBOutlet weak var cencelBtn: UIButton!  
   @IBOutlet weak var tableView: UITableView!
   
@@ -30,6 +31,12 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
     
     cencelBtn.setImage(UIImage(named: "cancel")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
     cencelBtn.tintColor = .white
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    
+    self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(sender:))))
   }
   
   override func viewWillLayoutSubviews() {
@@ -40,7 +47,16 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
     tableView.tableFooterView = UIView() // убрать все что ниже
   }
   
-  private func setValueToDatabase(_ name: String, _ value: String) {
+  @objc func keyboardWillShow(sender: NSNotification) {
+    self.view.frame.origin.y = -110
+  }
+  
+  @objc func keyboardWillHide(sender: NSNotification) {
+    self.view.frame.origin.y = 0
+    view.endEditing(true)
+  }
+  
+  private func saveValueToDatabase(_ name: String, _ value: String) {
     
     guard let uid = Auth.auth().currentUser?.uid else { return }
     
@@ -49,20 +65,7 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
     let valuesStatus = [name: value] as [String : Any]
     ref.updateChildValues(valuesStatus)
   }
-  
-  /*
- let ref = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
  
- if beforeStatusText != status {
- let valuesStatus = ["status": status] as [String : Any]
- ref.updateChildValues(valuesStatus)
- 
- } else {
- saveBtn.isEnabled = false
- saveBtn.setTitleColor(.gray, for: .normal)
- }
- */
-  
   private func sendMessameToSupport() {
     let email = "kievlandmarks@gmail.com"
     if let url = URL(string: "mailto:\(email)") {
@@ -115,6 +118,11 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
     tableView.register(UINib(nibName: "SettingButtonNextCell", bundle: nil), forCellReuseIdentifier: "SettingButtonNextCell")
   }
   
+  func saveTextFieldTapped(cell: SettingsTextFieldCell, string: String) {
+    print(string)
+    view.endEditing(true)
+  }
+
   func nextButtonTapped(cell: SettingButtonNextCell) {
     guard let indexPath = self.tableView.indexPath(for: cell) else { return }
     
@@ -232,6 +240,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     if indexPath.row == 6 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsTextFieldCell", for: indexPath) as! SettingsTextFieldCell
       cell.outletTextField.text = user?.email! ?? "someEmail@gmail.com"
+      cell.delegate = self
       return cell
     }
     
@@ -275,30 +284,30 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
   @objc func getRandomChatsAction(_ sender: UISwitch) {
     if sender.isOn == true {
       print("on")
-      setValueToDatabase("getRandomChat", "1")
+      saveValueToDatabase("getRandomChat", "1")
     } else {
       print("off")
-      setValueToDatabase("getRandomChat", "0")
+      saveValueToDatabase("getRandomChat", "0")
     }
   }
   
   @objc func getMessageFromMenAction(_ sender: UISwitch) {
     if sender.isOn == true {
       print("on")
-      setValueToDatabase("getMessageFromMen", "1")
+      saveValueToDatabase("getMessageFromMen", "1")
     } else {
       print("off")
-      setValueToDatabase("getMessageFromMen", "0")
+      saveValueToDatabase("getMessageFromMen", "0")
     }
   }
   
   @objc func getMessageFromWomenAction(_ sender: UISwitch) {
     if sender.isOn == true {
       print("on")
-      setValueToDatabase("getMessageFromWomen", "1")
+      saveValueToDatabase("getMessageFromWomen", "1")
     } else {
       print("off")
-      setValueToDatabase("getMessageFromWomen", "0")
+      saveValueToDatabase("getMessageFromWomen", "0")
     }
   }
   

@@ -304,7 +304,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
     if indexPath.row == 0 {
-      return 220
+      return 250
       
     } else if indexPath.row == 1 {
       return calculateHeight("status")
