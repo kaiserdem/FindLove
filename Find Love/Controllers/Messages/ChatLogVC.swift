@@ -559,7 +559,9 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
       
       let responseHeight = estimateFrameForText(message.responseToText!).height
       if let text = message.text {
-        height = estimateFrameForText(text).height + 30 + responseHeight
+        
+        height = estimateFrameForText(text).height + 50 + responseHeight
+        
       } else if let imageWidht = message.imageWidth, let imageHight = message.imageHeight {
         // сделали размер пропорционально
         height = CGFloat(imageHight / imageWidht * 200)
