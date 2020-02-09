@@ -13,7 +13,7 @@ import FirebaseDatabase
 import AVFoundation
 import MobileCoreServices
 
-class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
+class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
   
   var user: User? {
     didSet {
@@ -119,7 +119,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     collectionView?.alwaysBounceVertical = true
     collectionView?.backgroundColor = #colorLiteral(red: 0.1830653183, green: 0.1830653183, blue: 0.1830653183, alpha: 1)
     collectionView?.keyboardDismissMode = .interactive
-    collectionView?.register(ChatCell.self, forCellWithReuseIdentifier: cellId)
+    collectionView?.register(ChatGroupCell.self, forCellWithReuseIdentifier: cellId)
     
     setupInputComponents()
     setupKeyboardObservise()
@@ -243,7 +243,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     }, withCancel: nil)
   }
   
-  private func setupCell(_ cell: ChatCell, message: Message) {
+  private func setupCell(_ cell: ChatGroupCell, message: Message) {
     
     if let profileImageUrl = self.user?.profileImageUrl {
       cell.profileImageView.loadImageUsingCache(profileImageUrl)
@@ -258,16 +258,19 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
     }
     
     if message.fromId == Auth.auth().currentUser?.uid { // свои сообщения
-      cell.bubbleView.backgroundColor = ChatCell.blueColor
+      cell.bubbleView.backgroundColor = ChatGroupCell.blueColor
       cell.textView.textColor = .white
       cell.profileImageView.isHidden = true
+      cell.backImageView.isHidden = true
+      cell.downBlackView.isHidden = true
       cell.buubleViewRightAnchor?.isActive = true
       cell.buubleViewLeftAnchor?.isActive = false
     } else {
       cell.bubbleView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1) // не свои серый
       cell.textView.textColor = .black
       cell.profileImageView.isHidden = false
-      
+      cell.backImageView.isHidden = false
+      cell.downBlackView.isHidden = false
       cell.buubleViewRightAnchor?.isActive = false
       cell.buubleViewLeftAnchor?.isActive = true
     }
@@ -506,7 +509,7 @@ class ChatWriteMessageVC: UICollectionViewController, UITextFieldDelegate, UICol
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatGroupCell
     
     cell.deledate = self
     let message = messages[indexPath.row]

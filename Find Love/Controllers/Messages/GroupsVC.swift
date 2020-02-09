@@ -1,5 +1,5 @@
 //
-//  ChatVC.swift
+//  GroupsVC.swift
 //  Find Love
 //
 //  Created by Kaiserdem on 11.01.2020.
@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class ChatVC: UIViewController {
+class GroupsVC: UIViewController {
 
   var groups = [Group]()
   
@@ -81,7 +81,7 @@ class ChatVC: UIViewController {
 
 }
 
-extension ChatVC: UITableViewDataSource, UITableViewDelegate {
+extension GroupsVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "SelectChatCell", for: indexPath) as! SelectChatCell
@@ -121,7 +121,7 @@ extension ChatVC: UITableViewDataSource, UITableViewDelegate {
       
       let groupDict = Group(dictionary: dictionary)
       
-      let vc = ChatWriteMessageVC(collectionViewLayout: UICollectionViewFlowLayout())
+      let vc = ChatGroupCVC(collectionViewLayout: UICollectionViewFlowLayout())
       vc.group = groupDict
       self?.present(vc, animated: true, completion: nil)
       

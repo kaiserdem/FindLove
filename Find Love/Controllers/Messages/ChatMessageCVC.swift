@@ -12,7 +12,7 @@ import FirebaseDatabase
 import AVFoundation
 import MobileCoreServices
 
-class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
+class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
   
   var messages = [Message]() // масив всех сообщений
   var conteinerViewBottonAnchor: NSLayoutConstraint?
@@ -229,14 +229,17 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
       cell.bubbleView.backgroundColor = ChatMessageCell.blueColor 
       cell.textView.textColor = .white
       cell.profileImageView.isHidden = true
+      cell.backImageView.isHidden = true
+      cell.downBlackView.isHidden = true
       cell.buubleViewRightAnchor?.isActive = true
       cell.buubleViewLeftAnchor?.isActive = false
       
     } else {
-      cell.bubbleView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1) // не свои серый
+      cell.bubbleView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1) // не свои
       cell.textView.textColor = .black
       cell.profileImageView.isHidden = false
-      
+      cell.backImageView.isHidden = false
+      cell.downBlackView.isHidden = false
       cell.buubleViewRightAnchor?.isActive = false
       cell.buubleViewLeftAnchor?.isActive = true
     }
@@ -245,6 +248,15 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     dismiss(animated: true) {
       self.inputConteinerView.alpha = 1
+      
+      self.collectionView.reloadData() // код не срабатывает
+
+      if self.messages.count > 0 {
+        let indexPath = IndexPath(item: self.messages.count-1, section: 0) // последнее
+        //проскролить
+        self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+        self.collectionView.reloadData()
+      }
     }
   }
   
@@ -406,7 +418,6 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
         return
       }
     }
-    inputConteinerView.isHidden = false
   }
   
   var startFrame: CGRect?
@@ -488,6 +499,72 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     }
   }
   
+  @objc func imageUserTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+
+    if let imageView = gestureRecognizer.view as? UIImageView {
+    }
+    
+    let userProfileInfoView = UserProfileInfoView(frame: (self.view.frame))
+    userProfileInfoView.userNameLabel.text = user!.name
+    
+    if user!.age != nil {
+      userProfileInfoView.ageLabel.text = String(describing:"Возраст: \(user!.age!)")
+    } else {
+      userProfileInfoView.ageLabelHeightConstraint.constant = 0
+      userProfileInfoView.ageLabel.isHidden = true
+      userProfileInfoView.ageSeparatorView.isHidden = true
+    }
+    
+    if user!.gender != nil {
+      
+      
+      
+      let gen = self.genderValidatorToText(string: user!.gender!)
+      
+      userProfileInfoView.genderLabel.text = String(describing: "Пол: \(String(describing: gen))")
+    } else {
+      userProfileInfoView.genderLabelHeightConstraint.constant = 0
+      userProfileInfoView.genderLabel.isHidden = true
+      userProfileInfoView.genderSeparatorView.isHidden = true
+    }
+    
+    if user!.aboutSelf != nil {
+      userProfileInfoView.aboutSelfTextView.text = String(describing:"O себе: \n\(user!.aboutSelf!)")
+      let height = (self.estimateFrameForText(user!.aboutSelf!).height) + 20
+      userProfileInfoView.aboutSelfTextViewHeightConstraint.constant = height
+    } else {
+      userProfileInfoView.aboutSelfTextViewHeightConstraint.constant = 0
+      userProfileInfoView.aboutSelfTextView.isHidden = true
+      userProfileInfoView.aboutSelfSeparatorView.isHidden = true
+    }
+    
+    if user!.status != nil {
+      userProfileInfoView.statusTextView.text = String(describing:"Статус: \n\(user!.status!)")
+      let height = (self.estimateFrameForText(user!.status!).height) + 20
+      userProfileInfoView.statusTextViewHeightConstraint.constant = height
+    } else {
+      userProfileInfoView.statusTextViewHeightConstraint.constant = 0
+      userProfileInfoView.statusTextView.isHidden = true
+      userProfileInfoView.statusSeparatorView.isHidden = true
+    }
+    
+    if user!.orientation != nil {
+      let orientation = self.orientationValidatorToText(string: user!.orientation!)
+      userProfileInfoView.orientationLabel.text = String(describing:"Нравяться: \(orientation)")
+      let height = (self.estimateFrameForText(user!.orientation!).height) + 10
+      userProfileInfoView.orientationLabelHeightConstraint.constant = height
+    } else {
+      userProfileInfoView.orientationLabelHeightConstraint.constant = 0
+      userProfileInfoView.orientationLabel.isHidden = true
+      userProfileInfoView.orientationSeparatorView.isHidden = true
+    }
+    
+    
+    userProfileInfoView.profileImageView.loadImageUsingCache(user!.profileImageUrl!)
+    
+    self.view.addSubview(userProfileInfoView)
+  }
+  
    // текстовое поле возврвщвет
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     handleSend()
@@ -505,6 +582,7 @@ class ChatLogVC: UICollectionViewController, UITextFieldDelegate, UICollectionVi
     
     let message = messages[indexPath.row]
     cell.message = message
+    cell.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageUserTapped)))
     
     cell.timeLabel.text = setFormatDislayedTimeAndDate(from: message.timestamp as! TimeInterval, withString: false)
     

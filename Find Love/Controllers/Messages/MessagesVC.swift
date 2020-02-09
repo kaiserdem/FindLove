@@ -75,7 +75,7 @@ class MessagesVC: UIViewController {
   }
   
   func showChatLogVCForUser(_ user: User?) {
-    let vc = ChatLogVC(collectionViewLayout: UICollectionViewFlowLayout())
+    let vc = ChatMessageCVC(collectionViewLayout: UICollectionViewFlowLayout())
     vc.user = user
     present(vc, animated: true, completion: nil)
     self.navigationController?.pushViewController(vc, animated: true)

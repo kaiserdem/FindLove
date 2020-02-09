@@ -24,7 +24,7 @@ class MessengerVC: UIViewController {
   @IBOutlet weak var topBarView: UIView!
   @IBOutlet weak var backViewTable: UIView!
   
-  let chatVC = ChatVC()
+  let chatVC = GroupsVC()
   let messagesAllVC = MessagesVC()
   
   override func viewDidLoad() {

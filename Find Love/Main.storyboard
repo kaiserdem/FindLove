@@ -663,10 +663,10 @@
             </objects>
             <point key="canvasLocation" x="1626" y="857"/>
         </scene>
-        <!--ChatVC-->
+        <!--GroupsVC-->
         <scene sceneID="Ncy-ep-jkj">
             <objects>
-                <viewController id="DGL-zt-mwy" customClass="ChatVC" customModule="Find_Love" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DGL-zt-mwy" customClass="GroupsVC" customModule="Find_Love" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3ge-fZ-yew">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="723"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

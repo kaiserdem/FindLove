@@ -109,6 +109,7 @@ class ChatMessageCell: UICollectionViewCell {
     imageView.layer.masksToBounds = true
     imageView.layer.cornerRadius = 20
     imageView.contentMode = .scaleAspectFill
+    imageView.isUserInteractionEnabled = true
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -140,7 +141,7 @@ class ChatMessageCell: UICollectionViewCell {
     
     let pathRight = UIBezierPath()
     pathRight.move(to: CGPoint(x: -4, y: 6.2))
-    pathRight.addLine(to: CGPoint(x: 2, y: 8)) // crownBtn.bounds.maxX + 2
+    pathRight.addLine(to: CGPoint(x: 2, y: 8))
     
     let pathLeft = UIBezierPath()
     pathLeft.move(to: CGPoint(x: 23, y: 5.3))
@@ -222,10 +223,6 @@ class ChatMessageCell: UICollectionViewCell {
     crownBtn.centerYAnchor.constraint(equalTo: downBlackView.centerYAnchor).isActive = true
     crownBtn.widthAnchor.constraint(equalToConstant: 16).isActive = true
     crownBtn.heightAnchor.constraint(equalToConstant: 16).isActive = true
-    
-    
-    
-    
     
     buubleViewRightAnchor = bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
     buubleViewRightAnchor!.isActive = true
