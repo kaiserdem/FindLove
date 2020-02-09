@@ -356,6 +356,8 @@
 				AD79AC0B23CDEB2600FA7D09 /* StartScreenVC */,
 				AD79AC0C23CDEB9B00FA7D09 /* FeedScreenVC */,
 				ADB8DECD23CA1987008D989E /* Messages */,
+				ADEE6F9B23EB32D6008352C0 /* SettingsVC.swift */,
+				AD8895E723B293BE00347A6A /* ProfileVC.swift */,
 				AD4CC09723EC7A64004352F8 /* New Group */,
 			);
 			path = Controllers;
@@ -461,8 +463,6 @@
 				ADB8DED023CA1A27008D989E /* GroupsVC.swift */,
 				AD26947223B67B8A00D49887 /* ChatMessageCVC.swift */,
 				ADB8DED923CCCBD0008D989E /* ChatGroupCVC.swift */,
-				AD8895E723B293BE00347A6A /* ProfileVC.swift */,
-				ADEE6F9B23EB32D6008352C0 /* SettingsVC.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";

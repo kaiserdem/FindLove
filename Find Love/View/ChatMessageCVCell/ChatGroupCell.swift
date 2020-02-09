@@ -13,6 +13,7 @@ class ChatGroupCell: UICollectionViewCell {
   
   var message: Message?
   var deledate: ImageZomable?
+  weak var delegate: ProtocolChatGroupDelegate?
   
   static let blueColor = #colorLiteral(red: 0.08570486702, green: 0.2354284908, blue: 0.3383600027, alpha: 1)
   static let grayColor = #colorLiteral(red: 0.7610357215, green: 0.7610357215, blue: 0.7610357215, alpha: 1)
@@ -101,12 +102,14 @@ class ChatGroupCell: UICollectionViewCell {
     return btn
   }()
   
-  var profileImageView: UIImageView = {
+  lazy var profileImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = #imageLiteral(resourceName: "user.png")
     imageView.layer.masksToBounds = true
     imageView.layer.cornerRadius = 20
     imageView.contentMode = .scaleAspectFill
+    imageView.isUserInteractionEnabled = true
+    imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped(_ :))))
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -141,14 +144,9 @@ class ChatGroupCell: UICollectionViewCell {
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
-
-
-  
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
-    
     
     drawLineCrown()
     
@@ -230,7 +228,7 @@ class ChatGroupCell: UICollectionViewCell {
     
     nameLabel.leftAnchor.constraint(equalTo: bubbleView.leftAnchor, constant: 8).isActive = true
     nameLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 8).isActive = true
-
+    
     
     timeLabel.topAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -2).isActive = true
     timeLabel.leftAnchor.constraint(equalTo: bubbleView.leftAnchor, constant: 10).isActive = true
@@ -242,7 +240,7 @@ class ChatGroupCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func drawLineCrown() {
+  private func drawLineCrown() {
     
     self.shapeLayer?.removeFromSuperlayer()
     
@@ -293,8 +291,11 @@ class ChatGroupCell: UICollectionViewCell {
     activityIndicatorView.stopAnimating()
   }
   
+  @objc func imageTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+    delegate?.imageViewTapped(cell: self)
+  }
+  
   @objc func handleZoomTap(_ gestureRecognizer: UITapGestureRecognizer) {
-    
     if message?.videoUrl != nil {
       return
     }

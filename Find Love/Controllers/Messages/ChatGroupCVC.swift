@@ -13,7 +13,11 @@ import FirebaseDatabase
 import AVFoundation
 import MobileCoreServices
 
-class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
+protocol ProtocolChatGroupDelegate: class {
+  func imageViewTapped(cell: ChatGroupCell)
+}
+
+class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable, ProtocolChatGroupDelegate {
   
   var user: User? {
     didSet {
@@ -276,6 +280,78 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
     }
   }
   
+  
+  func imageViewTapped(cell: ChatGroupCell) {
+    
+    guard let indexPath = self.collectionView.indexPath(for: cell) else { return }
+    
+    let message = messages[indexPath.row]
+    
+    let ref = Database.database().reference().child("users").child(message.fromId!)
+    ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+      
+      if let dictionary = snapshot.value as? [String: AnyObject] {
+        let user = User(dictionary: dictionary)
+        
+        let userProfileInfoView = UserProfileInfoView(frame: (self?.view.frame)!)
+        userProfileInfoView.userNameLabel.text = user.name
+        
+        if user.age != nil {
+          userProfileInfoView.ageLabel.text = String(describing:"Возраст: \(user.age!)")
+        } else {
+          userProfileInfoView.ageLabelHeightConstraint.constant = 0
+          userProfileInfoView.ageLabel.isHidden = true
+          userProfileInfoView.ageSeparatorView.isHidden = true
+        }
+        
+        if user.gender != nil {
+          guard let gen = self?.genderValidatorToText(string: user.gender!) else { return }
+          userProfileInfoView.genderLabel.text = String(describing: "Пол: \(String(describing: gen))")
+        } else {
+          userProfileInfoView.genderLabelHeightConstraint.constant = 0
+          userProfileInfoView.genderLabel.isHidden = true
+          userProfileInfoView.genderSeparatorView.isHidden = true
+        }
+        
+        if user.aboutSelf != nil {
+          userProfileInfoView.aboutSelfTextView.text = String(describing:"O себе: \n\(user.aboutSelf!)")
+          let height = (self?.estimateFrameForText(user.aboutSelf!).height)! + 20
+          userProfileInfoView.aboutSelfTextViewHeightConstraint.constant = height
+        } else {
+          userProfileInfoView.aboutSelfTextViewHeightConstraint.constant = 0
+          userProfileInfoView.aboutSelfTextView.isHidden = true
+          userProfileInfoView.aboutSelfSeparatorView.isHidden = true
+        }
+        
+        if user.status != nil {
+          userProfileInfoView.statusTextView.text = String(describing:"Статус: \n\(user.status!)")
+          let height = (self?.estimateFrameForText(user.status!).height)! + 20
+          userProfileInfoView.statusTextViewHeightConstraint.constant = height
+        } else {
+          userProfileInfoView.statusTextViewHeightConstraint.constant = 0
+          userProfileInfoView.statusTextView.isHidden = true
+          userProfileInfoView.statusSeparatorView.isHidden = true
+        }
+        
+        if user.orientation != nil {
+          guard let orientation = self?.orientationValidatorToText(string: user.orientation!) else { return }
+          userProfileInfoView.orientationLabel.text = String(describing:"Нравяться: \(orientation)")
+          let height = (self?.estimateFrameForText(user.orientation!).height)! + 10
+          userProfileInfoView.orientationLabelHeightConstraint.constant = height
+        } else {
+          userProfileInfoView.orientationLabelHeightConstraint.constant = 0
+          userProfileInfoView.orientationLabel.isHidden = true
+          userProfileInfoView.orientationSeparatorView.isHidden = true
+        }
+        
+        
+        userProfileInfoView.profileImageView.loadImageUsingCache(user.profileImageUrl!)
+        
+        self?.view.addSubview(userProfileInfoView)
+      }
+      }, withCancel: nil)
+  }
+  
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     dismiss(animated: true) {
       self.inputConteinerView.alpha = 1
@@ -514,7 +590,7 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
     cell.deledate = self
     let message = messages[indexPath.row]
     cell.message = message
-    
+    cell.delegate = self
     cell.textView.text = message.text
     cell.timeLabel.text = setFormatDislayedTimeAndDate(from: message.timestamp as! TimeInterval, withString: false)
     
