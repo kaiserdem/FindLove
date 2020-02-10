@@ -23,26 +23,33 @@ class RegistrationVC: UIViewController {
   @IBOutlet weak var nameTextField: UITextField!
   
   weak var menuVC: ProfileVC?
+  var imageStatus = 0
   
   override var prefersStatusBarHidden: Bool {
     return true
   }
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-      activityIndicator.isHidden = true
-      
-        navigationController?.navigationBar.isHidden = true
-      
-      self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(sender:))))
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    activityIndicator.isHidden = true
+    navigationController?.navigationBar.isHidden = true
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    
+    self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(sender:))))
+  }
+  
+  @objc func keyboardWillShow(sender: NSNotification) {
+    self.view.frame.origin.y = -115
+  }
   
   @objc func keyboardWillHide(sender: NSNotification) {
+    self.view.frame.origin.y = 0
     view.endEditing(true)
   }
-
-
+  
+  
   func handleRegister() {
     guard let email = emailTF.text , let password = passwordTF.text, let name = nameTextField.text else { // если пустые, принт, выходим
       print("Error: field is empty")
@@ -51,6 +58,16 @@ class RegistrationVC: UIViewController {
       activityIndicator.stopAnimating()
       return
     }
+    
+    if imageStatus == 0 {
+      let view = CustomAlertWarning(frame: self.view.frame)
+      view.textTextView.text = "Без фотографии регистрация невозможна"
+      self.view.addSubview(view)
+      activityIndicator.isHidden = true
+      activityIndicator.stopAnimating()
+      return
+    }
+    
     Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
       if error != nil { // если ошибка, принт, выходим
         print("Error")
@@ -88,6 +105,7 @@ class RegistrationVC: UIViewController {
           })
         })
       }
+      
     }
   }
   
@@ -141,10 +159,10 @@ extension RegistrationVC: UIImagePickerControllerDelegate, UINavigationControlle
       selectedImageFromPicker = originalImage
     }
     if let selectedImage = selectedImageFromPicker {
+      imageStatus = 1
       userImageView.image = selectedImage
       userImageView.setNeedsDisplay()
     }
-    
     dismiss(animated: true, completion: nil) // выйти с контроллера
     
   }

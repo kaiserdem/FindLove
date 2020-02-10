@@ -89,15 +89,26 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
   
   private func deleteAccountFromFirebace() {
     let user = Auth.auth().currentUser
-    
+    let uid = Auth.auth().currentUser?.uid
     user?.delete { [weak self] error in
       if error != nil {
         print("Account deleted.")
         self?.handleLogout()
+        self?.deleteUsersDataAndHistory(uid!)
+        
       } else {
         print("An error happened.")
       }
     }
+  }
+  private func deleteUsersDataAndHistory(_ uid: String) {
+    let refUser = Database.database().reference().child("users").child(uid)
+    let refUserMessages = Database.database().reference().child("user-messages").child(uid)
+    let refUserPosts = Database.database().reference().child("posts").child(uid)
+    
+    refUserPosts.removeValue()
+    refUserMessages.removeValue()
+    refUser.removeValue()
   }
   
   private func uploadTableView() {
@@ -151,7 +162,6 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
       }) { () -> Void in
         print("user canceled")
       }
-      //deleteAccountFromFirebace()  // удалили, дальше нужно выйти
     }
   }
 

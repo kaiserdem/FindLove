@@ -88,8 +88,6 @@ class FeedCell: UITableViewCell {
         self?.post!.likedCount = arrayLiked.count
       }
     }, withCancel: nil)
-
-    
   }
   
   override func layoutSubviews() {

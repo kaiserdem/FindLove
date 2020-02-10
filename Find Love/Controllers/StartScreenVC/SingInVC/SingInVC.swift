@@ -58,8 +58,13 @@ class SingInVC: UIViewController {
       Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
         if error != nil {
           print("Error sing in")
+          self?.view.endEditing(true)
           self?.activityIndicator.stopAnimating()
           self?.activityIndicator.isHidden = true
+          
+          let view = CustomAlertWarning(frame: (self?.view.frame)!)
+          view.textTextView.text = "Не верный логин или пароль "
+          self?.view.addSubview(view)
           return
         }
         
@@ -74,6 +79,7 @@ class SingInVC: UIViewController {
     activityIndicator.isHidden = false
     activityIndicator.startAnimating()
     handleLogin()
+    view.endEditing(true)
   }
   @IBAction func forgotPasswordBtnAction(_ sender: Any) {
     

@@ -55,7 +55,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   }
 
   func writePost() {
-    let vc = NewFeedPostVC(collectionViewLayout: UICollectionViewFlowLayout())
+    let vc = NewFeedPostCVC(collectionViewLayout: UICollectionViewFlowLayout())
     present(vc, animated: true, completion: nil)
   }
 
@@ -98,7 +98,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   }
   
   func showChatLogVCForUser(_ user: User?) {
-    let vc = ReplyToFeedPostVC(collectionViewLayout: UICollectionViewFlowLayout())
+    let vc = ReplyToFeedPostCVC(collectionViewLayout: UICollectionViewFlowLayout())
     vc.user = user
     present(vc, animated: true) {
       NotificationCenter.default.post(name: NSNotification.Name("postTextToChat"), object: nil, userInfo: ["postText": self.currentPostText])

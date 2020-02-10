@@ -12,7 +12,7 @@ import AVFoundation
 import MobileCoreServices
 import FirebaseDatabase
 
-class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class NewFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   
   var user: User? 
@@ -185,7 +185,7 @@ class NewFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollecti
       values[key] = value
     }
     
-    childRef.updateChildValues(values) { (error, ref) in
+    ref.child(fromId).updateChildValues(values) { (error, ref) in
       if error != nil {
         print(error!)
         return

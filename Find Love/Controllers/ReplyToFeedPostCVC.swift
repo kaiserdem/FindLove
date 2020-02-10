@@ -12,8 +12,7 @@ import AVFoundation
 import MobileCoreServices
 import FirebaseDatabase
 
-class ReplyToFeedPostVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-  
+class ReplyToFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   var user: User? {
     didSet {
