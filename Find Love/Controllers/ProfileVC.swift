@@ -271,8 +271,47 @@ extension ProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDele
       selectedImageFromPicker = originalImage
     }
     if let selectedImage = selectedImageFromPicker {
-      //profileImageView.image = selectedImage
-      //profileImageView.setNeedsDisplay()
+      
+      let imageUrl = user?.profileImageUrl
+     
+      let ref = Storage.storage().reference().child("profile_images")
+
+      let storageRef = ref.storage.reference(forURL: imageUrl!)
+
+      storageRef.delete { error in
+        if let error = error {
+          print(error)
+        } else {
+          print("File deleted successfully")
+        }
+      }
+      
+      let imageName = NSUUID().uuidString
+      
+      let refImagePath = ref.child("\(imageName).png")
+
+      if let uploadData = selectedImage.jpegData(compressionQuality: 0.75) {
+        refImagePath.putData(uploadData, metadata: nil) { (metadata, error) in
+          if error != nil {
+            print(error?.localizedDescription as Any)
+            return
+          }
+          
+          refImagePath.downloadURL(completion: { (url, error) in
+            if error != nil {
+              print(error?.localizedDescription as Any)
+              return
+            }
+            if let imageUrl = url?.absoluteString {
+              let refUsersDatabase = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
+              
+              let values = ["profileImageUrl": imageUrl] as [String : Any]
+              refUsersDatabase.updateChildValues(values)
+            }
+          })
+        }
+      }
+      
     }
     dismiss(animated: true, completion: nil) // выйти с контроллера
   }
@@ -386,3 +425,18 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
   
   
 }
+ 
+ /*
+ let storageRef = FIRStorage.storage().reference().child("myImage.png")
+ if let uploadData = UIImagePNGRepresentation(self.myImageView.image!) {
+ storageRef.put(uploadData, metadata: nil) { (metadata, error) in
+ if error != nil {
+ print("error")
+ completion(nil)
+ } else {
+ completion((metadata?.downloadURL()?.absoluteString)!))
+ // your uploaded photo url.
+ }
+ }
+ */
+ 

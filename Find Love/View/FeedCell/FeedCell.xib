@@ -184,6 +184,7 @@
                     <constraint firstAttribute="trailing" secondItem="jaa-hT-fzB" secondAttribute="trailing" id="eaW-tq-28o"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="ageLabel" destination="zNx-hn-F9i" id="dgk-cY-kPW"/>

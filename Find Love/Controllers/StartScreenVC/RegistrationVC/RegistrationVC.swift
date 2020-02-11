@@ -58,8 +58,9 @@ class RegistrationVC: UIViewController {
       activityIndicator.stopAnimating()
       return
     }
-    
+    view.endEditing(true)
     if imageStatus == 0 {
+      self.view.frame.origin.y = 0
       let view = CustomAlertWarning(frame: self.view.frame)
       view.textTextView.text = "Без фотографии регистрация невозможна"
       self.view.addSubview(view)

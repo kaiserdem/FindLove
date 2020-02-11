@@ -31,6 +31,8 @@
 		AD5A563923BFC15A0032AB2A /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5A563723BFC15A0032AB2A /* SearchVC.swift */; };
 		AD5A563E23BFEB750032AB2A /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5A563C23BFEB750032AB2A /* FeedCell.swift */; };
 		AD5A563F23BFEB750032AB2A /* FeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD5A563D23BFEB750032AB2A /* FeedCell.xib */; };
+		AD5C8F8923F1B8D600AB826C /* PurchaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5C8F8723F1B8D600AB826C /* PurchaseVC.swift */; };
+		AD5C8F8A23F1B8D600AB826C /* PurchaseVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD5C8F8823F1B8D600AB826C /* PurchaseVC.xib */; };
 		AD79AC0E23CDEC2C00FA7D09 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD79AC0D23CDEC2C00FA7D09 /* GameVC.swift */; };
 		AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895C223B2122D00347A6A /* AppDelegate.swift */; };
 		AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD8895CB23B2122F00347A6A /* LaunchScreen.storyboard */; };
@@ -118,6 +120,8 @@
 		AD5A563723BFC15A0032AB2A /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		AD5A563C23BFEB750032AB2A /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		AD5A563D23BFEB750032AB2A /* FeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedCell.xib; sourceTree = "<group>"; };
+		AD5C8F8723F1B8D600AB826C /* PurchaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseVC.swift; sourceTree = "<group>"; };
+		AD5C8F8823F1B8D600AB826C /* PurchaseVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseVC.xib; sourceTree = "<group>"; };
 		AD79AC0D23CDEC2C00FA7D09 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
 		AD8895BF23B2122D00347A6A /* Find Love.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find Love.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD8895C223B2122D00347A6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -294,9 +298,19 @@
 			path = FeedCell;
 			sourceTree = "<group>";
 		};
+		AD5C8F8223F1B6A900AB826C /* PurchaseVC */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C8F8723F1B8D600AB826C /* PurchaseVC.swift */,
+				AD5C8F8823F1B8D600AB826C /* PurchaseVC.xib */,
+			);
+			path = PurchaseVC;
+			sourceTree = "<group>";
+		};
 		AD79AC0B23CDEB2600FA7D09 /* StartScreenVC */ = {
 			isa = PBXGroup;
 			children = (
+				AD5C8F8223F1B6A900AB826C /* PurchaseVC */,
 				AD8895D923B215BD00347A6A /* HelloVC */,
 				AD8895DF23B21F1B00347A6A /* SingInVC */,
 				AD8895DA23B215E800347A6A /* RegistrationVC */,
@@ -691,6 +705,7 @@
 				ADB8DED523CB9959008D989E /* SelectChatCell.xib in Resources */,
 				ADB4CD4723E1977D001DD8AF /* OrientationView.xib in Resources */,
 				AD1085A923DCA08A0009ADB3 /* AddFeedPostCell.xib in Resources */,
+				AD5C8F8A23F1B8D600AB826C /* PurchaseVC.xib in Resources */,
 				AD5A563F23BFEB750032AB2A /* FeedCell.xib in Resources */,
 				ADB4CD4223E18BE4001DD8AF /* StatusView.xib in Resources */,
 				ADFD0F4523E898C5008D2B9C /* SettingsViewCell.xib in Resources */,
@@ -778,6 +793,7 @@
 				AD26BE8C23C0CB2500EF1418 /* NewFeedPostCVC.swift in Sources */,
 				ADBA195B23C371E6009B45EC /* ReviewCVCell.swift in Sources */,
 				AD1085A823DCA08A0009ADB3 /* AddFeedPostCell.swift in Sources */,
+				AD5C8F8923F1B8D600AB826C /* PurchaseVC.swift in Sources */,
 				AD26946323B4FD2C00D49887 /* MessengerVC.swift in Sources */,
 				ADEE6FA023EB3CB9008352C0 /* SettingsSwitchCell.swift in Sources */,
 				AD8895D623B2128C00347A6A /* HelloVC.swift in Sources */,

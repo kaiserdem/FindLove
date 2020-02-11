@@ -54,12 +54,12 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     //NotificationCenter.default.removeObserver(self)
   }
 
-  func writePost() {
+  private func writePost() {
     let vc = NewFeedPostCVC(collectionViewLayout: UICollectionViewFlowLayout())
     present(vc, animated: true, completion: nil)
   }
 
-  func uploadTableView() {
+  private func uploadTableView() {
     
     tableView.delegate = self
     tableView.dataSource = self
@@ -77,7 +77,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     tableView.register(UINib(nibName: "AddFeedPostCell", bundle: nil), forCellReuseIdentifier: "AddFeedPostCell")
   }
   
-  func observePosts() {
+  private func observePosts() {
     
     let ref = Database.database().reference().child("posts")
     ref.observe(.childAdded, with: { [weak self](snapshot) in

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PurchaseVC" customModule="Find_Love" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="53t-0r-eTe" id="CBW-Ux-GN3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="53t-0r-eTe">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="girl1" translatesAutoresizingMaskIntoConstraints="NO" id="rwW-cO-Sqa">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                </imageView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0YN-eo-oZF">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjh-KV-yu3">
+                            <rect key="frame" x="186" y="389.5" width="42" height="21"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="42" id="asU-cT-FY4"/>
+                                <constraint firstAttribute="height" constant="21" id="ke7-eG-u2d"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mrb-kT-tIa">
+                            <rect key="frame" x="0.0" y="400" width="375" height="1200"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Лучшие девушки только с тобой" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAd-uu-iC4">
+                                    <rect key="frame" x="20" y="42" width="335" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="H9Y-uV-dTg"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWd-JL-Ntp">
+                                    <rect key="frame" x="40" y="260" width="295" height="50"/>
+                                    <color key="backgroundColor" red="1" green="0.50196078430000002" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="aCK-HN-hxe"/>
+                                    </constraints>
+                                    <state key="normal" title="Включить премиум"/>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Условия подписки" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVe-jp-mfP">
+                                    <rect key="frame" x="50" y="325" width="275" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="HYi-hf-9kS"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pg5-nW-a6l">
+                                    <rect key="frame" x="30" y="380" width="315" height="800"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <mutableString key="text">Условия подписки на сервис "Премиум-доступ":
+• Подписка «Премиум-доступ» является опциональной и дает вам расширенные возможности в приложении сроком на одну неделю или на один месяц. 
+• Оплата будет снята с вашего аккаунта iTunes после того, как вы подтвердите покупку. 
+• Ваша подписка будет обновляться еженедельно или ежемесячно: сумма 7,49 $ за 7 дней подписки или сумма 28,49 $ за месяц подписки будет списываться через аккаунт iTunes. 
+• Пробная подписка на премиум-доступ предоставляется бесплатно в течение 7 дней с момента ее подключения.
+• Если в течение 7 дней подписка не была отменена, по истечении пробного периода с вашего аккаунта будет взиматься ежемесячный платеж в размере 28,99 $.
+• Ваша подписка возобновляется автоматически, пока вы её не отключите как минимум за 24 часа до истечения текущей подписки. 
+• Оплата за возобновление будет снята с вашего счёта в течение 24 часов до окончания текущей подписки. 
+• После приобретения подписки вы можете управлять ею и выключить автоматическое возобновление в настройках вашего аккаунта iTunes. 
+• Вы не сможете аннулировать текущую подписку в течение того времени, пока она активна. 
+• Неиспользованный пробный период будет отменён, если вы приобретаете подписку в течение этого периода. 
+• Все ваши персональные данные обрабатываются в соответствии с положениями и условиями конфиденциальности: 
+ http://scandalapp.ru/conditions.php</mutableString>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2V-mO-Bfh">
+                                    <rect key="frame" x="30" y="112" width="315" height="128"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Ck-YP-FDV">
+                                            <rect key="frame" x="115" y="1" width="85" height="125"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pW5-Rr-gYc">
+                                            <rect key="frame" x="232" y="1" width="64" height="125"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="1" green="0.50115682490000002" blue="0.1212428485" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dLT-LU-y7c">
+                                            <rect key="frame" x="23" y="1" width="71" height="125"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.88261777159999999" green="0.89001113180000002" blue="0.90314030649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="128" id="MDl-bw-PQ7"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" red="0.32524396327901234" green="0.31630469317160492" blue="0.32586734633827158" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="Pg5-nW-a6l" firstAttribute="top" secondItem="jVe-jp-mfP" secondAttribute="bottom" constant="30" id="0MG-af-CIa"/>
+                                <constraint firstAttribute="trailing" secondItem="jVe-jp-mfP" secondAttribute="trailing" constant="50" id="7B3-nU-goG"/>
+                                <constraint firstAttribute="bottom" secondItem="Pg5-nW-a6l" secondAttribute="bottom" constant="20" id="7eQ-dI-khV"/>
+                                <constraint firstItem="jVe-jp-mfP" firstAttribute="top" secondItem="RWd-JL-Ntp" secondAttribute="bottom" constant="15" id="7rY-EH-GSj"/>
+                                <constraint firstAttribute="width" constant="375" id="JLd-4F-0Wc"/>
+                                <constraint firstItem="SAd-uu-iC4" firstAttribute="leading" secondItem="mrb-kT-tIa" secondAttribute="leading" constant="20" id="MNt-sD-1A9"/>
+                                <constraint firstAttribute="trailing" secondItem="q2V-mO-Bfh" secondAttribute="trailing" constant="30" id="MUb-iF-rli"/>
+                                <constraint firstAttribute="height" constant="1200" id="SUi-Id-apL"/>
+                                <constraint firstItem="jVe-jp-mfP" firstAttribute="leading" secondItem="mrb-kT-tIa" secondAttribute="leading" constant="50" id="WyN-Vd-TI7"/>
+                                <constraint firstItem="SAd-uu-iC4" firstAttribute="top" secondItem="mrb-kT-tIa" secondAttribute="top" constant="42" id="bCb-pv-ABy"/>
+                                <constraint firstItem="RWd-JL-Ntp" firstAttribute="top" secondItem="q2V-mO-Bfh" secondAttribute="bottom" constant="20" id="bIV-Hh-Gwq"/>
+                                <constraint firstItem="q2V-mO-Bfh" firstAttribute="top" secondItem="SAd-uu-iC4" secondAttribute="bottom" constant="20" id="f7O-As-LzQ"/>
+                                <constraint firstAttribute="trailing" secondItem="Pg5-nW-a6l" secondAttribute="trailing" constant="30" id="uma-X5-iSY"/>
+                                <constraint firstAttribute="trailing" secondItem="RWd-JL-Ntp" secondAttribute="trailing" constant="40" id="wjE-gK-wEZ"/>
+                                <constraint firstItem="q2V-mO-Bfh" firstAttribute="leading" secondItem="mrb-kT-tIa" secondAttribute="leading" constant="30" id="xVk-zr-UUx"/>
+                                <constraint firstAttribute="trailing" secondItem="SAd-uu-iC4" secondAttribute="trailing" constant="20" id="xlf-p5-p0v"/>
+                                <constraint firstItem="Pg5-nW-a6l" firstAttribute="leading" secondItem="mrb-kT-tIa" secondAttribute="leading" constant="30" id="yWe-xF-lZ9"/>
+                                <constraint firstItem="RWd-JL-Ntp" firstAttribute="leading" secondItem="mrb-kT-tIa" secondAttribute="leading" constant="40" id="ykM-Mg-6ys"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jd8-Cj-jAC">
+                            <rect key="frame" x="20" y="40" width="45" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="45" id="1J3-3g-hcn"/>
+                                <constraint firstAttribute="height" constant="45" id="BAt-lN-Yjj"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                            <state key="normal" title="Button" image="cancel"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="jd8-Cj-jAC" firstAttribute="top" secondItem="0YN-eo-oZF" secondAttribute="top" constant="40" id="6OQ-Qv-28q"/>
+                        <constraint firstAttribute="trailing" secondItem="mrb-kT-tIa" secondAttribute="trailing" id="Cei-fW-S0k"/>
+                        <constraint firstAttribute="bottom" secondItem="mrb-kT-tIa" secondAttribute="bottom" id="G5t-cJ-YN2"/>
+                        <constraint firstItem="mrb-kT-tIa" firstAttribute="leading" secondItem="0YN-eo-oZF" secondAttribute="leading" id="avx-Y1-61u"/>
+                        <constraint firstItem="mrb-kT-tIa" firstAttribute="top" secondItem="0YN-eo-oZF" secondAttribute="top" constant="400" id="efK-2g-SsC"/>
+                        <constraint firstItem="yjh-KV-yu3" firstAttribute="centerX" secondItem="0YN-eo-oZF" secondAttribute="centerX" id="ezH-Zp-3qd"/>
+                        <constraint firstItem="yjh-KV-yu3" firstAttribute="top" secondItem="0YN-eo-oZF" secondAttribute="top" constant="389.5" id="n6K-Xn-lKq"/>
+                        <constraint firstItem="jd8-Cj-jAC" firstAttribute="leading" secondItem="0YN-eo-oZF" secondAttribute="leading" constant="20" id="oU0-sk-gGh"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="0YN-eo-oZF" firstAttribute="width" secondItem="EDM-bI-gFs" secondAttribute="width" id="2Av-w6-yEP"/>
+                <constraint firstItem="0YN-eo-oZF" firstAttribute="trailing" secondItem="EDM-bI-gFs" secondAttribute="trailing" id="4ZF-1W-DId"/>
+                <constraint firstAttribute="bottom" secondItem="rwW-cO-Sqa" secondAttribute="bottom" id="71O-vh-O8h"/>
+                <constraint firstItem="0YN-eo-oZF" firstAttribute="top" secondItem="53t-0r-eTe" secondAttribute="top" id="7oa-Fn-y5X"/>
+                <constraint firstItem="0YN-eo-oZF" firstAttribute="height" secondItem="EDM-bI-gFs" secondAttribute="height" priority="250" id="J3w-Zm-FaU"/>
+                <constraint firstItem="rwW-cO-Sqa" firstAttribute="trailing" secondItem="EDM-bI-gFs" secondAttribute="trailing" id="dzq-j9-gKq"/>
+                <constraint firstItem="0YN-eo-oZF" firstAttribute="leading" secondItem="EDM-bI-gFs" secondAttribute="leading" id="fum-VE-tBE"/>
+                <constraint firstItem="rwW-cO-Sqa" firstAttribute="top" secondItem="53t-0r-eTe" secondAttribute="top" id="mM6-9V-74b"/>
+                <constraint firstItem="rwW-cO-Sqa" firstAttribute="leading" secondItem="EDM-bI-gFs" secondAttribute="leading" id="nDE-7k-jzd"/>
+                <constraint firstItem="0YN-eo-oZF" firstAttribute="bottom" secondItem="EDM-bI-gFs" secondAttribute="bottom" id="uxl-Nt-Itd"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="EDM-bI-gFs"/>
+            <point key="canvasLocation" x="137.68115942028987" y="154.01785714285714"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="cancel" width="128" height="128"/>
+        <image name="girl1" width="750" height="937"/>
+    </resources>
+</document>
