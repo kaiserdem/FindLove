@@ -64,7 +64,7 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
     tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
     tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-    tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
     
     tableView.register(UINib(nibName: "InformationViewCell", bundle: nil), forCellReuseIdentifier: "InformationViewCell")
     tableView.register(UINib(nibName: "StatusViewCell", bundle: nil), forCellReuseIdentifier:"StatusViewCell")
@@ -272,11 +272,10 @@ extension ProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDele
     }
     if let selectedImage = selectedImageFromPicker {
       
-      let imageUrl = user?.profileImageUrl
+      guard let imageUrl = user?.profileImageUrl else { return }
      
       let ref = Storage.storage().reference().child("profile_images")
-
-      let storageRef = ref.storage.reference(forURL: imageUrl!)
+      let storageRef = ref.storage.reference(forURL: imageUrl)
 
       storageRef.delete { error in
         if let error = error {
@@ -287,7 +286,6 @@ extension ProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDele
       }
       
       let imageName = NSUUID().uuidString
-      
       let refImagePath = ref.child("\(imageName).png")
 
       if let uploadData = selectedImage.jpegData(compressionQuality: 0.75) {
@@ -307,13 +305,14 @@ extension ProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDele
               
               let values = ["profileImageUrl": imageUrl] as [String : Any]
               refUsersDatabase.updateChildValues(values)
+              
             }
           })
         }
       }
       
     }
-    dismiss(animated: true, completion: nil) // выйти с контроллера
+    dismiss(animated: true, completion: nil)
   }
   
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -333,7 +332,9 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: "InformationViewCell", for: indexPath) as! InformationViewCell
       cell.delegate = self
       
-      cell.nameLabel.text = user!.name!
+      if user?.name != nil {
+        cell.nameLabel.text = user!.name!
+      }
       
       if user!.gender != nil {
         cell.genderLabel.textColor = .white
@@ -422,21 +423,4 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
       return 0
     }
   }
-  
-  
 }
- 
- /*
- let storageRef = FIRStorage.storage().reference().child("myImage.png")
- if let uploadData = UIImagePNGRepresentation(self.myImageView.image!) {
- storageRef.put(uploadData, metadata: nil) { (metadata, error) in
- if error != nil {
- print("error")
- completion(nil)
- } else {
- completion((metadata?.downloadURL()?.absoluteString)!))
- // your uploaded photo url.
- }
- }
- */
- 

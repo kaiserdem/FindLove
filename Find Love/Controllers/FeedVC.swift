@@ -24,6 +24,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   var posts = [Post]()
   var postDictionary = [String: Post]()
   var user: User?
+
   var currentUser: User?  {
     didSet {
       UserDefaults.standard.save(currentUser, forKey: "currentUserKey")
@@ -33,10 +34,8 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   
   override func viewDidLoad() {
         super.viewDidLoad()
-    
-    
     NotificationCenter.default.addObserver(self, selector: #selector(makeTransition(_:)), name: NSNotification.Name("makeTransitionToChat"), object: nil)
-    
+    checkAuht()
     uploadTableView()
     observePosts()
     
@@ -114,6 +113,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
       
       if let dictionary = snapshot.value as? [String: AnyObject] {
+       // print(dictionary)
         let user = User(dictionary: dictionary)
         
         let userProfileInfoView = UserProfileInfoView(frame: (self?.view.frame)!)
@@ -167,9 +167,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
           userProfileInfoView.orientationSeparatorView.isHidden = true
         }
         
-        
         userProfileInfoView.profileImageView.loadImageUsingCache(user.profileImageUrl!)
-
         self?.view.addSubview(userProfileInfoView)
       }
       }, withCancel: nil)
@@ -179,11 +177,9 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   func cellTappedLike(cell: FeedCell) {
         
     guard let indexPath = self.tableView.indexPath(for: cell) else { return }
-    print(indexPath.row)
     let post = posts[indexPath.row - 1]
     
     let ref = Database.database().reference().child("posts").child(post.postId!).child("likedUsers")
-    
     if post.likedCount == 0 { // если лайков нет вообще // is work
       guard let uid = Auth.auth().currentUser?.uid else { return }
       
@@ -245,6 +241,24 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         self?.showChatLogVCForUser(self?.user!)
       }
     }, withCancel: nil)
+  }
+  
+  private func checkAuht(){
+    let user = Auth.auth().currentUser
+    if user == nil {
+      handleLogout()
+      return
+    }
+  }
+  
+  private func handleLogout() {
+    do {
+      try Auth.auth().signOut()
+    } catch let logoutError {
+      print(logoutError)
+    }
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    _ = appDelegate.loadHelloVC()
   }
 }
 

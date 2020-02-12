@@ -50,19 +50,6 @@ class NewFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICollect
     conteinerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
     conteinerView.backgroundColor = .white
     
-//    let uploadImageView = UIImageView(image: #imageLiteral(resourceName: "picture.png"))
-//    uploadImageView.tintColor = .gray
-//    uploadImageView.isHidden = true
-//    uploadImageView.isUserInteractionEnabled = true
-//    uploadImageView.translatesAutoresizingMaskIntoConstraints = false
-//    //uploadImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleUploadTap)))
-//    conteinerView.addSubview(uploadImageView)
-//
-//    uploadImageView.leadingAnchor.constraint(equalTo: conteinerView.leadingAnchor, constant: 8).isActive = true
-//    uploadImageView.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
-//    uploadImageView.widthAnchor.constraint(equalToConstant: 28).isActive = true
-//    uploadImageView.heightAnchor.constraint(equalToConstant: 28).isActive = true
-    
     let sendButton = UIButton(type: .system)
 
     let image = UIImage(named: "send")
@@ -100,8 +87,6 @@ class NewFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICollect
   
   let cellId = "cellId"
   
-  
-
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 5, right: 0)
@@ -185,7 +170,7 @@ class NewFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICollect
       values[key] = value
     }
     
-    ref.child(fromId).updateChildValues(values) { (error, ref) in
+    childRef.updateChildValues(values) { (error, childRef) in
       if error != nil {
         print(error!)
         return

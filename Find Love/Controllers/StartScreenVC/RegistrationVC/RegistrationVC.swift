@@ -51,6 +51,7 @@ class RegistrationVC: UIViewController {
   
   
   func handleRegister() {
+    self.view.frame.origin.y = 0
     guard let email = emailTF.text , let password = passwordTF.text, let name = nameTextField.text else { // если пустые, принт, выходим
       print("Error: field is empty")
       

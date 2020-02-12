@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+//import FirebaseDatabase
 
 protocol ProtocolSettingsCellDelegate: class {
   func nextButtonTapped(cell: SettingButtonNextCell)
@@ -20,6 +21,7 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
   @IBOutlet weak var tableView: UITableView!
   
   var user: User?
+  var posts = [Post]()
   
   override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,26 +89,56 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
     _ = appDelegate.loadHelloVC()
   }
   
-  private func deleteAccountFromFirebace() {
+  private func deleteAccountFromFirebase() {
     let user = Auth.auth().currentUser
+    if user == nil {
+      self.handleLogout()
+      return
+    }
     let uid = Auth.auth().currentUser?.uid
     user?.delete { [weak self] error in
-      if error != nil {
-        print("Account deleted.")
-        self?.handleLogout()
-        self?.deleteUsersDataAndHistory(uid!)
-        
-      } else {
+      if let error = error {
         print("An error happened.")
+        print(error.localizedDescription as Any)
+        self?.showAlert(title: "Произошла ошибка, попробовать снова", success: {
+          self?.deleteAccountFromFirebase()
+        }, cancel: {
+          return
+        })
+      } else {
+        print("Account deleted.")
+        self?.deleteUsersDataAndHistory(uid!)
+        self?.handleLogout()
       }
     }
   }
   private func deleteUsersDataAndHistory(_ uid: String) {
     let refUser = Database.database().reference().child("users").child(uid)
     let refUserMessages = Database.database().reference().child("user-messages").child(uid)
-    let refUserPosts = Database.database().reference().child("posts").child(uid)
+    let refPosts = Database.database().reference().child("posts")
     
-    refUserPosts.removeValue()
+    let ref = Storage.storage().reference().child("profile_images")
+    let refImage = ref.storage.reference(forURL: (user?.profileImageUrl)!)
+    
+    refImage.delete { error in // фото не удаляеться
+      if let error = error {
+        print(error.localizedDescription as Any)
+      } else {
+        print("File deleted successfully")
+      }
+    }
+    refPosts.observe(.value) { (snapshot) in // delete user feed post
+      for child in snapshot.children {
+        let snap = child as! DataSnapshot
+        if let dictionary = snap.value as? [String: AnyObject] {
+          let post = Post(dictionary: dictionary)
+          if post.fromId == uid {
+            let refSnap = child as! DataSnapshot
+            refSnap.ref.removeValue()
+          }
+        }
+      }
+    }
     refUserMessages.removeValue()
     refUser.removeValue()
   }
@@ -130,7 +162,29 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
   }
   
   func saveTextFieldTapped(cell: SettingsTextFieldCell, string: String) {
-    print(string)
+    self.view.frame.origin.y = 0
+    
+    guard let currentUser = Auth.auth().currentUser else { return }
+    
+    let refUsers = Database.database().reference().child("users").child(currentUser.uid)
+    
+    currentUser.updateEmail(to: string) { error in
+      if let error = error {
+        print(error)
+        let view = CustomAlertWarning(frame: self.view.frame)
+        view.label.text = "Ошибка"
+        view.textTextView.text = "Выполните повторный вход в свой аккаунт и повторите действие"
+        self.view.addSubview(view)
+        return
+      } else {
+        let thisUserEmailRef = refUsers.child("email")
+        thisUserEmailRef.setValue(string)
+        let view = CustomAlertWarning(frame: self.view.frame)
+        view.label.text = "Успешно"
+        view.textTextView.text = "Электронная почта авторизации была изменена"
+        self.view.addSubview(view)
+      }
+    }
     view.endEditing(true)
   }
 
@@ -151,16 +205,15 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
       showAlert(title: "Вы действительно хотите выйти из аккаунта?",success: { [weak self] () -> Void in
         self?.handleLogout()
       }) { () -> Void in
-        print("user canceled")
+        print("cancel")
       }
     }
     if indexPath.row == 11 {
       print("delete account")
-      showAlert(title: "Вы действительно хотите удалить из аккаунт со всеми его данными?",success: { [weak self] () -> Void in
-        print("success")
-        self?.deleteAccountFromFirebace()
+      showAlert(title: "Вы действительно хотите удалить аккаунт со всеми его данными?",success: { [weak self] () -> Void in
+        self?.deleteAccountFromFirebase()
       }) { () -> Void in
-        print("user canceled")
+        print("cancel")
       }
     }
   }
