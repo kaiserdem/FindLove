@@ -23,7 +23,7 @@ class GroupsVC: UIViewController {
         super.viewDidLoad()
       uploadTableView()
       observeGroups()
-     // uploadChatGroup()
+      //uploadChatGroup()
   }
  
   func uploadTableView() {
@@ -44,23 +44,23 @@ class GroupsVC: UIViewController {
 
   func uploadChatGroup() {
     let ref = Database.database().reference().child("groups")
-    
-    let subject = "Женатые и замужние"
-    let descriptions = "Территория свободы "
-    let countUsers = 47
-    let liked = 1
+    let subject = "Психологическая реабилитация"
+    let descriptions = "Корректное общение"
+    let countUsers = 61
+    let liked = 33
     
     let values = ["subject": subject, "descriptions": descriptions, "countUsers": countUsers, "liked": liked] as [String : Any]
 
-    ref.child(subject).updateChildValues(values)
+    //ref.child(subject).updateChildValues(values)
     
     let values2  = ["dscds":"dscsdc"] as [String : Any]
     
-    ref.child(subject).child("messages").updateChildValues(values2) { (error, ref) in
+    ref.child(subject).updateChildValues(values) { (error, ref) in
       if error != nil {
         print(error!)
         return
       }
+      print("Group was created")
     }
   }
   
