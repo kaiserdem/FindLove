@@ -602,7 +602,7 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
     } else { // если это ответ
       
       if let text = message.text {
-        cell.textView.text = "Ответ на пост: \n\(message.responseToText!) \n \n\(text)"
+        cell.textView.text = "\(self.messageStatusValidator(message.stausMessage!)) \n\(message.responseToText!) \n \n\(text)"
         cell.bubbleWidthAnchor?.constant = self.view.frame.maxX - 60
         cell.bubbleView.backgroundColor = .white
         

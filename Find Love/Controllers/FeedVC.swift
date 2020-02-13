@@ -93,14 +93,17 @@ class FeedVC: UIViewController, CellSubclassDelegate {
 
   @objc func makeTransition(_ notification: Notification) {
      let toUser = notification.userInfo?["user"] as? User
-      showChatLogVCForUser(toUser)
+      openChatWithUser(toUser)
   }
   
-  func showChatLogVCForUser(_ user: User?) {
-    let vc = ReplyToFeedPostCVC(collectionViewLayout: UICollectionViewFlowLayout())
+  func openChatWithUser(_ user: User?) {
+    let vc = ReplyAndWriteMessageCVC(collectionViewLayout: UICollectionViewFlowLayout())
     vc.user = user
+    vc.stausMessage = "2"
+    vc.postText.text = self.currentPostText
+    vc.responseToText = self.currentPostText
     present(vc, animated: true) {
-      NotificationCenter.default.post(name: NSNotification.Name("postTextToChat"), object: nil, userInfo: ["postText": self.currentPostText])
+     // NotificationCenter.default.post(name: NSNotification.Name("postTextToChat"), object: nil, userInfo: ["postText": self.currentPostText])
     }
   }
   
@@ -230,7 +233,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     guard let indexPath = self.tableView.indexPath(for: cell) else { return }
     let post = posts[indexPath.row - 1]
     currentPostText = post.text!
-    
+    print(currentPostText)
     let ref = Database.database().reference().child("users").child(post.fromId!)
     ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
       
@@ -238,7 +241,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         let userCurrent = User(dictionary: dictionary)
         userCurrent.id = snapshot.key
         self?.user = userCurrent
-        self?.showChatLogVCForUser(self?.user!)
+        self?.openChatWithUser(self?.user!)
       }
     }, withCancel: nil)
   }

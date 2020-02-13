@@ -12,15 +12,12 @@ import AVFoundation
 import MobileCoreServices
 import FirebaseDatabase
 
-class ReplyToFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ReplyAndWriteMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
-  var user: User? {
-    didSet {
-    }
-  }
-  
+  var user: User?
   var posts = [Post]()
-  
+  var stausMessage = ""
+  var responseToText = ""
   var conteinerViewBottonAnchor: NSLayoutConstraint?
   
   lazy var inputTextField: UITextField = {
@@ -64,22 +61,8 @@ class ReplyToFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICol
     let conteinerView = UIView()
     conteinerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
     conteinerView.backgroundColor = .white
-    
-    let uploadImageView = UIImageView(image: #imageLiteral(resourceName: "picture.png"))
-    uploadImageView.tintColor = .gray
-    uploadImageView.isHidden = true
-    uploadImageView.isUserInteractionEnabled = true
-    uploadImageView.translatesAutoresizingMaskIntoConstraints = false
-    uploadImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleUploadTap)))
-    conteinerView.addSubview(uploadImageView)
-    
-    uploadImageView.leadingAnchor.constraint(equalTo: conteinerView.leadingAnchor, constant: 8).isActive = true
-    uploadImageView.centerYAnchor.constraint(equalTo: conteinerView.centerYAnchor).isActive = true
-    uploadImageView.widthAnchor.constraint(equalToConstant: 28).isActive = true
-    uploadImageView.heightAnchor.constraint(equalToConstant: 28).isActive = true
-    
+
     let sendButton = UIButton(type: .system)
-    
     let image = UIImage(named: "send")
     sendButton.setImage(image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
     sendButton.imageView?.contentMode = .scaleAspectFit
@@ -115,33 +98,33 @@ class ReplyToFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICol
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    print(stausMessage)
+    print(responseToText)
+    
+    
     collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 5, right: 0)
     collectionView?.alwaysBounceVertical = true
     collectionView?.backgroundColor = #colorLiteral(red: 0.1830653183, green: 0.1830653183, blue: 0.1830653183, alpha: 1)
     collectionView?.keyboardDismissMode = .interactive
     
-    
-    
-
-    NotificationCenter.default.addObserver(self, selector: #selector(postTextValue(_:)), name: NSNotification.Name("postTextToChat"), object: nil)
-    
+//    NotificationCenter.default.addObserver(self, selector: #selector(postTextValue(_:)), name: NSNotification.Name("postTextToChat"), object: nil)
+//
     UIApplication.shared.statusBarView?.backgroundColor = .black
     
     setupInputComponents()
     setupKeyboardObservise()
   }
   
-  @objc func postTextValue(_ notification: Notification) {
-    let toPost = notification.userInfo?["postText"] as? String
-    
-    postText.text = toPost
-  }
+//  @objc func postTextValue(_ notification: Notification) {
+//    let toPost = notification.userInfo?["postText"] as? String
+//    postText.text = toPost
+//  }
   
   override func viewDidDisappear(_ animated: Bool) {
     NotificationCenter.default.removeObserver(self) // убрать обсервер
   }
   
-
   override var inputAccessoryView: UIView? { // вю короторе отвечает за клавиатуру
     get {
       return inputConteinerView
@@ -157,7 +140,6 @@ class ReplyToFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICol
   }
   
   @objc func handleKeyboardDidShow() {
-    
     if posts.count > 0 {
       let indexPath = IndexPath(item: self.posts.count-1, section: 0) // последнее
       //проскролить
@@ -195,139 +177,17 @@ class ReplyToFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICol
     backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
     
     topConteinerView.addSubview(nameLabel)
-    
     nameLabel.heightAnchor.constraint(equalTo: topConteinerView.heightAnchor).isActive = true
     nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 0).isActive = true
     nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
     
     view.addSubview(postText)
-    
     postText.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
     postText.topAnchor.constraint(equalTo: topConteinerView.bottomAnchor, constant: 20).isActive = true
     postText.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-    
-    postText.heightAnchor.constraint(equalToConstant: 94).isActive = true
-    
+    postText.heightAnchor.constraint(equalToConstant: 120).isActive = true
   }
-  
-  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-    dismiss(animated: true, completion: nil)
-  }
-  
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    
-    if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
-      handleVideoSelectedForUrl(videoUrl)
-    } else {
-      handleImageSelectedForInfo(info)
-    }
-    
-    dismiss(animated: true, completion: nil) // выйти с контроллера
-  }
-  
-  // сохраняем видео в базу
-  private func handleVideoSelectedForUrl(_ url: URL) {
-    let filename = UUID().uuidString + ".mov"
-    let ref = Storage.storage().reference().child("messages_movies").child(filename)
-    
-    let uploadTask = ref.putFile(from: url, metadata: nil) { (metadata, error) in
-      if error != nil {
-        print(error!)
-        return
-      }
-      ref.downloadURL(completion: { (downloadUrl, error) in
-        if error != nil {
-          print(error!)
-          return
-        }
-        if let videoUrl = downloadUrl?.absoluteString {
-          
-          if let thumbnailImage = self.thumbnailimageForVideoUrl(url) {
-            
-            self.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { [weak self] (imageUrl) in
-              
-              let properties: [String: Any] = ["videoUrl": videoUrl, "imageUrl": imageUrl, "imageWigth": thumbnailImage.size.width, "imageHight": thumbnailImage.size.height]
-              
-              self?.sendMessagesWithProperties(properties)
-            })
-          }
-        }
-      })
-    }
-    uploadTask.observe(.progress) { (snapshot) in
-      if let complerionUnitCount = snapshot.progress?.completedUnitCount {
-        //self.nameLabel.text = String(complerionUnitCount)
-      }
-    }
-    uploadTask.observe(.success) { (snapshot) in
-      //self.nameLabel.text = self.user?.name
-    }
-  }
-  
-  // сделать картинку из видео
-  private func thumbnailimageForVideoUrl(_ videoUrl:URL) -> UIImage? {
-    // переобразовать ссылку в медиа
-    let asset = AVAsset(url: videoUrl)
-    let imageGenerate = AVAssetImageGenerator(asset: asset)
-    
-    do  {
-      let thumbnailCGImage = try imageGenerate.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
-      return UIImage(cgImage: thumbnailCGImage)
-    } catch {
-      print(error)
-    }
-    return nil
-  }
-  
-  private func handleImageSelectedForInfo(_ info: [UIImagePickerController.InfoKey: Any]) {
-    
-    var selectedImageFromPicker: UIImage?
-    if let editingImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-      selectedImageFromPicker = editingImage
-    } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-      selectedImageFromPicker = originalImage
-    }
-    if let selectedImage = selectedImageFromPicker {
-      uploadToFirebaseStorageUsingImage(selectedImage) { [weak self] (imageUrl) in
-        self?.sendMessageWithImageUrl(imageUrl, image: selectedImage)
-      }
-    }
-  }
-  
-  private func uploadToFirebaseStorageUsingImage(_ image: UIImage, completion: @escaping (_ imageUrl: String) -> ()) {
-    
-    let imageName = UUID().uuidString
-    
-    // создали папку в базе
-    let ref = Storage.storage().reference().child("message_images").child(imageName)
-    if let uploadData = image.jpegData(compressionQuality: 0.75) {
-      ref.putData(uploadData, metadata: nil) { (metadata, error) in
-        if error != nil {
-          print(error?.localizedDescription as Any)
-          return
-        }
-        // сохранили картинку
-        ref.downloadURL(completion: { (url, error) in
-          if error != nil {
-            print(error?.localizedDescription as Any)
-            return
-          }
-          if let imageUrl = url?.absoluteString {
-            completion(imageUrl)
-          }
-        })
-      }
-    }
-  }
-  
-  private func sendMessageWithImageUrl(_ imageUrl: String, image: UIImage) {
-    
-    let properties = ["imageUrl": imageUrl,"imageWidth": image.size.width, "imageHeight": image.size.height] as [String : Any]
-    
-    sendMessagesWithProperties(properties)
-    
-  }
-  
+
   private func sendMessagesWithProperties(_ properties: [String: Any]) {
     
     let ref = Database.database().reference().child("messages")
@@ -337,9 +197,9 @@ class ReplyToFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICol
     let fromId = Auth.auth().currentUser!.uid
     let timestamp = Int(Date().timeIntervalSince1970)
     
-    let responseToText = postText.text
+    let responseToText = self.responseToText
     
-    var values = [ "toId": toId, "fromId": fromId, "timestamp": timestamp, "responseToText": responseToText] as [String : Any]
+    var values = [ "toId": toId, "fromId": fromId, "timestamp": timestamp, "responseToText": responseToText, "stausMessage": stausMessage] as [String : Any]
     
     properties.forEach { (key: String, value: Any) in // метод принимает данные
       values[key] = value
@@ -379,15 +239,6 @@ class ReplyToFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICol
     }
   }
   
-  @objc func handleUploadTap() {
-    
-    let imagePickerController = UIImagePickerController()
-    imagePickerController.delegate = self
-    imagePickerController.allowsEditing = true
-    imagePickerController.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
-    present(imagePickerController, animated: true, completion: nil)
-  }
-  
   @objc func handleBack() {
     dismiss(animated: true, completion: nil)
   }
@@ -417,13 +268,11 @@ class ReplyToFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICol
       view.addSubview(viewCustomAlertWarning)
       return
     }
-    
     let properties = ["text": inputTextField.text!] as [String : Any]
     sendMessagesWithProperties(properties)
     dismiss(animated: true, completion: nil)
   }
   
-  // текстовое поле возврвщвет
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     handleSend()
     return true

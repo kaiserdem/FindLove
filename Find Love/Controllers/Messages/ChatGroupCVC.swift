@@ -291,65 +291,104 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
     ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
       
       if let dictionary = snapshot.value as? [String: AnyObject] {
+        
         let user = User(dictionary: dictionary)
+        user.id = snapshot.key
         
-        let userProfileInfoView = UserProfileInfoView(frame: (self?.view.frame)!)
-        userProfileInfoView.userNameLabel.text = user.name
-        
-        if user.age != nil {
-          userProfileInfoView.ageLabel.text = String(describing:"Возраст: \(user.age!)")
-        } else {
-          userProfileInfoView.ageLabelHeightConstraint.constant = 0
-          userProfileInfoView.ageLabel.isHidden = true
-          userProfileInfoView.ageSeparatorView.isHidden = true
+        self?.showAlertMulty(choiceWriteAction: {
+          self?.showChatLogVCForUser(user)
+          
+        }, choiceOpenProfile: {
+          self?.openProfile(user)
+          
+        }, choiceInviteChat: {
+          print("choiceInviteChat")
+          
+        }, choiceComplain: {
+          print("choiceComplain")
+          
+        }, choiceBlockUser: {
+          print("choiceBlockUser")
+          
+        }) {
+          return
         }
-        
-        if user.gender != nil {
-          guard let gen = self?.genderValidatorToText(string: user.gender!) else { return }
-          userProfileInfoView.genderLabel.text = String(describing: "Пол: \(String(describing: gen))")
-        } else {
-          userProfileInfoView.genderLabelHeightConstraint.constant = 0
-          userProfileInfoView.genderLabel.isHidden = true
-          userProfileInfoView.genderSeparatorView.isHidden = true
-        }
-        
-        if user.aboutSelf != nil {
-          userProfileInfoView.aboutSelfTextView.text = String(describing:"O себе: \n\(user.aboutSelf!)")
-          let height = (self?.estimateFrameForText(user.aboutSelf!).height)! + 20
-          userProfileInfoView.aboutSelfTextViewHeightConstraint.constant = height
-        } else {
-          userProfileInfoView.aboutSelfTextViewHeightConstraint.constant = 0
-          userProfileInfoView.aboutSelfTextView.isHidden = true
-          userProfileInfoView.aboutSelfSeparatorView.isHidden = true
-        }
-        
-        if user.status != nil {
-          userProfileInfoView.statusTextView.text = String(describing:"Статус: \n\(user.status!)")
-          let height = (self?.estimateFrameForText(user.status!).height)! + 20
-          userProfileInfoView.statusTextViewHeightConstraint.constant = height
-        } else {
-          userProfileInfoView.statusTextViewHeightConstraint.constant = 0
-          userProfileInfoView.statusTextView.isHidden = true
-          userProfileInfoView.statusSeparatorView.isHidden = true
-        }
-        
-        if user.orientation != nil {
-          guard let orientation = self?.orientationValidatorToText(string: user.orientation!) else { return }
-          userProfileInfoView.orientationLabel.text = String(describing:"Нравяться: \(orientation)")
-          let height = (self?.estimateFrameForText(user.orientation!).height)! + 10
-          userProfileInfoView.orientationLabelHeightConstraint.constant = height
-        } else {
-          userProfileInfoView.orientationLabelHeightConstraint.constant = 0
-          userProfileInfoView.orientationLabel.isHidden = true
-          userProfileInfoView.orientationSeparatorView.isHidden = true
-        }
-        
-        
-        userProfileInfoView.profileImageView.loadImageUsingCache(user.profileImageUrl!)
-        
-        self?.view.addSubview(userProfileInfoView)
       }
       }, withCancel: nil)
+  }
+  
+  func showChatLogVCForUser(_ user: User?) {
+    let vc = ReplyAndWriteMessageCVC(collectionViewLayout: UICollectionViewFlowLayout())
+    vc.user = user
+    vc.nameLabel.text = user?.name
+    vc.stausMessage = "1"
+    vc.postText.text = "Запрос на открытие личного чата. \nОт первого сообщения зависит разрешит ли \(user!.name!) открыть личный чат с вами!"
+    vc.responseToText = "Пользователь \(user!.name!) из чата (-\(String(describing: self.group!.subject!))-) хочет открыть личную переписку с вами!"
+    present(vc, animated: true) {
+      
+//      NotificationCenter.default.post(name: NSNotification.Name("postTextToChat"), object: nil, userInfo: ["postText": "Пользователь \(user!.name!) из чата (-\(String(describing: self.group!.subject))-) хочет открыть личную переписку с вами!"])
+    }
+  }
+  // ["postText": "Пользователь \(user!.name!) из чата (-\(String(describing: self.group!.subject))-) хочет открыть личную переписку с вами!"])
+  
+  // "Запрос на открытие личного чата. \nОт первого сообщения зависит разрешит ли \(user!.name!) открыть личный чат с вами!"
+  private func openProfile(_ user: User?) {
+    
+    let userProfileInfoView = UserProfileInfoView(frame: self.view.frame)
+    userProfileInfoView.userNameLabel.text = user!.name
+    
+    if user!.age != nil {
+      userProfileInfoView.ageLabel.text = String(describing:"Возраст: \(user!.age!)")
+    } else {
+      userProfileInfoView.ageLabelHeightConstraint.constant = 0
+      userProfileInfoView.ageLabel.isHidden = true
+      userProfileInfoView.ageSeparatorView.isHidden = true
+    }
+    
+    if user!.gender != nil {
+      let gen = self.genderValidatorToText(string: user!.gender!)
+      userProfileInfoView.genderLabel.text = String(describing: "Пол: \(String(describing: gen))")
+    } else {
+      userProfileInfoView.genderLabelHeightConstraint.constant = 0
+      userProfileInfoView.genderLabel.isHidden = true
+      userProfileInfoView.genderSeparatorView.isHidden = true
+    }
+    
+    if user!.aboutSelf != nil {
+      userProfileInfoView.aboutSelfTextView.text = String(describing:"O себе: \n\(user!.aboutSelf!)")
+      let height = (self.estimateFrameForText(user!.aboutSelf!).height) + 20
+      userProfileInfoView.aboutSelfTextViewHeightConstraint.constant = height
+    } else {
+      userProfileInfoView.aboutSelfTextViewHeightConstraint.constant = 0
+      userProfileInfoView.aboutSelfTextView.isHidden = true
+      userProfileInfoView.aboutSelfSeparatorView.isHidden = true
+    }
+    
+    if user!.status != nil {
+      userProfileInfoView.statusTextView.text = String(describing:"Статус: \n\(user!.status!)")
+      let height = (self.estimateFrameForText(user!.status!).height) + 20
+      userProfileInfoView.statusTextViewHeightConstraint.constant = height
+    } else {
+      userProfileInfoView.statusTextViewHeightConstraint.constant = 0
+      userProfileInfoView.statusTextView.isHidden = true
+      userProfileInfoView.statusSeparatorView.isHidden = true
+    }
+    
+    if user!.orientation != nil {
+      let orientation = self.orientationValidatorToText(string: user!.orientation!)
+      userProfileInfoView.orientationLabel.text = String(describing:"Нравяться: \(orientation)")
+      let height = (self.estimateFrameForText(user!.orientation!).height) + 10
+      userProfileInfoView.orientationLabelHeightConstraint.constant = height
+    } else {
+      userProfileInfoView.orientationLabelHeightConstraint.constant = 0
+      userProfileInfoView.orientationLabel.isHidden = true
+      userProfileInfoView.orientationSeparatorView.isHidden = true
+    }
+    
+    userProfileInfoView.profileImageView.loadImageUsingCache(user!.profileImageUrl!)
+    
+    self.view.addSubview(userProfileInfoView)
+    
   }
   
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

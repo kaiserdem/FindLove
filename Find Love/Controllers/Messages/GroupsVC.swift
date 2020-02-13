@@ -44,17 +44,13 @@ class GroupsVC: UIViewController {
 
   func uploadChatGroup() {
     let ref = Database.database().reference().child("groups")
-    let subject = "Психологическая реабилитация"
-    let descriptions = "Корректное общение"
+    let subject = "Луганск - Донецк"
+    let descriptions = ""
     let countUsers = 61
     let liked = 33
     
     let values = ["subject": subject, "descriptions": descriptions, "countUsers": countUsers, "liked": liked] as [String : Any]
-
-    //ref.child(subject).updateChildValues(values)
-    
-    let values2  = ["dscds":"dscsdc"] as [String : Any]
-    
+   
     ref.child(subject).updateChildValues(values) { (error, ref) in
       if error != nil {
         print(error!)

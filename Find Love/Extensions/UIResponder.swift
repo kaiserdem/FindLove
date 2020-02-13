@@ -64,6 +64,16 @@ extension UIResponder {
     }
   }
   
+  func messageStatusValidator(_ string: String) -> String {
+    if string == "1" {
+      return "Запрос на открытие личного чата."
+    } else if string == "2" {
+      return "Ответ на пост:"
+    } else {
+      return ""
+    }
+  }
+  
   func orientationValidatorToText(string: String) -> String {
     if string == "1" {
       return "Девушки"

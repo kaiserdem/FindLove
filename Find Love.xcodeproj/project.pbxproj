@@ -57,7 +57,7 @@
 		ADB4CD4E23E19C97001DD8AF /* AboutSelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB4CD4D23E19C97001DD8AF /* AboutSelfView.swift */; };
 		ADB8079223D05B1300847897 /* OpenFeedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8079123D05B1300847897 /* OpenFeedPost.swift */; };
 		ADB8079423D05B2100847897 /* OpenFeedPost.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB8079323D05B2100847897 /* OpenFeedPost.xib */; };
-		ADB8079A23D19DC600847897 /* ReplyToFeedPostCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8079923D19DC600847897 /* ReplyToFeedPostCVC.swift */; };
+		ADB8079A23D19DC600847897 /* ReplyAndWriteMessageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8079923D19DC600847897 /* ReplyAndWriteMessageCVC.swift */; };
 		ADB8DECF23CA1A15008D989E /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8DECE23CA1A15008D989E /* MessagesVC.swift */; };
 		ADB8DED123CA1A27008D989E /* GroupsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8DED023CA1A27008D989E /* GroupsVC.swift */; };
 		ADB8DED423CB9959008D989E /* SelectChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8DED223CB9959008D989E /* SelectChatCell.swift */; };
@@ -148,7 +148,7 @@
 		ADB4CD4D23E19C97001DD8AF /* AboutSelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSelfView.swift; sourceTree = "<group>"; };
 		ADB8079123D05B1300847897 /* OpenFeedPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFeedPost.swift; sourceTree = "<group>"; };
 		ADB8079323D05B2100847897 /* OpenFeedPost.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenFeedPost.xib; sourceTree = "<group>"; };
-		ADB8079923D19DC600847897 /* ReplyToFeedPostCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyToFeedPostCVC.swift; sourceTree = "<group>"; };
+		ADB8079923D19DC600847897 /* ReplyAndWriteMessageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyAndWriteMessageCVC.swift; sourceTree = "<group>"; };
 		ADB8DECE23CA1A15008D989E /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		ADB8DED023CA1A27008D989E /* GroupsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsVC.swift; sourceTree = "<group>"; };
 		ADB8DED223CB9959008D989E /* SelectChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChatCell.swift; sourceTree = "<group>"; };
@@ -323,7 +323,7 @@
 			children = (
 				AD5A563223BFBFCC0032AB2A /* FeedVC.swift */,
 				AD26BE8B23C0CB2500EF1418 /* NewFeedPostCVC.swift */,
-				ADB8079923D19DC600847897 /* ReplyToFeedPostCVC.swift */,
+				ADB8079923D19DC600847897 /* ReplyAndWriteMessageCVC.swift */,
 			);
 			name = FeedScreenVC;
 			sourceTree = "<group>";
@@ -786,7 +786,7 @@
 				ADEE6FA823EB3F3E008352C0 /* SettingButtonNextCell.swift in Sources */,
 				AD8895E223B21F5300347A6A /* SingInVC.swift in Sources */,
 				ADB4CD4E23E19C97001DD8AF /* AboutSelfView.swift in Sources */,
-				ADB8079A23D19DC600847897 /* ReplyToFeedPostCVC.swift in Sources */,
+				ADB8079A23D19DC600847897 /* ReplyAndWriteMessageCVC.swift in Sources */,
 				ADB4A24F23E44240001D1A6A /* UIViewController.swift in Sources */,
 				AD26947323B67B8A00D49887 /* ChatMessageCVC.swift in Sources */,
 				ADFD0F4423E898C5008D2B9C /* SettingsViewCell.swift in Sources */,
