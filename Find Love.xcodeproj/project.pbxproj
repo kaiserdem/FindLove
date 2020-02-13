@@ -22,6 +22,7 @@
 		AD26BE8C23C0CB2500EF1418 /* NewFeedPostCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26BE8B23C0CB2500EF1418 /* NewFeedPostCVC.swift */; };
 		AD26BE8E23C0D47700EF1418 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26BE8D23C0D47700EF1418 /* Post.swift */; };
 		AD293CAD23BC1D530091808F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD293CAC23BC1D530091808F /* Assets.xcassets */; };
+		AD32E29F23F5E62A00E6F912 /* BlockedUsersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E29E23F5E62A00E6F912 /* BlockedUsersVC.swift */; };
 		AD46C9E923D9E22400FC7002 /* ChatGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD46C9E823D9E22400FC7002 /* ChatGroupCell.swift */; };
 		AD4CC09A23EC8ADD004352F8 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */; };
 		AD4CC09B23EC8ADD004352F8 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */; };
@@ -111,6 +112,7 @@
 		AD26BE8B23C0CB2500EF1418 /* NewFeedPostCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedPostCVC.swift; sourceTree = "<group>"; };
 		AD26BE8D23C0D47700EF1418 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		AD293CAC23BC1D530091808F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AD32E29E23F5E62A00E6F912 /* BlockedUsersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersVC.swift; sourceTree = "<group>"; };
 		AD46C9E823D9E22400FC7002 /* ChatGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGroupCell.swift; sourceTree = "<group>"; };
 		AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
 		AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsHeaderCell.xib; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 				ADB8DECD23CA1987008D989E /* Messages */,
 				AD8895E723B293BE00347A6A /* ProfileVC.swift */,
 				ADEE6F9B23EB32D6008352C0 /* SettingsVC.swift */,
+				AD32E29E23F5E62A00E6F912 /* BlockedUsersVC.swift */,
 				AD4CC09723EC7A64004352F8 /* New Group */,
 			);
 			path = Controllers;
@@ -773,6 +776,7 @@
 				ADC55A8B23E7459B002BEAF7 /* UserProfileInfoView.swift in Sources */,
 				ADC55A9A23E8792B002BEAF7 /* AboutSelfViewCell.swift in Sources */,
 				ADFCA85F23DDFD9E004067A9 /* SearchStrangerForChatView.swift in Sources */,
+				AD32E29F23F5E62A00E6F912 /* BlockedUsersVC.swift in Sources */,
 				AD26946923B5393B00D49887 /* UIImageView.swift in Sources */,
 				ADB4CD4423E18BF2001DD8AF /* StatusView.swift in Sources */,
 				ADEE6FA423EB3E23008352C0 /* SettingsTextFieldCell.swift in Sources */,

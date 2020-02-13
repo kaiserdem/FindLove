@@ -678,6 +678,66 @@
             </objects>
             <point key="canvasLocation" x="2293" y="857"/>
         </scene>
+        <!--Blocked UsersVC-->
+        <scene sceneID="qFy-kX-W7g">
+            <objects>
+                <viewController storyboardIdentifier="BlockedUsersVC" id="DJ8-WN-pL7" customClass="BlockedUsersVC" customModule="Find_Love" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nVy-6r-T27">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Черный список" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ioq-K2-EUY">
+                                <rect key="frame" x="112" y="34" width="190" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="HKX-CE-Vyk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bpd-bT-Z5C">
+                                <rect key="frame" x="354" y="64" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="vFq-M5-ghF"/>
+                                    <constraint firstAttribute="height" constant="40" id="yYP-AV-YgE"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="cancel"/>
+                                <connections>
+                                    <action selector="cencelBtnAction:" destination="DJ8-WN-pL7" eventType="touchUpInside" id="iaW-c5-RdS"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="s69-Yu-eCU">
+                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="nVy-6r-T27" id="sf5-PI-S0y"/>
+                                    <outlet property="delegate" destination="nVy-6r-T27" id="3oN-xT-g6Y"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ioq-K2-EUY" firstAttribute="centerX" secondItem="nVy-6r-T27" secondAttribute="centerX" id="7Jr-qb-XBl"/>
+                            <constraint firstItem="s69-Yu-eCU" firstAttribute="top" secondItem="bpd-bT-Z5C" secondAttribute="bottom" id="e1b-cF-Dhh"/>
+                            <constraint firstItem="s69-Yu-eCU" firstAttribute="leading" secondItem="qSq-8a-CUS" secondAttribute="leading" id="fa3-v6-Mq5"/>
+                            <constraint firstItem="s69-Yu-eCU" firstAttribute="bottom" secondItem="qSq-8a-CUS" secondAttribute="bottom" id="feO-2S-B9M"/>
+                            <constraint firstItem="bpd-bT-Z5C" firstAttribute="top" secondItem="qSq-8a-CUS" secondAttribute="top" constant="20" id="fqg-ch-GEl"/>
+                            <constraint firstItem="qSq-8a-CUS" firstAttribute="trailing" secondItem="bpd-bT-Z5C" secondAttribute="trailing" constant="20" id="jsF-8o-QKJ"/>
+                            <constraint firstItem="s69-Yu-eCU" firstAttribute="trailing" secondItem="qSq-8a-CUS" secondAttribute="trailing" id="kme-nw-l0O"/>
+                            <constraint firstItem="ioq-K2-EUY" firstAttribute="top" secondItem="nVy-6r-T27" secondAttribute="top" constant="34" id="pMO-yw-TSP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qSq-8a-CUS"/>
+                    </view>
+                    <connections>
+                        <outlet property="cencelBtn" destination="bpd-bT-Z5C" id="yM9-B2-O52"/>
+                        <outlet property="tableView" destination="s69-Yu-eCU" id="TWn-z0-j95"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s2i-9P-pZx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4128" y="194"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cancel" width="128" height="128"/>

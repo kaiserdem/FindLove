@@ -24,6 +24,9 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   var posts = [Post]()
   var postDictionary = [String: Post]()
   var user: User?
+  
+  let defaults = UserDefaults.standard
+  lazy var arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
 
   var currentUser: User?  {
     didSet {
@@ -34,11 +37,12 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   
   override func viewDidLoad() {
         super.viewDidLoad()
+    
     NotificationCenter.default.addObserver(self, selector: #selector(makeTransition(_:)), name: NSNotification.Name("makeTransitionToChat"), object: nil)
     checkAuht()
     uploadTableView()
     observePosts()
-    
+    print(arrayBlockUsers.count)
   }
   
   override func viewWillLayoutSubviews() {
@@ -47,10 +51,16 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     tableView.backgroundColor = .black
     tableView.allowsMultipleSelection = false
   }
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(true)
+    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+     print(arrayBlockUsers.count)
+  }
   
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(true)
     //NotificationCenter.default.removeObserver(self)
+    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
   }
 
   private func writePost() {
@@ -77,12 +87,18 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   }
   
   private func observePosts() {
-    
     let ref = Database.database().reference().child("posts")
     ref.observe(.childAdded, with: { [weak self](snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
         let post = Post(dictionary: dictionary)
-        self?.posts.append(post)
+        if self?.arrayBlockUsers.isEmpty == false { // не пустой
+          if self?.arrayBlockUsers.contains(post.fromId!) ==  false {
+              self?.posts.append(post)
+            } else {
+          }
+        } else {
+          self?.posts.append(post)
+        }
       }
       DispatchQueue.main.async {
         self?.posts.reverse()
@@ -233,7 +249,6 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     guard let indexPath = self.tableView.indexPath(for: cell) else { return }
     let post = posts[indexPath.row - 1]
     currentPostText = post.text!
-    print(currentPostText)
     let ref = Database.database().reference().child("users").child(post.fromId!)
     ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
       

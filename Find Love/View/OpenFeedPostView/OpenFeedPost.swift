@@ -25,6 +25,8 @@ class OpenFeedPost: UIView {
   
   var user: User?
   weak var feedVC: FeedVC?
+  let defaults = UserDefaults.standard
+  lazy var arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -52,6 +54,8 @@ class OpenFeedPost: UIView {
     
     complaintButton.layer.cornerRadius = 18
     complaintButton.layoutIfNeeded()
+    
+    print(arrayBlockUsers.count)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -66,15 +70,47 @@ class OpenFeedPost: UIView {
   }
 
   @IBAction func replyButtonAction(_ sender: UIButton) {
-    
     NotificationCenter.default.post(name: NSNotification.Name("makeTransitionToChat"), object: nil, userInfo: ["user": user as Any])
     self.removeFromSuperview()
   }
   
   @IBAction func complaintButtonAction(_ sender: Any) {
+//    if user?.id != nil {
+//      if arrayBlockUsers.isEmpty == true { // если пустой тодобавялем
+//        arrayBlockUsers.append((user?.id!)!)
+//        defaults.set(arrayBlockUsers, forKey: "SavedStringArray")
+//      } else {                             // если не пусто то провкряем на наличие
+//        if arrayBlockUsers.contains((user?.id)!) { // если уже есть то удаляем
+//          if let index = arrayBlockUsers.index(of: (user?.id)!) {
+//            arrayBlockUsers.remove(at: index)
+//            defaults.set(arrayBlockUsers, forKey: "SavedStringArray")
+//        }
+//        } else {
+//          arrayBlockUsers.append((user?.id!)!)// если нет то добавляем
+//          defaults.set(arrayBlockUsers, forKey: "SavedStringArray")
+//        }
+//      }
+//    }
+//
+//    print(arrayBlockUsers.count)
   }
   
   @IBAction func blockButtonAction(_ sender: Any) {
+    if user?.id != nil {
+      if arrayBlockUsers.isEmpty == true { // если пустой тодобавялем
+        arrayBlockUsers.append((user?.id!)!)
+      } else {                             // если не пусто то провкряем на наличие
+        if arrayBlockUsers.contains((user?.id)!) { // если уже есть то удаляем
+          if let index = arrayBlockUsers.index(of: (user?.id)!) {
+            arrayBlockUsers.remove(at: index)
+          }
+        } else {
+          arrayBlockUsers.append((user?.id!)!)// если нет то добавляем
+        }
+      }
+      defaults.set(arrayBlockUsers, forKey: "arrayBlockUsers")
+    }
+    print(arrayBlockUsers.count)
   }
   
   @IBAction func closeButtonAction(_ sender: Any) {

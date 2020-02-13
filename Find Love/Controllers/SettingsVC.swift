@@ -310,7 +310,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     if indexPath.row == 7 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "SettingButtonNextCell", for: indexPath) as! SettingButtonNextCell
       cell.delegate = self
-      cell.nextButtonOutlet.setTitle("Восстановить покупки", for: .normal)
+      cell.nextButtonOutlet.setTitle("Черный список", for: .normal)
       return cell
     }
     
