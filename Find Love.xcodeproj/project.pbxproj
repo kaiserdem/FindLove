@@ -23,6 +23,8 @@
 		AD26BE8E23C0D47700EF1418 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD26BE8D23C0D47700EF1418 /* Post.swift */; };
 		AD293CAD23BC1D530091808F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD293CAC23BC1D530091808F /* Assets.xcassets */; };
 		AD32E29F23F5E62A00E6F912 /* BlockedUsersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E29E23F5E62A00E6F912 /* BlockedUsersVC.swift */; };
+		AD32E2A623F5ED3500E6F912 /* BlockedUsersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E2A423F5ED3500E6F912 /* BlockedUsersCell.swift */; };
+		AD32E2A723F5ED3500E6F912 /* BlockedUsersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32E2A523F5ED3500E6F912 /* BlockedUsersCell.xib */; };
 		AD46C9E923D9E22400FC7002 /* ChatGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD46C9E823D9E22400FC7002 /* ChatGroupCell.swift */; };
 		AD4CC09A23EC8ADD004352F8 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */; };
 		AD4CC09B23EC8ADD004352F8 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */; };
@@ -113,6 +115,8 @@
 		AD26BE8D23C0D47700EF1418 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		AD293CAC23BC1D530091808F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD32E29E23F5E62A00E6F912 /* BlockedUsersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersVC.swift; sourceTree = "<group>"; };
+		AD32E2A423F5ED3500E6F912 /* BlockedUsersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersCell.swift; sourceTree = "<group>"; };
+		AD32E2A523F5ED3500E6F912 /* BlockedUsersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockedUsersCell.xib; sourceTree = "<group>"; };
 		AD46C9E823D9E22400FC7002 /* ChatGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGroupCell.swift; sourceTree = "<group>"; };
 		AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
 		AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsHeaderCell.xib; sourceTree = "<group>"; };
@@ -570,6 +574,8 @@
 				ADEE6FA723EB3F3E008352C0 /* SettingButtonNextCell.xib */,
 				AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */,
 				AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */,
+				AD32E2A423F5ED3500E6F912 /* BlockedUsersCell.swift */,
+				AD32E2A523F5ED3500E6F912 /* BlockedUsersCell.xib */,
 			);
 			path = SettingsCells;
 			sourceTree = "<group>";
@@ -719,6 +725,7 @@
 				AD8895DE23B2162C00347A6A /* RegistrationVC.xib in Resources */,
 				ADC55A9723E878FD002BEAF7 /* OrientationViewCell.xib in Resources */,
 				ADEE6FA923EB3F3E008352C0 /* SettingButtonNextCell.xib in Resources */,
+				AD32E2A723F5ED3500E6F912 /* BlockedUsersCell.xib in Resources */,
 				ADBA195C23C371E6009B45EC /* ReviewCVCell.xib in Resources */,
 				AD293CAD23BC1D530091808F /* Assets.xcassets in Resources */,
 			);
@@ -814,6 +821,7 @@
 				AD79AC0E23CDEC2C00FA7D09 /* GameVC.swift in Sources */,
 				AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */,
 				ADFCA85B23DDEDFC004067A9 /* ChatWithStrangerCell.swift in Sources */,
+				AD32E2A623F5ED3500E6F912 /* BlockedUsersCell.swift in Sources */,
 				AD4CC09D23EDDA16004352F8 /* SettingPrivacyView.swift in Sources */,
 				AD46C9E923D9E22400FC7002 /* ChatGroupCell.swift in Sources */,
 				ADBA195623C2A41C009B45EC /* UIView.swift in Sources */,

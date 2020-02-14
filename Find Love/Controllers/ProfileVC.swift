@@ -140,7 +140,6 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     let newViewController = storyBoard.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsVC
     self.present(newViewController, animated: true, completion: nil)
-    
   }
   
   func changeImageTapped(cell: InformationViewCell) {

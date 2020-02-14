@@ -99,13 +99,22 @@ class OpenFeedPost: UIView {
     if user?.id != nil {
       if arrayBlockUsers.isEmpty == true { // если пустой тодобавялем
         arrayBlockUsers.append((user?.id!)!)
+        blockButton.backgroundColor = #colorLiteral(red: 0.2028513703, green: 0.2187514845, blue: 0.2407456104, alpha: 1)
+        blockButton.setTitleColor(#colorLiteral(red: 0.8431372549, green: 0.8431372549, blue: 0.8431372549, alpha: 1), for: .normal)
+        blockButton.setTitle("Разблокировать", for: .normal)
       } else {                             // если не пусто то провкряем на наличие
         if arrayBlockUsers.contains((user?.id)!) { // если уже есть то удаляем
           if let index = arrayBlockUsers.index(of: (user?.id)!) {
             arrayBlockUsers.remove(at: index)
+            blockButton.backgroundColor = #colorLiteral(red: 0.8431372549, green: 0.8431372549, blue: 0.8431372549, alpha: 1)
+            blockButton.setTitleColor(#colorLiteral(red: 0.2028513703, green: 0.2187514845, blue: 0.2407456104, alpha: 1), for: .normal)
+            blockButton.setTitle("Заблокировать", for: .normal)
           }
         } else {
           arrayBlockUsers.append((user?.id!)!)// если нет то добавляем
+          blockButton.backgroundColor = #colorLiteral(red: 0.2028513703, green: 0.2187514845, blue: 0.2407456104, alpha: 1)
+          blockButton.setTitleColor(#colorLiteral(red: 0.8431372549, green: 0.8431372549, blue: 0.8431372549, alpha: 1), for: .normal)
+          blockButton.setTitle("Разблокировать", for: .normal)
         }
       }
       defaults.set(arrayBlockUsers, forKey: "arrayBlockUsers")
@@ -114,6 +123,7 @@ class OpenFeedPost: UIView {
   }
   
   @IBAction func closeButtonAction(_ sender: Any) {
+     NotificationCenter.default.post(name: NSNotification.Name("reloadTableView"), object: nil, userInfo: nil)
     self.removeFromSuperview()
   }
   

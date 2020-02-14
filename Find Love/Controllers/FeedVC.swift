@@ -39,10 +39,12 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         super.viewDidLoad()
     
     NotificationCenter.default.addObserver(self, selector: #selector(makeTransition(_:)), name: NSNotification.Name("makeTransitionToChat"), object: nil)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadObservePosts(_:)), name: NSNotification.Name("reloadTableView"), object: nil)
+    
     checkAuht()
     uploadTableView()
     observePosts()
-    print(arrayBlockUsers.count)
   }
   
   override func viewWillLayoutSubviews() {
@@ -53,14 +55,12 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   }
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(true)
-    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
-     print(arrayBlockUsers.count)
+    observePosts()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(true)
     //NotificationCenter.default.removeObserver(self)
-    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
   }
 
   private func writePost() {
@@ -87,6 +87,8 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   }
   
   private func observePosts() {
+    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+    posts.removeAll()
     let ref = Database.database().reference().child("posts")
     ref.observe(.childAdded, with: { [weak self](snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
@@ -94,7 +96,6 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         if self?.arrayBlockUsers.isEmpty == false { // не пустой
           if self?.arrayBlockUsers.contains(post.fromId!) ==  false {
               self?.posts.append(post)
-            } else {
           }
         } else {
           self?.posts.append(post)
@@ -110,6 +111,10 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   @objc func makeTransition(_ notification: Notification) {
      let toUser = notification.userInfo?["user"] as? User
       openChatWithUser(toUser)
+  }
+  
+  @objc func reloadObservePosts(_ notification: Notification) {
+    observePosts()
   }
   
   func openChatWithUser(_ user: User?) {

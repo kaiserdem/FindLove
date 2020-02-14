@@ -178,7 +178,6 @@ class InfornatioView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     if pickerValue == 0 {
       ageBtn.setTitle(String(describing:ageArray[row]), for: .normal)
-      //ageBtn.titleLabel!.text = String(describing:ageArray[row])
       ageLabel.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
       ageSeparator.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     } else {

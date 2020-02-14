@@ -192,7 +192,9 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
     guard let indexPath = self.tableView.indexPath(for: cell) else { return }
     
     if indexPath.row == 7 {
-      print("restore purchases")
+      let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+      let newViewController = storyBoard.instantiateViewController(withIdentifier: "BlockedUsersVC") as! BlockedUsersVC
+      self.present(newViewController, animated: true, completion: nil)
     }
     if indexPath.row == 8 {
       sendMessameToSupport()
