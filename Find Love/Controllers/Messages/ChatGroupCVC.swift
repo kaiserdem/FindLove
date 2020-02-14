@@ -38,6 +38,9 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
   
   var conteinerViewBottonAnchor: NSLayoutConstraint?
   
+  let defaults = UserDefaults.standard
+  lazy var arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+  
   lazy var inputTextField: UITextField = {
     let textField = UITextField()
     textField.placeholder = "Ведите сообщение..."
@@ -249,34 +252,42 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
   
   private func setupCell(_ cell: ChatGroupCell, message: Message) {
     
-    if let profileImageUrl = self.user?.profileImageUrl {
-      cell.profileImageView.loadImageUsingCache(profileImageUrl)
-    }
-    
-    if let messageImageUrl = message.imageUrl {
-      cell.messageImageView.loadImageUsingCache(messageImageUrl)
-      cell.messageImageView.isHidden = false
-      cell.bubbleView.backgroundColor = .clear
-    } else {
+    if (self.arrayBlockUsers.contains(message.fromId!)) {
       cell.messageImageView.isHidden = true
-    }
-    
-    if message.fromId == Auth.auth().currentUser?.uid { // свои сообщения
-      cell.bubbleView.backgroundColor = ChatGroupCell.blueColor
-      cell.textView.textColor = .white
-      cell.profileImageView.isHidden = true
-      cell.backImageView.isHidden = true
-      cell.downBlackView.isHidden = true
-      cell.buubleViewRightAnchor?.isActive = true
-      cell.buubleViewLeftAnchor?.isActive = false
-    } else {
-      cell.bubbleView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1) // не свои серый
-      cell.textView.textColor = .black
-      cell.profileImageView.isHidden = false
-      cell.backImageView.isHidden = false
-      cell.downBlackView.isHidden = false
+      cell.bubbleView.backgroundColor = #colorLiteral(red: 0.2222529795, green: 0.2222529795, blue: 0.2222529795, alpha: 1)
       cell.buubleViewRightAnchor?.isActive = false
       cell.buubleViewLeftAnchor?.isActive = true
+    } else {
+      
+      if let profileImageUrl = self.user?.profileImageUrl {
+        cell.profileImageView.loadImageUsingCache(profileImageUrl)
+      }
+      
+      if let messageImageUrl = message.imageUrl {
+        cell.messageImageView.loadImageUsingCache(messageImageUrl)
+        cell.messageImageView.isHidden = false
+        cell.bubbleView.backgroundColor = .clear
+      } else {
+        cell.messageImageView.isHidden = true
+      }
+      
+      if message.fromId == Auth.auth().currentUser?.uid { // свои сообщения
+        cell.bubbleView.backgroundColor = ChatGroupCell.blueColor
+        cell.textView.textColor = .white
+        cell.profileImageView.isHidden = true
+        cell.backImageView.isHidden = true
+        cell.downBlackView.isHidden = true
+        cell.buubleViewRightAnchor?.isActive = true
+        cell.buubleViewLeftAnchor?.isActive = false
+      } else {
+        cell.bubbleView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1) // не свои серый
+        cell.textView.textColor = .black
+        cell.profileImageView.isHidden = false
+        cell.backImageView.isHidden = false
+        cell.downBlackView.isHidden = false
+        cell.buubleViewRightAnchor?.isActive = false
+        cell.buubleViewLeftAnchor?.isActive = true
+      }
     }
   }
   
@@ -630,41 +641,56 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
     let message = messages[indexPath.row]
     cell.message = message
     cell.delegate = self
-    cell.textView.text = message.text
-    cell.timeLabel.text = setFormatDislayedTimeAndDate(from: message.timestamp as! TimeInterval, withString: false)
+    
+    if (arrayBlockUsers.contains(message.fromId!)) {
+      cell.textView.isHidden = true
+      cell.timeLabel.isHidden = true
+      cell.playBtn.isHidden = true
+    } else {
+      cell.textView.text = message.text
+      cell.timeLabel.text = setFormatDislayedTimeAndDate(from: message.timestamp as! TimeInterval, withString: false)
+      cell.playBtn.isHidden = message.videoUrl == nil // если видео нет, тогда это тру
+    }
     
     setupCell(cell, message: message)
 
-    cell.playBtn.isHidden = message.videoUrl == nil // если видео нет, тогда это тру
-    
     if let userFromId = message.fromId {
       Database.database().reference().child("users").child(userFromId).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
         
         if let dictionary = snapshot.value as? [String: AnyObject] {
           let currentUser = User(dictionary: dictionary)
           
-          cell.nameLabel.text = currentUser.name
-          
-          if let text = message.text { // размер облака сообщения
+          if (self?.arrayBlockUsers.contains(snapshot.key))! {
+            cell.nameLabel.text = "Пользователь заблокирован"
+            cell.nameLabel.font = UIFont.systemFont(ofSize: 10)
+            cell.backImageView.isHidden = true
+            cell.crownBtn.isHidden = true
+            cell.downBlackView.isHidden = true
+          } else {
+            cell.nameLabel.text = currentUser.name
             
-            let widthByText = (self?.estimateFrameForText(text).width)! + 35
-            let widthByName = (self?.estimateFrameForText(currentUser.name!).width)! + 35
-            
-            if widthByText >= widthByName { // по размеру текста или имени
-              cell.bubbleWidthAnchor?.constant = widthByText
-            } else {
-              cell.bubbleWidthAnchor?.constant = widthByName
+            if let text = message.text { // размер облака сообщения
+              
+              let widthByText = (self?.estimateFrameForText(text).width)! + 35
+              let widthByName = (self?.estimateFrameForText(currentUser.name!).width)! + 35
+              
+              if widthByText >= widthByName { // по размеру текста или имени
+                cell.bubbleWidthAnchor?.constant = widthByText
+              } else {
+                cell.bubbleWidthAnchor?.constant = widthByName
+              }
+              
+              cell.textView.isHidden = false
+            } else if message.imageUrl != nil {
+              cell.bubbleWidthAnchor?.constant = 200
+              cell.textView.isHidden = true
             }
             
-            cell.textView.isHidden = false
-          } else if message.imageUrl != nil {
-            cell.bubbleWidthAnchor?.constant = 200
-            cell.textView.isHidden = true
+            if let profileImageView = currentUser.profileImageUrl {
+              cell.profileImageView.loadImageUsingCache(profileImageView)
+            }
           }
           
-          if let profileImageView = currentUser.profileImageUrl {
-            cell.profileImageView.loadImageUsingCache(profileImageView)
-          }
         }
       }, withCancel: nil)
     }
@@ -676,12 +702,17 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
     var height: CGFloat = 80
     let message = messages[indexPath.row]
     
-    if let text = message.text {
-      height = estimateFrameForText(text).height + 65
+    if (arrayBlockUsers.contains(message.fromId!)) {
+      height = 47
       
-    } else if let imageWidht = message.imageWidth, let imageHight = message.imageHeight {
-      // сделали размер пропорционально
-      height = CGFloat(imageHight / imageWidht * 200) + 30
+    } else {
+      if let text = message.text {
+        height = estimateFrameForText(text).height + 65
+        
+      } else if let imageWidht = message.imageWidth, let imageHight = message.imageHeight {
+        // сделали размер пропорционально
+        height = CGFloat(imageHight / imageWidht * 200) + 30
+      }
     }
     return CGSize(width: view.frame.width, height: height)
   }
