@@ -37,6 +37,8 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   
   override func viewDidLoad() {
         super.viewDidLoad()
+    print("\n viewDidLoad")
+    print(print("FeedVC - viewDidLoad - BlockUsers: \(arrayBlockUsers.count)"))
     
     NotificationCenter.default.addObserver(self, selector: #selector(makeTransition(_:)), name: NSNotification.Name("makeTransitionToChat"), object: nil)
     
@@ -44,7 +46,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     
     checkAuht()
     uploadTableView()
-    observePosts()
+    //observePosts()
   }
   
   override func viewWillLayoutSubviews() {
@@ -87,25 +89,39 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   }
   
   private func observePosts() {
-    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
     posts.removeAll()
+    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+    print("\n FeedVC - observePosts - BlockUsers: \(arrayBlockUsers)")
+    print(" FeedVC - observePosts - BlockUsers: \(arrayBlockUsers.count)")
+    
     let ref = Database.database().reference().child("posts")
-    ref.observe(.childAdded, with: { [weak self](snapshot) in
+    ref.observe(.childAdded) { [weak self](snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
+        print(snapshot.key.count)
+        print(snapshot.key)
         let post = Post(dictionary: dictionary)
+        
+        
         if self?.arrayBlockUsers.isEmpty == false { // не пустой
           if self?.arrayBlockUsers.contains(post.fromId!) ==  false {
-              self?.posts.append(post)
+            self?.posts.append(post)
+            print("\n append: \(post.fromId)")
+            print(" after  append: \(self?.posts.count)")
           }
         } else {
           self?.posts.append(post)
+          print("\n append: \(post.fromId)")
+          print(" after  append: \(self?.posts.count)")
         }
       }
       DispatchQueue.main.async {
+        print("\n end  posts.count: \(self?.posts.count)")
         self?.posts.reverse()
         self?.tableView.reloadData()
       }
-    }, withCancel: nil)
+    }
+    
+    
   }
 
   @objc func makeTransition(_ notification: Notification) {
@@ -124,7 +140,6 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     vc.postText.text = self.currentPostText
     vc.responseToText = self.currentPostText
     present(vc, animated: true) {
-     // NotificationCenter.default.post(name: NSNotification.Name("postTextToChat"), object: nil, userInfo: ["postText": self.currentPostText])
     }
   }
   

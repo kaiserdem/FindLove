@@ -19,7 +19,6 @@ class OpenFeedPost: UIView {
   @IBOutlet weak var blockButton: UIButton!
   @IBOutlet weak var complaintButton: UIButton!
   @IBOutlet weak var postTextView: UITextView!
-  @IBOutlet weak var userDescriptionLabel: UILabel!
   @IBOutlet weak var userNameLabel: UILabel!
   @IBOutlet weak var profileImageView: UIImageView!
   
@@ -75,24 +74,7 @@ class OpenFeedPost: UIView {
   }
   
   @IBAction func complaintButtonAction(_ sender: Any) {
-//    if user?.id != nil {
-//      if arrayBlockUsers.isEmpty == true { // если пустой тодобавялем
-//        arrayBlockUsers.append((user?.id!)!)
-//        defaults.set(arrayBlockUsers, forKey: "SavedStringArray")
-//      } else {                             // если не пусто то провкряем на наличие
-//        if arrayBlockUsers.contains((user?.id)!) { // если уже есть то удаляем
-//          if let index = arrayBlockUsers.index(of: (user?.id)!) {
-//            arrayBlockUsers.remove(at: index)
-//            defaults.set(arrayBlockUsers, forKey: "SavedStringArray")
-//        }
-//        } else {
-//          arrayBlockUsers.append((user?.id!)!)// если нет то добавляем
-//          defaults.set(arrayBlockUsers, forKey: "SavedStringArray")
-//        }
-//      }
-//    }
-//
-//    print(arrayBlockUsers.count)
+
   }
   
   @IBAction func blockButtonAction(_ sender: Any) {
@@ -119,7 +101,7 @@ class OpenFeedPost: UIView {
       }
       defaults.set(arrayBlockUsers, forKey: "arrayBlockUsers")
     }
-    print(arrayBlockUsers.count)
+    print("OpenFeedPost, block users: \(arrayBlockUsers.count)")
   }
   
   @IBAction func closeButtonAction(_ sender: Any) {

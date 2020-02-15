@@ -14,10 +14,8 @@ import FirebaseDatabase
 class MessagesVC: UIViewController {
   
   let tableView = UITableView()
-  var users = [User]()
   var messages = [Message]()
   var messagesDictionary = [String: Message]()
-  var menuVC: ProfileVC?
   var timer: Timer?
   
   let defaults = UserDefaults.standard
@@ -28,7 +26,13 @@ class MessagesVC: UIViewController {
     
     fetchUser()
     uploadTableView()
-    observeUserMessages()
+    //observeUserMessages()
+  }
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(true)
+    //arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+    //print(arrayBlockUsers.count)
+    loadUserMessages()
   }
   
   func uploadTableView() {
@@ -50,25 +54,24 @@ class MessagesVC: UIViewController {
     tableView.register(UINib(nibName: "ChatWithStrangerCell", bundle: nil), forCellReuseIdentifier:"ChatWithStrangerCell")
     tableView.allowsMultipleSelectionDuringEditing = true
   }
+  
   func fetchUser() { // выбрать пользователя
-    
     guard let uid = Auth.auth().currentUser?.uid else { return }
     
     Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
         let user = User(dictionary: dictionary)
         user.id = snapshot.key
-        self?.setupNavBarWithUser(user)
+        self?.loadUserMessages()
       }
     }, withCancel: nil)
   }
   
-  func setupNavBarWithUser(_ user: User) {
+  func loadUserMessages() {
     messages.removeAll()
     messagesDictionary.removeAll()
-    tableView.reloadData()
-    
     observeUserMessages()
+    tableView.reloadData()
   }
   
   func openSearchStrangerView() {
@@ -86,6 +89,9 @@ class MessagesVC: UIViewController {
   func observeUserMessages() {
     
     arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+    print("\n MessagesVC")
+    print(arrayBlockUsers)
+    print(arrayBlockUsers.count)
     // айди текущий пользователь
     guard let uid = Auth.auth().currentUser?.uid else { return }
     print(uid)
@@ -95,8 +101,13 @@ class MessagesVC: UIViewController {
       if self?.arrayBlockUsers.contains(snapshot.key) == false {
         // ключ сообщения
         let userId = snapshot.key
+        print(userId)
+        
+        
         Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
           let messageId = snapshot.key
+          
+          //
           self?.fetchMessageWithaMessageId(messageId)
         }, withCancel: nil)
       }
@@ -107,6 +118,7 @@ class MessagesVC: UIViewController {
   }
   
   private func fetchMessageWithaMessageId(_ messageId: String) {
+    
     // сслка на сообщения по ключу
     let messageReference = Database.database().reference().child("messages").child(messageId)
     
@@ -153,7 +165,7 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     
     self.attempReloadOfTable(false)
-    
+
     guard let uid = Auth.auth().currentUser?.uid else { return }
     
     let message = messages[indexPath.row]
@@ -171,16 +183,13 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
     if indexPath.row == 0 {
       openSearchStrangerView()
       return
     }
-    
-    let message = self.messages[indexPath.row - 1] //
+    let message = self.messages[indexPath.row - 1]
     guard let chatPartnerId = message.chatPartnerId() else { return }
     
-    // берем
     let ref = Database.database().reference().child("users").child(chatPartnerId)
     ref.observe(.value, with: { [weak self] (snapshot) in
       guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
@@ -201,15 +210,11 @@ extension MessagesVC: UITableViewDataSource, UITableViewDelegate {
       let cell = tableView.dequeueReusableCell(withIdentifier: "ChatWithStrangerCell", for: indexPath) as! ChatWithStrangerCell
       return cell
     } else {
-      
     let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell
-    
     let message = messages[indexPath.row - 1]
     cell.message = message
-    
     return cell
     }
-    return UITableViewCell()
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

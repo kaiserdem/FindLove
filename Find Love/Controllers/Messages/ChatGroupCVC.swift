@@ -257,6 +257,7 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
     if (self.arrayBlockUsers.contains(message.fromId!)) {
       cell.messageImageView.isHidden = true
       cell.bubbleView.backgroundColor = #colorLiteral(red: 0.2222529795, green: 0.2222529795, blue: 0.2222529795, alpha: 1)
+      cell.bubbleWidthAnchor?.constant = 160
       cell.buubleViewRightAnchor?.isActive = false
       cell.buubleViewLeftAnchor?.isActive = true
     } else {

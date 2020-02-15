@@ -117,7 +117,7 @@ class ChatGroupCell: UICollectionViewCell {
   lazy var messageImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.layer.masksToBounds = true
-    imageView.layer.cornerRadius = 16
+    imageView.layer.cornerRadius = 10
     imageView.contentMode = .scaleAspectFill
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.isUserInteractionEnabled = true
