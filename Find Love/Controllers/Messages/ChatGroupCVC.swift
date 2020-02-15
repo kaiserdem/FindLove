@@ -224,6 +224,8 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
   // утечка памяти, не работает [weak self]
   func observeMessages() {
     
+    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+    
     let userMessagesRef = Database.database().reference().child("groups").child(group!.subject!).child("messages")
     
     userMessagesRef.observe(.childAdded, with: {  (snapshot) in
@@ -319,8 +321,9 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
           print("choiceComplain")
           
         }, choiceBlockUser: {
-          print("choiceBlockUser")
-          
+          self?.arrayBlockUsers.append(user.id!)
+          self?.defaults.set(self?.arrayBlockUsers, forKey: "arrayBlockUsers")
+          self?.observeMessages()
         }) {
           return
         }
@@ -340,9 +343,7 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
 //      NotificationCenter.default.post(name: NSNotification.Name("postTextToChat"), object: nil, userInfo: ["postText": "Пользователь \(user!.name!) из чата (-\(String(describing: self.group!.subject))-) хочет открыть личную переписку с вами!"])
     }
   }
-  // ["postText": "Пользователь \(user!.name!) из чата (-\(String(describing: self.group!.subject))-) хочет открыть личную переписку с вами!"])
-  
-  // "Запрос на открытие личного чата. \nОт первого сообщения зависит разрешит ли \(user!.name!) открыть личный чат с вами!"
+ 
   private func openProfile(_ user: User?) {
     
     let userProfileInfoView = UserProfileInfoView(frame: self.view.frame)

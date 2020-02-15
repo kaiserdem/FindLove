@@ -20,6 +20,9 @@ class MessagesVC: UIViewController {
   var menuVC: ProfileVC?
   var timer: Timer?
   
+  let defaults = UserDefaults.standard
+  lazy var arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -52,10 +55,9 @@ class MessagesVC: UIViewController {
     guard let uid = Auth.auth().currentUser?.uid else { return }
     
     Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
-      
       if let dictionary = snapshot.value as? [String: AnyObject] {
-        
         let user = User(dictionary: dictionary)
+        user.id = snapshot.key
         self?.setupNavBarWithUser(user)
       }
     }, withCancel: nil)
@@ -82,23 +84,23 @@ class MessagesVC: UIViewController {
   }
   
   func observeUserMessages() {
+    
+    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
     // айди текущий пользователь
     guard let uid = Auth.auth().currentUser?.uid else { return }
-    
+    print(uid)
     // ссылка на все сообщения пользователя
     let ref = Database.database().reference().child("user-messages").child(uid)
     ref.observe(.childAdded, with: { [weak self] (snapshot) in
-      
-      // ключ сообщения
-      let userId = snapshot.key
-      Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
-        
-        let messageId = snapshot.key
-        self?.fetchMessageWithaMessageId(messageId)
-        
-      }, withCancel: nil)
+      if self?.arrayBlockUsers.contains(snapshot.key) == false {
+        // ключ сообщения
+        let userId = snapshot.key
+        Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
+          let messageId = snapshot.key
+          self?.fetchMessageWithaMessageId(messageId)
+        }, withCancel: nil)
+      }
     }, withCancel: nil)
-    
     ref.observe(.childMoved) { [weak self] (snapchot) in // наблюдать за удвлением
       self?.attempReloadOfTable(true)
     }
