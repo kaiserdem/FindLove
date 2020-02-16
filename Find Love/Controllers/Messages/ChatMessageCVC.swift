@@ -6,14 +6,19 @@
 //  Copyright © 2019 Kaiserdem. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import Firebase
 import FirebaseDatabase
 import AVFoundation
 import MobileCoreServices
 
-class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable {
-  
+protocol ProtocolChatMessageDelegate: class {
+  func imageViewTapped(cell: ChatMessageCell)
+}
+
+class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageZomable, ProtocolChatMessageDelegate {
+
   var messages = [Message]() // масив всех сообщений
   var conteinerViewBottonAnchor: NSLayoutConstraint?
   var user: User? {
@@ -22,6 +27,9 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
       observeMessages()
     }
   }
+  
+  let defaults = UserDefaults.standard
+  lazy var arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
 
   lazy var inputTextField: UITextField = {
     let textField = UITextField()
@@ -198,7 +206,7 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
         guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
         
         let message = Message(dictionary: dictionary)
-              
+          message.messadeId = snapshot.key
           self?.messages.append(message)
           
           DispatchQueue.main.async {
@@ -499,11 +507,82 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
     }
   }
   
-  @objc func imageUserTapped(_ gestureRecognizer: UITapGestureRecognizer) {
-
-    if let imageView = gestureRecognizer.view as? UIImageView {
-    }
+  
+  func imageViewTapped(cell: ChatMessageCell) {
     
+    guard let indexPath = self.collectionView.indexPath(for: cell) else { return }
+    
+    let message = messages[indexPath.row]
+    
+    let ref = Database.database().reference().child("users").child(message.fromId!)
+    ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+      if let dictionary = snapshot.value as? [String: AnyObject] {
+        
+        let user = User(dictionary: dictionary)
+        user.id = snapshot.key
+        
+        self?.showAlertMulty(write: false, profile: true, invite: true, complain: true, block: true, cancels: true, choiceWriteAction: {
+          
+        }, choiceOpenProfile: {
+          self?.openProfile()
+          
+        }, choiceInviteChat: {
+          print("choiceInviteChat")
+          
+        }, choiceComplain: {
+          
+          self?.openComplainVC(user, message: message.text ?? "", messageId: message.messadeId! , fromUserId: message.fromId!)
+          return
+          
+        }, choiceBlockUser: {
+          self?.arrayBlockUsers.append((self?.user!.id!)!)
+          self?.defaults.set(self?.arrayBlockUsers, forKey: "arrayBlockUsers")
+          self?.observeMessages()
+        }) {
+          return
+        }
+      }
+      }, withCancel: nil)
+  }
+  
+  @objc func imageUserTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+    
+    
+    
+//    self.showAlertMulty(write: false, profile: true, invite: true, complain: true, block: true, cancels: true, choiceWriteAction: {
+//
+//    }, choiceOpenProfile: {
+//      self.openProfile()
+//
+//    }, choiceInviteChat: {
+//      print("choiceInviteChat")
+//
+//    }, choiceComplain: {
+//      self?.openComplainVC(user, message: message.text ?? "", messageId: message.messadeId! , fromUserId: message.fromId!)
+//      return
+//
+//    }, choiceBlockUser: {
+//      self.arrayBlockUsers.append(self.user!.id!)
+//      self.defaults.set(self.arrayBlockUsers, forKey: "arrayBlockUsers")
+//      self.observeMessages()
+//    }) {
+//      return
+//    }
+  }
+  
+  func openComplainVC(_ user: User?, message: String, messageId: String, fromUserId: String) {
+    
+    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc = storyBoard.instantiateViewController(withIdentifier: "ComplainVС") as! ComplainVС
+    vc.user = user
+    vc.text = message
+    vc.messageId = messageId
+    vc.fromUserId = fromUserId
+    
+    self.present(vc, animated: true, completion: nil)
+  }
+  
+  private func openProfile() {
     let userProfileInfoView = UserProfileInfoView(frame: (self.view.frame))
     userProfileInfoView.userNameLabel.text = user!.name
     
@@ -514,11 +593,7 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
       userProfileInfoView.ageLabel.isHidden = true
       userProfileInfoView.ageSeparatorView.isHidden = true
     }
-    
     if user!.gender != nil {
-      
-      
-      
       let gen = self.genderValidatorToText(string: user!.gender!)
       
       userProfileInfoView.genderLabel.text = String(describing: "Пол: \(String(describing: gen))")
@@ -527,7 +602,6 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
       userProfileInfoView.genderLabel.isHidden = true
       userProfileInfoView.genderSeparatorView.isHidden = true
     }
-    
     if user!.aboutSelf != nil {
       userProfileInfoView.aboutSelfTextView.text = String(describing:"O себе: \n\(user!.aboutSelf!)")
       let height = (self.estimateFrameForText(user!.aboutSelf!).height) + 20
@@ -537,7 +611,6 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
       userProfileInfoView.aboutSelfTextView.isHidden = true
       userProfileInfoView.aboutSelfSeparatorView.isHidden = true
     }
-    
     if user!.status != nil {
       userProfileInfoView.statusTextView.text = String(describing:"Статус: \n\(user!.status!)")
       let height = (self.estimateFrameForText(user!.status!).height) + 20
@@ -547,7 +620,6 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
       userProfileInfoView.statusTextView.isHidden = true
       userProfileInfoView.statusSeparatorView.isHidden = true
     }
-    
     if user!.orientation != nil {
       let orientation = self.orientationValidatorToText(string: user!.orientation!)
       userProfileInfoView.orientationLabel.text = String(describing:"Нравяться: \(orientation)")
@@ -558,8 +630,6 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
       userProfileInfoView.orientationLabel.isHidden = true
       userProfileInfoView.orientationSeparatorView.isHidden = true
     }
-    
-    
     userProfileInfoView.profileImageView.loadImageUsingCache(user!.profileImageUrl!)
     
     self.view.addSubview(userProfileInfoView)
@@ -582,8 +652,7 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
     
     let message = messages[indexPath.row]
     cell.message = message
-    cell.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageUserTapped)))
-    
+    cell.delegate = self
     cell.timeLabel.text = setFormatDislayedTimeAndDate(from: message.timestamp as! TimeInterval, withString: false)
     
     setupCell(cell, message: message)
@@ -632,7 +701,6 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
         // сделали размер пропорционально
         height = CGFloat(imageHight / imageWidht * 200) + 20
       }
-      
     } else { // если это ответ
       
       let responseHeight = estimateFrameForText(message.responseToText!).height

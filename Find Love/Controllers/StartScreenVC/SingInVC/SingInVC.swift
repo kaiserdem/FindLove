@@ -39,12 +39,18 @@ class SingInVC: UIViewController {
     self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(sender:))))
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
   @objc func keyboardWillShow(sender: NSNotification) {
+    print("keyboardWillShow")
     self.view.frame.origin.y = -100
     closeBtnTopConstraints.constant = 130
   }
   
   @objc func keyboardWillHide(sender: NSNotification) {
+    print("keyboardWillHide")
     self.view.frame.origin.y = 0
     closeBtnTopConstraints.constant = 30
     view.endEditing(true)

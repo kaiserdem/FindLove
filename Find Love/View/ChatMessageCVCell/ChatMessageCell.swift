@@ -14,6 +14,8 @@ class ChatMessageCell: UICollectionViewCell {
   var deledate: ImageZomable?
   var message: Message?
   
+  weak var delegate: ProtocolChatMessageDelegate?
+  
   static let blueColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
   static let grayColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
   
@@ -103,13 +105,26 @@ class ChatMessageCell: UICollectionViewCell {
     return btn
   }()
   
-  var profileImageView: UIImageView = {
+//  var profileImageView: UIImageView = {
+//    let imageView = UIImageView()
+//    imageView.image = #imageLiteral(resourceName: "user.png")
+//    imageView.layer.masksToBounds = true
+//    imageView.layer.cornerRadius = 20
+//    imageView.contentMode = .scaleAspectFill
+//    imageView.isUserInteractionEnabled = true
+//    imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped(_ :))))
+//    imageView.translatesAutoresizingMaskIntoConstraints = false
+//    return imageView
+//  }()
+  
+  lazy var profileImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = #imageLiteral(resourceName: "user.png")
+    //imageView.image = #imageLiteral(resourceName: "user.png")
     imageView.layer.masksToBounds = true
     imageView.layer.cornerRadius = 20
     imageView.contentMode = .scaleAspectFill
     imageView.isUserInteractionEnabled = true
+    imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped(_ :))))
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -273,8 +288,11 @@ class ChatMessageCell: UICollectionViewCell {
     activityIndicatorView.stopAnimating()
   }
   
+  @objc func imageTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+    delegate?.imageViewTapped(cell: self)
+  }
+  
   @objc func handleZoomTap(_ gestureRecognizer: UITapGestureRecognizer) {
-    
     if message?.videoUrl != nil {
       return
     }

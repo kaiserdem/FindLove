@@ -18,6 +18,7 @@ class Message: NSObject { // модель сообщений
   var toId: String?
   var responseToText: String?
   var stausMessage: String?
+  var messadeId: String?
   
   var videoUrl: String?
   var imageUrl: String?
@@ -35,6 +36,7 @@ class Message: NSObject { // модель сообщений
     self.videoUrl = dictionary["videoUrl"] as? String
     self.responseToText = dictionary["responseToText"] as? String
     self.stausMessage = dictionary["stausMessage"] as? String
+    self.messadeId = dictionary["messadeId"] as? String
   }
   func chatPartnerId() -> String? { // если написали сообщение себе
     // если отправитель это я, тогда возврат toId, в противном случае fromId

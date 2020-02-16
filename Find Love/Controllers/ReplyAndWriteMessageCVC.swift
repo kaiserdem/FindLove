@@ -107,20 +107,13 @@ class ReplyAndWriteMessageCVC: UICollectionViewController, UITextFieldDelegate, 
     collectionView?.alwaysBounceVertical = true
     collectionView?.backgroundColor = #colorLiteral(red: 0.1830653183, green: 0.1830653183, blue: 0.1830653183, alpha: 1)
     collectionView?.keyboardDismissMode = .interactive
-    
-//    NotificationCenter.default.addObserver(self, selector: #selector(postTextValue(_:)), name: NSNotification.Name("postTextToChat"), object: nil)
-//
+
     UIApplication.shared.statusBarView?.backgroundColor = .black
     
     setupInputComponents()
     setupKeyboardObservise()
   }
-  
-//  @objc func postTextValue(_ notification: Notification) {
-//    let toPost = notification.userInfo?["postText"] as? String
-//    postText.text = toPost
-//  }
-  
+
   override func viewDidDisappear(_ animated: Bool) {
     NotificationCenter.default.removeObserver(self) // убрать обсервер
   }

@@ -293,7 +293,6 @@ extension ProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDele
             print(error?.localizedDescription as Any)
             return
           }
-          
           refImagePath.downloadURL(completion: { (url, error) in
             if error != nil {
               print(error?.localizedDescription as Any)

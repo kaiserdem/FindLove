@@ -32,7 +32,18 @@ extension UIViewController {
 
 extension UICollectionViewController {
   
-  func showAlertMulty(choiceWriteAction: (() -> Void)? ,choiceOpenProfile: (() -> Void)? ,choiceInviteChat: (() -> Void)? ,choiceComplain: (() -> Void)? ,choiceBlockUser: (() -> Void)? ,cancel: (() -> Void)?) {
+  func showAlertMulty(write: Bool,
+                      profile: Bool,
+                      invite: Bool,
+                      complain: Bool,
+                      block: Bool,
+                      cancels: Bool,
+                      choiceWriteAction: (() -> Void)?,
+                      choiceOpenProfile: (() -> Void)?,
+                      choiceInviteChat: (() -> Void)?,
+                      choiceComplain: (() -> Void)?,
+                      choiceBlockUser: (() -> Void)?,
+                      cancel: (() -> Void)?) {
     
     DispatchQueue.main.async(execute: { [weak self] () -> Void in
       
@@ -56,12 +67,25 @@ extension UICollectionViewController {
       let cancelAction: UIAlertAction = UIAlertAction(title: "Отменить", style: .cancel) {
         action -> Void in cancel?()
       }
-      alertController.addAction(writeAction)
-      alertController.addAction(openProfileAction)
-      alertController.addAction(inviteChatAction)
-      alertController.addAction(complainAction)
-      alertController.addAction(blockUserAction)
-      alertController.addAction(cancelAction)
+      
+      if write {
+        alertController.addAction(writeAction)
+      }
+      if profile {
+        alertController.addAction(openProfileAction)
+      }
+      if invite {
+        alertController.addAction(inviteChatAction)
+      }
+      if complain {
+        alertController.addAction(complainAction)
+      }
+      if block {
+        alertController.addAction(blockUserAction)
+      }
+      if cancels {
+        alertController.addAction(cancelAction)
+      }
       self?.present(alertController, animated: true, completion: nil)
     })
   }

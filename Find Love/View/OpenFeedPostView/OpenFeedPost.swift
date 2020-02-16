@@ -74,7 +74,12 @@ class OpenFeedPost: UIView {
   }
   
   @IBAction func complaintButtonAction(_ sender: Any) {
-
+    NotificationCenter.default.post(name: NSNotification.Name("openComplaintVC"), object: nil, userInfo: ["user": user as Any])
+    self.removeFromSuperview()
+  }
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self)
   }
   
   @IBAction func blockButtonAction(_ sender: Any) {

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Kaiserdem. All rights reserved.
 //
 
-// test1@gmail.com
+
 import UIKit
 import Firebase
 import FirebaseStorage
@@ -47,6 +47,10 @@ class RegistrationVC: UIViewController {
   @objc func keyboardWillHide(sender: NSNotification) {
     self.view.frame.origin.y = 0
     view.endEditing(true)
+  }
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self)
   }
   
   
@@ -165,11 +169,10 @@ extension RegistrationVC: UIImagePickerControllerDelegate, UINavigationControlle
       userImageView.image = selectedImage
       userImageView.setNeedsDisplay()
     }
-    dismiss(animated: true, completion: nil) // выйти с контроллера
+    dismiss(animated: true, completion: nil)
     
   }
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-    print("canceled picker")
     dismiss(animated: true, completion: nil)
   }
 }

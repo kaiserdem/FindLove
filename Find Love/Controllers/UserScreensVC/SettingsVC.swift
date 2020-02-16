@@ -41,6 +41,11 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
     self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(sender:))))
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
+  
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     

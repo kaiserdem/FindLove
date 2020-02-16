@@ -25,18 +25,17 @@
 		AD32E29F23F5E62A00E6F912 /* BlockedUsersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E29E23F5E62A00E6F912 /* BlockedUsersVC.swift */; };
 		AD32E2A623F5ED3500E6F912 /* BlockedUsersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E2A423F5ED3500E6F912 /* BlockedUsersCell.swift */; };
 		AD32E2A723F5ED3500E6F912 /* BlockedUsersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32E2A523F5ED3500E6F912 /* BlockedUsersCell.xib */; };
+		AD32E2AE23F94BA700E6F912 /* ComplainVС.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E2AD23F94BA700E6F912 /* ComplainVС.swift */; };
 		AD46C9E923D9E22400FC7002 /* ChatGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD46C9E823D9E22400FC7002 /* ChatGroupCell.swift */; };
 		AD4CC09A23EC8ADD004352F8 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */; };
 		AD4CC09B23EC8ADD004352F8 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */; };
 		AD4CC09D23EDDA16004352F8 /* SettingPrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4CC09C23EDDA16004352F8 /* SettingPrivacyView.swift */; };
 		AD4CC09F23EDDA1E004352F8 /* SettingPrivacyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD4CC09E23EDDA1E004352F8 /* SettingPrivacyView.xib */; };
 		AD5A563423BFBFCD0032AB2A /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5A563223BFBFCC0032AB2A /* FeedVC.swift */; };
-		AD5A563923BFC15A0032AB2A /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5A563723BFC15A0032AB2A /* SearchVC.swift */; };
 		AD5A563E23BFEB750032AB2A /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5A563C23BFEB750032AB2A /* FeedCell.swift */; };
 		AD5A563F23BFEB750032AB2A /* FeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD5A563D23BFEB750032AB2A /* FeedCell.xib */; };
 		AD5C8F8923F1B8D600AB826C /* PurchaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5C8F8723F1B8D600AB826C /* PurchaseVC.swift */; };
 		AD5C8F8A23F1B8D600AB826C /* PurchaseVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD5C8F8823F1B8D600AB826C /* PurchaseVC.xib */; };
-		AD79AC0E23CDEC2C00FA7D09 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD79AC0D23CDEC2C00FA7D09 /* GameVC.swift */; };
 		AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895C223B2122D00347A6A /* AppDelegate.swift */; };
 		AD8895CD23B2122F00347A6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD8895CB23B2122F00347A6A /* LaunchScreen.storyboard */; };
 		AD8895D623B2128C00347A6A /* HelloVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895D423B2128C00347A6A /* HelloVC.swift */; };
@@ -117,18 +116,17 @@
 		AD32E29E23F5E62A00E6F912 /* BlockedUsersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersVC.swift; sourceTree = "<group>"; };
 		AD32E2A423F5ED3500E6F912 /* BlockedUsersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersCell.swift; sourceTree = "<group>"; };
 		AD32E2A523F5ED3500E6F912 /* BlockedUsersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockedUsersCell.xib; sourceTree = "<group>"; };
+		AD32E2AD23F94BA700E6F912 /* ComplainVС.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComplainVС.swift"; sourceTree = "<group>"; };
 		AD46C9E823D9E22400FC7002 /* ChatGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGroupCell.swift; sourceTree = "<group>"; };
 		AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
 		AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsHeaderCell.xib; sourceTree = "<group>"; };
 		AD4CC09C23EDDA16004352F8 /* SettingPrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPrivacyView.swift; sourceTree = "<group>"; };
 		AD4CC09E23EDDA1E004352F8 /* SettingPrivacyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingPrivacyView.xib; sourceTree = "<group>"; };
 		AD5A563223BFBFCC0032AB2A /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
-		AD5A563723BFC15A0032AB2A /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		AD5A563C23BFEB750032AB2A /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		AD5A563D23BFEB750032AB2A /* FeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedCell.xib; sourceTree = "<group>"; };
 		AD5C8F8723F1B8D600AB826C /* PurchaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseVC.swift; sourceTree = "<group>"; };
 		AD5C8F8823F1B8D600AB826C /* PurchaseVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseVC.xib; sourceTree = "<group>"; };
-		AD79AC0D23CDEC2C00FA7D09 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
 		AD8895BF23B2122D00347A6A /* Find Love.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find Love.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD8895C223B2122D00347A6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD8895CC23B2122F00347A6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -286,13 +284,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		AD4CC09723EC7A64004352F8 /* New Group */ = {
+		AD32E2AF23F9D79800E6F912 /* UserScreensVC */ = {
 			isa = PBXGroup;
 			children = (
-				AD5A563723BFC15A0032AB2A /* SearchVC.swift */,
-				AD79AC0D23CDEC2C00FA7D09 /* GameVC.swift */,
+				AD8895E723B293BE00347A6A /* ProfileVC.swift */,
+				ADEE6F9B23EB32D6008352C0 /* SettingsVC.swift */,
+				AD32E29E23F5E62A00E6F912 /* BlockedUsersVC.swift */,
+				AD32E2AD23F94BA700E6F912 /* ComplainVС.swift */,
 			);
-			path = "New Group";
+			path = UserScreensVC;
 			sourceTree = "<group>";
 		};
 		AD5A563B23BFEB450032AB2A /* FeedCell */ = {
@@ -376,10 +376,7 @@
 				AD79AC0B23CDEB2600FA7D09 /* StartScreenVC */,
 				AD79AC0C23CDEB9B00FA7D09 /* FeedScreenVC */,
 				ADB8DECD23CA1987008D989E /* Messages */,
-				AD8895E723B293BE00347A6A /* ProfileVC.swift */,
-				ADEE6F9B23EB32D6008352C0 /* SettingsVC.swift */,
-				AD32E29E23F5E62A00E6F912 /* BlockedUsersVC.swift */,
-				AD4CC09723EC7A64004352F8 /* New Group */,
+				AD32E2AF23F9D79800E6F912 /* UserScreensVC */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -808,9 +805,9 @@
 				AD26946323B4FD2C00D49887 /* MessengerVC.swift in Sources */,
 				ADEE6FA023EB3CB9008352C0 /* SettingsSwitchCell.swift in Sources */,
 				AD8895D623B2128C00347A6A /* HelloVC.swift in Sources */,
+				AD32E2AE23F94BA700E6F912 /* ComplainVС.swift in Sources */,
 				ADB8DEDA23CCCBD0008D989E /* ChatGroupCVC.swift in Sources */,
 				ADB8DED123CA1A27008D989E /* GroupsVC.swift in Sources */,
-				AD5A563923BFC15A0032AB2A /* SearchVC.swift in Sources */,
 				AD26946723B538A500D49887 /* Message.swift in Sources */,
 				ADC55A8E23E878A7002BEAF7 /* InformationViewCell.swift in Sources */,
 				ADC55A9223E878D6002BEAF7 /* StatusViewCell.swift in Sources */,
@@ -818,7 +815,6 @@
 				ADB4CD3C23E0AFAF001DD8AF /* InfornatioView.swift in Sources */,
 				ADB8DED423CB9959008D989E /* SelectChatCell.swift in Sources */,
 				AD4CC09A23EC8ADD004352F8 /* SettingsHeaderCell.swift in Sources */,
-				AD79AC0E23CDEC2C00FA7D09 /* GameVC.swift in Sources */,
 				AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */,
 				ADFCA85B23DDEDFC004067A9 /* ChatWithStrangerCell.swift in Sources */,
 				AD32E2A623F5ED3500E6F912 /* BlockedUsersCell.swift in Sources */,

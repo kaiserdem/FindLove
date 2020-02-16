@@ -59,6 +59,10 @@ class StatusView: UIView, UIPickerViewDelegate , UIPickerViewDataSource {
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
   @objc func keyboardWillAppear(_ notification: Notification) {
     
     saveBtn.isEnabled = true

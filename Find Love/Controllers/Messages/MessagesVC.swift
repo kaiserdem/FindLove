@@ -30,8 +30,7 @@ class MessagesVC: UIViewController {
   }
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(true)
-    //arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
-    //print(arrayBlockUsers.count)
+    
     loadUserMessages()
   }
   
@@ -89,20 +88,15 @@ class MessagesVC: UIViewController {
   func observeUserMessages() {
     
     arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
-    print("\n MessagesVC")
-    print(arrayBlockUsers)
-    print(arrayBlockUsers.count)
-    // айди текущий пользователь
+    
     guard let uid = Auth.auth().currentUser?.uid else { return }
-    print(uid)
+   
     // ссылка на все сообщения пользователя
     let ref = Database.database().reference().child("user-messages").child(uid)
     ref.observe(.childAdded, with: { [weak self] (snapshot) in
       if self?.arrayBlockUsers.contains(snapshot.key) == false {
         // ключ сообщения
         let userId = snapshot.key
-        print(userId)
-        
         
         Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
           let messageId = snapshot.key

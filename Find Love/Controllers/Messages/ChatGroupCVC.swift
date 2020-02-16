@@ -140,11 +140,7 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
     NotificationCenter.default.removeObserver(self) // убрать обсервер
   }
   
-  // поменять констрейнты при смене ориентации
-  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-    collectionView?.collectionViewLayout.invalidateLayout()
-  }
-  
+
   override var inputAccessoryView: UIView? { // вю короторе отвечает за клавиатуру
     get {
       return inputConteinerView
@@ -157,12 +153,9 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
   
   func setupKeyboardObservise() {
     NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-    
   }
   
-  
   @objc func handleKeyboardDidShow() {
-    
     if messages.count > 0 {
       let indexPath = IndexPath(item: self.messages.count-1, section: 0) // последнее
       //проскролить
@@ -238,7 +231,7 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
         guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
         
         let message = Message(dictionary: dictionary)
-        
+        message.messadeId = snapshot.key
         self.messages.append(message)
         
         
@@ -309,7 +302,7 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
         let user = User(dictionary: dictionary)
         user.id = snapshot.key
         
-        self?.showAlertMulty(choiceWriteAction: {
+        self?.showAlertMulty(write: true, profile: true, invite: true, complain: true, block: true, cancels: true, choiceWriteAction: {
           self?.showChatLogVCForUser(user)
           
         }, choiceOpenProfile: {
@@ -319,7 +312,9 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
           print("choiceInviteChat")
           
         }, choiceComplain: {
-          print("choiceComplain")
+          
+          self?.openComplainVC(user, message: message.text ?? "", messageId: message.messadeId! , fromUserId: message.fromId!)
+          return
           
         }, choiceBlockUser: {
           self?.arrayBlockUsers.append(user.id!)
@@ -332,6 +327,18 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
       }, withCancel: nil)
   }
   
+  func openComplainVC(_ user: User?, message: String, messageId: String, fromUserId: String) {
+    
+    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc = storyBoard.instantiateViewController(withIdentifier: "ComplainVС") as! ComplainVС
+    vc.user = user
+    vc.text = message
+    vc.messageId = messageId
+    vc.fromUserId = fromUserId
+    
+    self.present(vc, animated: true, completion: nil)
+  }
+  
   func showChatLogVCForUser(_ user: User?) {
     let vc = ReplyAndWriteMessageCVC(collectionViewLayout: UICollectionViewFlowLayout())
     vc.user = user
@@ -339,10 +346,7 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
     vc.stausMessage = "1"
     vc.postText.text = "Запрос на открытие личного чата. \nОт первого сообщения зависит разрешит ли \(user!.name!) открыть личный чат с вами!"
     vc.responseToText = "Пользователь \(user!.name!) из чата (-\(String(describing: self.group!.subject!))-) хочет открыть личную переписку с вами!"
-    present(vc, animated: true) {
-      
-//      NotificationCenter.default.post(name: NSNotification.Name("postTextToChat"), object: nil, userInfo: ["postText": "Пользователь \(user!.name!) из чата (-\(String(describing: self.group!.subject))-) хочет открыть личную переписку с вами!"])
-    }
+    self.present(vc, animated: true, completion: nil)
   }
  
   private func openProfile(_ user: User?) {
@@ -692,7 +696,6 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
               cell.profileImageView.loadImageUsingCache(profileImageView)
             }
           }
-          
         }
       }, withCancel: nil)
     }

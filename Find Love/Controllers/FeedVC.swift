@@ -34,15 +34,17 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     }
   }
   var currentPostText = ""
+  var currentPostId = ""
+  var postFromUserId = ""
   
   override func viewDidLoad() {
         super.viewDidLoad()
-    print("\n viewDidLoad")
-    print(print("FeedVC - viewDidLoad - BlockUsers: \(arrayBlockUsers.count)"))
     
     NotificationCenter.default.addObserver(self, selector: #selector(makeTransition(_:)), name: NSNotification.Name("makeTransitionToChat"), object: nil)
     
     NotificationCenter.default.addObserver(self, selector: #selector(reloadObservePosts(_:)), name: NSNotification.Name("reloadTableView"), object: nil)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(makeTransitionToComplainVC(_:)), name: NSNotification.Name("openComplaintVC"), object: nil)
     
     checkAuht()
     uploadTableView()
@@ -58,6 +60,10 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(true)
     observePosts()
+  }
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self)
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -91,37 +97,24 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   private func observePosts() {
     posts.removeAll()
     arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
-    print("\n FeedVC - observePosts - BlockUsers: \(arrayBlockUsers)")
-    print(" FeedVC - observePosts - BlockUsers: \(arrayBlockUsers.count)")
     
     let ref = Database.database().reference().child("posts")
     ref.observe(.childAdded) { [weak self](snapshot) in
       if let dictionary = snapshot.value as? [String: AnyObject] {
-        print(snapshot.key.count)
-        print(snapshot.key)
         let post = Post(dictionary: dictionary)
-        
-        
         if self?.arrayBlockUsers.isEmpty == false { // не пустой
           if self?.arrayBlockUsers.contains(post.fromId!) ==  false {
             self?.posts.append(post)
-            print("\n append: \(post.fromId)")
-            print(" after  append: \(self?.posts.count)")
           }
         } else {
           self?.posts.append(post)
-          print("\n append: \(post.fromId)")
-          print(" after  append: \(self?.posts.count)")
         }
       }
       DispatchQueue.main.async {
-        print("\n end  posts.count: \(self?.posts.count)")
         self?.posts.reverse()
         self?.tableView.reloadData()
       }
     }
-    
-    
   }
 
   @objc func makeTransition(_ notification: Notification) {
@@ -133,14 +126,28 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     observePosts()
   }
   
+  @objc func makeTransitionToComplainVC(_ notification: Notification) {
+    let toUser = notification.userInfo?["user"] as? User
+    openComplainVC(toUser)
+  }
+  
+  func openComplainVC(_ user: User?) {
+    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc = storyBoard.instantiateViewController(withIdentifier: "ComplainVС") as! ComplainVС
+    vc.user = user
+    vc.text = self.currentPostText
+    vc.messageId = self.currentPostId
+    vc.fromUserId = self.postFromUserId
+    self.present(vc, animated: true, completion: nil)
+  }
+  
   func openChatWithUser(_ user: User?) {
     let vc = ReplyAndWriteMessageCVC(collectionViewLayout: UICollectionViewFlowLayout())
     vc.user = user
     vc.stausMessage = "2"
     vc.postText.text = self.currentPostText
     vc.responseToText = self.currentPostText
-    present(vc, animated: true) {
-    }
+    self.present(vc, animated: true, completion: nil)
   }
   
   func cellTappedImageProfile(cell: FeedCell) {
@@ -152,7 +159,6 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
       
       if let dictionary = snapshot.value as? [String: AnyObject] {
-       // print(dictionary)
         let user = User(dictionary: dictionary)
         
         let userProfileInfoView = UserProfileInfoView(frame: (self?.view.frame)!)
@@ -348,6 +354,8 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     let post = self.posts[indexPath.row - 1]
     
     currentPostText = post.text!
+    currentPostId = post.postId!
+    postFromUserId = post.fromId!
     
     let postText = post.text
     let time = post.timestamp

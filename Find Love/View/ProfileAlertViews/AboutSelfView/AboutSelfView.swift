@@ -52,6 +52,11 @@ class AboutSelfView: UIView {
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
   }
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
   @objc func keyboardWillAppear(_ notification: Notification) {
     if aboutSelfTextView.text.count > 5 {
       saveBtn.isEnabled = true
