@@ -92,9 +92,7 @@ class ComplainVС: UIViewController {
     let timestamp = Int(Date().timeIntervalSince1970)
     
     var values = [ "toId": toId, "fromId": fromId, "timestamp": timestamp, "text": text] as [String : Any]
-    
-    //print(childRef)
-    
+        
     childRef.updateChildValues(values) { (error, ref) in
       if error != nil {
         print(error!)

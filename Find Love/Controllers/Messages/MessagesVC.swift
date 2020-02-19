@@ -15,7 +15,7 @@ class MessagesVC: UIViewController {
   
   let tableView = UITableView()
   var messages = [Message]()
-  var messagesDictionary = [String: Message]()
+  var messagesDictionary = [String: Message]() // для сортировки
   var timer: Timer?
   
   let defaults = UserDefaults.standard
@@ -26,8 +26,8 @@ class MessagesVC: UIViewController {
     
     fetchUser()
     uploadTableView()
-    //observeUserMessages()
   }
+  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(true)
     

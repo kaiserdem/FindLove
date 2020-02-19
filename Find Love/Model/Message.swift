@@ -38,8 +38,10 @@ class Message: NSObject { // модель сообщений
     self.stausMessage = dictionary["stausMessage"] as? String
     self.messadeId = dictionary["messadeId"] as? String
   }
+  
   func chatPartnerId() -> String? { // если написали сообщение себе
     // если отправитель это я, тогда возврат toId, в противном случае fromId
     return fromId == Auth.auth().currentUser?.uid ? toId : fromId
   }
+  
 }

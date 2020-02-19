@@ -57,6 +57,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     tableView.backgroundColor = .black
     tableView.allowsMultipleSelection = false
   }
+  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(true)
     observePosts()
@@ -75,6 +76,31 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     let vc = NewFeedPostCVC(collectionViewLayout: UICollectionViewFlowLayout())
     present(vc, animated: true, completion: nil)
   }
+  
+//  func observeChatInvitation() {
+//    
+//    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+//    
+//    guard let uid = Auth.auth().currentUser?.uid else { return }
+//    
+//    // ссылка на все сообщения пользователя
+//    let ref = Database.database().reference().child("user-messages").child(uid)
+//    ref.observe(.childAdded, with: { [weak self] (snapshot) in
+//      if self?.arrayBlockUsers.contains(snapshot.key) == false {
+//        // ключ сообщения
+//        let userId = snapshot.key
+//        
+//        Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
+//          let messageId = snapshot.key
+//          
+//          
+//          //
+//        }, withCancel: nil)
+//      }
+//      }, withCancel: nil)
+//    ref.observe(.childMoved) { [weak self] (snapchot) in // наблюдать за удвлением
+//    }
+//  }
 
   private func uploadTableView() {
     

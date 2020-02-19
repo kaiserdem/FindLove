@@ -58,7 +58,7 @@
                                 <action selector="closeButtonAction:" destination="-1" eventType="touchUpInside" id="CRo-4h-GAH"/>
                             </connections>
                         </button>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="cVQ-F1-Ovt">
+                        <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="cVQ-F1-Ovt">
                             <rect key="frame" x="117.5" y="30" width="100" height="100"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="100" id="VjZ-ze-lfA"/>

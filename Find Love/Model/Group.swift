@@ -17,6 +17,7 @@ class Group: NSObject { // модель сообщений
   var countUsers: Int?
   var liked: Int?
   
+  
   init(dictionary: [String: Any]) {
     self.subject = dictionary["subject"] as? String
     self.descriptions = dictionary["descriptions"] as? String

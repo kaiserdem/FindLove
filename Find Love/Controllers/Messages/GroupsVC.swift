@@ -13,10 +13,7 @@ import FirebaseDatabase
 class GroupsVC: UIViewController {
 
   var groups = [Group]()
-  
-  var messages = [Message]()
-  
-  
+
   let tableView = UITableView()
     
     override func viewDidLoad() {

@@ -99,10 +99,6 @@ class ReplyAndWriteMessageCVC: UICollectionViewController, UITextFieldDelegate, 
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    print(stausMessage)
-    print(responseToText)
-    
-    
     collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 5, right: 0)
     collectionView?.alwaysBounceVertical = true
     collectionView?.backgroundColor = #colorLiteral(red: 0.1830653183, green: 0.1830653183, blue: 0.1830653183, alpha: 1)

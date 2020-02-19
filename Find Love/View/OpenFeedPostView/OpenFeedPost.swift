@@ -54,7 +54,6 @@ class OpenFeedPost: UIView {
     complaintButton.layer.cornerRadius = 18
     complaintButton.layoutIfNeeded()
     
-    print(arrayBlockUsers.count)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -106,7 +105,6 @@ class OpenFeedPost: UIView {
       }
       defaults.set(arrayBlockUsers, forKey: "arrayBlockUsers")
     }
-    print("OpenFeedPost, block users: \(arrayBlockUsers.count)")
   }
   
   @IBAction func closeButtonAction(_ sender: Any) {

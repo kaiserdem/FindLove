@@ -26,6 +26,9 @@
 		AD32E2A623F5ED3500E6F912 /* BlockedUsersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E2A423F5ED3500E6F912 /* BlockedUsersCell.swift */; };
 		AD32E2A723F5ED3500E6F912 /* BlockedUsersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32E2A523F5ED3500E6F912 /* BlockedUsersCell.xib */; };
 		AD32E2AE23F94BA700E6F912 /* ComplainVС.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E2AD23F94BA700E6F912 /* ComplainVС.swift */; };
+		AD32E35E23FC3BB000E6F912 /* ChatInvitationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E35D23FC3BB000E6F912 /* ChatInvitationVC.swift */; };
+		AD32E36623FC40C800E6F912 /* ChatInvitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E36423FC40C800E6F912 /* ChatInvitationCell.swift */; };
+		AD32E36723FC40C800E6F912 /* ChatInvitationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32E36523FC40C800E6F912 /* ChatInvitationCell.xib */; };
 		AD46C9E923D9E22400FC7002 /* ChatGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD46C9E823D9E22400FC7002 /* ChatGroupCell.swift */; };
 		AD4CC09A23EC8ADD004352F8 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */; };
 		AD4CC09B23EC8ADD004352F8 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */; };
@@ -117,6 +120,9 @@
 		AD32E2A423F5ED3500E6F912 /* BlockedUsersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersCell.swift; sourceTree = "<group>"; };
 		AD32E2A523F5ED3500E6F912 /* BlockedUsersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockedUsersCell.xib; sourceTree = "<group>"; };
 		AD32E2AD23F94BA700E6F912 /* ComplainVС.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComplainVС.swift"; sourceTree = "<group>"; };
+		AD32E35D23FC3BB000E6F912 /* ChatInvitationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInvitationVC.swift; sourceTree = "<group>"; };
+		AD32E36423FC40C800E6F912 /* ChatInvitationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInvitationCell.swift; sourceTree = "<group>"; };
+		AD32E36523FC40C800E6F912 /* ChatInvitationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatInvitationCell.xib; sourceTree = "<group>"; };
 		AD46C9E823D9E22400FC7002 /* ChatGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGroupCell.swift; sourceTree = "<group>"; };
 		AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
 		AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsHeaderCell.xib; sourceTree = "<group>"; };
@@ -265,21 +271,22 @@
 		AD26947123B606BA00D49887 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AD32E35F23FC402100E6F912 /* ChatInvitationCell */,
 				ADB4A25123E44C64001D1A6A /* CustomAlertWarning */,
-				ADC55A9C23E88844002BEAF7 /* ProfileCells */,
-				ADC55A8723E74547002BEAF7 /* UserProfileInfoView */,
 				ADB4CD3A23E0AF60001DD8AF /* ProfileAlertViews */,
-				ADEE6F9D23EB3C51008352C0 /* SettingsCells */,
 				ADFCA85D23DDFCAF004067A9 /* SearchStrangerForChatView */,
+				ADF0B58523EF0620009C03A1 /* SettingPrivacyView */,
+				ADC55A8723E74547002BEAF7 /* UserProfileInfoView */,
+				ADB8079023D05AE800847897 /* OpenFeedPostView */,
+				ADEE6F9D23EB3C51008352C0 /* SettingsCells */,
 				ADFCA85823DDED92004067A9 /* ChatWithStrangerCell */,
 				AD1085AA23DCA0970009ADB3 /* AddFeedPostCell */,
 				AD5A563B23BFEB450032AB2A /* FeedCell */,
-				ADB8079023D05AE800847897 /* OpenFeedPostView */,
 				AD26946E23B6019C00D49887 /* UserCell */,
 				AD02EB2923B793C200F472A5 /* ChatMessageCVCell */,
 				ADBA195D23C49004009B45EC /* ReviewCVCell */,
 				ADB8DED623CB9970008D989E /* SelectChatCell */,
-				ADF0B58523EF0620009C03A1 /* SettingPrivacyView */,
+				ADC55A9C23E88844002BEAF7 /* ProfileCells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -293,6 +300,15 @@
 				AD32E2AD23F94BA700E6F912 /* ComplainVС.swift */,
 			);
 			path = UserScreensVC;
+			sourceTree = "<group>";
+		};
+		AD32E35F23FC402100E6F912 /* ChatInvitationCell */ = {
+			isa = PBXGroup;
+			children = (
+				AD32E36423FC40C800E6F912 /* ChatInvitationCell.swift */,
+				AD32E36523FC40C800E6F912 /* ChatInvitationCell.xib */,
+			);
+			path = ChatInvitationCell;
 			sourceTree = "<group>";
 		};
 		AD5A563B23BFEB450032AB2A /* FeedCell */ = {
@@ -481,6 +497,7 @@
 				ADB8DED023CA1A27008D989E /* GroupsVC.swift */,
 				AD26947223B67B8A00D49887 /* ChatMessageCVC.swift */,
 				ADB8DED923CCCBD0008D989E /* ChatGroupCVC.swift */,
+				AD32E35D23FC3BB000E6F912 /* ChatInvitationVC.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -722,6 +739,7 @@
 				AD8895DE23B2162C00347A6A /* RegistrationVC.xib in Resources */,
 				ADC55A9723E878FD002BEAF7 /* OrientationViewCell.xib in Resources */,
 				ADEE6FA923EB3F3E008352C0 /* SettingButtonNextCell.xib in Resources */,
+				AD32E36723FC40C800E6F912 /* ChatInvitationCell.xib in Resources */,
 				AD32E2A723F5ED3500E6F912 /* BlockedUsersCell.xib in Resources */,
 				ADBA195C23C371E6009B45EC /* ReviewCVCell.xib in Resources */,
 				AD293CAD23BC1D530091808F /* Assets.xcassets in Resources */,
@@ -800,6 +818,7 @@
 				ADFD0F4423E898C5008D2B9C /* SettingsViewCell.swift in Sources */,
 				AD26BE8C23C0CB2500EF1418 /* NewFeedPostCVC.swift in Sources */,
 				ADBA195B23C371E6009B45EC /* ReviewCVCell.swift in Sources */,
+				AD32E35E23FC3BB000E6F912 /* ChatInvitationVC.swift in Sources */,
 				AD1085A823DCA08A0009ADB3 /* AddFeedPostCell.swift in Sources */,
 				AD5C8F8923F1B8D600AB826C /* PurchaseVC.swift in Sources */,
 				AD26946323B4FD2C00D49887 /* MessengerVC.swift in Sources */,
@@ -830,6 +849,7 @@
 				AD26946523B4FF8100D49887 /* User.swift in Sources */,
 				ADB4CD4923E19788001DD8AF /* OrientationView.swift in Sources */,
 				ADC55A9623E878FD002BEAF7 /* OrientationViewCell.swift in Sources */,
+				AD32E36623FC40C800E6F912 /* ChatInvitationCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

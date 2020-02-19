@@ -559,6 +559,80 @@
             </objects>
             <point key="canvasLocation" x="3967" y="194"/>
         </scene>
+        <!--Chat InvitationVC-->
+        <scene sceneID="pPQ-fr-nZ7">
+            <objects>
+                <viewController storyboardIdentifier="ChatInvitationVC" id="BBs-kZ-HDb" customClass="ChatInvitationVC" customModule="Find_Love" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1ON-3i-13h">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пригласить в чат" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h4C-Za-WF0">
+                                <rect key="frame" x="114" y="34" width="186" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="tut-St-axe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8v-GB-Lhh">
+                                <rect key="frame" x="354" y="39" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="LSN-xO-C7j"/>
+                                    <constraint firstAttribute="width" constant="40" id="Tp8-Y2-PJl"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="cancel"/>
+                                <connections>
+                                    <action selector="closeButtonAction:" destination="BBs-kZ-HDb" eventType="touchUpInside" id="vp2-CG-IPa"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tKJ-wk-U3r">
+                                <rect key="frame" x="0.0" y="112" width="414" height="783"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="1ON-3i-13h" id="1z8-2M-SIw"/>
+                                    <outlet property="delegate" destination="1ON-3i-13h" id="cF8-GU-CV4"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bsL-BD-nF8">
+                                <rect key="frame" x="20" y="39" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="HHo-1E-kfE"/>
+                                    <constraint firstAttribute="height" constant="40" id="vWt-Pk-iML"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                <connections>
+                                    <action selector="searchButtonAction:" destination="BBs-kZ-HDb" eventType="touchUpInside" id="wuB-5p-9i1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="tKJ-wk-U3r" firstAttribute="top" secondItem="f8v-GB-Lhh" secondAttribute="bottom" id="577-WI-Ptt"/>
+                            <constraint firstItem="n7D-ZD-NEK" firstAttribute="trailing" secondItem="f8v-GB-Lhh" secondAttribute="trailing" constant="20" id="8EM-TA-K33"/>
+                            <constraint firstItem="f8v-GB-Lhh" firstAttribute="centerY" secondItem="h4C-Za-WF0" secondAttribute="centerY" id="MPz-Jc-MXu"/>
+                            <constraint firstItem="tKJ-wk-U3r" firstAttribute="leading" secondItem="n7D-ZD-NEK" secondAttribute="leading" id="NS6-85-E7O"/>
+                            <constraint firstItem="h4C-Za-WF0" firstAttribute="centerY" secondItem="bsL-BD-nF8" secondAttribute="centerY" id="O8Z-DU-AQM"/>
+                            <constraint firstItem="bsL-BD-nF8" firstAttribute="leading" secondItem="n7D-ZD-NEK" secondAttribute="leading" constant="20" id="PfH-cc-CwU"/>
+                            <constraint firstItem="h4C-Za-WF0" firstAttribute="top" secondItem="1ON-3i-13h" secondAttribute="top" constant="34" id="R7B-ms-7g7"/>
+                            <constraint firstItem="tKJ-wk-U3r" firstAttribute="trailing" secondItem="n7D-ZD-NEK" secondAttribute="trailing" id="kxm-Fp-ESg"/>
+                            <constraint firstItem="h4C-Za-WF0" firstAttribute="centerX" secondItem="1ON-3i-13h" secondAttribute="centerX" id="lAB-zv-rcL"/>
+                            <constraint firstItem="tKJ-wk-U3r" firstAttribute="bottom" secondItem="n7D-ZD-NEK" secondAttribute="bottom" id="lJv-Wn-Agp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="n7D-ZD-NEK"/>
+                    </view>
+                    <connections>
+                        <outlet property="cencelBtn" destination="f8v-GB-Lhh" id="AEx-sg-uca"/>
+                        <outlet property="searchBtn" destination="bsL-BD-nF8" id="t3s-88-TYf"/>
+                        <outlet property="tableView" destination="tKJ-wk-U3r" id="xUu-rQ-dMD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Esr-MP-2xj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3833" y="890"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cancel" width="128" height="128"/>

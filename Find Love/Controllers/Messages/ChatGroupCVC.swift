@@ -309,7 +309,7 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
           self?.openProfile(user)
           
         }, choiceInviteChat: {
-          print("choiceInviteChat")
+          self?.chatInvition(user)
           
         }, choiceComplain: {
           
@@ -336,6 +336,13 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
     vc.messageId = messageId
     vc.fromUserId = fromUserId
     
+    self.present(vc, animated: true, completion: nil)
+  }
+  
+  private func chatInvition(_ user: User?) {
+    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc = storyBoard.instantiateViewController(withIdentifier: "ChatInvitationVC") as! ChatInvitationVC
+    vc.user = user
     self.present(vc, animated: true, completion: nil)
   }
   
