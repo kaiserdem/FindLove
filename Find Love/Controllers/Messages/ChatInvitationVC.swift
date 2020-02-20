@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class ChatInvitationVC: UIViewController {
 
@@ -17,6 +18,11 @@ class ChatInvitationVC: UIViewController {
   
   var groups = [Group]()
   var user: User?
+  var currentUser: User? {
+    didSet {
+      print(currentUser?.id)
+    }
+  }
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +34,12 @@ class ChatInvitationVC: UIViewController {
       searchBtn.tintColor = .white
       
       uploadTableView()
-      observeGroups()
+      fetchGroups()
+      
+      let objUser = UserDefaults.standard.retrieve(object: User.self, fromKey: "currentUserKey")
+      currentUser = objUser
+      
+      
 
     }
   
@@ -48,7 +59,7 @@ class ChatInvitationVC: UIViewController {
     
   }
   
-  func observeGroups() {
+  private func fetchGroups() {
     
     let ref = Database.database().reference().child("groups")
     ref.observe(.childAdded, with: { [weak self] (snapshot) in
@@ -61,6 +72,38 @@ class ChatInvitationVC: UIViewController {
         self?.tableView.reloadData()
       }
       }, withCancel: nil)
+  }
+  
+  private func sendChatInvintation(_ group: Group) {
+ 
+    let ref = Database.database().reference().child("user-request")
+    let toId = user!.id!
+    let statusRequest = "0"
+    let childRef = ref.childByAutoId()
+    let fromUser = currentUser?.name
+    let fromImageUrl = currentUser?.profileImageUrl
+    let fromUserId = currentUser?.id
+    let toGroup = group.subject
+    
+    let values = [ "fromUser": fromUser,
+                   "fromImageUrl": fromImageUrl,
+                   "fromUserId": fromUserId,
+                   "toId": toId,
+                   "toGroup": toGroup,
+                   "statusRequest": statusRequest] as [String : Any]
+    
+    let chaild = ref.child(toId)
+    let id = chaild.childByAutoId()
+    id.updateChildValues(values) { [weak self ] (error, chaild) in
+      if error != nil {
+        print(error!)
+        return
+      } else {
+        let customNotificationView = CustomNotificationView(frame: (self?.view.frame)!)
+        customNotificationView.textTextView.text = "Запрос отправлен"
+        self?.view.addSubview(customNotificationView)
+      }
+    }
   }
     
 
@@ -94,50 +137,31 @@ extension ChatInvitationVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let group = groups[indexPath.row]
-    
-    print(group.subject)
-    
-//    let ref = Database.database().reference().child("messages")
-//    let childRef = ref.childByAutoId()
-//    let toId = user!.id!
-//    let fromId = Auth.auth().currentUser!.uid
-//    let timestamp = Int(Date().timeIntervalSince1970)
-//    let stausMessage = "3"
-//    let text = group.subject
-//
-//    var values = [ "toId": toId, "fromId": fromId, "timestamp": timestamp, text: "text", "stausMessage": stausMessage] as! [String : Any]
-//
-//    childRef.updateChildValues(values) { (error, ref) in
-//      if error != nil {
-//        print(error!)
-//        return
-//      }
-//    }
-//
-//
-//    let refFromTo = Database.database().reference().child("user-messages").child(fromId).child(toId)
-//
-//    let messageId = childRef.key
-//    let values2 = [messageId: 1] as! [String : Any]
-//
-//    refFromTo.updateChildValues(values2) { (error, ref) in
-//      if error != nil {
-//        print(error!)
-//        return
-//      }
-//    }
-//
-//    let refToFrom = Database.database().reference().child("user-messages").child(toId).child(fromId)
-//
-//    let messageId3 = childRef.key
-//    let values3 = [messageId3: 1] as! [String : Any]
-//
-//    refToFrom.updateChildValues(values3) { (error, ref) in
-//      if error != nil {
-//        print(error!)
-//        return
-//      }
-//    }
+    sendChatInvintation(group)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+      self.dismiss(animated: true, completion: nil)
+    }
   }
   
+}
+
+
+extension UIView {
+  func fadeIn(duration: TimeInterval = 0.5, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in }) {
+    self.alpha = 0.0
+    
+    UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseIn, animations: {
+      self.isHidden = false
+      self.alpha = 1.0
+    }, completion: completion)
+  }
+  
+  func fadeOut(duration: TimeInterval = 0.5, delay: TimeInterval = 0.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in }) {
+    self.alpha = 1.0
+    
+    UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseOut, animations: {
+      self.isHidden = true
+      self.alpha = 0.0
+    }, completion: completion)
+  }
 }

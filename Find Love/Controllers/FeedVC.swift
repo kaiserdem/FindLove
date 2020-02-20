@@ -24,6 +24,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   var posts = [Post]()
   var postDictionary = [String: Post]()
   var user: User?
+  var request: Request?
   
   let defaults = UserDefaults.standard
   lazy var arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
@@ -48,6 +49,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     
     checkAuht()
     uploadTableView()
+    observeChatInvitation()
     //observePosts()
   }
   
@@ -61,6 +63,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(true)
     observePosts()
+    observeChatInvitation()
   }
   
   deinit {
@@ -77,30 +80,34 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     present(vc, animated: true, completion: nil)
   }
   
-//  func observeChatInvitation() {
-//    
-//    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
-//    
-//    guard let uid = Auth.auth().currentUser?.uid else { return }
-//    
-//    // ссылка на все сообщения пользователя
-//    let ref = Database.database().reference().child("user-messages").child(uid)
-//    ref.observe(.childAdded, with: { [weak self] (snapshot) in
-//      if self?.arrayBlockUsers.contains(snapshot.key) == false {
-//        // ключ сообщения
-//        let userId = snapshot.key
-//        
-//        Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
-//          let messageId = snapshot.key
-//          
-//          
-//          //
-//        }, withCancel: nil)
-//      }
-//      }, withCancel: nil)
-//    ref.observe(.childMoved) { [weak self] (snapchot) in // наблюдать за удвлением
-//    }
-//  }
+  func observeChatInvitation() {
+    
+    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+    
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    let ref = Database.database().reference().child("user-request").child(uid)
+    ref.observe(.childAdded, with: { [weak self] (snapshot) in
+      
+      guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+      
+      let request = Request(dictionary: dictionary)
+      
+      if request.toId == uid {
+        if self?.arrayBlockUsers.contains(request.fromUserId!) == false {
+          if request.statusRequest == "0" {
+            let invitationView = ChatInvitationView(frame: (self?.view.frame)!)
+            invitationView.toGroupTextView.text = request.toGroup
+            invitationView.userNameLabel.text = request.fromUser
+            invitationView.userImageView.loadImageUsingCache(request.fromImageUrl!)
+            self?.view.addSubview(invitationView)
+          }
+        } else {
+          ref.child(snapshot.key).removeValue()
+        }
+      }
+      }, withCancel: nil)
+  }
 
   private func uploadTableView() {
     

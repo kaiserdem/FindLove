@@ -10,60 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Find Love/Controllers/Messages/ChatMessageCVC.swift"
-            timestampString = "603578515.422812"
+            timestampString = "603916077.835712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "515"
-            endingLineNumber = "515"
+            startingLineNumber = "522"
+            endingLineNumber = "522"
             landmarkName = "imageViewTapped(cell:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Find_Love.ChatMessageCVC.imageUserTapped(__C.UITapGestureRecognizer) -&gt; ()"
-                  moduleName = "Find Love"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kaiserdem/Desktop/WorkDev/Find%20Love/Find%20Love/Controllers/Messages/ChatMessageCVC.swift"
-                  timestampString = "603570990.36621"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "516"
-                  endingLineNumber = "516"
-                  offsetFromSymbolStart = "150">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 () -&gt; () in Find_Love.ChatMessageCVC.imageUserTapped(__C.UITapGestureRecognizer) -&gt; ()"
-                  moduleName = "Find Love"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kaiserdem/Desktop/WorkDev/Find%20Love/Find%20Love/Controllers/Messages/ChatMessageCVC.swift"
-                  timestampString = "603570990.370809"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "516"
-                  endingLineNumber = "516"
-                  offsetFromSymbolStart = "148">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 () -&gt; () in Find_Love.ChatMessageCVC.imageUserTapped(__C.UITapGestureRecognizer) -&gt; ()"
-                  moduleName = "Find Love"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kaiserdem/Desktop/WorkDev/Find%20Love/Find%20Love/Controllers/Messages/ChatMessageCVC.swift"
-                  timestampString = "603570990.374637"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "517"
-                  endingLineNumber = "517"
-                  offsetFromSymbolStart = "26">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -73,12 +26,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Find Love/Controllers/Messages/ChatMessageCVC.swift"
-            timestampString = "603578515.423324"
+            timestampString = "603916077.835977"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "522"
-            endingLineNumber = "522"
+            startingLineNumber = "529"
+            endingLineNumber = "529"
             landmarkName = "imageViewTapped(cell:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Find Love/View/CustomNotificationView/CustomNotificationView.swift"
+            timestampString = "603916077.836128"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "init(frame:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Find Love/Controllers/FeedVC.swift"
+            timestampString = "603916077.836297"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "observeChatInvitation()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

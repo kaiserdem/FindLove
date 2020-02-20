@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class Group: NSObject { // модель сообщений
+class Group: NSObject {
   
   var subject: String?
   var descriptions: String?

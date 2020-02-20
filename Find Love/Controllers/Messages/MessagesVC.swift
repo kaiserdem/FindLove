@@ -132,7 +132,6 @@ class MessagesVC: UIViewController {
   
   private func attempReloadOfTable(_ allow: Bool) { // вызывает таймер
     timer?.invalidate()
-    
     if allow == true {
       timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.tableReloadTable), userInfo: nil, repeats: true)
     }

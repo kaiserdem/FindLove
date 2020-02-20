@@ -29,6 +29,12 @@
 		AD32E35E23FC3BB000E6F912 /* ChatInvitationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E35D23FC3BB000E6F912 /* ChatInvitationVC.swift */; };
 		AD32E36623FC40C800E6F912 /* ChatInvitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E36423FC40C800E6F912 /* ChatInvitationCell.swift */; };
 		AD32E36723FC40C800E6F912 /* ChatInvitationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD32E36523FC40C800E6F912 /* ChatInvitationCell.xib */; };
+		AD464AC723FD7502002363B0 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD464AC623FD7502002363B0 /* APIManager.swift */; };
+		AD464ACA23FDAA81002363B0 /* ChatInvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD464AC923FDAA81002363B0 /* ChatInvitationView.swift */; };
+		AD464ACC23FDAA89002363B0 /* ChatInvitationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD464ACB23FDAA89002363B0 /* ChatInvitationView.xib */; };
+		AD464ACF23FEA376002363B0 /* CustomNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD464ACE23FEA376002363B0 /* CustomNotificationView.xib */; };
+		AD464AD123FEA37F002363B0 /* CustomNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD464AD023FEA37F002363B0 /* CustomNotificationView.swift */; };
+		AD464AD323FECFA7002363B0 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD464AD223FECFA7002363B0 /* Request.swift */; };
 		AD46C9E923D9E22400FC7002 /* ChatGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD46C9E823D9E22400FC7002 /* ChatGroupCell.swift */; };
 		AD4CC09A23EC8ADD004352F8 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */; };
 		AD4CC09B23EC8ADD004352F8 /* SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */; };
@@ -123,6 +129,12 @@
 		AD32E35D23FC3BB000E6F912 /* ChatInvitationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInvitationVC.swift; sourceTree = "<group>"; };
 		AD32E36423FC40C800E6F912 /* ChatInvitationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInvitationCell.swift; sourceTree = "<group>"; };
 		AD32E36523FC40C800E6F912 /* ChatInvitationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatInvitationCell.xib; sourceTree = "<group>"; };
+		AD464AC623FD7502002363B0 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		AD464AC923FDAA81002363B0 /* ChatInvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInvitationView.swift; sourceTree = "<group>"; };
+		AD464ACB23FDAA89002363B0 /* ChatInvitationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatInvitationView.xib; sourceTree = "<group>"; };
+		AD464ACE23FEA376002363B0 /* CustomNotificationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomNotificationView.xib; sourceTree = "<group>"; };
+		AD464AD023FEA37F002363B0 /* CustomNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNotificationView.swift; sourceTree = "<group>"; };
+		AD464AD223FECFA7002363B0 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		AD46C9E823D9E22400FC7002 /* ChatGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGroupCell.swift; sourceTree = "<group>"; };
 		AD4CC09823EC8ADD004352F8 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
 		AD4CC09923EC8ADD004352F8 /* SettingsHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsHeaderCell.xib; sourceTree = "<group>"; };
@@ -252,6 +264,7 @@
 				AD26BE8D23C0D47700EF1418 /* Post.swift */,
 				ADB8DED723CC7D11008D989E /* Group.swift */,
 				AD26946623B538A500D49887 /* Message.swift */,
+				AD464AD223FECFA7002363B0 /* Request.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -271,6 +284,8 @@
 		AD26947123B606BA00D49887 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AD464ACD23FEA348002363B0 /* CustomNotificationView */,
+				AD464AC823FDAA59002363B0 /* ChatInvitationView */,
 				AD32E35F23FC402100E6F912 /* ChatInvitationCell */,
 				ADB4A25123E44C64001D1A6A /* CustomAlertWarning */,
 				ADB4CD3A23E0AF60001DD8AF /* ProfileAlertViews */,
@@ -309,6 +324,24 @@
 				AD32E36523FC40C800E6F912 /* ChatInvitationCell.xib */,
 			);
 			path = ChatInvitationCell;
+			sourceTree = "<group>";
+		};
+		AD464AC823FDAA59002363B0 /* ChatInvitationView */ = {
+			isa = PBXGroup;
+			children = (
+				AD464AC923FDAA81002363B0 /* ChatInvitationView.swift */,
+				AD464ACB23FDAA89002363B0 /* ChatInvitationView.xib */,
+			);
+			path = ChatInvitationView;
+			sourceTree = "<group>";
+		};
+		AD464ACD23FEA348002363B0 /* CustomNotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				AD464AD023FEA37F002363B0 /* CustomNotificationView.swift */,
+				AD464ACE23FEA376002363B0 /* CustomNotificationView.xib */,
+			);
+			path = CustomNotificationView;
 			sourceTree = "<group>";
 		};
 		AD5A563B23BFEB450032AB2A /* FeedCell */ = {
@@ -374,6 +407,7 @@
 				AD09E33B23D7066D00AAC162 /* Find Love.entitlements */,
 				AD09E33C23D7647D00AAC162 /* GoogleService-Info.plist */,
 				AD8895C223B2122D00347A6A /* AppDelegate.swift */,
+				AD464AC623FD7502002363B0 /* APIManager.swift */,
 				AD98E3D323C729B9003A6DA8 /* Main.storyboard */,
 				AD26947023B6049100D49887 /* Extensions */,
 				AD26946F23B6047B00D49887 /* Model */,
@@ -718,6 +752,7 @@
 				ADFCA85C23DDEDFC004067A9 /* ChatWithStrangerCell.xib in Resources */,
 				ADB8079423D05B2100847897 /* OpenFeedPost.xib in Resources */,
 				AD8895D723B2128C00347A6A /* HelloVC.xib in Resources */,
+				AD464ACC23FDAA89002363B0 /* ChatInvitationView.xib in Resources */,
 				ADB4A25523E44CCF001D1A6A /* CustomAlertWarning.xib in Resources */,
 				ADC55A9B23E8792B002BEAF7 /* AboutSelfViewCell.xib in Resources */,
 				ADC55A8923E74591002BEAF7 /* UserProfileInfoView.xib in Resources */,
@@ -736,6 +771,7 @@
 				AD26946D23B6019200D49887 /* UserCell.xib in Resources */,
 				ADC55A8F23E878A7002BEAF7 /* InformationViewCell.xib in Resources */,
 				ADFCA86123DDFDA9004067A9 /* SearchStrangerForChatView.xib in Resources */,
+				AD464ACF23FEA376002363B0 /* CustomNotificationView.xib in Resources */,
 				AD8895DE23B2162C00347A6A /* RegistrationVC.xib in Resources */,
 				ADC55A9723E878FD002BEAF7 /* OrientationViewCell.xib in Resources */,
 				ADEE6FA923EB3F3E008352C0 /* SettingButtonNextCell.xib in Resources */,
@@ -799,15 +835,18 @@
 				ADC55A9A23E8792B002BEAF7 /* AboutSelfViewCell.swift in Sources */,
 				ADFCA85F23DDFD9E004067A9 /* SearchStrangerForChatView.swift in Sources */,
 				AD32E29F23F5E62A00E6F912 /* BlockedUsersVC.swift in Sources */,
+				AD464AD123FEA37F002363B0 /* CustomNotificationView.swift in Sources */,
 				AD26946923B5393B00D49887 /* UIImageView.swift in Sources */,
 				ADB4CD4423E18BF2001DD8AF /* StatusView.swift in Sources */,
 				ADEE6FA423EB3E23008352C0 /* SettingsTextFieldCell.swift in Sources */,
 				ADB8079223D05B1300847897 /* OpenFeedPost.swift in Sources */,
 				ADB4A25323E44CC0001D1A6A /* CustomAlertWarning.swift in Sources */,
+				AD464ACA23FDAA81002363B0 /* ChatInvitationView.swift in Sources */,
 				AD8895C323B2122D00347A6A /* AppDelegate.swift in Sources */,
 				ADB8DECF23CA1A15008D989E /* MessagesVC.swift in Sources */,
 				ADB8DED823CC7D11008D989E /* Group.swift in Sources */,
 				AD5A563E23BFEB750032AB2A /* FeedCell.swift in Sources */,
+				AD464AD323FECFA7002363B0 /* Request.swift in Sources */,
 				AD8895DD23B2162C00347A6A /* RegistrationVC.swift in Sources */,
 				ADEE6FA823EB3F3E008352C0 /* SettingButtonNextCell.swift in Sources */,
 				AD8895E223B21F5300347A6A /* SingInVC.swift in Sources */,
@@ -843,6 +882,7 @@
 				ADEE6F9C23EB32D6008352C0 /* SettingsVC.swift in Sources */,
 				ADEE6F9A23E9871E008352C0 /* UIResponder.swift in Sources */,
 				AD26946C23B6019200D49887 /* UserCell.swift in Sources */,
+				AD464AC723FD7502002363B0 /* APIManager.swift in Sources */,
 				ADFD0F4723E980D4008D2B9C /* UserDefault.swift in Sources */,
 				AD5A563423BFBFCD0032AB2A /* FeedVC.swift in Sources */,
 				AD26BE8E23C0D47700EF1418 /* Post.swift in Sources */,

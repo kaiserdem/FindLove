@@ -206,6 +206,11 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
         guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
         
         let message = Message(dictionary: dictionary)
+        
+        if message.stausMessage == "3" {
+           print("chat invitation")
+          
+        } else {
           message.messadeId = snapshot.key
           self?.messages.append(message)
           
@@ -215,6 +220,8 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
             //проскролить
             self?.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
           }
+        }
+        
       }, withCancel: nil)
     }, withCancel: nil)
   }
@@ -543,31 +550,6 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
         }
       }
       }, withCancel: nil)
-  }
-  
-  @objc func imageUserTapped(_ gestureRecognizer: UITapGestureRecognizer) {
-    
-    
-    
-//    self.showAlertMulty(write: false, profile: true, invite: true, complain: true, block: true, cancels: true, choiceWriteAction: {
-//
-//    }, choiceOpenProfile: {
-//      self.openProfile()
-//
-//    }, choiceInviteChat: {
-//      print("choiceInviteChat")
-//
-//    }, choiceComplain: {
-//      self?.openComplainVC(user, message: message.text ?? "", messageId: message.messadeId! , fromUserId: message.fromId!)
-//      return
-//
-//    }, choiceBlockUser: {
-//      self.arrayBlockUsers.append(self.user!.id!)
-//      self.defaults.set(self.arrayBlockUsers, forKey: "arrayBlockUsers")
-//      self.observeMessages()
-//    }) {
-//      return
-//    }
   }
   
   func openComplainVC(_ user: User?, message: String, messageId: String, fromUserId: String) {

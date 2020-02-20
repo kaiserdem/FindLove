@@ -25,9 +25,6 @@ class User: NSObject, Codable {
   var getMessageFromWomen: String?
   var purchases: String?
   
-  
-  
-  
   init(dictionary: [String: AnyObject]) {
     self.id = dictionary["id"] as? String
     self.name = dictionary["name"] as? String

@@ -40,24 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     
     FirebaseApp.configure()
-    
     registerForPushNotifications()
-    
     checkIfUserIsLogedIn()
     
     return true
-  }
-  
-  func fetchUser() {
-    guard let uid = Auth.auth().currentUser?.uid else { return }
-    // получаем uid по из базы данных, берем значение
-    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-      
-      if let dictionary = snapshot.value as? [String: AnyObject] {
-        let user = User(dictionary: dictionary)
-        user.id = snapshot.key
-      }
-    }, withCancel: nil)
   }
   
   // MARK: - Push Notificarion
@@ -123,8 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
   }
   
-  
-  
+
   func applicationWillResignActive(_ application: UIApplication) {
   }
   
@@ -143,7 +128,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   // MARK: - Auth
   
   func checkIfUserIsLogedIn() { // проверка если пользователь вошел в систему
-    
     if Auth.auth().currentUser?.uid == nil { // если мы не вошли
       loadHelloVC()
     } else {
@@ -160,7 +144,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   }
   
   func loadFeedVC() {
-    
     let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     let initialViewControlleripad : UIViewController = mainStoryboardIpad.instantiateViewController(withIdentifier: "CustomTabBar") as UIViewController
     self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -169,7 +152,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   }
   
 }
-
 
 extension UIApplication {
   var statusBarView: UIView? {
