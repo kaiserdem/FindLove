@@ -47,6 +47,10 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     
     NotificationCenter.default.addObserver(self, selector: #selector(makeTransitionToComplainVC(_:)), name: NSNotification.Name("openComplaintVC"), object: nil)
     
+    NotificationCenter.default.addObserver(self, selector: #selector(transitionToChatGroup(_:)), name: NSNotification.Name("toChatGroup"), object: nil)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(transitionToGroupInvintation(_:)), name: NSNotification.Name("ToGroupInvintation"), object: nil)
+    
     checkAuht()
     uploadTableView()
     observeChatInvitation()
@@ -97,9 +101,11 @@ class FeedVC: UIViewController, CellSubclassDelegate {
         if self?.arrayBlockUsers.contains(request.fromUserId!) == false {
           if request.statusRequest == "0" {
             let invitationView = ChatInvitationView(frame: (self?.view.frame)!)
+            invitationView.request = request
             invitationView.toGroupTextView.text = request.toGroup
             invitationView.userNameLabel.text = request.fromUser
             invitationView.userImageView.loadImageUsingCache(request.fromImageUrl!)
+            invitationView.requestId = snapshot.key
             self?.view.addSubview(invitationView)
           }
         } else {
@@ -149,6 +155,13 @@ class FeedVC: UIViewController, CellSubclassDelegate {
       }
     }
   }
+  
+  private func chatInvition(_ user: User?) {
+    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc = storyBoard.instantiateViewController(withIdentifier: "ChatInvitationVC") as! ChatInvitationVC
+    vc.user = user
+    self.present(vc, animated: true, completion: nil)
+  }
 
   @objc func makeTransition(_ notification: Notification) {
      let toUser = notification.userInfo?["user"] as? User
@@ -164,7 +177,29 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     openComplainVC(toUser)
   }
   
-  func openComplainVC(_ user: User?) {
+  @objc func transitionToChatGroup(_ notification: Notification) {
+    let toGroup = notification.userInfo?["group"] as Any
+    let ref = Database.database().reference().child("groups").child(toGroup as! String)
+    ref.observeSingleEvent(of: .value) { [weak self] (snapshot) in
+      if let dictionary = snapshot.value as? [String: AnyObject] {
+        let group = Group(dictionary: dictionary)
+        self?.toChatGroup(group)
+      }
+    }
+  }
+  
+  @objc func transitionToGroupInvintation(_ notification: Notification) {
+    let user = notification.userInfo?["user"] as? User
+    chatInvition(user)
+  }
+  
+  private func toChatGroup(_ group: Group) {
+    let vc = ChatGroupCVC(collectionViewLayout: UICollectionViewFlowLayout())
+    vc.group = group
+    self.present(vc, animated: true, completion: nil)
+  }
+  
+  private func openComplainVC(_ user: User?) {
     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     let vc = storyBoard.instantiateViewController(withIdentifier: "ComplainVС") as! ComplainVС
     vc.user = user
@@ -174,7 +209,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     self.present(vc, animated: true, completion: nil)
   }
   
-  func openChatWithUser(_ user: User?) {
+  private func openChatWithUser(_ user: User?) {
     let vc = ReplyAndWriteMessageCVC(collectionViewLayout: UICollectionViewFlowLayout())
     vc.user = user
     vc.stausMessage = "2"

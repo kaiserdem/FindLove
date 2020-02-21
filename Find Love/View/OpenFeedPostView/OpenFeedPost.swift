@@ -15,6 +15,7 @@ class OpenFeedPost: UIView {
   @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var replyButton: UIButton!
+  @IBOutlet weak var chatInvitationButton: UIButton!
   @IBOutlet weak var closeButton: UIButton!
   @IBOutlet weak var blockButton: UIButton!
   @IBOutlet weak var complaintButton: UIButton!
@@ -40,18 +41,18 @@ class OpenFeedPost: UIView {
     
     replyButton.applyGradient2(with: [#colorLiteral(red: 0.02352941176, green: 0.1764705882, blue: 0.5333333333, alpha: 1), #colorLiteral(red: 0.1529411765, green: 0.4509803922, blue: 0.8666666667, alpha: 1), #colorLiteral(red: 0.2196078431, green: 0.7921568627, blue: 0.7176470588, alpha: 1)], gradient: .horizontal)
     replyButton.layer.cornerRadius = 23
+    chatInvitationButton.applyGradient2(with:  [#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1), #colorLiteral(red: 0.9764705896, green: 1, blue: 0.4059954256, alpha: 1)], gradient: .horizontal)
+    chatInvitationButton.layer.cornerRadius = 23
+    chatInvitationButton.layoutIfNeeded()
     postTextView.layer.cornerRadius = 6
     postTextView.sizeToFit()
     postTextView.layoutIfNeeded()
     textViewHeightConstraint.constant = postTextView.intrinsicContentSize.height
-    
     profileImageView.layer.cornerRadius = 23
     profileImageView.layoutIfNeeded()
-    
-    blockButton.layer.cornerRadius = 18
+    blockButton.layer.cornerRadius = 16
     blockButton.layoutIfNeeded()
-    
-    complaintButton.layer.cornerRadius = 18
+    complaintButton.layer.cornerRadius = 16
     complaintButton.layoutIfNeeded()
     
   }
@@ -72,13 +73,14 @@ class OpenFeedPost: UIView {
     self.removeFromSuperview()
   }
   
-  @IBAction func complaintButtonAction(_ sender: Any) {
-    NotificationCenter.default.post(name: NSNotification.Name("openComplaintVC"), object: nil, userInfo: ["user": user as Any])
+  @IBAction func chatInvitationButtonAction(_ sender: Any) {
+     NotificationCenter.default.post(name: NSNotification.Name("ToGroupInvintation"), object: nil, userInfo: ["user": user as Any])
     self.removeFromSuperview()
   }
   
-  deinit {
-    NotificationCenter.default.removeObserver(self)
+  @IBAction func complaintButtonAction(_ sender: Any) {
+    NotificationCenter.default.post(name: NSNotification.Name("openComplaintVC"), object: nil, userInfo: ["user": user as Any])
+    self.removeFromSuperview()
   }
   
   @IBAction func blockButtonAction(_ sender: Any) {

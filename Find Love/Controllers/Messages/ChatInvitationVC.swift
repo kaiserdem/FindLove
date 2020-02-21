@@ -18,11 +18,7 @@ class ChatInvitationVC: UIViewController {
   
   var groups = [Group]()
   var user: User?
-  var currentUser: User? {
-    didSet {
-      print(currentUser?.id)
-    }
-  }
+  var currentUser: User?
   
     override func viewDidLoad() {
         super.viewDidLoad()
