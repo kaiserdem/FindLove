@@ -121,6 +121,11 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
     setupKeyboardObservise()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(true)
+    observeChatInvitation()
+  }
+  
   override func viewDidDisappear(_ animated: Bool) {
     NotificationCenter.default.removeObserver(self) // убрать обсервер
   }
@@ -224,6 +229,37 @@ class ChatMessageCVC: UICollectionViewController, UITextFieldDelegate, UICollect
         
       }, withCancel: nil)
     }, withCancel: nil)
+  }
+  
+  private func observeChatInvitation() {
+    
+    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+    
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    let ref = Database.database().reference().child("user-request").child(uid)
+    ref.observe(.childAdded, with: { [weak self] (snapshot) in
+      
+      guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+      
+      let request = Request(dictionary: dictionary)
+      
+      if request.toId == uid {
+        if self?.arrayBlockUsers.contains(request.fromUserId!) == false {
+          if request.statusRequest == "0" {
+            let invitationView = ChatInvitationView(frame: (self?.view.frame)!)
+            invitationView.request = request
+            invitationView.toGroupTextView.text = request.toGroup
+            invitationView.userNameLabel.text = request.fromUser
+            invitationView.userImageView.loadImageUsingCache(request.fromImageUrl!)
+            invitationView.requestId = snapshot.key
+            self?.view.addSubview(invitationView)
+          }
+        } else {
+          ref.child(snapshot.key).removeValue()
+        }
+      }
+      }, withCancel: nil)
   }
   
   private func setupCell(_ cell: ChatMessageCell, message: Message) {

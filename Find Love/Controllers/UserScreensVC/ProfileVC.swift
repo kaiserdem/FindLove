@@ -28,6 +28,8 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
   var startingImageView: UIImageView?
   
   let tableView = UITableView()
+  let defaults = UserDefaults.standard
+  lazy var arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
   var user: User?
   
   override func viewDidLoad() {
@@ -50,7 +52,12 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
     tableView.tableFooterView = UIView() // убрать все что ниже
   }
   
-  func uploadTableView() {
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(true)
+    observeChatInvitation()
+  }
+  
+  private func uploadTableView() {
     
     tableView.delegate = self
     tableView.dataSource = self
@@ -75,7 +82,38 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
     tableView.allowsMultipleSelectionDuringEditing = true
   }
   
-  func changeAboutSelfTapped(cell: AboutSelfViewCell) {
+  private func observeChatInvitation() {
+    
+    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+    
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    let ref = Database.database().reference().child("user-request").child(uid)
+    ref.observe(.childAdded, with: { [weak self] (snapshot) in
+      
+      guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+      
+      let request = Request(dictionary: dictionary)
+      
+      if request.toId == uid {
+        if self?.arrayBlockUsers.contains(request.fromUserId!) == false {
+          if request.statusRequest == "0" {
+            let invitationView = ChatInvitationView(frame: (self?.view.frame)!)
+            invitationView.request = request
+            invitationView.toGroupTextView.text = request.toGroup
+            invitationView.userNameLabel.text = request.fromUser
+            invitationView.userImageView.loadImageUsingCache(request.fromImageUrl!)
+            invitationView.requestId = snapshot.key
+            self?.view.addSubview(invitationView)
+          }
+        } else {
+          ref.child(snapshot.key).removeValue()
+        }
+      }
+      }, withCancel: nil)
+  }
+  
+   func changeAboutSelfTapped(cell: AboutSelfViewCell) {
     let view = AboutSelfView(frame: self.view.frame)
     if user?.aboutSelf != nil {
       view.aboutSelfTextView.text = user!.aboutSelf!

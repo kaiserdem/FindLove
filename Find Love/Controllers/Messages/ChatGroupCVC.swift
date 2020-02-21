@@ -136,6 +136,11 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
     UIApplication.shared.statusBarView?.backgroundColor = .black
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(true)
+    observeChatInvitation()
+  }
+  
   override func viewDidDisappear(_ animated: Bool) {
     NotificationCenter.default.removeObserver(self) // убрать обсервер
   }
@@ -200,7 +205,38 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
     nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
   }
   
-  func fetchUser() { // выбрать пользователя
+  private func observeChatInvitation() {
+    
+    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+    
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    let ref = Database.database().reference().child("user-request").child(uid)
+    ref.observe(.childAdded, with: { [weak self] (snapshot) in
+      
+      guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+      
+      let request = Request(dictionary: dictionary)
+      
+      if request.toId == uid {
+        if self?.arrayBlockUsers.contains(request.fromUserId!) == false {
+          if request.statusRequest == "0" {
+            let invitationView = ChatInvitationView(frame: (self?.view.frame)!)
+            invitationView.request = request
+            invitationView.toGroupTextView.text = request.toGroup
+            invitationView.userNameLabel.text = request.fromUser
+            invitationView.userImageView.loadImageUsingCache(request.fromImageUrl!)
+            invitationView.requestId = snapshot.key
+            self?.view.addSubview(invitationView)
+          }
+        } else {
+          ref.child(snapshot.key).removeValue()
+        }
+      }
+      }, withCancel: nil)
+  }
+  
+  private func fetchUser() { // выбрать пользователя
     
     guard let uid = Auth.auth().currentUser?.uid else { return }
     
@@ -215,7 +251,7 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
   }
   
   // утечка памяти, не работает [weak self]
-  func observeMessages() {
+  private func observeMessages() {
     
     arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
     

@@ -84,7 +84,7 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     present(vc, animated: true, completion: nil)
   }
   
-  func observeChatInvitation() {
+  private func observeChatInvitation() {
     
     arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
     

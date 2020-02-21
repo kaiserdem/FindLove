@@ -30,11 +30,42 @@ class MessagesVC: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(true)
-    
     loadUserMessages()
+    observeChatInvitation()
   }
   
-  func uploadTableView() {
+  private func observeChatInvitation() {
+    
+    arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
+    
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    let ref = Database.database().reference().child("user-request").child(uid)
+    ref.observe(.childAdded, with: { [weak self] (snapshot) in
+      
+      guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+      
+      let request = Request(dictionary: dictionary)
+      
+      if request.toId == uid {
+        if self?.arrayBlockUsers.contains(request.fromUserId!) == false {
+          if request.statusRequest == "0" {
+            let invitationView = ChatInvitationView(frame: (self?.view.frame)!)
+            invitationView.request = request
+            invitationView.toGroupTextView.text = request.toGroup
+            invitationView.userNameLabel.text = request.fromUser
+            invitationView.userImageView.loadImageUsingCache(request.fromImageUrl!)
+            invitationView.requestId = snapshot.key
+            self?.view.addSubview(invitationView)
+          }
+        } else {
+          ref.child(snapshot.key).removeValue()
+        }
+      }
+      }, withCancel: nil)
+  }
+  
+  private func uploadTableView() {
     
     tableView.delegate = self
     tableView.dataSource = self
@@ -54,7 +85,7 @@ class MessagesVC: UIViewController {
     tableView.allowsMultipleSelectionDuringEditing = true
   }
   
-  func fetchUser() { // выбрать пользователя
+  private func fetchUser() { // выбрать пользователя
     guard let uid = Auth.auth().currentUser?.uid else { return }
     
     Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
@@ -66,26 +97,26 @@ class MessagesVC: UIViewController {
     }, withCancel: nil)
   }
   
-  func loadUserMessages() {
+  private func loadUserMessages() {
     messages.removeAll()
     messagesDictionary.removeAll()
     observeUserMessages()
     tableView.reloadData()
   }
   
-  func openSearchStrangerView() {
+  private func openSearchStrangerView() {
     let view =  SearchStrangerForChatView(frame: self.view.frame)
     self.view.addSubview(view)
   }
   
-  func showChatLogVCForUser(_ user: User?) {
+  private func showChatLogVCForUser(_ user: User?) {
     let vc = ChatMessageCVC(collectionViewLayout: UICollectionViewFlowLayout())
     vc.user = user
     present(vc, animated: true, completion: nil)
     self.navigationController?.pushViewController(vc, animated: true)
   }
   
-  func observeUserMessages() {
+  private func observeUserMessages() {
     
     arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
     
