@@ -41,8 +41,7 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
     navigationController?.navigationBar.isHidden = true
     
     uploadTableView()
-    fetchUser()
-    
+   
     self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(sender:))))
   }
   
@@ -52,9 +51,10 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
     tableView.tableFooterView = UIView() // убрать все что ниже
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(true)
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
     observeChatInvitation()
+    observeUser()
   }
   
   private func uploadTableView() {
@@ -81,6 +81,30 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
     
     tableView.allowsMultipleSelectionDuringEditing = true
   }
+  
+  private func observeUser() {
+    
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    let ref = Database.database().reference().child("users").child(uid)
+    ref.observe(.value, with: { [weak self] (snapshot) in
+      
+      guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+      
+      let user = User(dictionary: dictionary)
+     
+      self?.user = user
+      
+      UserDefaults.standard.save(user, forKey: "currentUserKey")
+      
+      DispatchQueue.main.async {
+        self?.tableView.reloadData()
+        self?.tableView.layoutIfNeeded()
+      }
+      
+      }, withCancel: nil)
+  }
+
   
   private func observeChatInvitation() {
     
@@ -247,17 +271,6 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
     view.endEditing(true)
   }
   
-  func fetchUser() {
-    guard let uid = Auth.auth().currentUser?.uid else { return }
-    Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
-      if let dictionary = snapshot.value as? [String: AnyObject] {
-        let user = User(dictionary: dictionary)
-        user.id = snapshot.key
-        self?.user = user
-      }
-    }, withCancel: nil)
-  }
-  
   func calculateHeight(_ properties: String) -> CGFloat {
     var heightReturn: CGFloat = 0
         switch properties {
@@ -326,7 +339,7 @@ extension ProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDele
       let refImagePath = ref.child("\(imageName).png")
 
       if let uploadData = selectedImage.jpegData(compressionQuality: 0.75) {
-        refImagePath.putData(uploadData, metadata: nil) { (metadata, error) in
+        refImagePath.putData(uploadData, metadata: nil) { [weak self]  (metadata, error) in
           if error != nil {
             print(error?.localizedDescription as Any)
             return
@@ -339,16 +352,22 @@ extension ProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDele
             if let imageUrl = url?.absoluteString {
               let refUsersDatabase = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
               
+              self?.user?.profileImageUrl = imageUrl
+              UserDefaults.standard.save(self?.user, forKey: "currentUserKey")
+              
               let values = ["profileImageUrl": imageUrl] as [String : Any]
               refUsersDatabase.updateChildValues(values)
-              
             }
           })
         }
       }
-      
     }
-    dismiss(animated: true, completion: nil)
+    dismiss(animated: true) {
+      DispatchQueue.main.async {
+        self.tableView.reloadData()
+        self.tableView.layoutIfNeeded()
+      }
+    }
   }
   
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -364,6 +383,9 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
+   // let objUser = UserDefaults.standard.retrieve(object: User.self, fromKey: "currentUserKey")
+   // user = objUser
+ 
     if indexPath.row == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "InformationViewCell", for: indexPath) as! InformationViewCell
       cell.delegate = self
@@ -400,7 +422,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
       
       if user!.status != nil {
         cell.statusTextView.textColor = .white
-        cell.statusTextView.text = user!.status
+        cell.statusTextView.text = user?.status
       } else {
         cell.statusTextView.text = "Тут пока пусто, опишите свое настроение"
         cell.statusTextView.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)

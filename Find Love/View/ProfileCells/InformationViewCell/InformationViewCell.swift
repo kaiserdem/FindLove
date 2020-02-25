@@ -19,6 +19,14 @@ class InformationViewCell: UITableViewCell {
   @IBOutlet weak var genderLabel: UILabel!
   @IBOutlet weak var changeImageBtn: UIButton!
   
+  var user: User? {
+    didSet {
+      print(user?.name)
+      print(user?.age)
+      print(user?.gender)
+    }
+  }
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     changeDataBtn.setImage(UIImage(named: "pen")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)

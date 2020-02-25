@@ -24,6 +24,7 @@ class User: NSObject, Codable {
   var getMessageFromMen: String?
   var getMessageFromWomen: String?
   var purchases: String?
+  var statusOnline: String?
   
   init(dictionary: [String: AnyObject]) {
     self.id = dictionary["id"] as? String
@@ -39,5 +40,6 @@ class User: NSObject, Codable {
     self.getMessageFromMen = dictionary["getMessageFromMen"] as? String
     self.getMessageFromWomen = dictionary["getMessageFromWomen"] as? String
     self.purchases = dictionary["purchases"] as? String
+    self.statusOnline = dictionary["statusOnline"] as? String
   }
 }

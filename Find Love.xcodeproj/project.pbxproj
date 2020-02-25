@@ -65,6 +65,7 @@
 		ADB4CD4923E19788001DD8AF /* OrientationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB4CD4823E19788001DD8AF /* OrientationView.swift */; };
 		ADB4CD4C23E19C8B001DD8AF /* AboutSelfView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB4CD4B23E19C8B001DD8AF /* AboutSelfView.xib */; };
 		ADB4CD4E23E19C97001DD8AF /* AboutSelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB4CD4D23E19C97001DD8AF /* AboutSelfView.swift */; };
+		ADB7D92324031CC000F5C5F4 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D92224031CC000F5C5F4 /* UITextView.swift */; };
 		ADB8079223D05B1300847897 /* OpenFeedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8079123D05B1300847897 /* OpenFeedPost.swift */; };
 		ADB8079423D05B2100847897 /* OpenFeedPost.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB8079323D05B2100847897 /* OpenFeedPost.xib */; };
 		ADB8079A23D19DC600847897 /* ReplyAndWriteMessageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8079923D19DC600847897 /* ReplyAndWriteMessageCVC.swift */; };
@@ -166,6 +167,7 @@
 		ADB4CD4823E19788001DD8AF /* OrientationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationView.swift; sourceTree = "<group>"; };
 		ADB4CD4B23E19C8B001DD8AF /* AboutSelfView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutSelfView.xib; sourceTree = "<group>"; };
 		ADB4CD4D23E19C97001DD8AF /* AboutSelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSelfView.swift; sourceTree = "<group>"; };
+		ADB7D92224031CC000F5C5F4 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		ADB8079123D05B1300847897 /* OpenFeedPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFeedPost.swift; sourceTree = "<group>"; };
 		ADB8079323D05B2100847897 /* OpenFeedPost.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenFeedPost.xib; sourceTree = "<group>"; };
 		ADB8079923D19DC600847897 /* ReplyAndWriteMessageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyAndWriteMessageCVC.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				AD26946823B5393B00D49887 /* UIImageView.swift */,
 				ADB4A24E23E44240001D1A6A /* UIViewController.swift */,
 				ADBA195523C2A41C009B45EC /* UIView.swift */,
+				ADB7D92224031CC000F5C5F4 /* UITextView.swift */,
 				ADEE6F9923E9871E008352C0 /* UIResponder.swift */,
 				ADFD0F4623E980D4008D2B9C /* UserDefault.swift */,
 			);
@@ -282,6 +285,7 @@
 		AD26947123B606BA00D49887 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AD98E3D323C729B9003A6DA8 /* Main.storyboard */,
 				AD464ACD23FEA348002363B0 /* CustomNotificationView */,
 				AD464AC823FDAA59002363B0 /* ChatInvitationView */,
 				AD32E35F23FC402100E6F912 /* ChatInvitationCell */,
@@ -405,11 +409,10 @@
 				AD09E33B23D7066D00AAC162 /* Find Love.entitlements */,
 				AD09E33C23D7647D00AAC162 /* GoogleService-Info.plist */,
 				AD8895C223B2122D00347A6A /* AppDelegate.swift */,
-				AD98E3D323C729B9003A6DA8 /* Main.storyboard */,
-				AD26947023B6049100D49887 /* Extensions */,
 				AD26946F23B6047B00D49887 /* Model */,
 				AD26947123B606BA00D49887 /* View */,
 				AD8895D823B2159F00347A6A /* Controllers */,
+				AD26947023B6049100D49887 /* Extensions */,
 				AD8895CB23B2122F00347A6A /* LaunchScreen.storyboard */,
 				AD8895CE23B2122F00347A6A /* Info.plist */,
 				AD293CAC23BC1D530091808F /* Assets.xcassets */,
@@ -881,6 +884,7 @@
 				AD26946C23B6019200D49887 /* UserCell.swift in Sources */,
 				ADFD0F4723E980D4008D2B9C /* UserDefault.swift in Sources */,
 				AD5A563423BFBFCD0032AB2A /* FeedVC.swift in Sources */,
+				ADB7D92324031CC000F5C5F4 /* UITextView.swift in Sources */,
 				AD26BE8E23C0D47700EF1418 /* Post.swift in Sources */,
 				AD26946523B4FF8100D49887 /* User.swift in Sources */,
 				ADB4CD4923E19788001DD8AF /* OrientationView.swift in Sources */,

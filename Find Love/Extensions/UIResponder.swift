@@ -55,6 +55,13 @@ extension UIResponder {
 
 extension UIResponder {
   
+  func statusOnlineValidator(string: String) -> String {
+    if string == "0" {
+      return ""
+    } else {
+      return "Онлайн"
+    }
+  }
   
   func genderValidatorToText(string: String) -> String {
     if string == "1" {

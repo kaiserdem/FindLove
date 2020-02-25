@@ -17,6 +17,7 @@ class MessagesVC: UIViewController {
   var messages = [Message]()
   var messagesDictionary = [String: Message]() // для сортировки
   var timer: Timer?
+  var user: User?
   
   let defaults = UserDefaults.standard
   lazy var arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
@@ -26,6 +27,7 @@ class MessagesVC: UIViewController {
     
     fetchUser()
     uploadTableView()
+   // observeUser()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -33,6 +35,20 @@ class MessagesVC: UIViewController {
     loadUserMessages()
     observeChatInvitation()
   }
+  
+//  private func observeUser() {
+//
+//    guard let uid = Auth.auth().currentUser?.uid else { return }
+//
+//    let ref = Database.database().reference().child("users").child(uid)
+//    ref.observe(.childAdded, with: { [weak self] (snapshot) in
+//
+//      guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+//      let user = User(dictionary: dictionary)
+//      self?.user = user
+//
+//      }, withCancel: nil)
+//  }
   
   private func observeChatInvitation() {
     

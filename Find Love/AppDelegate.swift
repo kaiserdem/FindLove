@@ -123,6 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   }
   
   func applicationWillTerminate(_ application: UIApplication) {
+    reloadOnlineStatus(isOnline: false)
   }
   
   // MARK: - Auth
@@ -132,6 +133,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
       loadHelloVC()
     } else {
       loadFeedVC()
+      reloadOnlineStatus(isOnline: true)
+    }
+  }
+  
+  func reloadOnlineStatus(isOnline online: Bool) {
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    
+    let ref = Database.database().reference().child("users").child(uid)
+    
+    if online == true {
+      let valuesStatus = ["statusOnline": "1"] as [String : Any]
+      ref.updateChildValues(valuesStatus)
+    } else {
+      let valuesStatus = ["statusOnline": "0"] as [String : Any]
+      ref.updateChildValues(valuesStatus)
     }
   }
   

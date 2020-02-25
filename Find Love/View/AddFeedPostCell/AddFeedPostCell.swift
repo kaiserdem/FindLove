@@ -14,6 +14,12 @@ class AddFeedPostCell: UITableViewCell {
   @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var addBtn: UIButton!
   
+  var user: User? {
+    didSet {
+      loadCell()
+    }
+  }
+
     override func awakeFromNib() {
         super.awakeFromNib()
       
@@ -21,11 +27,23 @@ class AddFeedPostCell: UITableViewCell {
       addBtn.setImage(UIImage(named: "add")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
       addBtn.imageView?.tintColor = .white
       
+      let objUser = UserDefaults.standard.retrieve(object: User.self, fromKey: "currentUserKey")
+      user = objUser
+      
   }
-  
+ 
   override func layoutSubviews() {
     super.layoutSubviews()
     postTextView.centerVertically()
+  }
+  
+  private func loadCell() {
+    DispatchQueue.main.async {
+      if let profileImageView = self.user!.profileImageUrl {
+        self.profileImageView.loadImageUsingCache(profileImageView)
+        self.profileImageView.image = nil
+      }
+    }
   }
 
   override func setSelected(_ selected: Bool, animated: Bool) {
@@ -36,18 +54,4 @@ class AddFeedPostCell: UITableViewCell {
       contentView.backgroundColor = .black
     }
   }
-  
-    
-}
-
-extension UITextView {
-  
-  func centerVertically() {
-    let fittingSize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
-    let size = sizeThatFits(fittingSize)
-    let topOffset = (bounds.size.height - size.height * zoomScale) / 2
-    let positiveTopOffset = max(1, topOffset)
-    contentOffset.y = -positiveTopOffset
-  }
-  
 }

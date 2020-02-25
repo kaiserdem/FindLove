@@ -29,32 +29,22 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   let defaults = UserDefaults.standard
   lazy var arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
 
+  var currentPostText = ""
+  var currentPostId = ""
+  var postFromUserId = ""
   var currentUser: User?  {
     didSet {
       UserDefaults.standard.save(currentUser, forKey: "currentUserKey")
     }
   }
-  var currentPostText = ""
-  var currentPostId = ""
-  var postFromUserId = ""
   
   override func viewDidLoad() {
         super.viewDidLoad()
     
-    NotificationCenter.default.addObserver(self, selector: #selector(makeTransition(_:)), name: NSNotification.Name("makeTransitionToChat"), object: nil)
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(reloadObservePosts(_:)), name: NSNotification.Name("reloadTableView"), object: nil)
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(makeTransitionToComplainVC(_:)), name: NSNotification.Name("openComplaintVC"), object: nil)
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(transitionToChatGroup(_:)), name: NSNotification.Name("toChatGroup"), object: nil)
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(transitionToGroupInvintation(_:)), name: NSNotification.Name("ToGroupInvintation"), object: nil)
-    
     checkAuht()
     uploadTableView()
+    uploadNotifiationObserve()
     observeChatInvitation()
-    //observePosts()
   }
   
   override func viewWillLayoutSubviews() {
@@ -74,9 +64,17 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     NotificationCenter.default.removeObserver(self)
   }
   
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(true)
-    //NotificationCenter.default.removeObserver(self)
+  
+  private func uploadNotifiationObserve() {
+    NotificationCenter.default.addObserver(self, selector: #selector(makeTransition(_:)), name: NSNotification.Name("makeTransitionToChat"), object: nil)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadObservePosts(_:)), name: NSNotification.Name("reloadTableView"), object: nil)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(makeTransitionToComplainVC(_:)), name: NSNotification.Name("openComplaintVC"), object: nil)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(transitionToChatGroup(_:)), name: NSNotification.Name("toChatGroup"), object: nil)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(transitionToGroupInvintation(_:)), name: NSNotification.Name("ToGroupInvintation"), object: nil)
   }
 
   private func writePost() {
@@ -386,18 +384,7 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
       
       let cell = tableView.dequeueReusableCell(withIdentifier: "AddFeedPostCell", for: indexPath) as! AddFeedPostCell
       cell.contentView.backgroundColor = .black
-      Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
-        
-        if let dictionary = snapshot.value as? [String: AnyObject] {
-          let user = User(dictionary: dictionary)
-          user.id = snapshot.key
-          self?.user = user
-          self?.currentUser = user
-          if let profileImageView = user.profileImageUrl {
-            cell.profileImageView.loadImageUsingCache(profileImageView)
-          }
-        }
-      }, withCancel: nil)
+
       
     } else {
       

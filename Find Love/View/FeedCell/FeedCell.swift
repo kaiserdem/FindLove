@@ -14,6 +14,7 @@ class FeedCell: UITableViewCell {
   
   weak var delegate: CellSubclassDelegate?
   
+  @IBOutlet weak var statusOnlineLabel: UILabel!
   @IBOutlet weak var timeDateLabel: UILabel!
   @IBOutlet weak var countLikeLabel: UILabel!
   @IBOutlet weak var backView: UIView!
@@ -21,7 +22,6 @@ class FeedCell: UITableViewCell {
   @IBOutlet weak var viewsBtnLabel: UIButton!
   @IBOutlet weak var replyBtn: UIButton!
   @IBOutlet weak var likeBtn: UIButton!
-  @IBOutlet weak var stateOnlineLabel: UIView!
   @IBOutlet weak var locationLabel: UILabel!
   @IBOutlet weak var ageLabel: UILabel!
   @IBOutlet weak var nameLabel: UILabel!
@@ -38,6 +38,7 @@ class FeedCell: UITableViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     self.delegate = nil
+    self.userProfileImageView.image = nil
   }
   
   private func uploadPostData() {
@@ -53,9 +54,17 @@ class FeedCell: UITableViewCell {
         if let dictionary = snapshot.value as? [String: AnyObject] {
           self?.nameLabel.text = dictionary["name"] as? String
           
+          if let status = dictionary["statusOnline"] as? String {
+            
+             self?.statusOnlineLabel.text = self?.statusOnlineValidator(string: status)
+          } else {
+            self?.statusOnlineLabel.text = ""
+          }
+          
           if let profileImageView = dictionary["profileImageUrl"] as? String {
             self?.userProfileImageView.loadImageUsingCache(profileImageView)
           }
+  
         }
       }, withCancel: nil)
     }
