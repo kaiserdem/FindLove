@@ -62,7 +62,7 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
     tableView.delegate = self
     tableView.dataSource = self
     
-    tableView.backgroundColor = .black
+    tableView.backgroundColor = .white
     
     self.view.addSubview(tableView)
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -395,7 +395,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
       }
       
       if user!.gender != nil {
-        cell.genderLabel.textColor = .white
+        cell.genderLabel.textColor = .black
         let gender = user!.gender!
         let genderString = genderValidatorToText(string: gender)
         cell.genderLabel.text = "Пол: \(genderString)"
@@ -404,7 +404,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         cell.genderLabel.text = "Введите свой пол"
       }
       if user!.age != nil {
-        cell.ageLabel.textColor = .white
+        cell.ageLabel.textColor = .black
         let ageString = String(describing: user!.age!)
         cell.ageLabel.text = String(describing:"Возраст: \(ageString)")
       } else {

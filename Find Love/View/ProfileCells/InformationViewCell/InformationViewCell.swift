@@ -30,10 +30,10 @@ class InformationViewCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     changeDataBtn.setImage(UIImage(named: "pen")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
-    changeDataBtn.imageView?.tintColor = .white
+    changeDataBtn.imageView?.tintColor = .black
     
     changeImageBtn.setImage(UIImage(named: "add")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
-    changeImageBtn.imageView?.tintColor = .white
+    changeImageBtn.imageView?.tintColor = .black
   }
   
   override func prepareForReuse() {
@@ -44,9 +44,9 @@ class InformationViewCell: UITableViewCell {
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
     if selected {
-      contentView.backgroundColor = .black
+      contentView.backgroundColor = .white
     } else {
-      contentView.backgroundColor = .black
+      contentView.backgroundColor = .white
     }
   }
   

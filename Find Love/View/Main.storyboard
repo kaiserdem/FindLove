@@ -173,10 +173,10 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dj1-Pg-p0r">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="dj1-Pg-p0r" firstAttribute="top" secondItem="BP8-aL-PeB" secondAttribute="top" id="B10-Ev-Se9"/>
                             <constraint firstItem="dj1-Pg-p0r" firstAttribute="trailing" secondItem="BP8-aL-PeB" secondAttribute="trailing" id="hUO-4C-O2B"/>

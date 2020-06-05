@@ -133,7 +133,7 @@ class ChatGroupCVC: UICollectionViewController, UITextFieldDelegate, UICollectio
     fetchUser()
     observeMessages()
     
-    UIApplication.shared.statusBarView?.backgroundColor = .black
+    //UIApplication.shared.statusBarView?.backgroundColor = .black
   }
   
   override func viewDidAppear(_ animated: Bool) {

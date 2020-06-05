@@ -104,7 +104,7 @@ class ReplyAndWriteMessageCVC: UICollectionViewController, UITextFieldDelegate, 
     collectionView?.backgroundColor = #colorLiteral(red: 0.1830653183, green: 0.1830653183, blue: 0.1830653183, alpha: 1)
     collectionView?.keyboardDismissMode = .interactive
 
-    UIApplication.shared.statusBarView?.backgroundColor = .black
+    //UIApplication.shared.statusBarView?.backgroundColor = .black
     
     setupInputComponents()
     setupKeyboardObservise()
