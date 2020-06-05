@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		10922157054E58D2595F4C55 /* Pods_Find_Love.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD710EB921D70B94626E4CDB /* Pods_Find_Love.framework */; };
 		AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */; };
 		AD09E33D23D7647D00AAC162 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD09E33C23D7647D00AAC162 /* GoogleService-Info.plist */; };
 		AD1085A823DCA08A0009ADB3 /* AddFeedPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1085A623DCA08A0009ADB3 /* AddFeedPostCell.swift */; };
@@ -214,7 +213,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10922157054E58D2595F4C55 /* Pods_Find_Love.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

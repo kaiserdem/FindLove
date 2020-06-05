@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OsZ-I5-e7d">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OsZ-I5-e7d">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -205,12 +203,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Настройки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kH-15-vk3">
-                                <rect key="frame" x="140" y="34" width="134.5" height="50"/>
+                                <rect key="frame" x="140" y="59" width="134.5" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="QkA-Rg-cYK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iu5-C7-xwR">
@@ -234,14 +232,14 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="6kH-15-vk3" firstAttribute="centerY" secondItem="Iu5-C7-xwR" secondAttribute="centerY" id="0A0-iz-hcF"/>
                             <constraint firstItem="xKg-pz-0iN" firstAttribute="trailing" secondItem="84V-s0-aYP" secondAttribute="trailing" id="0fq-Rt-W6t"/>
                             <constraint firstItem="Iu5-C7-xwR" firstAttribute="top" secondItem="84V-s0-aYP" secondAttribute="top" constant="20" id="3Fo-Kb-FG2"/>
                             <constraint firstItem="xKg-pz-0iN" firstAttribute="top" secondItem="Iu5-C7-xwR" secondAttribute="bottom" id="3Ly-F8-Au3"/>
                             <constraint firstItem="84V-s0-aYP" firstAttribute="trailing" secondItem="Iu5-C7-xwR" secondAttribute="trailing" constant="20" id="6jr-DN-iEp"/>
                             <constraint firstItem="xKg-pz-0iN" firstAttribute="bottom" secondItem="84V-s0-aYP" secondAttribute="bottom" id="8mM-mf-iQd"/>
-                            <constraint firstItem="6kH-15-vk3" firstAttribute="top" secondItem="cCS-x3-kjL" secondAttribute="top" constant="34" id="LDz-RG-Be2"/>
                             <constraint firstItem="xKg-pz-0iN" firstAttribute="leading" secondItem="84V-s0-aYP" secondAttribute="leading" id="R1q-WK-ToA"/>
                             <constraint firstItem="6kH-15-vk3" firstAttribute="centerX" secondItem="cCS-x3-kjL" secondAttribute="centerX" id="fCk-lk-U1T"/>
                         </constraints>
@@ -508,12 +506,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Черный список" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ioq-K2-EUY">
-                                <rect key="frame" x="112" y="34" width="190" height="50"/>
+                                <rect key="frame" x="112" y="59" width="190" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="HKX-CE-Vyk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bpd-bT-Z5C">
@@ -537,16 +535,16 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ioq-K2-EUY" firstAttribute="centerX" secondItem="nVy-6r-T27" secondAttribute="centerX" id="7Jr-qb-XBl"/>
+                            <constraint firstItem="ioq-K2-EUY" firstAttribute="centerY" secondItem="bpd-bT-Z5C" secondAttribute="centerY" id="Jwd-c0-9ut"/>
                             <constraint firstItem="s69-Yu-eCU" firstAttribute="top" secondItem="bpd-bT-Z5C" secondAttribute="bottom" id="e1b-cF-Dhh"/>
                             <constraint firstItem="s69-Yu-eCU" firstAttribute="leading" secondItem="qSq-8a-CUS" secondAttribute="leading" id="fa3-v6-Mq5"/>
                             <constraint firstItem="s69-Yu-eCU" firstAttribute="bottom" secondItem="qSq-8a-CUS" secondAttribute="bottom" id="feO-2S-B9M"/>
                             <constraint firstItem="bpd-bT-Z5C" firstAttribute="top" secondItem="qSq-8a-CUS" secondAttribute="top" constant="20" id="fqg-ch-GEl"/>
                             <constraint firstItem="qSq-8a-CUS" firstAttribute="trailing" secondItem="bpd-bT-Z5C" secondAttribute="trailing" constant="20" id="jsF-8o-QKJ"/>
                             <constraint firstItem="s69-Yu-eCU" firstAttribute="trailing" secondItem="qSq-8a-CUS" secondAttribute="trailing" id="kme-nw-l0O"/>
-                            <constraint firstItem="ioq-K2-EUY" firstAttribute="top" secondItem="nVy-6r-T27" secondAttribute="top" constant="34" id="pMO-yw-TSP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qSq-8a-CUS"/>
                     </view>
