@@ -14,21 +14,21 @@ class AddFeedPostCell: UITableViewCell {
   @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var addBtn: UIButton!
   
-  var user: User? {
-    didSet {
-      loadCell()
-    }
-  }
+//  var user: User? {
+//    didSet {
+//      loadCell()
+//    }
+//  }
 
     override func awakeFromNib() {
         super.awakeFromNib()
       
       postTextView.isEditable = false
       addBtn.setImage(UIImage(named: "add")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
-      addBtn.imageView?.tintColor = .white
+      addBtn.imageView?.tintColor = .black
       
-      let objUser = UserDefaults.standard.retrieve(object: User.self, fromKey: "currentUserKey")
-      user = objUser
+//      let objUser = UserDefaults.standard.retrieve(object: User.self, fromKey: "currentUserKey")
+//      user = objUser
       
   }
  
@@ -37,14 +37,23 @@ class AddFeedPostCell: UITableViewCell {
     postTextView.centerVertically()
   }
   
-  private func loadCell() {
+  func configureWithItem(imageUrl: String) {
     DispatchQueue.main.async {
-      if let profileImageView = self.user!.profileImageUrl {
-        self.profileImageView.loadImageUsingCache(profileImageView)
-        self.profileImageView.image = nil
-      }
+      self.profileImageView.loadImageUsingCache(imageUrl)
     }
   }
+  
+//  private func loadCell() {
+//    DispatchQueue.main.async {
+//
+//      print(self.user?.profileImageUrl)
+//      guard (self.user?.profileImageUrl) != nil else { return }
+//      if let profileImageView = self.user!.profileImageUrl {
+//        self.profileImageView.loadImageUsingCache(profileImageView)
+//        self.profileImageView.image = nil
+//      }
+//    }
+//  }
 
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)

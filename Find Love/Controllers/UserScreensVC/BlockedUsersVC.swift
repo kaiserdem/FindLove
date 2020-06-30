@@ -76,7 +76,7 @@ class BlockedUsersVC: UIViewController, ProtocolBlockCellDelegate {
      let user = users[indexPath.row]
     
     if arrayBlockUsers.contains(user.id!) {
-      arrayBlockUsers.removeAll { $0 == user.id! }
+      arrayBlockUsers.removeAll { $0 == user.id }
       cell.userBtn.setTitleColor(#colorLiteral(red: 0.2722153795, green: 0.2650756615, blue: 0.2733453801, alpha: 1), for: .normal)
       cell.userBtn.tintColor = .black
       defaults.set(arrayBlockUsers, forKey: "arrayBlockUsers")

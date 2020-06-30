@@ -9,20 +9,23 @@
 import Foundation
 import Firebase
 
+let refDataBase = Database.database().reference()
+
 class NetworkManager {
   
   static let shared = NetworkManager()
-  
+    
   init() { return }
   
   var initialRead = true
 
   func getUsers(_ comletionHandeler: @escaping ([User]) -> Void) {
-       let usersRef = Database.database().reference().child("users")
+    let usersRef = refDataBase.child(RequestType.users.endPoint)
+    
       var users = [User]()
       usersRef.observe(.childAdded, with: { [weak self] snapshot in
+        
           if let dictionary = snapshot.value as? [String: AnyObject] {
-            
             let user = User(dictionary: dictionary)
             user.id = snapshot.key
             users.append(user)
@@ -41,48 +44,48 @@ class NetworkManager {
   }
   
   
-//  func getItems(_ comletionHandeler: @escaping ([User]) -> Void) {
-//       let usersRef = Database.database().reference().child("users")
-//      var users = [User]()
-//      usersRef.observe(.childAdded, with: { [weak self] snapshot in
-//          if let dictionary = snapshot.value as? [String: AnyObject] {
-//            
-//            let user = User(dictionary: dictionary)
-//            user.id = snapshot.key
-//            users.append(user)
-//          }
-//
-//          if self?.initialRead == false {
-//              print("a new user was added")
-//          }
-//      })
-//
-//      usersRef.observeSingleEvent(of: .value, with: { [weak self] snapshot in
-//          print("--inital load has completed and the last user was read--")
-//        comletionHandeler(users)
-//          self?.initialRead = false
-//      })
-//  }
-  
-
 func getPosts(_ comletionHandeler: @escaping ([Post]) -> Void) {
-     let postRef = Database.database().reference().child("posts")
+     let postsRef = refDataBase.child(RequestType.posts.endPoint)
+
     var posts = [Post]()
-    postRef.observe(.childAdded, with: { [weak self] snapshot in
+    postsRef.observe(.childAdded, with: { [weak self] snapshot in
+      
         if let dictionary = snapshot.value as? [String: AnyObject] {
-          
           let post = Post(dictionary: dictionary)
           posts.append(post)
         }
 
         if self?.initialRead == false {
-            print("a new user was added")
+            print("a new post was added")
         }
     })
 
-    postRef.observeSingleEvent(of: .value, with: { [weak self] snapshot in
-        print("--inital load has completed and the last user was read--")
+    postsRef.observeSingleEvent(of: .value, with: { [weak self] snapshot in
+        print("--inital load has completed and the last post was read--")
       comletionHandeler(posts)
+        self?.initialRead = false
+    })
+  }
+  
+  func getGroups(_ comletionHandeler: @escaping ([Group]) -> Void) {
+     let groupsRef = refDataBase.child(RequestType.groups.endPoint)
+
+    var groups = [Group]()
+    groupsRef.observe(.childAdded, with: { [weak self] snapshot in
+
+        if let dictionary = snapshot.value as? [String: AnyObject] {
+          let group = Group(dictionary: dictionary)
+          groups.append(group)
+        }
+
+        if self?.initialRead == false {
+            print("a new group was added")
+        }
+    })
+
+    groupsRef.observeSingleEvent(of: .value, with: { [weak self] snapshot in
+        print("--inital load has completed and the last group was read--")
+      comletionHandeler(groups)
         self?.initialRead = false
     })
   }

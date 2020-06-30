@@ -12,6 +12,8 @@ import Firebase
 
 class FeedCell: UITableViewCell {
   
+  // MARK: - Properties
+  
   weak var delegate: CellSubclassDelegate?
   
   @IBOutlet weak var statusOnlineLabel: UILabel!
@@ -29,11 +31,17 @@ class FeedCell: UITableViewCell {
   @IBOutlet weak var postTextView: UITextView!
   @IBOutlet weak var backGradientView: UIView!
   
-  var post: Post? {
-    didSet {
-      uploadPostData()
-    }
-  }
+//  var post: Post? {
+//    didSet {
+//      uploadPostData()
+//    }
+//  }
+//
+//  var users = [User]() {
+//    didSet {
+//      uploadUserData()
+//    }
+//  }
 
   override func prepareForReuse() {
     super.prepareForReuse()
@@ -41,33 +49,74 @@ class FeedCell: UITableViewCell {
     self.userProfileImageView.image = nil
   }
   
+  // MARK: - Update UI
+  /*
+  private func uploadUserData() {
+    for item in users {
+         if item.id == post!.fromId {
+           self.nameLabel.text = item.name
+           
+           if item.statusOnline != nil {
+             self.statusOnlineLabel.text = statusOnlineValidator(string: item.statusOnline!)
+           }
+           
+           if item.profileImageUrl != nil {
+             userProfileImageView.loadImageUsingCache(item.profileImageUrl!)
+           } else {
+            print("profileImageUrl = nil")
+          }
+         }
+       }
+  }
+  */
+  func configureWithItem(_ post: Post, _ user: User) {
+    
+    if user.statusOnline != nil {
+      self.statusOnlineLabel.text = statusOnlineValidator(string: user.statusOnline!)
+    }
+    
+    if user.profileImageUrl != nil {
+      userProfileImageView.loadImageUsingCache(user.profileImageUrl!)
+    } else {
+      print("profileImageUrl = nil")
+    }
+    
+    self.nameLabel.text = user.name
+    
+    self.postTextView.text = post.text // текст
+    
+    self.timeDateLabel.text = setFormatDislayedTimeAndDate(from: post.timestamp as! TimeInterval, withString: true)
+    
+  }
+  
+  /*
   private func uploadPostData() {
     
     self.postTextView.text = self.post!.text // текст
     
     self.timeDateLabel.text = setFormatDislayedTimeAndDate(from: self.post!.timestamp as! TimeInterval, withString: true)
-    
-    if let fromId = self.post!.fromId {
-      let ref = Database.database().reference().child("users").child(fromId)
-      ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
-        
-        if let dictionary = snapshot.value as? [String: AnyObject] {
-          self?.nameLabel.text = dictionary["name"] as? String
-          
-          if let status = dictionary["statusOnline"] as? String {
-            
-             self?.statusOnlineLabel.text = self?.statusOnlineValidator(string: status)
-          } else {
-            self?.statusOnlineLabel.text = ""
-          }
-          
-          if let profileImageView = dictionary["profileImageUrl"] as? String {
-            self?.userProfileImageView.loadImageUsingCache(profileImageView)
-          }
-  
-        }
-      }, withCancel: nil)
-    }
+       
+//    if let fromId = self.post!.fromId {
+//      let ref = Database.database().reference().child("users").child(fromId)
+//      ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+//
+//        if let dictionary = snapshot.value as? [String: AnyObject] {
+//          self?.nameLabel.text = dictionary["name"] as? String
+//
+//          if let status = dictionary["statusOnline"] as? String {
+//
+//             self?.statusOnlineLabel.text = self?.statusOnlineValidator(string: status)
+//          } else {
+//            self?.statusOnlineLabel.text = ""
+//          }
+//
+//          if let profileImageView = dictionary["profileImageUrl"] as? String {
+//            self?.userProfileImageView.loadImageUsingCache(profileImageView)
+//          }
+//
+//        }
+//      }, withCancel: nil)
+//    }
     
     let ref = Database.database().reference().child("posts").child(post!.postId!).child("likedUsers")
     ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
@@ -94,20 +143,19 @@ class FeedCell: UITableViewCell {
       } else {
         self?.countLikeLabel.isHidden = false
         self?.countLikeLabel.text = String(describing: arrayLiked.count)
-        self?.post!.likedCount = arrayLiked.count
+        self?.post!.likedCount = Int64(arrayLiked.count)
       }
     }, withCancel: nil)
   }
-  
+  */
   override func layoutSubviews() {
     super.layoutSubviews()
     postTextView.centerVertically()
   }
-
   
-  override func awakeFromNib() {
-        super.awakeFromNib()
-    
+  // MARK: - Setup View
+
+  private func setupView() {
     backView.applyGradient2(with: [#colorLiteral(red: 0.01959940786, green: 0.156984397, blue: 0.4753301834, alpha: 1), #colorLiteral(red: 0.1285700801, green: 0.3775917176, blue: 0.7260313053, alpha: 1), #colorLiteral(red: 0.1967329752, green: 0.7184665444, blue: 0.6488609484, alpha: 1)], gradient: .horizontal)
     
     backGradientView.applyGradient2(with: [#colorLiteral(red: 0.01323446935, green: 0.1060034673, blue: 0.3209659593, alpha: 1), #colorLiteral(red: 0.09266551329, green: 0.2721452013, blue: 0.5232793159, alpha: 1), #colorLiteral(red: 0.1401252464, green: 0.5117357752, blue: 0.4621584164, alpha: 1)], gradient: .horizontal)
@@ -130,15 +178,22 @@ class FeedCell: UITableViewCell {
     userProfileImageView.addGestureRecognizer(tapGestureRecognizer)
   }
 
+  
+  override func awakeFromNib() {
+        super.awakeFromNib()
+    setupView()
+  }
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
       if selected {
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = .none
       } else {
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = .none
       }
     }
     
+  // MARK: - Actions
   @IBAction func replyBtnAction(_ sender: Any) {
     self.delegate?.cellTappedReplyMessage(cell: self)
   }

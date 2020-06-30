@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +14,7 @@
                 <outlet property="closeBtn" destination="rDl-z1-bPe" id="ao6-ns-Z5c"/>
                 <outlet property="closeBtnTopConstraints" destination="vkp-CT-mNE" id="O6o-zk-8Ac"/>
                 <outlet property="emailTF" destination="B2i-Nn-a4f" id="fTF-x4-hqC"/>
-                <outlet property="enterBtn" destination="AgK-fD-zzw" id="dAb-3r-YME"/>
+                <outlet property="enterButton" destination="AgK-fD-zzw" id="vSZ-Hq-5AM"/>
                 <outlet property="forgotPasswordBtn" destination="J5R-3l-3QY" id="s9x-d0-OZY"/>
                 <outlet property="passwordTF" destination="6IH-P1-f5n" id="txz-6U-0Qp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -28,16 +26,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B2i-Nn-a4f">
-                    <rect key="frame" x="30" y="253" width="315" height="35"/>
+                    <rect key="frame" x="30" y="233" width="315" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="oWb-sF-Bfh"/>
                     </constraints>
-                    <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите електронную почту" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arF-T2-IJf">
-                    <rect key="frame" x="30" y="218" width="315" height="35"/>
+                    <rect key="frame" x="30" y="198" width="315" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="tAL-ho-LaQ"/>
                     </constraints>
@@ -46,7 +43,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите пароль" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TeU-vd-f0g">
-                    <rect key="frame" x="30" y="303" width="315" height="35"/>
+                    <rect key="frame" x="30" y="283" width="315" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="M7o-ih-JSy"/>
                     </constraints>
@@ -68,7 +65,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AgK-fD-zzw">
-                    <rect key="frame" x="30" y="423" width="315" height="36"/>
+                    <rect key="frame" x="30" y="403" width="315" height="36"/>
                     <color key="backgroundColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Войти">
@@ -84,7 +81,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDl-z1-bPe">
-                    <rect key="frame" x="305" y="50" width="40" height="40"/>
+                    <rect key="frame" x="305" y="30" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="Bpy-Tm-oxD"/>
                         <constraint firstAttribute="height" constant="40" id="uzU-VC-Zm2"/>
@@ -95,16 +92,15 @@
                     </connections>
                 </button>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6IH-P1-f5n">
-                    <rect key="frame" x="30" y="338" width="315" height="35"/>
+                    <rect key="frame" x="30" y="318" width="315" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="Vu3-nz-efp"/>
                     </constraints>
-                    <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="c1S-nC-8of">
-                    <rect key="frame" x="169" y="166" width="37" height="37"/>
+                    <rect key="frame" x="169" y="146" width="37" height="37"/>
                     <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </activityIndicatorView>
             </subviews>

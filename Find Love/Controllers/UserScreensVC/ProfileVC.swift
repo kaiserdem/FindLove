@@ -21,22 +21,33 @@ protocol ProtocolProfileCellsDelegate: class {
 
 class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
   
+  // MARK: - Properties
+
   @IBOutlet weak var backView: UIView!
   
   var startFrame: CGRect?
   var blackBackgroundView: UIView?
   var startingImageView: UIImageView?
+    
+  let dataManager = DataManager()
   
   let tableView = UITableView()
   let defaults = UserDefaults.standard
   lazy var arrayBlockUsers = defaults.stringArray(forKey: "arrayBlockUsers") ?? [String]()
   var user: User?
+  var users = [User]()
+  var posts = [Post]()
+  var groups = [Group]()
   
+  // MARK: - Lifecycle
+
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let objUser = UserDefaults.standard.retrieve(object: User.self, fromKey: "currentUserKey")
-    user = objUser
+    fetchData()
+    
+//    let objUser = UserDefaults.standard.retrieve(object: User.self, fromKey: "currentUserKey")
+//    user = objUser
     
     navigationController?.navigationBar.isHidden = true
     
@@ -57,29 +68,27 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
     observeUser()
   }
   
-  private func uploadTableView() {
+  // MARK: - Data Fetch Methods
+
+  private func fetchData() {
+        
+    guard let userUID = Auth.auth().currentUser?.uid else { return }
+
+    dataManager.getUsersCDorFB { [weak self] (users) in
+      self?.users = users
+      
+      if let user = users.first(where: {$0.id == userUID}) {
+         self?.user = user
+      }
+    }
     
-    tableView.delegate = self
-    tableView.dataSource = self
+    dataManager.getPostsCDorFB { [weak self] (posts) in
+      self?.posts = posts
+    }
     
-    tableView.backgroundColor = .white
-    
-    self.view.addSubview(tableView)
-    tableView.translatesAutoresizingMaskIntoConstraints = false
-    
-    tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-    tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-    tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-    tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-    tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-    
-    tableView.register(UINib(nibName: "InformationViewCell", bundle: nil), forCellReuseIdentifier: "InformationViewCell")
-    tableView.register(UINib(nibName: "StatusViewCell", bundle: nil), forCellReuseIdentifier:"StatusViewCell")
-    tableView.register(UINib(nibName: "OrientationViewCell", bundle: nil), forCellReuseIdentifier: "OrientationViewCell")
-    tableView.register(UINib(nibName: "AboutSelfViewCell", bundle: nil), forCellReuseIdentifier:"AboutSelfViewCell")
-    tableView.register(UINib(nibName: "SettingsViewCell", bundle: nil), forCellReuseIdentifier: "SettingsViewCell")
-    
-    tableView.allowsMultipleSelectionDuringEditing = true
+    dataManager.getGroupsCDorFB { [weak self] (groups) in
+      self?.groups = groups
+    }
   }
   
   private func observeUser() {
@@ -137,6 +146,39 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
       }, withCancel: nil)
   }
   
+  
+  
+  // MARK: - Setup Views
+
+  private func uploadTableView() {
+    
+    tableView.delegate = self
+    tableView.dataSource = self
+    
+    tableView.backgroundColor = .white
+    
+    self.view.addSubview(tableView)
+    tableView.translatesAutoresizingMaskIntoConstraints = false
+    
+    tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+    tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+    tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+    tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+    tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+    
+    tableView.register(UINib(nibName: "InformationViewCell", bundle: nil), forCellReuseIdentifier: "InformationViewCell")
+    tableView.register(UINib(nibName: "StatusViewCell", bundle: nil), forCellReuseIdentifier:"StatusViewCell")
+    tableView.register(UINib(nibName: "OrientationViewCell", bundle: nil), forCellReuseIdentifier: "OrientationViewCell")
+    tableView.register(UINib(nibName: "AboutSelfViewCell", bundle: nil), forCellReuseIdentifier:"AboutSelfViewCell")
+    tableView.register(UINib(nibName: "SettingsViewCell", bundle: nil), forCellReuseIdentifier: "SettingsViewCell")
+    
+    tableView.allowsMultipleSelectionDuringEditing = true
+  }
+  
+  
+  
+  // MARK: - Cell Delegate Methods
+
    func changeAboutSelfTapped(cell: AboutSelfViewCell) {
     let view = AboutSelfView(frame: self.view.frame)
     if user?.aboutSelf != nil {
@@ -241,6 +283,9 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
     }
   }
   
+  
+  // MARK: - Helper Methods
+
   @objc func handleZoomOut(_ tapGesture: UITapGestureRecognizer) {
     if let zoomOutImageView = tapGesture.view as? UIImageView {
       DispatchQueue.main.async {
@@ -275,7 +320,7 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
     var heightReturn: CGFloat = 0
         switch properties {
         case "status":
-          if user!.status != nil {
+          if user?.status != nil {
             heightReturn = estimateFrameForText(user!.status!).height + 80
             if heightReturn < 100 {
               return 100
@@ -285,7 +330,7 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
             return 100
           }
         case "aboutSelf":
-          if user!.aboutSelf != nil {
+          if user?.aboutSelf != nil {
             heightReturn = estimateFrameForText(user!.aboutSelf!).height + 20
             if heightReturn < 100 {
               return 100
@@ -301,6 +346,8 @@ class ProfileVC: UIViewController, ProtocolProfileCellsDelegate {
   }
   
 }
+
+// MARK: - Image Picker Delegate
 
 extension ProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -375,6 +422,8 @@ extension ProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDele
   }
 }
 
+// MARK: - TableView Delegate DataSource
+
 extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -394,24 +443,24 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.text = user!.name!
       }
       
-      if user!.gender != nil {
+      if user?.gender != nil {
         cell.genderLabel.textColor = .black
-        let gender = user!.gender!
-        let genderString = genderValidatorToText(string: gender)
+        let gender = user?.gender
+        let genderString = genderValidatorToText(string: gender!)
         cell.genderLabel.text = "Пол: \(genderString)"
       } else {
         cell.genderLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
         cell.genderLabel.text = "Введите свой пол"
       }
-      if user!.age != nil {
+      if user?.age != nil {
         cell.ageLabel.textColor = .black
-        let ageString = String(describing: user!.age!)
+        let ageString = String(describing: user?.age!)
         cell.ageLabel.text = String(describing:"Возраст: \(ageString)")
       } else {
         cell.ageLabel.textColor = #colorLiteral(red: 1, green: 0.5693903705, blue: 0.4846021499, alpha: 1)
         cell.ageLabel.text = "Введите свой возраст"
       }
-      if let profileImageView = user!.profileImageUrl {
+      if let profileImageView = user?.profileImageUrl {
         cell.profileImageView.loadImageUsingCache(profileImageView)
         cell.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handelZoomTap)))
       }
@@ -420,7 +469,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: "StatusViewCell", for: indexPath) as! StatusViewCell
       cell.delegate = self
       
-      if user!.status != nil {
+      if user?.status != nil {
         cell.statusTextView.textColor = .white
         cell.statusTextView.text = user?.status
       } else {
@@ -432,7 +481,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: "OrientationViewCell", for: indexPath) as! OrientationViewCell
       cell.delegate = self
       
-      if user!.orientation != nil {
+      if user?.orientation != nil {
         cell.orientationLabel.textColor = .white
         cell.orientationLabel.text = orientationValidatorToText(string: user!.orientation!)
       } else {
@@ -444,7 +493,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: "AboutSelfViewCell", for: indexPath) as! AboutSelfViewCell
       cell.delegate = self
       
-      if user!.aboutSelf != nil {
+      if user?.aboutSelf != nil {
         cell.aboutSelfTextView.textColor = .white
         cell.aboutSelfTextView.text = user!.aboutSelf
       } else {

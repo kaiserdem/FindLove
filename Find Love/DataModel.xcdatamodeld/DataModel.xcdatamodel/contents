@@ -1,4 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F96" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+    <entity name="GroupEntity" representedClassName=".GroupEntity" syncable="YES" codeGenerationType="category">
+        <attribute name="countUsers" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="descriptions" optional="YES" attributeType="String"/>
+        <attribute name="iconImageUrl" optional="YES" attributeType="String"/>
+        <attribute name="liked" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subject" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="PostEntity" representedClassName=".PostEntity" syncable="YES" codeGenerationType="category">
+        <attribute name="fromId" optional="YES" attributeType="String"/>
+        <attribute name="likedCount" optional="YES" attributeType="Integer 64" defaultValueString="0"/>
+        <attribute name="postId" optional="YES" attributeType="String"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="post" inverseEntity="UserEntity"/>
+    </entity>
+    <entity name="UserEntity" representedClassName=".UserEntity" syncable="YES" codeGenerationType="category">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="profileImageUrl" optional="YES" attributeType="String"/>
+        <relationship name="post" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PostEntity" inverseName="user" inverseEntity="PostEntity"/>
+    </entity>
+    <elements>
+        <element name="PostEntity" positionX="-27" positionY="18" width="128" height="133"/>
+        <element name="UserEntity" positionX="-294.5390625" positionY="21.48828125" width="128" height="118"/>
+        <element name="GroupEntity" positionX="-295.90234375" positionY="-146.1875" width="128" height="118"/>
+    </elements>
 </model>

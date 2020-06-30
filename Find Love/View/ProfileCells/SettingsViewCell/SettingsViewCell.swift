@@ -21,7 +21,7 @@ class SettingsViewCell: UITableViewCell {
     let buttonView = UIImageView(image: image)
     buttonView.contentMode = UIView.ContentMode.scaleAspectFit
     buttonView.layer.masksToBounds = true
-    settingsBtn.tintColor = .white
+    settingsBtn.tintColor = .black
     settingsBtn.addSubview(buttonView)
     
     buttonView.rightAnchor.constraint(equalTo: settingsBtn.rightAnchor).isActive = true
@@ -39,9 +39,9 @@ class SettingsViewCell: UITableViewCell {
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
     if selected {
-      contentView.backgroundColor = .black
+      contentView.backgroundColor = .white
     } else {
-      contentView.backgroundColor = .black
+      contentView.backgroundColor = .white
     }
   }
   

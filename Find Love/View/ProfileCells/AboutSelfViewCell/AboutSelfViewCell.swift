@@ -18,7 +18,7 @@ class AboutSelfViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
       changeAboutSelfBtn.setImage(UIImage(named: "pen")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
-      changeAboutSelfBtn.imageView?.tintColor = .white
+      changeAboutSelfBtn.imageView?.tintColor = .black
     
     }
   
@@ -30,9 +30,9 @@ class AboutSelfViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
       if selected {
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = .white
       } else {
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = .white
       }
     }
   

@@ -18,7 +18,7 @@ class OrientationViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
       changeOrientationBtn.setImage(UIImage(named: "pen")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
-      changeOrientationBtn.imageView?.tintColor = .white
+      changeOrientationBtn.imageView?.tintColor = .black
   }
   
   override func prepareForReuse() {
@@ -29,9 +29,9 @@ class OrientationViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
       if selected {
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = .white
       } else {
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = .white
       }
     }
   

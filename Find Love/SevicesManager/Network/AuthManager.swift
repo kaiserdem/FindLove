@@ -21,6 +21,8 @@ class AuthManager {
   let storageRef = Storage.storage().reference()
   
   func checkIfUserIsLogedIn() { // проверка если пользователь вошел в систему
+    let uid = Auth.auth().currentUser?.uid
+    print(uid)
     if Auth.auth().currentUser?.uid == nil { // если мы не вошли
       loadHelloVC()
     } else {
@@ -74,52 +76,67 @@ class AuthManager {
      loadHelloVC()
    }
   
-  func handleRegister(_ email: String, _ password: String, _ name: String, _ profileImage: UIImage) {
-//    self.view.frame.origin.y = 0
-//    guard let email = emailTF.text , let password = passwordTF.text, let name = nameTextField.text else { // если пустые, принт, выходим
-//      print("Error: field is empty")
+//  func aaa() {
+//  let imageName = NSUUID().uuidString // генерирует случайный айди
+//      // создали папку  для картинке в базе
+//      let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
 //
-//      activityIndicator.isHidden = true
-//      activityIndicator.stopAnimating()
-//      return
-//    }
-//    view.endEditing(true)
-//    if imageStatus == 0 {
-//      self.view.frame.origin.y = 0
-//      let view = CustomAlertWarning(frame: self.view.frame)
-//      view.textTextView.text = "Без фотографии регистрация невозможна"
-//      self.view.addSubview(view)
-//      activityIndicator.isHidden = true
-//      activityIndicator.stopAnimating()
-//      return
-//    }
-    
+//      if let profileImage = self.userImageView.image, let  uploadData = profileImage.jpegData(compressionQuality: 0.1) {
+//        storageRef.putData(uploadData, metadata: nil, completion: { [weak self] (metadata, error) in
+//
+//          if error != nil {
+//            print(error ?? "")
+//            return
+//          }
+//          // могут быть ошибки
+//          storageRef.downloadURL(completion: { (url, error) in
+//            if error != nil {
+//              print(error!.localizedDescription)
+//              return
+//            }
+//            if let profileImageUrl = url?.absoluteString {
+//
+//              let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl]
+//              self?.registeUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
+//            }
+//          })
+//        })
+//
+//  }
+  
+  
+  func handleRegister(_ email: String, _ password: String, _ name: String, _ profileImage: UIImage, _  userCreatingComplete: @escaping(_ status: Bool, _ error: Error?) -> ()) {
+    print("\(email) - \(password)")
+
     Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
       if error != nil { // если ошибка, принт, выходим
-        print("Error")
-//        self?.activityIndicator.isHidden = true
-//        self?.activityIndicator.stopAnimating()
+        print(error?.localizedDescription as Any)
+        userCreatingComplete(false, error)
         return
       }
       // успешно
       
       guard let uid = user?.user.uid else { // создаем айди пользователя
+        userCreatingComplete(false, error)
         return
       }
       let imageName = NSUUID().uuidString // генерирует случайный айди
       // создали папку  для картинке в базе
-      self?.storageRef.child("profile_images").child("\(imageName).png")
+      
+      let storageImageRef = self?.storageRef.child("profile_images").child("\(imageName).png")
+      //self?.storageRef.child("profile_images").child("\(imageName).png")
       
       let uploadData = profileImage.jpegData(compressionQuality: 0.1)
       
-      self?.storageRef.putData(uploadData!, metadata: nil, completion: { [weak self] (metadata, error) in
+      storageImageRef!.putData(uploadData!, metadata: nil, completion: { [weak self] (metadata, error) in
           
           if error != nil {
-            print(error ?? "")
+            print(error?.localizedDescription as Any)
+            userCreatingComplete(false, error)
             return
           }
           // могут быть ошибки
-        self?.storageRef.downloadURL(completion: { [weak self] (url, error) in
+        storageImageRef!.downloadURL(completion: { [weak self] (url, error) in
             if error != nil {
               print(error!.localizedDescription)
               return
@@ -127,23 +144,34 @@ class AuthManager {
             if let profileImageUrl = url?.absoluteString {
               
               let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl]
-              self?.registeUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
+             
+              self?.registeUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject], completion: { (status, error) in
+                if error != nil {
+                  print(error?.localizedDescription as Any)
+                  userCreatingComplete(false, error)
+                }
+                if status == true {
+                  userCreatingComplete(true, nil)
+                }
+              })
             }
           })
         })
       }
     }
   
-  func registeUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
+  func registeUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject], completion: @escaping(_ status: Bool, _ error: Error?) -> ()) {
      
     let userReference = dataBaseRef.child(RequestType.users.endPoint).child(uid) // создали папку пользователя
      userReference.updateChildValues(values, withCompletionBlock: { [weak self] (error, ref) in
        if error != nil {
+        completion(false, error)
          return
        }
 //       self?.activityIndicator.isHidden = true
 //       self?.activityIndicator.stopAnimating()
-//
+      
+      completion(true, nil)
       self?.checkIfUserIsLogedIn()
      })
    }

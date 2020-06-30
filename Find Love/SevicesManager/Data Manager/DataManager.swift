@@ -25,7 +25,7 @@ class DataManager {
         
         self?.networkManager.getUsers { [weak self] (users:[User]) in
           print("Users from Network")
-          self?.coreDataManager.saveUsers(users: users) {
+          self?.coreDataManager.saveUsers(users) {
             comletionHandeler(users)
           }
         }
@@ -39,12 +39,12 @@ class DataManager {
       if posts.count > 0 {
         print("Posts from Core Data")
         comletionHandeler(posts)
-        
+
       } else {
         
         self?.networkManager.getPosts { [weak self] (posts:[Post]) in
           print("Posts from Network")
-          self?.coreDataManager.savePosts(posts: posts) {
+          self?.coreDataManager.savePosts(posts) {
             comletionHandeler(posts)
           }
         }
@@ -54,21 +54,21 @@ class DataManager {
   
   func getGroupsCDorFB(_ comletionHandeler: @escaping ([Group]) -> Void) {
     
-//    coreDataManager.getAllGroups { [weak self] (groups) in
-//      if users.count > 0 {
-//        print("Groups from Core Data")
-//        comletionHandeler(groups)
-//
-//      } else {
-//
-//        self?.networkManager.getGroups { [weak self] (users:[User]) in
-//          print("Groups from Network")
-//          self?.coreDataManager.saveUsers(users: groups) {
-//            comletionHandeler(groups)
-//          }
-//        }
-//      }
-//    }
+    coreDataManager.getAllGroups { [weak self] (groups) in
+      if groups.count > 0 {
+        print("Groups from Core Data")
+        comletionHandeler(groups)
+
+      } else {
+
+        self?.networkManager.getGroups { [weak self] (groups:[Group]) in
+          print("Groups from Network")
+          self?.coreDataManager.saveGroups(groups) {
+            comletionHandeler(groups)
+          }
+        }
+      }
+    }
   }
 }
 

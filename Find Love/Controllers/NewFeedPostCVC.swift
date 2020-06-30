@@ -24,7 +24,7 @@ class NewFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICollect
     let textField = UITextField()
     textField.placeholder = "Ведите содержание поста..."
     textField.translatesAutoresizingMaskIntoConstraints = false
-    textField.delegate = self // подписали делегат
+    textField.delegate = self
     return textField
   }()
 
@@ -35,15 +35,15 @@ class NewFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICollect
     return view
   }()
   
-  lazy var nameLabel: UILabel = {
-    let label = UILabel()
-    label.textAlignment = NSTextAlignment.center
-    label.textColor = .white
-    label.font = UIFont.systemFont(ofSize: 18)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.text = "Новый пост"
-    return label
-  }()
+//  lazy var nameLabel: UILabel = {
+//    let label = UILabel()
+//    label.textAlignment = NSTextAlignment.center
+//    label.textColor = .white
+//    label.font = UIFont.systemFont(ofSize: 18)
+//    label.translatesAutoresizingMaskIntoConstraints = false
+//    label.text = "Новый пост"
+//    return label
+//  }()
   
   lazy var inputConteinerView: UIView = {
     let conteinerView = UIView()
@@ -89,12 +89,16 @@ class NewFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICollect
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 5, right: 0)
-    collectionView?.alwaysBounceVertical = true
-    collectionView?.backgroundColor = #colorLiteral(red: 0.1124108919, green: 0.1124108919, blue: 0.1124108919, alpha: 1)
-    collectionView?.keyboardDismissMode = .interactive
     
-    setupInputComponents()
+    navigationController?.navigationBar.isHidden = false
+    navigationItem.title = "Новый пост"
+    
+//    collectionView?.contentInset = UIEdgeInsets.init(top: 78, left: 0, bottom: 5, right: 0)
+//    collectionView?.alwaysBounceVertical = true
+//    collectionView?.backgroundColor = #colorLiteral(red: 0.1124108919, green: 0.1124108919, blue: 0.1124108919, alpha: 1)
+//    collectionView?.keyboardDismissMode = .interactive
+    
+    //setupInputComponents()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -112,41 +116,41 @@ class NewFeedPostCVC: UICollectionViewController, UITextFieldDelegate, UICollect
   }
   
 
-  func setupInputComponents() { // компоненты контроллера
+//  func setupInputComponents() { // компоненты контроллера
     
-    let topConteinerView = UIView()
-    topConteinerView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    topConteinerView.clipsToBounds = true
-    topConteinerView.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(topConteinerView)
+//    let topConteinerView = UIView()
+//    topConteinerView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//    topConteinerView.clipsToBounds = true
+//    topConteinerView.translatesAutoresizingMaskIntoConstraints = false
+//    view.addSubview(topConteinerView)
+//
+//    topConteinerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//    topConteinerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+//    topConteinerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+//    topConteinerView.heightAnchor.constraint(equalToConstant: 44).isActive = true
     
-    topConteinerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    topConteinerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-    topConteinerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    topConteinerView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+//    let backButton = UIButton(type: .system)
+//    let image = UIImage(named: "back")
+//    backButton.setImage(image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+//    backButton.imageView?.contentMode = .scaleAspectFit
+//    backButton.tintColor = .white
+//    backButton.setTitleColor(.white, for: .normal)
+//    backButton.imageEdgeInsets = UIEdgeInsets(top: 7.0, left: 0.0, bottom: 7.0, right: 0.0)
+//    backButton.translatesAutoresizingMaskIntoConstraints = false
+//    backButton.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
+//    topConteinerView.addSubview(backButton)
+//
+//    backButton.leftAnchor.constraint(equalTo: topConteinerView.leftAnchor, constant: 10).isActive = true
+//    backButton.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 0).isActive = true
+//    backButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+//    backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
     
-    let backButton = UIButton(type: .system)
-    let image = UIImage(named: "back")
-    backButton.setImage(image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
-    backButton.imageView?.contentMode = .scaleAspectFit
-    backButton.tintColor = .white
-    backButton.setTitleColor(.white, for: .normal)
-    backButton.imageEdgeInsets = UIEdgeInsets(top: 7.0, left: 0.0, bottom: 7.0, right: 0.0)
-    backButton.translatesAutoresizingMaskIntoConstraints = false
-    backButton.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
-    topConteinerView.addSubview(backButton)
-    
-    backButton.leftAnchor.constraint(equalTo: topConteinerView.leftAnchor, constant: 10).isActive = true
-    backButton.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 0).isActive = true
-    backButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
-    backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-    
-    topConteinerView.addSubview(nameLabel)
-
-    nameLabel.heightAnchor.constraint(equalTo: topConteinerView.heightAnchor).isActive = true
-    nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 0).isActive = true
-    nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
-  }
+//    topConteinerView.addSubview(nameLabel)
+//
+//    nameLabel.heightAnchor.constraint(equalTo: topConteinerView.heightAnchor).isActive = true
+//    nameLabel.centerYAnchor.constraint(equalTo: topConteinerView.centerYAnchor, constant: 0).isActive = true
+//    nameLabel.centerXAnchor.constraint(equalTo: topConteinerView.centerXAnchor).isActive = true
+//  }
 
   private func sendMessageWithImageUrl(_ imageUrl: String, image: UIImage) {
     

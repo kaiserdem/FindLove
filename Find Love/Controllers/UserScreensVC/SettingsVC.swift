@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-//import FirebaseDatabase
 
 protocol ProtocolSettingsCellDelegate: class {
   func nextButtonTapped(cell: SettingButtonNextCell)
@@ -17,12 +16,17 @@ protocol ProtocolSettingsCellDelegate: class {
 
 class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
   
+  // MARK: - Properties
+
   @IBOutlet weak var cencelBtn: UIButton!  
   @IBOutlet weak var tableView: UITableView!
   
   var user: User?
   var posts = [Post]()
   
+  
+  // MARK: - Lifecycle
+
   override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -90,8 +94,9 @@ class SettingsVC: UIViewController, ProtocolSettingsCellDelegate {
     } catch let logoutError {
       print(logoutError)
     }
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    _ = appDelegate.loadHelloVC()
+//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//    _ = appDelegate.loadHelloVC()
+    AuthManager.shared.loadHelloVC()
   }
   
   private func deleteAccountFromFirebase() {

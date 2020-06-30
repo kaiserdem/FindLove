@@ -19,21 +19,22 @@ enum RequestType {
 }
 
 extension RequestType: EndPointType {
+  
     
     var endPoint: String {
         switch self {
         case .users:
-            return "register"
+            return "users"
         case .posts:
-            return "register"
+            return "posts"
         case .groups:
-            return "verify"
+            return "groups"
         case .messages:
-            return "profile"
+            return "messages"
         case .userMessages:
-            return "profileImage"
+            return "user-messages"
         case .userRequest:
-            return "profileImage"
+            return "user-request"
         }
     }
 }

@@ -38,10 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     application.registerForRemoteNotifications()
     
-    
     FirebaseApp.configure()
     registerForPushNotifications()
-    checkIfUserIsLogedIn()
+    //AuthManager.shared.handleLogout()
+    AuthManager.shared.checkIfUserIsLogedIn()
     
     return true
   }
@@ -123,49 +123,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   }
   
   func applicationWillTerminate(_ application: UIApplication) {
-    reloadOnlineStatus(isOnline: false)
+    //reloadOnlineStatus(isOnline: false)
+    AuthManager.shared.reloadOnlineStatus(isOnline: false)
   }
   
   // MARK: - Auth
   
-  func checkIfUserIsLogedIn() { // проверка если пользователь вошел в систему
-    if Auth.auth().currentUser?.uid == nil { // если мы не вошли
-      loadHelloVC()
-    } else {
-      loadFeedVC()
-      reloadOnlineStatus(isOnline: true)
-    }
-  }
-  
-  func reloadOnlineStatus(isOnline online: Bool) {
-    guard let uid = Auth.auth().currentUser?.uid else { return }
-    
-    let ref = Database.database().reference().child("users").child(uid)
-    
-    if online == true {
-      let valuesStatus = ["statusOnline": "1"] as [String : Any]
-      ref.updateChildValues(valuesStatus)
-    } else {
-      let valuesStatus = ["statusOnline": "0"] as [String : Any]
-      ref.updateChildValues(valuesStatus)
-    }
-  }
-  
-  func loadHelloVC() {
-    let nav1 = UINavigationController()
-    let mainView = HelloVC(nibName: "HelloVC", bundle: nil)
-    nav1.viewControllers = [mainView]
-    self.window!.rootViewController = nav1
-    self.window?.makeKeyAndVisible()
-  }
-  
-  func loadFeedVC() {
-    let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    let initialViewControlleripad : UIViewController = mainStoryboardIpad.instantiateViewController(withIdentifier: "CustomTabBar") as UIViewController
-    self.window = UIWindow(frame: UIScreen.main.bounds)
-    self.window?.rootViewController = initialViewControlleripad
-    self.window?.makeKeyAndVisible()
-  }
+//  func checkIfUserIsLogedIn() { // проверка если пользователь вошел в систему
+//    if Auth.auth().currentUser?.uid == nil { // если мы не вошли
+//      loadHelloVC()
+//    } else {
+//      loadFeedVC()
+//      reloadOnlineStatus(isOnline: true)
+//    }
+//  }
+//
+//  func reloadOnlineStatus(isOnline online: Bool) {
+//    guard let uid = Auth.auth().currentUser?.uid else { return }
+//
+//    let ref = Database.database().reference().child("users").child(uid)
+//
+//    if online == true {
+//      let valuesStatus = ["statusOnline": "1"] as [String : Any]
+//      ref.updateChildValues(valuesStatus)
+//    } else {
+//      let valuesStatus = ["statusOnline": "0"] as [String : Any]
+//      ref.updateChildValues(valuesStatus)
+//    }
+//  }
+//
+//  func loadHelloVC() {
+//    let nav1 = UINavigationController()
+//    let mainView = HelloVC(nibName: "HelloVC", bundle: nil)
+//    nav1.viewControllers = [mainView]
+//    self.window!.rootViewController = nav1
+//    self.window?.makeKeyAndVisible()
+//  }
+//
+//  func loadFeedVC() {
+//    let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//    let initialViewControlleripad : UIViewController = mainStoryboardIpad.instantiateViewController(withIdentifier: "CustomTabBar") as UIViewController
+//    self.window = UIWindow(frame: UIScreen.main.bounds)
+//    self.window?.rootViewController = initialViewControlleripad
+//    self.window?.makeKeyAndVisible()
+//  }
   
 }
 

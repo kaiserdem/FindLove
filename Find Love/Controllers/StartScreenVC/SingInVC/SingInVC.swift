@@ -11,6 +11,7 @@ import Firebase
 
 class SingInVC: UIViewController {
 
+  @IBOutlet weak var enterButton: UIButton!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var emailTF: UITextField!
   @IBOutlet weak var closeBtnTopConstraints: NSLayoutConstraint!
@@ -18,10 +19,9 @@ class SingInVC: UIViewController {
   @IBOutlet weak var forgotPasswordBtn: UIButton!
   @IBOutlet weak var passwordTF: UITextField!
   
-  weak var menuVC: ProfileVC?
-  
-  @IBOutlet weak var enterBtn: UIButton!
-  
+  let buttonTFRight = UIButton(type: .custom)
+
+      
   override var prefersStatusBarHidden: Bool {
     return true
   }
@@ -29,8 +29,15 @@ class SingInVC: UIViewController {
   override func viewDidLoad() {
         super.viewDidLoad()
     activityIndicator.isHidden = true
+    
+    enterButton.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+    enterButton.isEnabled = false
       
       navigationController?.navigationBar.isHidden = true
+    
+    
+    emailTF.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    passwordTF.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
 
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     
@@ -56,6 +63,20 @@ class SingInVC: UIViewController {
     view.endEditing(true)
   }
   
+  
+  @objc func textFieldDidChange(sender: UITextField) {
+  
+    if (emailTF.text!.isEmpty) || (passwordTF.text!.isEmpty) {
+      enterButton.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+         enterButton.isEnabled = false
+      print("false")
+    } else {
+      enterButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+         enterButton.isEnabled = true
+      print("true")
+    }
+  }
+  
     func handleLogin() {
       guard let email = emailTF.text, let password = passwordTF.text else {
         print("Form is not valid")
@@ -76,8 +97,10 @@ class SingInVC: UIViewController {
         
         print("Success sing in")
         self?.activityIndicator.stopAnimating()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        _ = appDelegate.checkIfUserIsLogedIn()
+        
+        AuthManager.shared.checkIfUserIsLogedIn()
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        _ = appDelegate.checkIfUserIsLogedIn()
       }
     }
 

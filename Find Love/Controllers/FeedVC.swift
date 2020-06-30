@@ -18,12 +18,18 @@ protocol CellSubclassDelegate: class {
 
 class FeedVC: UIViewController, CellSubclassDelegate {
 
+  // MARK: - Properties
+  
   @IBOutlet weak var backTableView: UIView!
   
+  let dataManager = DataManager()
+  
   let tableView = UITableView()
-  var posts = [Post]()
-  var postDictionary = [String: Post]()
-  var user: User?
+  var posts = [Post]() // posts from network
+  var postsFromCD = [Post]()
+  
+  var groups = [Group]()
+
   var request: Request?
   
   let defaults = UserDefaults.standard
@@ -32,16 +38,40 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   var currentPostText = ""
   var currentPostId = ""
   var postFromUserId = ""
+  
+  var user: User? 
+  var users = [User]()
   var currentUser: User?  {
     didSet {
       UserDefaults.standard.save(currentUser, forKey: "currentUserKey")
     }
   }
   
+//  func getAllUsers(_ comletionHandeler: @escaping ([User]) -> Void) {
+//    let ref = Database.database().reference().child("users")
+//    var users = [User]()
+//    ref.observe(.childAdded) { (snapshot) in
+//      if let dictionary = snapshot.value as? [String: AnyObject] {
+//        
+//        let user = User(dictionary: dictionary)
+//        users.append(user)
+//      }
+//    }
+//    comletionHandeler(users)
+//  }
+  
+
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+      return .lightContent
+  }
+  
+  // MARK: - Lifecycle
+
   override func viewDidLoad() {
         super.viewDidLoad()
-    
-    checkAuht()
+
+    fetchData()
     uploadTableView()
     uploadNotifiationObserve()
     observeChatInvitation()
@@ -50,7 +80,8 @@ class FeedVC: UIViewController, CellSubclassDelegate {
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     
-    tableView.backgroundColor = .black
+    navigationController?.navigationBar.isHidden = true
+    tableView.backgroundColor = .white
     tableView.allowsMultipleSelection = false
   }
   
@@ -60,11 +91,32 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     observeChatInvitation()
   }
   
+  // MARK: - Setup View
+  
+  private func uploadTableView() {
+     
+     tableView.delegate = self
+     tableView.dataSource = self
+     tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+     tableView.showsVerticalScrollIndicator = false
+     
+     backTableView.addSubview(tableView)
+     tableView.translatesAutoresizingMaskIntoConstraints = false
+     tableView.topAnchor.constraint(equalTo: backTableView.topAnchor).isActive = true
+     tableView.leftAnchor.constraint(equalTo: backTableView.leftAnchor).isActive = true
+     tableView.bottomAnchor.constraint(equalTo: backTableView.bottomAnchor).isActive = true
+     tableView.rightAnchor.constraint(equalTo: backTableView.rightAnchor).isActive = true
+     
+     tableView.register(UINib(nibName: "FeedCell", bundle: nil), forCellReuseIdentifier: "FeedCell")
+     tableView.register(UINib(nibName: "AddFeedPostCell", bundle: nil), forCellReuseIdentifier: "AddFeedPostCell")
+   }
+  
   deinit {
     NotificationCenter.default.removeObserver(self)
   }
   
-  
+  // MARK: - Notification Center
+
   private func uploadNotifiationObserve() {
     NotificationCenter.default.addObserver(self, selector: #selector(makeTransition(_:)), name: NSNotification.Name("makeTransitionToChat"), object: nil)
     
@@ -76,10 +128,31 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     
     NotificationCenter.default.addObserver(self, selector: #selector(transitionToGroupInvintation(_:)), name: NSNotification.Name("ToGroupInvintation"), object: nil)
   }
+  
+  
+  // MARK: - Data Fetch Methods
+  
+  private func fetchData() {
+        
+    guard let userUID = Auth.auth().currentUser?.uid else { return }
 
-  private func writePost() {
-    let vc = NewFeedPostCVC(collectionViewLayout: UICollectionViewFlowLayout())
-    present(vc, animated: true, completion: nil)
+    dataManager.getUsersCDorFB { [weak self] (users) in
+      self?.users = users
+      
+      if let user = users.first(where: {$0.id == userUID}) {
+         self?.user = user
+         self?.tableView.reloadData()
+      }
+    }
+    
+    dataManager.getPostsCDorFB { [weak self] (posts) in
+      self?.postsFromCD = posts
+      self?.tableView.reloadData()
+    }
+    
+    dataManager.getGroupsCDorFB { [weak self] (groups) in
+      self?.groups = groups
+    }
   }
   
   private func observeChatInvitation() {
@@ -112,24 +185,6 @@ class FeedVC: UIViewController, CellSubclassDelegate {
       }
       }, withCancel: nil)
   }
-
-  private func uploadTableView() {
-    
-    tableView.delegate = self
-    tableView.dataSource = self
-    tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-    tableView.showsVerticalScrollIndicator = false
-    
-    backTableView.addSubview(tableView)
-    tableView.translatesAutoresizingMaskIntoConstraints = false
-    tableView.topAnchor.constraint(equalTo: backTableView.topAnchor).isActive = true
-    tableView.leftAnchor.constraint(equalTo: backTableView.leftAnchor).isActive = true
-    tableView.bottomAnchor.constraint(equalTo: backTableView.bottomAnchor).isActive = true
-    tableView.rightAnchor.constraint(equalTo: backTableView.rightAnchor).isActive = true
-    
-    tableView.register(UINib(nibName: "FeedCell", bundle: nil), forCellReuseIdentifier: "FeedCell")
-    tableView.register(UINib(nibName: "AddFeedPostCell", bundle: nil), forCellReuseIdentifier: "AddFeedPostCell")
-  }
   
   private func observePosts() {
     posts.removeAll()
@@ -154,6 +209,18 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     }
   }
   
+  @objc func reloadObservePosts(_ notification: Notification) {
+    observePosts()
+  }
+  
+  // MARK: - Transition
+  
+   private func writePost() {
+     let vc = NewFeedPostCVC(collectionViewLayout: UICollectionViewFlowLayout())
+     navigationController?.pushViewController(vc, animated: true)
+     //present(vc, animated: true, completion: nil)
+   }
+  
   private func chatInvition(_ user: User?) {
     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     let vc = storyBoard.instantiateViewController(withIdentifier: "ChatInvitationVC") as! ChatInvitationVC
@@ -166,24 +233,26 @@ class FeedVC: UIViewController, CellSubclassDelegate {
       openChatWithUser(toUser)
   }
   
-  @objc func reloadObservePosts(_ notification: Notification) {
-    observePosts()
-  }
-  
   @objc func makeTransitionToComplainVC(_ notification: Notification) {
     let toUser = notification.userInfo?["user"] as? User
     openComplainVC(toUser)
   }
   
   @objc func transitionToChatGroup(_ notification: Notification) {
-    let toGroup = notification.userInfo?["group"] as Any
-    let ref = Database.database().reference().child("groups").child(toGroup as! String)
-    ref.observeSingleEvent(of: .value) { [weak self] (snapshot) in
-      if let dictionary = snapshot.value as? [String: AnyObject] {
-        let group = Group(dictionary: dictionary)
-        self?.toChatGroup(group)
-      }
+    let toGroup = notification.userInfo?["group"] as? Group
+    
+    if let group = groups.first(where: {$0.subject == toGroup?.subject}) {
+      self.toChatGroup(group)
     }
+    
+    
+//    let ref = Database.database().reference().child("groups").child(toGroup as! String)
+//    ref.observeSingleEvent(of: .value) { [weak self] (snapshot) in
+//      if let dictionary = snapshot.value as? [String: AnyObject] {
+//        let group = Group(dictionary: dictionary)
+//        self?.toChatGroup(group)
+//      }
+//    }
   }
   
   @objc func transitionToGroupInvintation(_ notification: Notification) {
@@ -216,6 +285,8 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     self.present(vc, animated: true, completion: nil)
   }
   
+  // MARK: - Cell Delegate Methods
+
   func cellTappedImageProfile(cell: FeedCell) {
     guard let indexPath = self.tableView.indexPath(for: cell) else { return }
     
@@ -314,17 +385,17 @@ class FeedVC: UIViewController, CellSubclassDelegate {
           arrayLiked.append(value) // масив всех лайков
         }
         if arrayLiked.contains(uid!) { // мой лайк уже есть, тогда удаляем
-          if let index = arrayLiked.index(of: uid!) {
+          if let index = arrayLiked.firstIndex(of: uid!) {
             arrayLiked.remove(at: index)
             cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
             cell.likeBtn.tintColor = .white
             cell.countLikeLabel.text = String(describing: arrayLiked.count)
-            post.likedCount = arrayLiked.count
+            post.likedCount = Int64(arrayLiked.count)
             ref.child(uid!).removeValue()
           }
         } else { // лайки есть но моего нет
           arrayLiked.append(uid!)
-          post.likedCount = arrayLiked.count
+          post.likedCount = Int64(arrayLiked.count)
           cell.likeBtn.setImage(UIImage(named: "like")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
           cell.likeBtn.tintColor = .red
           cell.countLikeLabel.text = String(describing: arrayLiked.count)
@@ -353,29 +424,38 @@ class FeedVC: UIViewController, CellSubclassDelegate {
     }, withCancel: nil)
   }
   
-  private func checkAuht(){
-    let user = Auth.auth().currentUser
-    if user == nil {
-      handleLogout()
-      return
-    }
-  }
-  
-  private func handleLogout() {
-    do {
-      try Auth.auth().signOut()
-    } catch let logoutError {
-      print(logoutError)
-    }
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    _ = appDelegate.loadHelloVC()
-  }
+//  // MARK: - Auth Methods
+//
+//  private func checkAuht(){
+//    let user = Auth.auth().currentUser
+//    if user == nil {
+//      handleLogout()
+//      return
+//    }
+//  }
+//
+//  private func userUID() -> String {
+//    let uid = Auth.auth().currentUser?.uid
+//    return uid!
+//  }
+//
+//  private func handleLogout() {
+//    do {
+//      try Auth.auth().signOut()
+//    } catch let logoutError {
+//      print(logoutError)
+//    }
+//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//    _ = appDelegate.loadHelloVC()
+//  }
 }
+
+// MARK: - TableView Delegate DataSource
 
 extension FeedVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return posts.count + 1
+    return postsFromCD.count + 1
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -383,20 +463,43 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     if indexPath.row == 0 {
       
       let cell = tableView.dequeueReusableCell(withIdentifier: "AddFeedPostCell", for: indexPath) as! AddFeedPostCell
-      cell.contentView.backgroundColor = .black
-
+      
+//      dataManager.getUsersCDorFB { [weak self] (users) in
+//        if let user = users.first(where: {$0.id == self?.userUID()}) {
+//          cell.user = user
+//        }
+//      }
+      print(user?.name)
+      guard let imageUrl = user?.profileImageUrl else { return cell}
+      
+      cell.configureWithItem(imageUrl: imageUrl)
+      
+     return cell
       
     } else {
       
       let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as! FeedCell
       
-      let post = posts[indexPath.row - 1]
-      cell.post = post
-      cell.delegate = self
-      cell.selectionStyle = .none
+      if postsFromCD.count != 0 {
+        let post = postsFromCD[indexPath.row - 1]
+        let user = users.first(where: {$0.id == post.fromId})
+        
+        print(user?.name)
+        
+        if user != nil{
+          cell.configureWithItem(post, user!)
+        } else {
+          cell.selectionStyle = .none
+          return cell
+        }
+                
+        //cell.users = users
+        //cell.delegate = self
+        cell.selectionStyle = .none
+        return cell
+      }
       return cell
     }
-    return UITableViewCell()
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -406,42 +509,61 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
       return
     }
     
-    let post = self.posts[indexPath.row - 1]
+//    let post = self.posts[indexPath.row - 1]
+//
+//    currentPostText = post.text!
+//    currentPostId = post.postId!
+//    postFromUserId = post.fromId!
+//
+//    let postText = post.text
+//    let time = post.timestamp
+//
+//    let view = OpenFeedPost(frame: self.view.frame)
+//
+//    let ref = Database.database().reference().child("users").child(post.fromId!)
+//    ref.observeSingleEvent(of: .value, with: { (snapshot) in
+//
+//      if let dictionary = snapshot.value as? [String: AnyObject] {
+//
+//        let userCurrent = User(dictionary: dictionary)
+//        userCurrent.id = snapshot.key
+//        view.user = userCurrent
+//        view.userNameLabel.text = dictionary["name"] as? String
+//
+//        if let profileImageView = dictionary["profileImageUrl"] as? String {
+//          view.profileImageView.loadImageUsingCache(profileImageView)
+//        }
+//      }
+//    }, withCancel: nil)
+//
+//    view.timeLabel.text = setFormatDislayedTimeAndDate(from: time as! TimeInterval, withString: true)
+//    view.postTextView.text = postText
     
-    currentPostText = post.text!
-    currentPostId = post.postId!
-    postFromUserId = post.fromId!
     
-    let postText = post.text
-    let time = post.timestamp
+    let post = self.postsFromCD[indexPath.row - 1]
 
     let view = OpenFeedPost(frame: self.view.frame)
     
-    let ref = Database.database().reference().child("users").child(post.fromId!)
-    ref.observeSingleEvent(of: .value, with: { (snapshot) in
+    if let user = users.first(where: {$0.id == post.fromId!}) {
+      view.user = user
+      view.userNameLabel.text = user.name
       
-      if let dictionary = snapshot.value as? [String: AnyObject] {
-        
-        let userCurrent = User(dictionary: dictionary)
-        userCurrent.id = snapshot.key
-        view.user = userCurrent
-        view.userNameLabel.text = dictionary["name"] as? String
+      view.timeLabel.text = setFormatDislayedTimeAndDate(from: post.timestamp as! TimeInterval, withString: true)
+      view.postTextView.text = post.text
       
-        if let profileImageView = dictionary["profileImageUrl"] as? String {
-          view.profileImageView.loadImageUsingCache(profileImageView)
-        }
+      if let profileImageView = user.profileImageUrl {
+        view.profileImageView.loadImageUsingCache(profileImageView)
       }
-    }, withCancel: nil)
-    
-    view.timeLabel.text = setFormatDislayedTimeAndDate(from: time as! TimeInterval, withString: true)
-    view.postTextView.text = postText
+    }
     
     self.view.addSubview(view)
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
     if indexPath.row == 0 {
       return 110
+      
     } else {
       return 115
     }

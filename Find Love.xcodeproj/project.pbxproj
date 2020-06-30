@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */; };
+		AD083E45249C093900A3FFC4 /* GroupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD083E44249C093900A3FFC4 /* GroupEntity.swift */; };
+		AD083E47249CE10900A3FFC4 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD083E46249CE10900A3FFC4 /* EndPointType.swift */; };
+		AD083E49249CE25E00A3FFC4 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD083E48249CE25E00A3FFC4 /* RequestType.swift */; };
+		AD083E53249D4E3000A3FFC4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD083E52249D4E3000A3FFC4 /* AuthManager.swift */; };
 		AD09E33D23D7647D00AAC162 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD09E33C23D7647D00AAC162 /* GoogleService-Info.plist */; };
 		AD1085A823DCA08A0009ADB3 /* AddFeedPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1085A623DCA08A0009ADB3 /* AddFeedPostCell.swift */; };
 		AD1085A923DCA08A0009ADB3 /* AddFeedPostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD1085A723DCA08A0009ADB3 /* AddFeedPostCell.xib */; };
@@ -53,6 +57,12 @@
 		AD8895E323B21F5300347A6A /* SingInVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8895E123B21F5300347A6A /* SingInVC.xib */; };
 		AD8895E923B293BE00347A6A /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8895E723B293BE00347A6A /* ProfileVC.swift */; };
 		AD98E3D423C729B9003A6DA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD98E3D323C729B9003A6DA8 /* Main.storyboard */; };
+		ADA85742248B976100C44B9D /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ADA85740248B976100C44B9D /* DataModel.xcdatamodeld */; };
+		ADA85745248B9A1500C44B9D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA85744248B9A1500C44B9D /* DataManager.swift */; };
+		ADA85747248B9A2200C44B9D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA85746248B9A2200C44B9D /* CoreDataManager.swift */; };
+		ADA85749248B9A3000C44B9D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA85748248B9A3000C44B9D /* NetworkManager.swift */; };
+		ADA8574C248B9A7C00C44B9D /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA8574B248B9A7C00C44B9D /* UserEntity.swift */; };
+		ADB297482499242300C24A8F /* PostEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB297472499242300C24A8F /* PostEntity.swift */; };
 		ADB4A24F23E44240001D1A6A /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB4A24E23E44240001D1A6A /* UIViewController.swift */; };
 		ADB4A25323E44CC0001D1A6A /* CustomAlertWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB4A25223E44CC0001D1A6A /* CustomAlertWarning.swift */; };
 		ADB4A25523E44CCF001D1A6A /* CustomAlertWarning.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB4A25423E44CCF001D1A6A /* CustomAlertWarning.xib */; };
@@ -107,6 +117,10 @@
 /* Begin PBXFileReference section */
 		09A7F9FC8CF0F1991ED38035 /* Pods-Find Love.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Love.debug.xcconfig"; path = "Target Support Files/Pods-Find Love/Pods-Find Love.debug.xcconfig"; sourceTree = "<group>"; };
 		AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
+		AD083E44249C093900A3FFC4 /* GroupEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupEntity.swift; sourceTree = "<group>"; };
+		AD083E46249CE10900A3FFC4 /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		AD083E48249CE25E00A3FFC4 /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
+		AD083E52249D4E3000A3FFC4 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		AD09E33B23D7066D00AAC162 /* Find Love.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Find Love.entitlements"; sourceTree = "<group>"; };
 		AD09E33C23D7647D00AAC162 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AD1085A623DCA08A0009ADB3 /* AddFeedPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedPostCell.swift; sourceTree = "<group>"; };
@@ -155,6 +169,12 @@
 		AD8895E123B21F5300347A6A /* SingInVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingInVC.xib; sourceTree = "<group>"; };
 		AD8895E723B293BE00347A6A /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		AD98E3D323C729B9003A6DA8 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		ADA85741248B976100C44B9D /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		ADA85744248B9A1500C44B9D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		ADA85746248B9A2200C44B9D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		ADA85748248B9A3000C44B9D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		ADA8574B248B9A7C00C44B9D /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
+		ADB297472499242300C24A8F /* PostEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEntity.swift; sourceTree = "<group>"; };
 		ADB4A24E23E44240001D1A6A /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		ADB4A25223E44CC0001D1A6A /* CustomAlertWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertWarning.swift; sourceTree = "<group>"; };
 		ADB4A25423E44CCF001D1A6A /* CustomAlertWarning.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomAlertWarning.xib; sourceTree = "<group>"; };
@@ -237,6 +257,42 @@
 			path = ChatMessageCVCell;
 			sourceTree = "<group>";
 		};
+		AD083E4A249CE2DB00A3FFC4 /* Data Manager */ = {
+			isa = PBXGroup;
+			children = (
+				ADA85744248B9A1500C44B9D /* DataManager.swift */,
+			);
+			path = "Data Manager";
+			sourceTree = "<group>";
+		};
+		AD083E4B249CE2F800A3FFC4 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				ADA85746248B9A2200C44B9D /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		AD083E4C249CE36600A3FFC4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				AD083E52249D4E3000A3FFC4 /* AuthManager.swift */,
+				ADA85748248B9A3000C44B9D /* NetworkManager.swift */,
+				AD083E46249CE10900A3FFC4 /* EndPointType.swift */,
+				AD083E48249CE25E00A3FFC4 /* RequestType.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		AD083E4F249D4C0E00A3FFC4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ADA8574A248B9A3B00C44B9D /* DataBaseModels */,
+				AD26946F23B6047B00D49887 /* NetworkModels */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		AD1085AA23DCA0970009ADB3 /* AddFeedPostCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,7 +311,7 @@
 			path = UserCell;
 			sourceTree = "<group>";
 		};
-		AD26946F23B6047B00D49887 /* Model */ = {
+		AD26946F23B6047B00D49887 /* NetworkModels */ = {
 			isa = PBXGroup;
 			children = (
 				AD26946423B4FF8100D49887 /* User.swift */,
@@ -264,7 +320,7 @@
 				AD26946623B538A500D49887 /* Message.swift */,
 				AD464AD223FECFA7002363B0 /* Request.swift */,
 			);
-			path = Model;
+			path = NetworkModels;
 			sourceTree = "<group>";
 		};
 		AD26947023B6049100D49887 /* Extensions */ = {
@@ -405,9 +461,11 @@
 			isa = PBXGroup;
 			children = (
 				AD09E33B23D7066D00AAC162 /* Find Love.entitlements */,
+				ADA85740248B976100C44B9D /* DataModel.xcdatamodeld */,
 				AD09E33C23D7647D00AAC162 /* GoogleService-Info.plist */,
 				AD8895C223B2122D00347A6A /* AppDelegate.swift */,
-				AD26946F23B6047B00D49887 /* Model */,
+				AD083E4F249D4C0E00A3FFC4 /* Models */,
+				ADA85743248B99FD00C44B9D /* SevicesManager */,
 				AD26947123B606BA00D49887 /* View */,
 				AD8895D823B2159F00347A6A /* Controllers */,
 				AD26947023B6049100D49887 /* Extensions */,
@@ -454,6 +512,26 @@
 				AD8895E123B21F5300347A6A /* SingInVC.xib */,
 			);
 			path = SingInVC;
+			sourceTree = "<group>";
+		};
+		ADA85743248B99FD00C44B9D /* SevicesManager */ = {
+			isa = PBXGroup;
+			children = (
+				AD083E4A249CE2DB00A3FFC4 /* Data Manager */,
+				AD083E4B249CE2F800A3FFC4 /* CoreData */,
+				AD083E4C249CE36600A3FFC4 /* Network */,
+			);
+			path = SevicesManager;
+			sourceTree = "<group>";
+		};
+		ADA8574A248B9A3B00C44B9D /* DataBaseModels */ = {
+			isa = PBXGroup;
+			children = (
+				ADA8574B248B9A7C00C44B9D /* UserEntity.swift */,
+				ADB297472499242300C24A8F /* PostEntity.swift */,
+				AD083E44249C093900A3FFC4 /* GroupEntity.swift */,
+			);
+			path = DataBaseModels;
 			sourceTree = "<group>";
 		};
 		ADB4A25123E44C64001D1A6A /* CustomAlertWarning */ = {
@@ -707,6 +785,7 @@
 				TargetAttributes = {
 					AD8895BE23B2122D00347A6A = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1150;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -830,12 +909,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADC55A8B23E7459B002BEAF7 /* UserProfileInfoView.swift in Sources */,
+				AD083E53249D4E3000A3FFC4 /* AuthManager.swift in Sources */,
 				ADC55A9A23E8792B002BEAF7 /* AboutSelfViewCell.swift in Sources */,
 				ADFCA85F23DDFD9E004067A9 /* SearchStrangerForChatView.swift in Sources */,
 				AD32E29F23F5E62A00E6F912 /* BlockedUsersVC.swift in Sources */,
 				AD464AD123FEA37F002363B0 /* CustomNotificationView.swift in Sources */,
 				AD26946923B5393B00D49887 /* UIImageView.swift in Sources */,
 				ADB4CD4423E18BF2001DD8AF /* StatusView.swift in Sources */,
+				ADA8574C248B9A7C00C44B9D /* UserEntity.swift in Sources */,
 				ADEE6FA423EB3E23008352C0 /* SettingsTextFieldCell.swift in Sources */,
 				ADB8079223D05B1300847897 /* OpenFeedPost.swift in Sources */,
 				ADB4A25323E44CC0001D1A6A /* CustomAlertWarning.swift in Sources */,
@@ -850,9 +931,12 @@
 				AD8895E223B21F5300347A6A /* SingInVC.swift in Sources */,
 				ADB4CD4E23E19C97001DD8AF /* AboutSelfView.swift in Sources */,
 				ADB8079A23D19DC600847897 /* ReplyAndWriteMessageCVC.swift in Sources */,
+				ADA85742248B976100C44B9D /* DataModel.xcdatamodeld in Sources */,
+				ADB297482499242300C24A8F /* PostEntity.swift in Sources */,
 				ADB4A24F23E44240001D1A6A /* UIViewController.swift in Sources */,
 				AD26947323B67B8A00D49887 /* ChatMessageCVC.swift in Sources */,
 				ADFD0F4423E898C5008D2B9C /* SettingsViewCell.swift in Sources */,
+				AD083E49249CE25E00A3FFC4 /* RequestType.swift in Sources */,
 				AD26BE8C23C0CB2500EF1418 /* NewFeedPostCVC.swift in Sources */,
 				ADBA195B23C371E6009B45EC /* ReviewCVCell.swift in Sources */,
 				AD32E35E23FC3BB000E6F912 /* ChatInvitationVC.swift in Sources */,
@@ -870,12 +954,16 @@
 				AD8895E923B293BE00347A6A /* ProfileVC.swift in Sources */,
 				ADB4CD3C23E0AFAF001DD8AF /* InfornatioView.swift in Sources */,
 				ADB8DED423CB9959008D989E /* SelectChatCell.swift in Sources */,
+				ADA85747248B9A2200C44B9D /* CoreDataManager.swift in Sources */,
 				AD4CC09A23EC8ADD004352F8 /* SettingsHeaderCell.swift in Sources */,
 				AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */,
+				AD083E47249CE10900A3FFC4 /* EndPointType.swift in Sources */,
+				ADA85749248B9A3000C44B9D /* NetworkManager.swift in Sources */,
 				ADFCA85B23DDEDFC004067A9 /* ChatWithStrangerCell.swift in Sources */,
 				AD32E2A623F5ED3500E6F912 /* BlockedUsersCell.swift in Sources */,
 				AD4CC09D23EDDA16004352F8 /* SettingPrivacyView.swift in Sources */,
 				AD46C9E923D9E22400FC7002 /* ChatGroupCell.swift in Sources */,
+				ADA85745248B9A1500C44B9D /* DataManager.swift in Sources */,
 				ADBA195623C2A41C009B45EC /* UIView.swift in Sources */,
 				ADEE6F9C23EB32D6008352C0 /* SettingsVC.swift in Sources */,
 				ADEE6F9A23E9871E008352C0 /* UIResponder.swift in Sources */,
@@ -887,6 +975,7 @@
 				AD26946523B4FF8100D49887 /* User.swift in Sources */,
 				ADB4CD4923E19788001DD8AF /* OrientationView.swift in Sources */,
 				ADC55A9623E878FD002BEAF7 /* OrientationViewCell.swift in Sources */,
+				AD083E45249C093900A3FFC4 /* GroupEntity.swift in Sources */,
 				AD32E36623FC40C800E6F912 /* ChatInvitationCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1027,8 +1116,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Find Love/Find Love.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7729HYB5LH;
 				INFOPLIST_FILE = "Find Love/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1037,8 +1126,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaiserdem.FindLove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = FindLoveProfileDev;
-				SWIFT_VERSION = 4.2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1049,8 +1138,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Find Love/Find Love.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7729HYB5LH;
 				INFOPLIST_FILE = "Find Love/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1059,8 +1148,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaiserdem.FindLove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = FindLoveProfileDev;
-				SWIFT_VERSION = 4.2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1087,6 +1176,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		ADA85740248B976100C44B9D /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				ADA85741248B976100C44B9D /* DataModel.xcdatamodel */,
+			);
+			currentVersion = ADA85741248B976100C44B9D /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AD8895B723B2122D00347A6A /* Project object */;
 }

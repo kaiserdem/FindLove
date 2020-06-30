@@ -17,7 +17,7 @@ class StatusViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
       changeStatusBtn.setImage(UIImage(named: "pen")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
-      changeStatusBtn.imageView?.tintColor = .white
+      changeStatusBtn.imageView?.tintColor = .black
 
   }
   
@@ -29,9 +29,9 @@ class StatusViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
       if selected {
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = .white
       } else {
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = .white
       }
     }
   

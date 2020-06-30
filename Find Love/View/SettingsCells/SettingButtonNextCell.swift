@@ -18,7 +18,7 @@ class SettingButtonNextCell: UITableViewCell {
         super.awakeFromNib()
 
     let image = UIImage(named: "right")
-    nextButtonOutlet.tintColor = .white
+    nextButtonOutlet.tintColor = .black
     let buttonView = UIImageView(image: image)
     buttonView.contentMode = UIView.ContentMode.scaleAspectFit
     buttonView.layer.masksToBounds = true

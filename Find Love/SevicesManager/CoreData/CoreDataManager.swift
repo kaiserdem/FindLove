@@ -56,7 +56,21 @@ class CoreDataManager {
     }
   }
   
-  func saveUsers(users:[User], completionHandler: @escaping() -> Void) {
+  func getAllGroups(_ completionHandler: @escaping ([Group]) -> Void) {
+    
+    let viewContext = persistentContainer.viewContext
+    
+    viewContext.perform {
+      
+      let groupEntities = try? GroupEntity.all(viewContext)
+    
+      let dbGroups = groupEntities?.map({Group(entity: $0)})
+      
+      completionHandler(dbGroups ?? [])
+    }
+  }
+  
+  func saveUsers(_ users:[User], completionHandler: @escaping() -> Void) {
     
     let viewContext = persistentContainer.viewContext
     
@@ -69,13 +83,26 @@ class CoreDataManager {
     }
   }
   
-  func savePosts(posts:[Post], completionHandler: @escaping() -> Void) {
+  func savePosts(_ posts:[Post], completionHandler: @escaping() -> Void) {
     
     let viewContext = persistentContainer.viewContext
     
     viewContext.perform {
       for post in posts {
         _ = try? PostEntity.findeOrCreate(post, context: viewContext)
+      }
+      try? viewContext.save()
+      completionHandler()
+    }
+  }
+  
+  func saveGroups(_ groups:[Group], completionHandler: @escaping() -> Void) {
+
+    let viewContext = persistentContainer.viewContext
+
+    viewContext.perform {
+      for group in groups {
+        _ = try? GroupEntity.findeOrCreate(group, context: viewContext)
       }
       try? viewContext.save()
       completionHandler()
