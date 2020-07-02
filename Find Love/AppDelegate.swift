@@ -11,9 +11,10 @@ import Firebase
 import UserNotifications
 import FirebaseInstanceID
 import FirebaseMessaging
+import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate, GIDSignInDelegate {
   
   var window: UIWindow?
   
@@ -39,11 +40,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     application.registerForRemoteNotifications()
     
     FirebaseApp.configure()
+    
+    GIDSignIn.sharedInstance()?.clientID = "1049488869623-jqk9l162d6bhaefqn1s32qbbtb8frh19.apps.googleusercontent.com"
+    GIDSignIn.sharedInstance()?.delegate = self
+    
     registerForPushNotifications()
     //AuthManager.shared.handleLogout()
     AuthManager.shared.checkIfUserIsLogedIn()
     
     return true
+  }
+  
+  func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+    if error != nil {
+      print(error.localizedDescription)
+    } else {
+      print("User Email:\(user.profile.email ?? "No Email")")
+    }
+  }
+  
+  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    return GIDSignIn.sharedInstance().handle(url)
   }
   
   // MARK: - Push Notificarion

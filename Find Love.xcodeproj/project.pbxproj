@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BC9DF7962E97609DFF603FE /* Pods_Find_Love.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD710EB921D70B94626E4CDB /* Pods_Find_Love.framework */; };
 		AD02EB2823B793BB00F472A5 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02EB2723B793BB00F472A5 /* ChatMessageCell.swift */; };
 		AD083E45249C093900A3FFC4 /* GroupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD083E44249C093900A3FFC4 /* GroupEntity.swift */; };
 		AD083E47249CE10900A3FFC4 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD083E46249CE10900A3FFC4 /* EndPointType.swift */; };
@@ -233,6 +234,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BC9DF7962E97609DFF603FE /* Pods_Find_Love.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,7 +761,8 @@
 				AD8895BB23B2122D00347A6A /* Sources */,
 				AD8895BC23B2122D00347A6A /* Frameworks */,
 				AD8895BD23B2122D00347A6A /* Resources */,
-				C7E09B6B8B20ABCB56BBF623 /* [CP] Embed Pods Frameworks */,
+				6E716147C28D5D8D77BCE68C /* [CP] Embed Pods Frameworks */,
+				B5ACC39B0A9E338F40E6993C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -884,7 +887,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C7E09B6B8B20ABCB56BBF623 /* [CP] Embed Pods Frameworks */ = {
+		6E716147C28D5D8D77BCE68C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -899,6 +902,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Find Love/Pods-Find Love-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5ACC39B0A9E338F40E6993C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Find Love/Pods-Find Love-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Find Love/Pods-Find Love-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Find Love/Pods-Find Love-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

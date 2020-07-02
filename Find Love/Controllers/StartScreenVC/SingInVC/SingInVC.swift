@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 class SingInVC: UIViewController {
 
@@ -18,6 +19,8 @@ class SingInVC: UIViewController {
   @IBOutlet weak var closeBtn: UIButton!
   @IBOutlet weak var forgotPasswordBtn: UIButton!
   @IBOutlet weak var passwordTF: UITextField!
+  @IBOutlet weak var googleBtn: GIDSignInButton!
+
   
   let buttonTFRight = UIButton(type: .custom)
 
@@ -28,6 +31,11 @@ class SingInVC: UIViewController {
   
   override func viewDidLoad() {
         super.viewDidLoad()
+    
+    
+    GIDSignIn.sharedInstance()?.presentingViewController = self
+
+    
     activityIndicator.isHidden = true
     
     enterButton.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
@@ -40,10 +48,10 @@ class SingInVC: UIViewController {
     passwordTF.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
 
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-    
+
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    
-    self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(sender:))))
+//
+//    self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(sender:))))
   }
   
   deinit {

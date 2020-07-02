@@ -7,7 +7,10 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseDatabase
+import FirebaseCore
+import FirebaseAuth
+import FirebaseStorage
 
 class AuthManager {
   
@@ -21,8 +24,6 @@ class AuthManager {
   let storageRef = Storage.storage().reference()
   
   func checkIfUserIsLogedIn() { // проверка если пользователь вошел в систему
-    let uid = Auth.auth().currentUser?.uid
-    print(uid)
     if Auth.auth().currentUser?.uid == nil { // если мы не вошли
       loadHelloVC()
     } else {

@@ -469,7 +469,6 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
 //          cell.user = user
 //        }
 //      }
-      print(user?.name)
       guard let imageUrl = user?.profileImageUrl else { return cell}
       
       cell.configureWithItem(imageUrl: imageUrl)
@@ -483,9 +482,7 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
       if postsFromCD.count != 0 {
         let post = postsFromCD[indexPath.row - 1]
         let user = users.first(where: {$0.id == post.fromId})
-        
-        print(user?.name)
-        
+                
         if user != nil{
           cell.configureWithItem(post, user!)
         } else {

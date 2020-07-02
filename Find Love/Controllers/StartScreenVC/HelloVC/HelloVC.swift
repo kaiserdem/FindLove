@@ -26,17 +26,15 @@ class HelloVC: UIViewController {
 
       navigationController?.navigationBar.isHidden = true
     
-    checkAuth()
+    checkAuth()    
   }
-  
   
   private func checkAuth() {
     
     if Auth.auth().currentUser == nil {
       perform(#selector(handleLogin), with: nil, afterDelay: 0)
     } else {
-//      let vc = ProfileVC.init(nibName: "MenuVC", bundle: nil)
-//      navigationController?.pushViewController(vc, animated: true)
+      AuthManager.shared.loadFeedVC()
     }
   }
   
