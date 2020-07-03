@@ -12,6 +12,7 @@ import UserNotifications
 import FirebaseInstanceID
 import FirebaseMessaging
 import GoogleSignIn
+import FBSDKLoginKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate, GIDSignInDelegate {
@@ -44,9 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     GIDSignIn.sharedInstance()?.clientID = "1049488869623-jqk9l162d6bhaefqn1s32qbbtb8frh19.apps.googleusercontent.com"
     GIDSignIn.sharedInstance()?.delegate = self
     
+    ApplicationDelegate.shared.application(
+    application, didFinishLaunchingWithOptions: launchOptions )
+    
     registerForPushNotifications()
-    //AuthManager.shared.handleLogout()
+    
     AuthManager.shared.checkIfUserIsLogedIn()
+    
+    
     
     return true
   }
@@ -60,7 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   }
   
   func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-    return GIDSignIn.sharedInstance().handle(url)
+    let fbSignIn = FBSDKCoreKit.ApplicationDelegate.shared.application(app, open: url, options: options)
+    let googleSignIn = GIDSignIn.sharedInstance().handle(url)
+    
+    return fbSignIn || googleSignIn
   }
   
   // MARK: - Push Notificarion
@@ -143,6 +152,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     //reloadOnlineStatus(isOnline: false)
     AuthManager.shared.reloadOnlineStatus(isOnline: false)
   }
+  
+/*
+  // AppDelegate.swift
+  import UIKit
+  import FBSDKCoreKit
+  @UIApplicationMain
+  class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application( _ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? ) -> Bool {
+      ApplicationDelegate.shared.application(
+      application, didFinishLaunchingWithOptions: launchOptions )
+      return true
+      
+    }
+    func application( _ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:] ) -> Bool {
+      ApplicationDelegate.shared.application(
+        app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation] )
+      
+    }
+    
+  }
+*/
+      
   
   // MARK: - Auth
   

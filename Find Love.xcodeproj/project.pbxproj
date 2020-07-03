@@ -1184,7 +1184,7 @@
 				AD8895D023B2122F00347A6A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		AD8895D123B2122F00347A6A /* Build configuration list for PBXNativeTarget "Find Love" */ = {
 			isa = XCConfigurationList;
@@ -1193,7 +1193,7 @@
 				AD8895D323B2122F00347A6A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 

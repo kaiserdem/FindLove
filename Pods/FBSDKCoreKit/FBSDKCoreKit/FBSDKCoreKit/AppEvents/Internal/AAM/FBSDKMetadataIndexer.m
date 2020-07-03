@@ -55,12 +55,11 @@ static dispatch_queue_t serialQueue;
   if (FBSDKAdvertisingTrackingAllowed != [FBSDKAppEventsUtility advertisingTrackingStatus]) {
     return;
   }
-  [FBSDKServerConfigurationManager loadServerConfigurationWithCompletionBlock:^(FBSDKServerConfiguration *serverConfiguration, NSError *error) {
-    if (error) {
-      return;
-    }
-    [FBSDKMetadataIndexer setupWithRules:serverConfiguration.AAMRules];
-  }];
+
+  NSDictionary<NSString *, id> *AAMRules = [FBSDKServerConfigurationManager cachedServerConfiguration].AAMRules;
+  if (AAMRules) {
+    [FBSDKMetadataIndexer setupWithRules:AAMRules];
+  }
 }
 
 + (void)setupWithRules:(NSDictionary<NSString *, id> * _Nullable)rules
@@ -75,17 +74,14 @@ static dispatch_queue_t serialQueue;
 
     BOOL isEnabled = NO;
     for (NSString *key in _rules) {
-      BOOL isRuleEnabled = (nil != _rules[key]);
-      if (isRuleEnabled) {
+      if (_rules[key]) {
         isEnabled = YES;
-      }
-      if (!isRuleEnabled) {
-        [_store removeObjectForKey:key];
-        [FBSDKUserDataStore setHashData:nil forType:key];
+        break;
       }
     }
 
     if (isEnabled) {
+      [FBSDKUserDataStore setEnabledRules:_rules.allKeys];
       [FBSDKMetadataIndexer setupMetadataIndexing];
     }
   });
@@ -95,15 +91,15 @@ static dispatch_queue_t serialQueue;
 {
   _store = [[NSMutableDictionary alloc] init];
   for (NSString *key in _rules) {
-    NSString *data = [FBSDKUserDataStore getHashedDataForType:key];
+    NSString *data = [FBSDKUserDataStore getInternalHashedDataForType:key];
     if (data.length > 0) {
-      _store[key] = [NSMutableArray arrayWithArray:[data componentsSeparatedByString:FIELD_K_DELIMITER]];
+      [FBSDKTypeUtility dictionary:_store setObject:[NSMutableArray arrayWithArray:[data componentsSeparatedByString:FIELD_K_DELIMITER]] forKey:key];
     }
   }
 
   for (NSString *key in _rules) {
     if (!_store[key]) {
-      _store[key] = [[NSMutableArray alloc] init];
+      [FBSDKTypeUtility dictionary:_store setObject:[[NSMutableArray alloc] init] forKey:key];
     }
   }
 }
@@ -113,7 +109,7 @@ static dispatch_queue_t serialQueue;
   for (NSString *key in rules) {
     NSDictionary<NSString *, NSString *> *value = [FBSDKTypeUtility dictionaryValue:rules[key]];
     if (value[FIELD_K].length > 0 && value[FIELD_V]) {
-      _rules[key] = value;
+      [FBSDKTypeUtility dictionary:_rules setObject:value forKey:key];
     }
   }
 }
@@ -167,16 +163,16 @@ static dispatch_queue_t serialQueue;
   NSMutableArray<NSString *> *labels = [[NSMutableArray alloc] init];
 
   NSString *placeholder = [self normalizeField:[FBSDKViewHierarchy getHint:view]];
-  if (placeholder) {
-    [labels addObject:placeholder];
+  if (placeholder.length > 0) {
+    [FBSDKTypeUtility array:labels addObject:placeholder];
   }
 
   NSArray<id> *siblingViews = [self getSiblingViewsOfView:view];
   for (id sibling in siblingViews) {
     if ([sibling isKindOfClass:[UILabel class]]) {
       NSString *text = [self normalizeField:[FBSDKViewHierarchy getText:sibling]];
-      if (text) {
-        [labels addObject:text];
+      if (text.length > 0) {
+        [FBSDKTypeUtility array:labels addObject:text];
       }
     }
   }
@@ -257,9 +253,9 @@ static dispatch_queue_t serialQueue;
     while (_store[key].count >= FBSDKMetadataIndexerMaxValue) {
       [_store[key] removeObjectAtIndex:0];
     }
-    [_store[key] addObject:hashData];
-    [FBSDKUserDataStore setHashData:[_store[key] componentsJoinedByString:FIELD_K_DELIMITER]
-                            forType:key];
+    [FBSDKTypeUtility array:_store[key] addObject:hashData];
+    [FBSDKUserDataStore setInternalHashData:[_store[key] componentsJoinedByString:FIELD_K_DELIMITER]
+                                    forType:key];
   });
 }
 
@@ -302,8 +298,8 @@ static dispatch_queue_t serialQueue;
 
 + (NSString *)normalizeField:(NSString *)field
 {
-  if (!field) {
-    return nil;
+  if (field.length == 0) {
+    return @"";
   }
   NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[_-]|\\s"
                                                                          options:NSRegularExpressionCaseInsensitive
@@ -316,8 +312,8 @@ static dispatch_queue_t serialQueue;
 
 + (NSString *)normalizeValue:(NSString *)value
 {
-  if (!value) {
-    return nil;
+  if (value.length == 0) {
+    return @"";
   }
   return [value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].lowercaseString;
 }
@@ -336,7 +332,7 @@ static dispatch_queue_t serialQueue;
   } else if ([key isEqualToString:@"r4"] || [key isEqualToString:@"r5"]) {
     value = [[value componentsSeparatedByCharactersInSet:[[NSCharacterSet letterCharacterSet] invertedSet]] componentsJoinedByString:@""];
   } else if ([key isEqualToString:@"r6"]) {
-    value = [value componentsSeparatedByString:@"-"][0];
+    value = [FBSDKTypeUtility array:[value componentsSeparatedByString:@"-"] objectAtIndex:0];
   }
   return value;
 }

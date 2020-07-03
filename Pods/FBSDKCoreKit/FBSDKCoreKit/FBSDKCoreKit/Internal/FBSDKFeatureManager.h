@@ -49,14 +49,16 @@ typedef NS_ENUM(NSUInteger, FBSDKFeature)
   FBSDKFeatureAAM = 0x00010300,
   FBSDKFeaturePrivacyProtection = 0x00010400,
   FBSDKFeatureSuggestedEvents = 0x00010401,
-  FBSDKFeaturePIIFiltering = 0x00010402,
-  FBSDKFeatureMTML = 0x00010403,
+  FBSDKFeatureIntelligentIntegrity = 0x00010402,
+  FBSDKFeatureModelRequest = 0x00010403,
   FBSDKFeatureEventDeactivation = 0x00010500,
   /** Instrument */
   FBSDKFeatureInstrument = 0x00020000,
   FBSDKFeatureCrashReport = 0x00020100,
   FBSDKFeatureCrashShield = 0x00020101,
   FBSDKFeatureErrorReport = 0x00020200,
+  /** Monitoring */
+  FBSDKFeatureMonitoring = 0x00030000,
 
   // Features in LoginKit
   /** Essential of LoginKit */

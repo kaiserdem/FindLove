@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKLoginKit
+
 
 class SingInVC: UIViewController {
 
@@ -20,8 +22,9 @@ class SingInVC: UIViewController {
   @IBOutlet weak var forgotPasswordBtn: UIButton!
   @IBOutlet weak var passwordTF: UITextField!
   @IBOutlet weak var googleBtn: GIDSignInButton!
+  //@IBOutlet weak var facebookBtn: FBLoginButton!
+  let loginButton = FBLoginButton()
 
-  
   let buttonTFRight = UIButton(type: .custom)
 
       
@@ -31,6 +34,10 @@ class SingInVC: UIViewController {
   
   override func viewDidLoad() {
         super.viewDidLoad()
+    
+    let loginButton = FBLoginButton()
+    loginButton.frame = CGRect(x: enterButton.frame.minX, y: enterButton.frame.maxY + 30, width: enterButton.frame.width, height: enterButton.frame.height)
+    view.addSubview(loginButton)
     
     
     GIDSignIn.sharedInstance()?.presentingViewController = self
